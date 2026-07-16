@@ -614,7 +614,7 @@ main > section > header h2::before {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  overflow: hidden;
+  
 }
 
 .btn-disabled::before {
