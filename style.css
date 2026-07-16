@@ -456,7 +456,7 @@ main > section > header h2::before {
   max-width: 52ch;
 }
 
-/* Cards métricas no hero */
+
 .hero-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -547,7 +547,6 @@ main > section > header h2::before {
 #sobre article p + p,
 #finck article p + p { margin-top: 1.1rem; }
 
-/* ---- FinCK ---- */
 .project-status {
   display: flex;
   align-items: center;
@@ -614,7 +613,7 @@ main > section > header h2::before {
   color: var(--text-1);
   font: inherit;
   font-weight: 700;
-  cursor: not-allowed;
+  cursor: pointer;
   overflow: hidden;
 }
 
