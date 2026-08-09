@@ -2,335 +2,996 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Conscious Knowledge</title>
-    <link rel="icon" type="image/png" href="Logo CK - Oficial.png">
+  <title>Conscious Knowledge — Tecnologia consciente · FinCK</title>
+  <link rel="icon" type="image/png" href="Logo CK - Oficial.png">
 
-    <meta name="description"
-        content="Conscious Knowledge - Empresa fictícia de tecnologia responsável pelo desenvolvimento do FinCK, aplicativo de controle financeiro inteligente.">
+  <meta name="description"
+    content="Conscious Knowledge (CK) é a empresa de tecnologia criada pela turma 2ºC M-Tec Informática para Internet da ETEC Taboão da Serra. Conheça a equipe e o FinCK, aplicativo que traduz preço em tempo de vida.">
+  <meta name="author" content="Conscious Knowledge">
+  <meta name="theme-color" content="#050409">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Conscious Knowledge — Tecnologia consciente · FinCK">
+  <meta property="og:description"
+    content="Conhecimento consciente aplicado a problemas reais. Conheça a CK e o FinCK, o app que mostra quanto uma compra custa em horas de vida.">
+  <meta property="og:image" content="Logo CK - Oficial.png">
+  <meta property="og:locale" content="pt_BR">
 
-<script src="script.js" defer></script>
-    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
 
+  <!-- ================= PRELOADER ================= -->
+  <div class="preloader" data-preloader aria-hidden="true">
+    <div class="preloader__core">
+      <span class="preloader__ring"></span>
+      <span class="preloader__ring preloader__ring--2"></span>
+      <img src="Logo CK - Oficial.png" alt="" class="preloader__logo" decoding="async">
+    </div>
+    <p class="preloader__brand">Conscious Knowledge</p>
+    <div class="preloader__bar"><span></span></div>
+  </div>
 
-    <header>
+  <!-- ================= FUNDO ANIMADO ================= -->
+  <div class="cena-fundo" aria-hidden="true">
+    <canvas class="cena-fundo__canvas" data-canvas></canvas>
+    <span class="orbe orbe--1"></span>
+    <span class="orbe orbe--2"></span>
+    <span class="orbe orbe--3"></span>
+    <span class="cena-fundo__grade"></span>
+    <span class="cena-fundo__scan"></span>
+    <span class="cena-fundo__ruido"></span>
+  </div>
 
-        <div class="logo-container">
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+  <div class="cursor cursor--halo" data-cursor-halo aria-hidden="true"></div>
 
-            <a href="#">
-                <img src="Logo CK - Oficial.png" alt="Logo Conscious Knowledge">
-            </a>
+  <a class="pular" href="#inicio">Pular para o conteúdo</a>
 
-        </div>
+  <!-- ================= HEADER ================= -->
+  <header>
 
-        <nav>
+    <div class="logo-container">
+      <a href="#inicio" aria-label="Conscious Knowledge — início">
+        <img src="Logo CK - Oficial.png" alt="Logo Conscious Knowledge" width="72" height="108">
+      </a>
+      <span class="logo-wordmark">
+        <strong>Conscious</strong>
+        <small>Knowledge</small>
+      </span>
+    </div>
 
-            <ul>
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#finck">FinCK</a></li>
+        <li><a href="#entrega">Entrega</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
 
-                <li><a href="#inicio">Início</a></li>
+  </header>
 
-                <li><a href="#sobre">Sobre</a></li>
+  <!-- ================= MAIN ================= -->
+  <main>
 
-                <li><a href="#equipe">Equipe</a></li>
+    <!-- ========== HERO ========== -->
+    <section id="inicio">
+      <div class="hero-content">
 
-                <li><a href="#finck">FinCK</a></li>
-
-                <li><a href="#contato">Contato</a></li>
-
-            </ul>
-
-        </nav>
-
-    </header>
-
-    <!-- ================= MAIN ================= -->
-
-    <main>
-
-        <!-- HERO -->
-
-        <section id="inicio">
-    <div class="hero-content">
         <div class="hero-brand">
-            <div class="hero-logo-wrap">
-                <img
-                    src="Logo CK - Oficial.png"
-                    alt="Logo Conscious Knowledge"
-                    class="hero-logo"
-                >
-                <span class="hero-logo-ring" aria-hidden="true"></span>
-                <span class="hero-logo-ring hero-logo-ring--secondary" aria-hidden="true"></span>
-            </div>
 
-            <div class="hero-text">
-                <p class="hero-eyebrow">Tecnologia consciente · ETEC Taboão da Serra</p>
-                <h1>Conscious Knowledge</h1>
-                <p class="hero-description">
-                    Transformando conhecimento em soluções tecnológicas úteis,
-                    conscientes e eficientes.
-                </p>
+          <!-- 3D · Núcleo orbital da marca -->
+          <div class="nucleo" data-nucleo>
+            <div class="nucleo__palco">
+              <span class="nucleo__anel nucleo__anel--a"></span>
+              <span class="nucleo__anel nucleo__anel--b"></span>
+              <span class="nucleo__anel nucleo__anel--c"></span>
+              <span class="nucleo__orbita"><i class="nucleo__satelite"></i></span>
+              <span class="nucleo__orbita nucleo__orbita--2"><i class="nucleo__satelite nucleo__satelite--ouro"></i></span>
+              <img src="Logo CK - Oficial.png" alt="Logo Conscious Knowledge" class="nucleo__logo" width="256"
+                height="384" decoding="async">
+              <span class="nucleo__halo"></span>
             </div>
+          </div>
+
+          <div class="hero-text">
+            <p class="hero-eyebrow">
+              <span class="ponto-vivo"></span>
+              Tecnologia consciente · ETEC Taboão da Serra
+            </p>
+
+            <h1>Conscious<br>Knowledge</h1>
+
+            <p class="hero-typed">
+              Transformamos conhecimento em
+              <span class="typed" data-typed
+                data-palavras="soluções conscientes|decisões melhores|tecnologia com propósito|educação financeira"><span
+                  class="typed__texto"></span><span class="typed__cursor"></span></span>
+            </p>
+
+            <p class="hero-description">
+              Somos uma empresa-conceito de tecnologia formada por estudantes do Ensino Médio Técnico.
+              Nosso primeiro produto, o <strong>FinCK</strong>, traduz o preço de uma compra em algo que
+              ninguém devolve: <strong>tempo de vida</strong>.
+            </p>
+
+            <div class="hero-acoes">
+              <a class="btn btn--primario" href="#finck" data-magnetico>
+                <span>Conhecer o FinCK</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+              <a class="btn btn--fantasma" href="#equipe" data-magnetico>
+                <span>Ver a equipe</span>
+              </a>
+            </div>
+          </div>
         </div>
 
         <div class="hero-metrics" aria-label="Destaques institucionais">
-            <div class="metric-card">
-                <span class="metric-label">Foco</span>
-                <strong>Inovação responsável</strong>
-            </div>
-            <div class="metric-card">
-                <span class="metric-label">Produto</span>
-                <strong>FinCK · 2026</strong>
-            </div>
-            <div class="metric-card">
-                <span class="metric-label">Missão</span>
-                <strong>Educação financeira consciente</strong>
-            </div>
+          <div class="metric-card" data-tilt>
+            <span class="metric-label">Foco</span>
+            <strong>Inovação responsável</strong>
+            <p>Tecnologia que resolve problema real, sem manipular quem usa.</p>
+          </div>
+          <div class="metric-card" data-tilt>
+            <span class="metric-label">Produto</span>
+            <strong>FinCK · 2026</strong>
+            <p>Aplicativo de consumo consciente e controle financeiro.</p>
+          </div>
+          <div class="metric-card" data-tilt>
+            <span class="metric-label">Missão</span>
+            <strong>Educação financeira</strong>
+            <p>Dar clareza antes da decisão — nunca depois da fatura.</p>
+          </div>
         </div>
+
+      </div>
+
+      <a class="hero-scroll" href="#sobre" aria-label="Rolar para a próxima seção">
+        <span class="hero-scroll__mouse"><i></i></span>
+        <span class="hero-scroll__texto">role</span>
+      </a>
+    </section>
+
+    <!-- ========== TICKER ========== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__trilha">
+        <span>Conhecimento Consciente</span><i>◆</i>
+        <span>FinCK of Reality</span><i>◆</i>
+        <span>Preço → Tempo de vida</span><i>◆</i>
+        <span>Projeto Interdisciplinar 2026</span><i>◆</i>
+        <span>ETEC Taboão da Serra</span><i>◆</i>
+        <span>2ºC M-Tec Informática para Internet</span><i>◆</i>
+        <span>Conhecimento Consciente</span><i>◆</i>
+        <span>FinCK of Reality</span><i>◆</i>
+        <span>Preço → Tempo de vida</span><i>◆</i>
+        <span>Projeto Interdisciplinar 2026</span><i>◆</i>
+        <span>ETEC Taboão da Serra</span><i>◆</i>
+        <span>2ºC M-Tec Informática para Internet</span><i>◆</i>
+      </div>
     </div>
-</section>
 
-        <!-- SOBRE -->
+    <!-- ========== SOBRE ========== -->
+    <section id="sobre">
 
-        <section id="sobre">
+      <header>
+        <p class="secao-indice">01 — Quem somos</p>
+        <h2>Sobre a Conscious Knowledge</h2>
+        <p class="secao-sub">
+          Uma empresa-conceito criada para dar forma real ao Projeto Interdisciplinar:
+          método, identidade e um produto que funciona de verdade.
+        </p>
+      </header>
 
-            <header>
+      <div class="sobre-grade">
 
-                <h2>Sobre a Conscious Knowledge</h2>
+        <article>
+          <p>
+            A <strong>Conscious Knowledge (CK)</strong> é uma empresa fictícia de tecnologia criada
+            para representar o desenvolvimento do Projeto Interdisciplinar da
+            Escola Técnica Estadual de Taboão da Serra. Ela existe para que o trabalho seja
+            conduzido como um produto de verdade — com marca, processo, documentação e entrega.
+          </p>
+          <p>
+            A iniciativa foi idealizada por <strong>Gustavo Oliveira dos Santos</strong>,
+            contando com a colaboração de toda a equipe de desenvolvimento.
+          </p>
+          <p>
+            O principal objetivo da CK é desenvolver soluções tecnológicas úteis, eficientes e
+            acessíveis para problemas reais do cotidiano, sempre utilizando a tecnologia de forma
+            ética, responsável e consciente.
+          </p>
 
-            </header>
+          <div class="etimologia">
+            <div class="etimologia__peca">
+              <span>Conscious</span>
+              <strong>Consciente</strong>
+            </div>
+            <span class="etimologia__mais">+</span>
+            <div class="etimologia__peca">
+              <span>Knowledge</span>
+              <strong>Conhecimento</strong>
+            </div>
+            <span class="etimologia__igual">=</span>
+            <div class="etimologia__peca etimologia__peca--destaque">
+              <span>Nossa filosofia</span>
+              <strong>Conhecimento aplicado com responsabilidade</strong>
+            </div>
+          </div>
+        </article>
 
-            <article>
+        <!-- 3D · Cartões de valores com profundidade -->
+        <div class="pilares">
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l7.5 3.8v5c0 4.4-3.1 7.9-7.5 9.2-4.4-1.3-7.5-4.8-7.5-9.2v-5L12 3Z" />
+                <path d="M9 12l2.2 2.2L15.5 10" />
+              </svg>
+            </span>
+            <h3>Ética por padrão</h3>
+            <p>Nenhum recurso empurra compra, cria urgência falsa ou lucra com o descontrole do usuário.</p>
+          </div>
 
-                <p>
-                    A <strong>Conscious Knowledge (CK)</strong> é uma empresa fictícia de tecnologia criada
-                    para representar o desenvolvimento do Projeto Interdisciplinar da
-                    Escola Técnica Estadual de Taboão da Serra.
-                </p>
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8.5" />
+                <path d="M12 7v5l3.2 2" />
+              </svg>
+            </span>
+            <h3>Clareza antes da decisão</h3>
+            <p>A informação certa precisa chegar no momento em que ainda dá para mudar de ideia.</p>
+          </div>
 
-                <p>
-                    A iniciativa foi idealizada por <strong>Gustavo Oliveira dos Santos</strong>,
-                    contando com a colaboração de toda a equipe de desenvolvimento.
-                </p>
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 19V5" />
+                <path d="M4 19h16" />
+                <path d="M8 16V11M12.5 16V7M17 16v-3" />
+              </svg>
+            </span>
+            <h3>Dado sobre opinião</h3>
+            <p>Cada número exibido tem uma fórmula rastreável por trás. Nada de estimativa mágica.</p>
+          </div>
 
-                <p>
-                    O principal objetivo da Conscious Knowledge é desenvolver soluções
-                    tecnológicas úteis, eficientes e acessíveis para problemas reais do cotidiano,
-                    sempre utilizando a tecnologia de forma ética, responsável e consciente.
-                </p>
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+                <circle cx="12" cy="12" r="3.2" />
+              </svg>
+            </span>
+            <h3>Acessível de verdade</h3>
+            <p>Contraste, teclado, leitor de tela e funcionamento offline fazem parte do requisito.</p>
+          </div>
+        </div>
 
-                <p>
-                    O nome <strong>Conscious Knowledge</strong> significa
-                    <em>"Conhecimento Consciente"</em>,
-                    refletindo a filosofia da empresa de aplicar conhecimento técnico
-                    com responsabilidade, inovação e propósito.
-                </p>
+      </div>
+    </section>
 
-            </article>
+    <!-- ========== FINCK ========== -->
+    <section id="finck">
 
-        </section>
+      <header>
+        <p class="secao-indice">02 — Nosso produto</p>
+        <h2>FinCK <span class="h2-sub">of Reality</span></h2>
+        <p class="secao-sub">
+          O primeiro produto da Conscious Knowledge e a entrega central do Projeto
+          Interdisciplinar de 2026.
+        </p>
+      </header>
 
-        <!-- FINCK -->
+      <!-- Manifesto do produto -->
+      <article class="finck-intro">
+        <div class="finck-intro__texto">
+          <p class="destaque-linha">
+            Todo preço tem duas etiquetas. A que está na vitrine e a que ninguém mostra:
+            <strong>quantas horas da sua vida aquilo custa.</strong>
+          </p>
+          <p>
+            O <strong>FinCK</strong> é um aplicativo mobile de controle financeiro inteligente e
+            consumo consciente. Ele organiza receitas, despesas, contas, parcelas e metas — mas o
+            que o torna diferente é o motor <strong>FinCK of Reality</strong>: antes de você comprar,
+            ele converte o preço em <em>tempo de trabalho</em>, mostra o impacto no orçamento do mês
+            e o atraso que aquela compra causa nas suas metas.
+          </p>
+          <p>
+            O app nunca bloqueia uma compra e nunca julga a escolha. Ele apenas garante que a decisão
+            seja tomada com todas as cartas na mesa.
+          </p>
 
-        <section id="finck">
+          <ul class="selos">
+            <li>Mobile-first · PWA instalável</li>
+            <li>Funciona offline</li>
+            <li>Interface em português</li>
+            <li>Sem anúncios</li>
+          </ul>
+        </div>
 
-            <header>
+        <!-- 3D · Mockup de celular com a interface do app -->
+        <div class="palco-device" data-device>
+          <div class="device">
+            <div class="device__moldura">
+              <span class="device__ilha"></span>
+              <div class="device__tela">
 
-                <h2>FinCK</h2>
+                <div class="mini-topo">
+                  <span class="mini-avatar"></span>
+                  <div>
+                    <small>Olá, Gustavo</small>
+                    <strong>Seu mês em foco</strong>
+                  </div>
+                </div>
 
-            </header>
+                <div class="mini-saldo">
+                  <small>Saldo atual</small>
+                  <p>R$ 2.480,00</p>
+                  <div class="mini-saldo__linhas">
+                    <span><i>Entradas</i><b class="verde">R$ 3.500</b></span>
+                    <span><i>Saídas</i><b class="vermelho">R$ 1.020</b></span>
+                  </div>
+                </div>
 
-            <article>
+                <div class="mini-card mini-card--reality">
+                  <small>FinCK of Reality</small>
+                  <strong>Fone · R$ 800,00</strong>
+                  <div class="mini-semaforo">
+                    <span class="ativo"></span><span></span><span></span>
+                  </div>
+                  <p>≈ <b>40h</b> de trabalho · 22,9% da renda</p>
+                </div>
 
-                <p>
+                <div class="mini-barras">
+                  <span style="--h:44%"></span>
+                  <span style="--h:72%"></span>
+                  <span style="--h:31%"></span>
+                  <span style="--h:88%"></span>
+                  <span style="--h:57%"></span>
+                  <span style="--h:66%"></span>
+                </div>
 
-                    O <strong>FinCK</strong> é o primeiro produto desenvolvido pela
-                    Conscious Knowledge e representa o projeto interdisciplinar da equipe
-                    para o ano de 2026.
+                <div class="mini-metas">
+                  <div>
+                    <small>Notebook</small>
+                    <span class="mini-progresso"><i style="--p:62%"></i></span>
+                  </div>
+                  <div>
+                    <small>Reserva</small>
+                    <span class="mini-progresso"><i style="--p:38%"></i></span>
+                  </div>
+                </div>
 
-                </p>
+                <div class="mini-nav">
+                  <span class="ativo"></span><span></span><span></span><span></span>
+                </div>
 
-                <p>
-
-                    Trata-se de um aplicativo mobile voltado ao controle financeiro
-                    inteligente e ao incentivo do consumo consciente, permitindo que
-                    usuários organizem receitas, despesas, metas financeiras e acompanhem
-                    seus hábitos de consumo por meio de análises e indicadores visuais. O
-                    projeto busca oferecer uma ferramenta simples, moderna e intuitiva para
-                    promover uma melhor educação financeira e auxiliar na tomada de decisões
-                    econômicas mais conscientes. 
-                    
-
-                </p>
-
-            </article>
-
-            <div class="project-status">
-
-    <p>
-
-        Status do Projeto
-
-    </p>
-
-    <span class="status active">
-        Ativo
-    </span>
-
-</div>
-
-                <span class="status active">
-        Ativo
-    </span>
-
+              </div>
             </div>
 
-            <button
-    class="btn-disabled"
-    onclick="window.location.href='https://gustavooliveira-xxx.github.io/finck-app/'"
-    title="Acessar o FinCK">
+            <!-- Cartões flutuantes em profundidade -->
+            <div class="device__flutuante device__flutuante--1">
+              <span>Horas preservadas</span>
+              <strong>128 h</strong>
+            </div>
+            <div class="device__flutuante device__flutuante--2">
+              <span>Compras evitadas</span>
+              <strong>17</strong>
+            </div>
+            <div class="device__flutuante device__flutuante--3">
+              <span>Nível</span>
+              <strong>Consciente</strong>
+            </div>
+          </div>
+          <span class="palco-device__sombra" aria-hidden="true"></span>
+        </div>
+      </article>
 
-    Acessar FinCK
-    <span class="development-indicator"></span>
+      <!-- Números do produto -->
+      <div class="numeros">
+        <div class="numero" data-tilt>
+          <strong data-contador="18">0</strong>
+          <span>telas do aplicativo</span>
+        </div>
+        <div class="numero" data-tilt>
+          <strong data-contador="30">0</strong>
+          <span>módulos JavaScript</span>
+        </div>
+        <div class="numero" data-tilt>
+          <strong data-contador="9">0</strong>
+          <span>categorias de gasto</span>
+        </div>
+        <div class="numero" data-tilt>
+          <strong data-contador="7">0</strong>
+          <span>instituições no catálogo</span>
+        </div>
+      </div>
 
-</button>
+      <!-- 3D · O prisma: o mesmo valor lido de quatro ângulos -->
+      <div class="prisma-secao">
+        <div class="prisma-secao__texto">
+          <h3>O mesmo valor, quatro leituras</h3>
+          <p>
+            Este é o coração do FinCK. Um único valor é traduzido em unidades diferentes —
+            reais, horas, dias e porcentagem da renda — porque cada uma revela um aspecto que a
+            outra esconde. Gire o prisma e teste com os seus próprios números.
+          </p>
 
-        </section>
+          <form class="calc" data-calc autocomplete="off">
+            <div class="calc__campos">
+              <label>
+                Renda mensal (R$)
+                <input type="number" id="calcRenda" value="3500" min="0" step="100" inputmode="decimal">
+              </label>
+              <label>
+                Dias de trabalho/mês
+                <input type="number" id="calcDias" value="22" min="1" max="31" step="1" inputmode="numeric">
+              </label>
+              <label>
+                Horas por dia
+                <input type="number" id="calcHoras" value="8" min="1" max="24" step="1" inputmode="numeric">
+              </label>
+              <label>
+                Preço do item (R$)
+                <input type="number" id="calcPreco" value="800" min="0" step="50" inputmode="decimal">
+              </label>
+            </div>
 
-        <!-- EQUIPE -->
+            <p class="calc__formula">
+              <code>valor_dia = renda ÷ dias</code>
+              <code>valor_hora = valor_dia ÷ horas</code>
+              <code>custo_horas = preço ÷ valor_hora</code>
+            </p>
 
-        <section id="equipe">
+            <p class="calc__saida" aria-live="polite" data-calc-resumo>
+              Sua hora vale <strong>R$ 19,89</strong> e seu dia vale <strong>R$ 159,09</strong>.
+            </p>
+          </form>
+        </div>
 
-            <header>
+        <div class="prisma-palco" data-prisma>
+          <div class="prisma-orbita">
+            <div class="prisma">
+              <div class="prisma__face prisma__face--frente">
+                <span class="prisma__rotulo">Preço</span>
+                <strong class="prisma__valor" data-prisma-reais>R$ 800,00</strong>
+                <span class="prisma__nota">o que a etiqueta mostra</span>
+              </div>
+              <div class="prisma__face prisma__face--direita">
+                <span class="prisma__rotulo">Em trabalho</span>
+                <strong class="prisma__valor" data-prisma-horas>40,2 h</strong>
+                <span class="prisma__nota">horas para ganhar esse valor</span>
+              </div>
+              <div class="prisma__face prisma__face--tras">
+                <span class="prisma__rotulo">Em dias</span>
+                <strong class="prisma__valor" data-prisma-dias>5,0 dias</strong>
+                <span class="prisma__nota">dias de trabalho equivalentes</span>
+              </div>
+              <div class="prisma__face prisma__face--esquerda">
+                <span class="prisma__rotulo">Da sua renda</span>
+                <strong class="prisma__valor" data-prisma-percent>22,9%</strong>
+                <span class="prisma__nota">fatia do mês comprometida</span>
+              </div>
+              <div class="prisma__face prisma__face--topo" aria-hidden="true"></div>
+              <div class="prisma__face prisma__face--base" aria-hidden="true"></div>
+            </div>
+          </div>
+          <span class="prisma-palco__sombra" aria-hidden="true"></span>
+          <span class="prisma-dica">arraste para girar</span>
+        </div>
+      </div>
 
-                <h2>Nossa Equipe</h2>
+      <!-- Funcionalidades -->
+      <h3 class="titulo-bloco">O que existe dentro do app</h3>
+      <div class="funcoes">
 
-            </header>
+        <article class="funcao funcao--destaque" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8.5" />
+              <path d="M12 7v5l3.2 2" />
+            </svg>
+          </span>
+          <h4>FinCK of Reality</h4>
+          <p>
+            O motor de decisão. Informe o item e o preço: o app devolve custo em horas e dias de
+            trabalho, percentual da renda, impacto no saldo, efeito em cada meta, um semáforo de
+            risco e alternativas mais sustentáveis. Depois vêm as perguntas de reflexão — e a
+            decisão fica sempre com você.
+          </p>
+        </article>
 
-            <!-- Sala -->
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="2.5" y="6" width="19" height="13" rx="2" />
+              <path d="M2.5 10h19M6 14.5h4" />
+            </svg>
+          </span>
+          <h4>Contas</h4>
+          <p>Carteira, conta corrente, poupança e cartões em uma visão consolidada, com total por
+            instituição e transferências internas que não contaminam entradas e saídas.</p>
+        </article>
 
-            <section class="classroom">
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M3 10h18M8 3v4M16 3v4M8 15h2M14 15h2" />
+            </svg>
+          </span>
+          <h4>Planejamento</h4>
+          <p>Projeção de saldo mês a mês, calendário financeiro, compras parceladas e teto por
+            categoria — com aviso aos 75% do limite, antes de estourar.</p>
+        </article>
 
-                <h3>Turma</h3>
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z" />
+            </svg>
+          </span>
+          <h4>Metas</h4>
+          <p>Valor, prazo e aporte mensal. Cada meta funciona como contraponto ao impulso: o que
+            você deixa de gastar aparece como progresso.</p>
+        </article>
 
-                <p>
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 20V11M12 20V4M19 20v-7" />
+            </svg>
+          </span>
+          <h4>Análises e relatórios</h4>
+          <p>Gastos por categoria, evolução mensal, indicadores de consumo consciente e exportação
+            dos dados em CSV.</p>
+        </article>
 
-                    <strong>2º C - M-Tec Informática para Internet</strong>
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" />
+              <path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5 3.5 3.5 0 0 0 6.5 10H7" />
+              <path d="M17 5h2.5A1.5 1.5 0 0 1 21 6.5 3.5 3.5 0 0 1 17.5 10H17" />
+              <path d="M12 13v3M8.5 20h7l-1-3.5h-5z" />
+            </svg>
+          </span>
+          <h4>Jornada</h4>
+          <p>XP, níveis e conquistas por constância real — com regras anti-farm: teto diário,
+            intervalo mínimo entre ganhos e cada conquista paga uma única vez.</p>
+        </article>
 
-                </p>
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7h11a3 3 0 0 1 3 3v1M15 4l3 3-3 3" />
+              <path d="M20 17H9a3 3 0 0 1-3-3v-1M9 20l-3-3 3-3" />
+            </svg>
+          </span>
+          <h4>Recorrentes</h4>
+          <p>Assinaturas e contas fixas cadastradas uma vez, aplicadas automaticamente ao orçamento
+            previsto e à projeção futura.</p>
+        </article>
 
-            </section>
+        <article class="funcao" data-tilt>
+          <span class="funcao__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z" />
+              <path d="M9 8h6M9 12h6M9 16h3" />
+            </svg>
+          </span>
+          <h4>Decisões</h4>
+          <p>Todo cálculo vira histórico: o que você comprou, adiou ou substituiu, e o quanto isso
+            representou em dinheiro e em horas preservadas.</p>
+        </article>
 
-            <!-- Membros -->
+      </div>
 
-            <section class="members">
+      <!-- Como funciona -->
+      <h3 class="titulo-bloco">Como funciona, na prática</h3>
+      <ol class="fluxo">
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">01</span>
+          <h4>Você define sua realidade</h4>
+          <p>Renda mensal, dias trabalhados e horas por dia. É daí que sai o valor real da sua hora.</p>
+        </li>
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">02</span>
+          <h4>Registra a compra desejada</h4>
+          <p>Item, preço, categoria e, se quiser, o link do produto e uma observação.</p>
+        </li>
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">03</span>
+          <h4>Recebe a tradução completa</h4>
+          <p>Horas, dias, percentual da renda, semáforo, impacto nas metas e alternativas.</p>
+        </li>
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">04</span>
+          <h4>Decide com consciência</h4>
+          <p>Comprar, adiar ou substituir. A escolha é registrada e vira aprendizado no histórico.</p>
+        </li>
+      </ol>
 
-                <h3>Equipe de Desenvolvimento</h3>
+      <!-- Tecnologia -->
+      <h3 class="titulo-bloco">A tecnologia por trás</h3>
+      <div class="tech">
+        <div class="tech__texto">
+          <p>
+            O FinCK foi construído sem framework: HTML semântico, CSS moderno e JavaScript modular,
+            para que cada linha do projeto seja compreendida e defendida pela equipe. A persistência
+            usa <strong>Supabase</strong> (PostgreSQL + autenticação), com fallback local que mantém
+            o app funcionando <strong>100% offline</strong> — útil tanto para o usuário quanto para a
+            demonstração em sala.
+          </p>
+          <ul class="tech__lista">
+            <li><strong>Front-end</strong> HTML5, CSS3 e JavaScript (ES6+), sem dependências de build</li>
+            <li><strong>Back-end</strong> Supabase — PostgreSQL, Auth e políticas de acesso por usuário</li>
+            <li><strong>PWA</strong> manifest, ícones e instalação na tela inicial</li>
+            <li><strong>Offline-first</strong> camada de armazenamento local como fallback</li>
+            <li><strong>Acessibilidade</strong> foco visível, navegação por teclado, ARIA e alto contraste</li>
+            <li><strong>Design system</strong> tokens de cor, tipografia e espaçamento centralizados</li>
+          </ul>
+        </div>
 
-                <ul>
+        <!-- 3D · Anel giratório de tecnologias -->
+        <div class="anel-tech" data-anel>
+          <div class="anel-tech__palco">
+            <span class="anel-tech__item">HTML5</span>
+            <span class="anel-tech__item">CSS3</span>
+            <span class="anel-tech__item">JavaScript</span>
+            <span class="anel-tech__item">Supabase</span>
+            <span class="anel-tech__item">PostgreSQL</span>
+            <span class="anel-tech__item">PWA</span>
+            <span class="anel-tech__item">Git</span>
+            <span class="anel-tech__item">Figma</span>
+          </div>
+        </div>
+      </div>
 
-                    <li class="leader">
+      <div class="project-status">
+        <p>Status do Projeto</p>
+        <span class="status active">Ativo</span>
+      </div>
 
-                        <h4 class="leader-name">
+      <div class="finck-cta">
+        <a class="btn btn--primario btn--grande" href="https://gustavooliveira-xxx.github.io/finck-app/"
+          target="_blank" rel="noopener" data-magnetico>
+          <span>Acessar o FinCK</span>
+          <span class="development-indicator" aria-hidden="true"></span>
+        </a>
+        <p class="finck-cta__nota">Abre o aplicativo em uma nova aba.</p>
+      </div>
 
-                            Gustavo Oliveira dos Santos
+    </section>
 
-                        </h4>
+    <!-- ========== ENTREGA ========== -->
+    <section id="entrega">
 
-                        <span>Líder do Projeto</span>
+      <header>
+        <p class="secao-indice">03 — Projeto Interdisciplinar</p>
+        <h2>O que entregamos</h2>
+        <p class="secao-sub">
+          O Interdisciplinar não é só um app. É um conjunto de entregas que mostra domínio técnico,
+          organização de equipe e capacidade de defender cada decisão tomada.
+        </p>
+      </header>
 
-                        <p>
+      <div class="entregaveis">
+        <article class="entregavel" data-tilt>
+          <span class="entregavel__tag">Produto</span>
+          <h3>Aplicativo FinCK</h3>
+          <p>PWA responsivo e instalável, com autenticação, banco de dados e todos os módulos
+            funcionais de ponta a ponta.</p>
+        </article>
 
-                            Idealizador da Conscious Knowledge e responsável pela liderança,
-                            organização e coordenação geral do projeto.
+        <article class="entregavel" data-tilt>
+          <span class="entregavel__tag">Dados</span>
+          <h3>Modelagem do banco</h3>
+          <p>Esquema relacional em PostgreSQL com migrações versionadas e regras de acesso por
+            usuário.</p>
+        </article>
 
-                        </p>
+        <article class="entregavel" data-tilt>
+          <span class="entregavel__tag">Marca</span>
+          <h3>Identidade visual</h3>
+          <p>Logotipo, paleta, tipografia e sistema de componentes aplicados de forma coerente no
+            app e neste site.</p>
+        </article>
 
-                    </li>
+        <article class="entregavel" data-tilt>
+          <span class="entregavel__tag">Web</span>
+          <h3>Site institucional</h3>
+          <p>Esta página: apresentação da empresa, da equipe e do produto, com demonstração
+            interativa do motor de cálculo.</p>
+        </article>
 
-                    <li>Éric Estrela Vieira</li>
+        <article class="entregavel" data-tilt>
+          <span class="entregavel__tag">Documentação</span>
+          <h3>Documento do projeto</h3>
+          <p>Escopo, requisitos, fórmulas, regras de negócio e cenários de teste que sustentam cada
+            número exibido no app.</p>
+        </article>
 
-                    <li>Gabriel Heanna dos Reis</li>
+        <article class="entregavel" data-tilt>
+          <span class="entregavel__tag">Banca</span>
+          <h3>Apresentação final</h3>
+          <p>Defesa do projeto com demonstração ao vivo, divisão de falas e justificativa técnica
+            das escolhas.</p>
+        </article>
+      </div>
 
-                    <li>Paulo Henrique de Lima Silva</li>
+      <h3 class="titulo-bloco">Linha do tempo do desenvolvimento</h3>
+      <ol class="timeline">
+        <li class="timeline__item" data-estado="feito">
+          <span class="timeline__marca"></span>
+          <div class="timeline__corpo">
+            <span class="timeline__fase">Fase 01</span>
+            <h4>Concepção e identidade</h4>
+            <p>Definição do problema, criação da Conscious Knowledge, nome, logotipo e paleta.</p>
+          </div>
+        </li>
+        <li class="timeline__item" data-estado="feito">
+          <span class="timeline__marca"></span>
+          <div class="timeline__corpo">
+            <span class="timeline__fase">Fase 02</span>
+            <h4>Fundação técnica</h4>
+            <p>Estrutura do app, design system, autenticação, banco de dados e camada de armazenamento.</p>
+          </div>
+        </li>
+        <li class="timeline__item" data-estado="feito">
+          <span class="timeline__marca"></span>
+          <div class="timeline__corpo">
+            <span class="timeline__fase">Fase 03</span>
+            <h4>Motor FinCK of Reality</h4>
+            <p>Fórmulas de conversão preço→tempo, semáforo de risco, reflexão e registro de decisões.</p>
+          </div>
+        </li>
+        <li class="timeline__item" data-estado="feito">
+          <span class="timeline__marca"></span>
+          <div class="timeline__corpo">
+            <span class="timeline__fase">Fase 04</span>
+            <h4>Contas, planejamento e metas</h4>
+            <p>Visão consolidada, parcelamentos, projeção de saldo, calendário e tetos por categoria.</p>
+          </div>
+        </li>
+        <li class="timeline__item" data-estado="feito">
+          <span class="timeline__marca"></span>
+          <div class="timeline__corpo">
+            <span class="timeline__fase">Fase 05</span>
+            <h4>Jornada, análises e relatórios</h4>
+            <p>Gamificação com regras anti-farm, gráficos de categoria, evolução mensal e exportação.</p>
+          </div>
+        </li>
+        <li class="timeline__item" data-estado="andamento">
+          <span class="timeline__marca"></span>
+          <div class="timeline__corpo">
+            <span class="timeline__fase">Fase 06</span>
+            <h4>Refino e apresentação</h4>
+            <p>Testes finais, ajustes de usabilidade, documentação e preparação da defesa.</p>
+          </div>
+        </li>
+      </ol>
 
-                    <li>Pedro Alcantara dos Santos Fialho</li>
+    </section>
 
-                    <li>Thiago Wilson Vieira Serbino</li>
+    <!-- ========== EQUIPE ========== -->
+    <section id="equipe">
 
-                </ul>
+      <header>
+        <p class="secao-indice">04 — Quem constrói</p>
+        <h2>Nossa Equipe</h2>
+        <p class="secao-sub">
+          Seis estudantes desenvolvendo um produto real, do conceito à defesa.
+        </p>
+      </header>
 
-            </section>
+      <div class="classroom">
+        <h3>Turma</h3>
+        <p><strong>2º C — M-Tec Informática para Internet</strong></p>
+        <p class="classroom__escola">Escola Técnica Estadual de Taboão da Serra</p>
+      </div>
 
-        </section>
+      <div class="members">
+        <h3>Equipe de Desenvolvimento</h3>
 
-        <!-- CONTATO -->
+        <!--
+          Os cartões abaixo giram no hover/foco. O verso está pronto para receber a
+          especialidade de cada integrante — basta editar o texto de .membro__verso p.
+        -->
+        <ul>
+          <li class="leader">
+            <div class="leader__marca" aria-hidden="true">
+              <img src="Logo CK - Oficial.png" alt="" width="120" height="180" loading="lazy" decoding="async">
+            </div>
+            <div class="leader__texto">
+              <h4 class="leader-name">Gustavo Oliveira dos Santos</h4>
+              <span>Líder do Projeto</span>
+              <p>
+                Idealizador da Conscious Knowledge e responsável pela liderança,
+                organização e coordenação geral do projeto.
+              </p>
+            </div>
+          </li>
 
-        <section id="contato">
+          <li class="membro" data-inicial="É" tabindex="0">
+            <div class="membro__carta">
+              <div class="membro__frente">
+                <span class="membro__avatar" aria-hidden="true">É</span>
+                <h4>Éric Estrela Vieira</h4>
+                <span class="membro__papel">Equipe de Desenvolvimento</span>
+              </div>
+              <div class="membro__verso">
+                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
+                <span class="membro__marca">CK</span>
+              </div>
+            </div>
+          </li>
 
-            <header>
+          <li class="membro" data-inicial="G" tabindex="0">
+            <div class="membro__carta">
+              <div class="membro__frente">
+                <span class="membro__avatar" aria-hidden="true">G</span>
+                <h4>Gabriel Heanna dos Reis</h4>
+                <span class="membro__papel">Equipe de Desenvolvimento</span>
+              </div>
+              <div class="membro__verso">
+                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
+                <span class="membro__marca">CK</span>
+              </div>
+            </div>
+          </li>
 
-                <h2>Contato</h2>
+          <li class="membro" data-inicial="P" tabindex="0">
+            <div class="membro__carta">
+              <div class="membro__frente">
+                <span class="membro__avatar" aria-hidden="true">P</span>
+                <h4>Paulo Henrique de Lima Silva</h4>
+                <span class="membro__papel">Equipe de Desenvolvimento</span>
+              </div>
+              <div class="membro__verso">
+                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
+                <span class="membro__marca">CK</span>
+              </div>
+            </div>
+          </li>
 
-            </header>
+          <li class="membro" data-inicial="P" tabindex="0">
+            <div class="membro__carta">
+              <div class="membro__frente">
+                <span class="membro__avatar" aria-hidden="true">P</span>
+                <h4>Pedro Alcantara dos Santos Fialho</h4>
+                <span class="membro__papel">Equipe de Desenvolvimento</span>
+              </div>
+              <div class="membro__verso">
+                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
+                <span class="membro__marca">CK</span>
+              </div>
+            </div>
+          </li>
 
-            <address>
+          <li class="membro" data-inicial="T" tabindex="0">
+            <div class="membro__carta">
+              <div class="membro__frente">
+                <span class="membro__avatar" aria-hidden="true">T</span>
+                <h4>Thiago Wilson Vieira Serbino</h4>
+                <span class="membro__papel">Equipe de Desenvolvimento</span>
+              </div>
+              <div class="membro__verso">
+                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
+                <span class="membro__marca">CK</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-                <p>
+    </section>
 
-                    <strong>Telefone</strong><br>
+    <!-- ========== CONTATO ========== -->
+    <section id="contato">
 
-                    <a href="tel:+5511945258239">
-                        (11) 94525-8239
-                    </a>
+      <header>
+        <p class="secao-indice">05 — Fale com a gente</p>
+        <h2>Contato</h2>
+        <p class="secao-sub">
+          Dúvidas sobre o projeto, a empresa ou o FinCK? É só chamar.
+        </p>
+      </header>
 
-                </p>
-
-                <p>
-
-                    <strong>E-mail</strong><br>
-
-                    <a href="mailto:gu.prgrm@gmail.com">
-                        gu.prgrm@gmail.com
-                    </a>
-
-                </p>
-
-            </address>
-
-        </section>
-
-    </main>
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
+      <address>
         <p>
-
-            © 2026 Conscious Knowledge.
-
+          <span class="contato-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M5 4h3.5l1.7 4-2 1.4a12 12 0 0 0 6.4 6.4l1.4-2 4 1.7V19a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 5 4Z" />
+            </svg>
+          </span>
+          <strong>Telefone</strong>
+          <a href="tel:+5511945258239">(11) 94525-8239</a>
         </p>
 
         <p>
-
-            Projeto desenvolvido para o Projeto Interdisciplinar da
-            ETEC Taboão da Serra.
-
+          <span class="contato-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3.5 7 8.5 6 8.5-6" />
+            </svg>
+          </span>
+          <strong>E-mail</strong>
+          <a href="mailto:gu.prgrm@gmail.com">gu.prgrm@gmail.com</a>
         </p>
 
-    </footer>
-<script src="script.js"></script>
+        <p>
+          <span class="contato-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" />
+              <circle cx="12" cy="10" r="2.6" />
+            </svg>
+          </span>
+          <strong>Instituição</strong>
+          <span class="contato-valor">ETEC Taboão da Serra — SP</span>
+        </p>
+
+        <p>
+          <span class="contato-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M9 19c-4 1.3-4-2.2-5.6-2.7M15 21v-3.4c0-.9.1-1.3-.5-1.8 2.6-.3 5.3-1.3 5.3-5.8a4.5 4.5 0 0 0-1.2-3.1 4.2 4.2 0 0 0-.1-3.1s-1-.3-3.3 1.2a11.4 11.4 0 0 0-6 0C6.9 3.5 5.9 3.8 5.9 3.8a4.2 4.2 0 0 0-.1 3.1A4.5 4.5 0 0 0 4.6 10c0 4.5 2.7 5.5 5.3 5.8-.4.4-.5.9-.5 1.5V21" />
+            </svg>
+          </span>
+          <strong>Repositório</strong>
+          <a href="https://github.com/GustavoOliveira-xxx/ck-group" target="_blank" rel="noopener">github.com/ck-group</a>
+        </p>
+      </address>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-grade">
+      <div class="footer-marca">
+        <img src="Logo CK - Oficial.png" alt="Logo Conscious Knowledge" width="64" height="96" loading="lazy"
+          decoding="async">
+        <div>
+          <strong>Conscious Knowledge</strong>
+          <span>Conhecimento consciente aplicado à tecnologia.</span>
+        </div>
+      </div>
+
+      <nav class="footer-links" aria-label="Navegação do rodapé">
+        <a href="#sobre">Sobre</a>
+        <a href="#finck">FinCK</a>
+        <a href="#entrega">Entrega</a>
+        <a href="#equipe">Equipe</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+
+    <div class="footer-base">
+      <p>© 2026 Conscious Knowledge.</p>
+      <p>Projeto desenvolvido para o Projeto Interdisciplinar da ETEC Taboão da Serra.</p>
+    </div>
+  </footer>
+
 </body>
 
 </html>
-
