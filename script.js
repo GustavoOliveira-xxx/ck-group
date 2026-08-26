@@ -1,527 +1,876 @@
 /* ============================================================
-   CONSCIOUS KNOWLEDGE — INTERACTION SYSTEM
-   Vanilla JS · accessible · motion-aware
+   Conscious Knowledge — interações do site
+   Tudo é progressivo: se o JS falhar, o conteúdo continua
+   legível e navegável. Nada aqui é obrigatório para ler a
+   página, apenas para dar vida a ela.
    ============================================================ */
 
 (() => {
   "use strict";
 
-  const $ = (selector, context = document) => context.querySelector(selector);
-  const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const temHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+  const limitar = (v, min, max) => Math.min(max, Math.max(min, v));
 
-  document.body.classList.add("preloading");
 
-  /* ---------- 01. Preloader ---------- */
+  /* ---------------------------------------------------------
+     00. Sistema de atmosfera — origem, alter ego e fusão
+     --------------------------------------------------------- */
+  const temasValidos = ["origem", "fusao", "futuro"];
+  const coresTema = {
+    origem: "#7e22ce",
+    fusao: "#25f0a2",
+    futuro: "#18c98b",
+  };
+
+  const sincronizarMarcaNucleo = (tema) => {
+    if (tema === "fusao") return;
+    $$('[data-marca]').forEach((marca) => {
+      const ativa = marca.dataset.marca === tema;
+      marca.classList.toggle("is-active", ativa);
+      marca.setAttribute("aria-pressed", String(ativa));
+    });
+  };
+
+  const aplicarTema = (tema) => {
+    if (!temasValidos.includes(tema)) return;
+    document.body.dataset.tema = tema;
+
+    $$('[data-tema-botao]').forEach((botao) => {
+      const ativo = botao.dataset.temaBotao === tema;
+      botao.classList.toggle("is-active", ativo);
+      botao.setAttribute("aria-pressed", String(ativo));
+    });
+
+    sincronizarMarcaNucleo(tema);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", coresTema[tema]);
+    window.dispatchEvent(new CustomEvent("ck:tema", { detail: { tema } }));
+  };
+
+  $$('[data-tema-botao]').forEach((botao) => {
+    botao.addEventListener("click", () => aplicarTema(botao.dataset.temaBotao));
+  });
+
+  $$('[data-marca]').forEach((marca) => {
+    marca.addEventListener("click", () => aplicarTema(marca.dataset.marca));
+  });
+
+  aplicarTema(document.body.dataset.tema || "fusao");
+
+
+  /* ---------------------------------------------------------
+     01. Preloader
+     --------------------------------------------------------- */
   const preloader = $("[data-preloader]");
-  const finishLoading = () => {
-    if (!preloader || preloader.classList.contains("is-done")) return;
-    preloader.classList.add("is-done");
-    document.body.classList.remove("preloading");
-    window.setTimeout(() => preloader.remove(), 800);
+
+  const encerrarPreloader = () => {
+    if (!preloader || preloader.classList.contains("is-pronto")) return;
+    preloader.classList.add("is-pronto");
+    document.body.classList.remove("is-travado");
+    setTimeout(() => preloader.remove(), 900);
   };
 
-  window.addEventListener("load", () => window.setTimeout(finishLoading, reducedMotion ? 0 : 650), { once: true });
-  window.setTimeout(finishLoading, 3200);
+  if (preloader) {
+    document.body.classList.add("is-travado");
+    window.addEventListener("load", () => setTimeout(encerrarPreloader, semMovimento ? 0 : 600));
+    // rede lenta ou imagem grande não pode prender o usuário
+    setTimeout(encerrarPreloader, 4500);
+  }
 
-  /* ---------- 02. Header, mobile nav and scroll progress ---------- */
-  const header = $("[data-header]");
-  const nav = $("[data-nav]");
-  const navToggle = $("[data-nav-toggle]");
-  const navLinks = $$('a[href^="#"]', nav || document);
-  const scrollProgress = $("[data-scroll-progress]");
-  let previousScroll = window.scrollY;
-  let scrollTicking = false;
 
-  const closeNav = () => {
-    nav?.classList.remove("is-open");
-    navToggle?.classList.remove("is-open");
-    navToggle?.setAttribute("aria-expanded", "false");
-    navToggle?.setAttribute("aria-label", "Abrir menu");
+  /* ---------------------------------------------------------
+     02. Header, menu mobile e scrollspy
+     --------------------------------------------------------- */
+  const header = $("body > header");
+  const nav = header && $("nav", header);
+  const navLinks = nav ? $$("a[href^='#']", nav) : [];
+  const secoes = navLinks
+    .map((link) => $(link.getAttribute("href")))
+    .filter(Boolean);
+
+  let toggle = header && $(".nav-toggle", header);
+
+  if (header && nav && !toggle) {
+    toggle = document.createElement("button");
+    toggle.className = "nav-toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-label", "Abrir menu");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.innerHTML = "<span></span>";
+    header.appendChild(toggle);
+  }
+
+  const fecharMenu = () => {
+    if (!nav || !toggle) return;
+    nav.classList.remove("is-open");
+    toggle.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Abrir menu");
   };
 
-  navToggle?.addEventListener("click", () => {
-    const open = nav?.classList.toggle("is-open");
-    navToggle.classList.toggle("is-open", Boolean(open));
-    navToggle.setAttribute("aria-expanded", String(Boolean(open)));
-    navToggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+  toggle?.addEventListener("click", () => {
+    const aberto = nav.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", aberto);
+    toggle.setAttribute("aria-expanded", String(aberto));
+    toggle.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
   });
 
-  navLinks.forEach((link) => link.addEventListener("click", closeNav));
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeNav();
+  navLinks.forEach((link) => link.addEventListener("click", fecharMenu));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") fecharMenu();
   });
 
-  const updateScroll = () => {
+  /* header some ao descer, volta ao subir */
+  let ultimoY = window.scrollY;
+  let agendado = false;
+
+  const progresso = document.createElement("div");
+  progresso.className = "scroll-progress";
+  progresso.setAttribute("aria-hidden", "true");
+  document.body.appendChild(progresso);
+
+  const aoRolar = () => {
     const y = window.scrollY;
-    const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-    header?.classList.toggle("is-scrolled", y > 18);
-    if (y > 160 && y > previousScroll + 7 && !nav?.classList.contains("is-open")) {
-      header?.classList.add("is-hidden");
-    } else if (y < previousScroll - 5 || y < 160) {
+    header?.classList.toggle("is-scrolled", y > 24);
+
+    if (y > 140 && !nav?.classList.contains("is-open")) {
+      if (y > ultimoY + 8) header?.classList.add("is-hidden");
+      else if (y < ultimoY - 8) header?.classList.remove("is-hidden");
+    } else {
       header?.classList.remove("is-hidden");
     }
 
-    if (scrollProgress) {
-      scrollProgress.style.width = `${pageHeight > 0 ? (y / pageHeight) * 100 : 0}%`;
-    }
+    const alturaDoc = document.documentElement.scrollHeight - window.innerHeight;
+    progresso.style.width = `${alturaDoc > 0 ? (y / alturaDoc) * 100 : 0}%`;
 
-    previousScroll = y;
-    scrollTicking = false;
+    ultimoY = y;
+    agendado = false;
   };
 
   window.addEventListener("scroll", () => {
-    if (scrollTicking) return;
-    scrollTicking = true;
-    requestAnimationFrame(updateScroll);
+    if (!agendado) {
+      window.requestAnimationFrame(aoRolar);
+      agendado = true;
+    }
   }, { passive: true });
-  updateScroll();
 
-  const observedSections = $$('main section[id]');
-  if ("IntersectionObserver" in window) {
-    const sectionSpy = new IntersectionObserver((entries) => {
-      const current = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!current) return;
+  aoRolar();
+
+  /* link ativo conforme a seção visível */
+  if ("IntersectionObserver" in window && secoes.length) {
+    const marcarAtivo = (id) => {
       navLinks.forEach((link) => {
-        link.classList.toggle("is-active", link.getAttribute("href") === `#${current.target.id}`);
+        link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
       });
-    }, { rootMargin: "-42% 0px -46% 0px", threshold: [0.08, 0.25, 0.5] });
-    observedSections.forEach((section) => sectionSpy.observe(section));
+    };
+
+    const espiao = new IntersectionObserver(
+      (entradas) => {
+        entradas
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+          .forEach((e) => marcarAtivo(e.target.id));
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0.1, 0.3, 0.5] }
+    );
+
+    secoes.forEach((s) => espiao.observe(s));
   }
 
-  /* ---------- 03. Reveal on entry ---------- */
-  const revealGroups = [
-    ".section-heading",
-    ".about__manifesto",
-    ".principle",
-    ".product",
-    ".palette-switcher",
-    ".identity-card",
-    ".identity-bridge",
-    ".journey",
-    ".team",
-    ".contact__content",
-    ".contact__orb",
-    ".site-footer",
+
+  /* ---------------------------------------------------------
+     03. Reveal ao rolar
+     --------------------------------------------------------- */
+  const alvosReveal = [
+    [".hero-content", ""],
+    [".metric-card", ""],
+    ["main > section > header", ""],
+    ["#sobre article", "reveal--esq"],
+    [".pilar", "reveal--dir"],
+    [".finck-intro", ""],
+    [".numero", "reveal--zoom"],
+    [".prisma-secao", ""],
+    [".titulo-bloco", ""],
+    [".funcao", ""],
+    [".fluxo__passo", ""],
+    [".tech__texto", "reveal--esq"],
+    [".anel-tech", "reveal--dir"],
+    [".project-status", ""],
+    [".finck-cta", ""],
+    [".dynamick-intro", ""],
+    [".dynamic-numeros article", "reveal--zoom"],
+    [".dynamic-lab", ""],
+    [".dynamic-funcao", ""],
+    [".ciclo-conhecimento__texto", "reveal--esq"],
+    [".knowledge-core", "reveal--dir"],
+    [".dynamic-cta", ""],
+    [".identidade-paleta", ""],
+    [".identity-totem--origem", "reveal--esq"],
+    [".identity-totem--futuro", "reveal--dir"],
+    [".identity-reactor", "reveal--zoom"],
+    [".fusion-lab", ""],
+    [".identity-matrix article", "reveal--zoom"],
+    [".entregavel", ""],
+    [".timeline__item", "reveal--esq"],
+    [".classroom", ""],
+    [".members", ""],
+    ["#contato address p", "reveal--zoom"],
+    [".footer-grade", ""],
   ];
 
-  const revealElements = revealGroups.flatMap((selector) => $$(selector));
-  revealElements.forEach((element, index) => {
-    element.classList.add("reveal");
-    if (element.classList.contains("identity-card--origin")) element.classList.add("reveal--left");
-    if (element.classList.contains("identity-card--future")) element.classList.add("reveal--right");
-    element.style.transitionDelay = `${Math.min((index % 4) * 0.07, 0.21)}s`;
+  const elementosReveal = [];
+
+  alvosReveal.forEach(([sel, variante]) => {
+    $$(sel).forEach((el, i) => {
+      el.classList.add("reveal");
+      if (variante) el.classList.add(variante);
+      el.style.transitionDelay = `${Math.min(i * 0.07, 0.42)}s`;
+      elementosReveal.push(el);
+    });
   });
 
-  if ("IntersectionObserver" in window && !reducedMotion) {
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: "0px 0px -5%" });
-    revealElements.forEach((element) => revealObserver.observe(element));
+  if ("IntersectionObserver" in window && !semMovimento) {
+    const obsReveal = new IntersectionObserver(
+      (entradas, obs) => {
+        entradas.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("is-visible");
+          obs.unobserve(e.target);
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -6% 0px" }
+    );
+
+    elementosReveal.forEach((el) => obsReveal.observe(el));
   } else {
-    revealElements.forEach((element) => element.classList.add("is-visible"));
+    elementosReveal.forEach((el) => el.classList.add("is-visible"));
   }
 
-  /* ---------- 04. Dual identity controls ---------- */
-  const brandEmblems = $$('[data-brand-emblem]');
-  const activateBrand = (selected) => {
-    brandEmblems.forEach((emblem) => {
-      const active = emblem === selected;
-      emblem.classList.toggle("is-front", active);
-      emblem.setAttribute("aria-pressed", String(active));
-    });
-  };
-  brandEmblems.forEach((emblem) => emblem.addEventListener("click", () => activateBrand(emblem)));
 
-  const paletteButtons = $$('[data-palette-button]');
-  const themeMeta = $('meta[name="theme-color"]');
-  const themeColors = { origin: "#08050d", fusion: "#050807", future: "#03100c" };
-
-  const setPalette = (palette) => {
-    document.body.dataset.palette = palette;
-    themeMeta?.setAttribute("content", themeColors[palette] || themeColors.fusion);
-    paletteButtons.forEach((button) => {
-      const active = button.dataset.paletteButton === palette;
-      button.classList.toggle("is-active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-    window.dispatchEvent(new CustomEvent("ck:palette", { detail: palette }));
-  };
-  paletteButtons.forEach((button) => button.addEventListener("click", () => setPalette(button.dataset.paletteButton)));
-
-  /* ---------- 05. Typed hero statement ---------- */
-  const typed = $("[data-typed]");
-  if (typed) {
-    const output = $("[data-typed-text]", typed);
-    const words = (typed.dataset.words || "").split("|").filter(Boolean);
-
-    if (output && words.length && !reducedMotion) {
-      let wordIndex = 0;
-      let letterIndex = words[0].length;
-      let deleting = true;
-
-      const typeStep = () => {
-        const word = words[wordIndex];
-        letterIndex += deleting ? -1 : 1;
-        output.textContent = word.slice(0, letterIndex);
-
-        let delay = deleting ? 42 : 76;
-        if (!deleting && letterIndex === word.length) {
-          deleting = true;
-          delay = 1750;
-        } else if (deleting && letterIndex === 0) {
-          deleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-          delay = 280;
-        }
-        window.setTimeout(typeStep, delay);
-      };
-      window.setTimeout(typeStep, 2600);
-    }
-  }
-
-  /* ---------- 06. Reactive constellation background ---------- */
+  /* ---------------------------------------------------------
+     04. Fundo em canvas — constelação reativa ao mouse
+     --------------------------------------------------------- */
   const canvas = $("[data-canvas]");
-  if (canvas && !reducedMotion) {
-    const context = canvas.getContext("2d", { alpha: true });
-    const pointer = { x: -9999, y: -9999 };
-    const palettes = {
-      fusion: ["155,69,245", "53,239,170", "255,216,77", "94,231,242"],
-      origin: ["155,69,245", "193,132,255", "255,216,77"],
-      future: ["53,239,170", "15,191,159", "94,231,242", "234,255,223"],
-    };
-    let particles = [];
-    let width = 0;
-    let height = 0;
-    let dpr = 1;
-    let animationFrame = 0;
-    let running = true;
 
-    const createParticles = () => {
-      const colors = palettes[document.body.dataset.palette] || palettes.fusion;
-      const count = clamp(Math.round((width * height) / 17500), 35, 105);
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        radius: Math.random() * 1.4 + 0.45,
-        alpha: Math.random() * 0.42 + 0.18,
-        color: colors[Math.floor(Math.random() * colors.length)],
+  if (canvas && !semMovimento) {
+    const ctx = canvas.getContext("2d", { alpha: true });
+    const ponteiro = { x: -9999, y: -9999 };
+    let particulas = [];
+    let largura = 0;
+    let altura = 0;
+    let dpr = 1;
+    let animando = true;
+    let quadro = 0;
+
+    const PALETAS = {
+      origem: ["168, 85, 247", "192, 132, 252", "254, 200, 0"],
+      fusao: ["168, 85, 247", "37, 240, 162", "50, 215, 230", "254, 200, 0"],
+      futuro: ["37, 240, 162", "50, 215, 230", "234, 255, 223"],
+    };
+    let CORES = PALETAS[document.body.dataset.tema] || PALETAS.fusao;
+
+    window.addEventListener("ck:tema", (e) => {
+      CORES = PALETAS[e.detail?.tema] || PALETAS.fusao;
+      particulas.forEach((p, i) => {
+        p.cor = CORES[i % CORES.length];
+      });
+    });
+
+    const dimensionar = () => {
+      dpr = limitar(window.devicePixelRatio || 1, 1, 2);
+      largura = canvas.clientWidth;
+      altura = canvas.clientHeight;
+      canvas.width = Math.floor(largura * dpr);
+      canvas.height = Math.floor(altura * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // densidade proporcional à área, com teto para não pesar
+      const quantidade = limitar(Math.round((largura * altura) / 16000), 26, 92);
+      particulas = Array.from({ length: quantidade }, () => ({
+        x: Math.random() * largura,
+        y: Math.random() * altura,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: (Math.random() - 0.5) * 0.28,
+        r: Math.random() * 1.6 + 0.6,
+        cor: CORES[Math.random() < 0.12 ? 2 : Math.random() < 0.5 ? 0 : 1],
+        brilho: Math.random() * 0.4 + 0.25,
       }));
     };
 
-    const resizeCanvas = () => {
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
-      dpr = clamp(window.devicePixelRatio || 1, 1, 2);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      createParticles();
-    };
+    const desenhar = () => {
+      if (!animando) return;
+      quadro = requestAnimationFrame(desenhar);
 
-    const render = () => {
-      if (!running) return;
-      animationFrame = requestAnimationFrame(render);
-      context.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, largura, altura);
 
-      for (let index = 0; index < particles.length; index += 1) {
-        const particle = particles[index];
-        const dxPointer = particle.x - pointer.x;
-        const dyPointer = particle.y - pointer.y;
-        const pointerDistance = Math.hypot(dxPointer, dyPointer);
+      for (let i = 0; i < particulas.length; i++) {
+        const p = particulas[i];
 
-        if (pointerDistance < 150 && pointerDistance > 0.1) {
-          const force = (150 - pointerDistance) / 150;
-          particle.vx += (dxPointer / pointerDistance) * force * 0.035;
-          particle.vy += (dyPointer / pointerDistance) * force * 0.035;
+        // repulsão suave em torno do ponteiro
+        const dxm = p.x - ponteiro.x;
+        const dym = p.y - ponteiro.y;
+        const distM = Math.hypot(dxm, dym);
+        if (distM < 130 && distM > 0.1) {
+          const forca = (130 - distM) / 130 * 0.7;
+          p.vx += (dxm / distM) * forca * 0.12;
+          p.vy += (dym / distM) * forca * 0.12;
         }
 
-        particle.vx *= 0.994;
-        particle.vy *= 0.994;
-        particle.x += particle.vx;
-        particle.y += particle.vy;
+        // atrito para a velocidade não escapar
+        p.vx *= 0.99;
+        p.vy *= 0.99;
 
-        if (particle.x < -15) particle.x = width + 15;
-        if (particle.x > width + 15) particle.x = -15;
-        if (particle.y < -15) particle.y = height + 15;
-        if (particle.y > height + 15) particle.y = -15;
+        p.x += p.vx;
+        p.y += p.vy;
 
-        context.beginPath();
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fillStyle = `rgba(${particle.color},${particle.alpha})`;
-        context.fill();
+        if (p.x < -20) p.x = largura + 20;
+        if (p.x > largura + 20) p.x = -20;
+        if (p.y < -20) p.y = altura + 20;
+        if (p.y > altura + 20) p.y = -20;
 
-        for (let secondIndex = index + 1; secondIndex < particles.length; secondIndex += 1) {
-          const second = particles[secondIndex];
-          const dx = particle.x - second.x;
-          const dy = particle.y - second.y;
-          const distanceSquared = dx * dx + dy * dy;
-          if (distanceSquared > 15000) continue;
-          const alpha = (1 - Math.sqrt(distanceSquared) / Math.sqrt(15000)) * 0.12;
-          context.beginPath();
-          context.moveTo(particle.x, particle.y);
-          context.lineTo(second.x, second.y);
-          context.strokeStyle = `rgba(${particle.color},${alpha})`;
-          context.lineWidth = 0.65;
-          context.stroke();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.cor}, ${p.brilho})`;
+        ctx.fill();
+
+        // linhas entre vizinhos próximos
+        for (let j = i + 1; j < particulas.length; j++) {
+          const q = particulas[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist2 = dx * dx + dy * dy;
+          if (dist2 > 16900) continue; // 130²
+          const alpha = (1 - Math.sqrt(dist2) / 130) * 0.16;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(${p.cor}, ${alpha})`;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
         }
       }
     };
 
-    resizeCanvas();
-    render();
+    dimensionar();
+    desenhar();
 
-    let resizeTimer;
+    let redimensionando;
     window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(resizeCanvas, 140);
+      clearTimeout(redimensionando);
+      redimensionando = setTimeout(dimensionar, 180);
     });
-    window.addEventListener("pointermove", (event) => {
-      pointer.x = event.clientX;
-      pointer.y = event.clientY;
+
+    window.addEventListener("pointermove", (e) => {
+      ponteiro.x = e.clientX;
+      ponteiro.y = e.clientY;
     }, { passive: true });
-    document.addEventListener("mouseleave", () => { pointer.x = pointer.y = -9999; });
-    window.addEventListener("ck:palette", createParticles);
+
+    window.addEventListener("pointerleave", () => {
+      ponteiro.x = ponteiro.y = -9999;
+    });
+
+    // não gasta bateria com a aba escondida
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        running = false;
-        cancelAnimationFrame(animationFrame);
-      } else if (!running) {
-        running = true;
-        render();
+        animando = false;
+        cancelAnimationFrame(quadro);
+      } else if (!animando) {
+        animando = true;
+        desenhar();
       }
     });
   }
 
-  /* ---------- 07. Custom cursor ---------- */
-  const cursor = $("[data-cursor]");
-  const cursorRing = $("[data-cursor-ring]");
-  if (cursor && cursorRing && precisePointer && !reducedMotion) {
-    let pointerX = window.innerWidth / 2;
-    let pointerY = window.innerHeight / 2;
-    let ringX = pointerX;
-    let ringY = pointerY;
-    document.body.classList.add("has-custom-cursor");
 
-    window.addEventListener("pointermove", (event) => {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      cursor.style.transform = `translate3d(${pointerX - 3.5}px, ${pointerY - 3.5}px, 0)`;
+  /* ---------------------------------------------------------
+     05. Cursor personalizado
+     --------------------------------------------------------- */
+  const cursor = $("[data-cursor]");
+  const halo = $("[data-cursor-halo]");
+
+  if (cursor && halo && temHover && !semMovimento) {
+    let px = window.innerWidth / 2;
+    let py = window.innerHeight / 2;
+    let hx = px;
+    let hy = py;
+
+    document.body.classList.add("cursor-ativo");
+
+    window.addEventListener("pointermove", (e) => {
+      px = e.clientX;
+      py = e.clientY;
+      cursor.style.transform = `translate3d(${px - 3.5}px, ${py - 3.5}px, 0)`;
     }, { passive: true });
 
-    const moveRing = () => {
-      ringX += (pointerX - ringX) * 0.15;
-      ringY += (pointerY - ringY) * 0.15;
-      const size = document.body.classList.contains("cursor-hover") ? 62 : 42;
-      cursorRing.style.transform = `translate3d(${ringX - size / 2}px, ${ringY - size / 2}px, 0)`;
-      requestAnimationFrame(moveRing);
+    const seguir = () => {
+      hx += (px - hx) * 0.16;
+      hy += (py - hy) * 0.16;
+      halo.style.transform = `translate3d(${hx - 19}px, ${hy - 19}px, 0)`;
+      requestAnimationFrame(seguir);
     };
-    moveRing();
+    seguir();
 
-    const interactiveSelector = "a, button, input, [tabindex], [data-tilt]";
-    document.addEventListener("pointerover", (event) => {
-      if (event.target.closest(interactiveSelector)) document.body.classList.add("cursor-hover");
+    const interativos = "a, button, input, [data-tilt], .membro, .prisma-palco";
+    document.addEventListener("pointerover", (e) => {
+      if (e.target.closest(interativos)) document.body.classList.add("cursor-toque");
     });
-    document.addEventListener("pointerout", (event) => {
-      if (event.target.closest(interactiveSelector)) document.body.classList.remove("cursor-hover");
+    document.addEventListener("pointerout", (e) => {
+      if (e.target.closest(interativos)) document.body.classList.remove("cursor-toque");
     });
   }
 
-  /* ---------- 08. Card tilt + responsive spotlights ---------- */
-  if (precisePointer && !reducedMotion) {
-    $$('[data-tilt]').forEach((element) => {
-      const maxTilt = element.classList.contains("product") ? 1.8 : 5;
-      element.addEventListener("pointermove", (event) => {
-        const bounds = element.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width;
-        const y = (event.clientY - bounds.top) / bounds.height;
-        element.style.setProperty("--mx", `${x * 100}%`);
-        element.style.setProperty("--my", `${y * 100}%`);
-        element.style.setProperty("--tilt-x", `${(0.5 - y) * maxTilt}deg`);
-        element.style.setProperty("--tilt-y", `${(x - 0.5) * maxTilt}deg`);
-      });
-      element.addEventListener("pointerleave", () => {
-        element.style.setProperty("--tilt-x", "0deg");
-        element.style.setProperty("--tilt-y", "0deg");
-      });
-    });
 
-    $$('[data-magnetic]').forEach((element) => {
-      element.addEventListener("pointermove", (event) => {
-        const bounds = element.getBoundingClientRect();
-        const x = event.clientX - (bounds.left + bounds.width / 2);
-        const y = event.clientY - (bounds.top + bounds.height / 2);
-        element.style.transform = `translate(${x * 0.11}px, ${y * 0.16 - 2}px)`;
-      });
-      element.addEventListener("pointerleave", () => { element.style.transform = ""; });
-    });
-  }
+  /* ---------------------------------------------------------
+     06. Tilt 3D nos cartões
+     --------------------------------------------------------- */
+  if (temHover && !semMovimento) {
+    $$("[data-tilt]").forEach((card) => {
+      const intensidade = 9;
 
-  /* ---------- 09. FinCK live calculation ---------- */
-  const finckInputs = {
-    price: $("[data-finck-price]"),
-    income: $("[data-finck-income]"),
-    hours: $("[data-finck-hours]"),
-  };
-  const finckOutputs = {
-    time: $("[data-finck-time]"),
-    percent: $("[data-finck-percent]"),
-    days: $("[data-finck-days]"),
-    hourValue: $("[data-finck-hour-value]"),
-    dial: $("[data-time-dial]"),
-  };
-  const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-  const decimal = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+      const mover = (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
 
-  const updateFinck = () => {
-    const price = Math.max(0, Number(finckInputs.price?.value) || 0);
-    const income = Math.max(1, Number(finckInputs.income?.value) || 1);
-    const monthlyHours = Math.max(1, Number(finckInputs.hours?.value) || 1);
-    const hourValue = income / monthlyHours;
-    const workHours = price / hourValue;
-    const wholeHours = Math.floor(workHours);
-    const minutes = Math.round((workHours - wholeHours) * 60);
-    const percent = (price / income) * 100;
-    const workDays = workHours / 8;
+        card.style.setProperty("--mx", `${x * 100}%`);
+        card.style.setProperty("--my", `${y * 100}%`);
+        card.style.transform =
+          `perspective(900px) rotateX(${(0.5 - y) * intensidade}deg) ` +
+          `rotateY(${(x - 0.5) * intensidade}deg) translateY(-4px)`;
+      };
 
-    if (finckOutputs.time) finckOutputs.time.textContent = `${wholeHours}h ${minutes.toString().padStart(2, "0")}min`;
-    if (finckOutputs.percent) finckOutputs.percent.textContent = `${decimal.format(percent)}%`;
-    if (finckOutputs.days) finckOutputs.days.textContent = decimal.format(workDays);
-    if (finckOutputs.hourValue) finckOutputs.hourValue.textContent = brl.format(hourValue);
-    if (finckOutputs.dial) finckOutputs.dial.style.setProperty("--dial", `${clamp((workHours / monthlyHours) * 360, 4, 356)}deg`);
-  };
-  Object.values(finckInputs).forEach((input) => input?.addEventListener("input", updateFinck));
-  updateFinck();
+      const sair = () => {
+        card.style.transform = "";
+        card.style.transition = "transform .6s var(--ease)";
+        setTimeout(() => (card.style.transition = ""), 600);
+      };
 
-  /* ---------- 10. DynamiCK study session ---------- */
-  const studyRange = $("[data-study-range]");
-  const studyOutputs = {
-    total: $("[data-study-time]"),
-    learnBar: $("[data-study-learn]"),
-    learnText: $("[data-study-learn-text]"),
-    practiceBar: $("[data-study-practice]"),
-    practiceText: $("[data-study-practice-text]"),
-    reviewBar: $("[data-study-review]"),
-    reviewText: $("[data-study-review-text]"),
-  };
-
-  const updateStudyPlan = () => {
-    if (!studyRange) return;
-    const total = Number(studyRange.value);
-    const learn = Math.max(3, Math.round(total * 0.2));
-    const review = Math.max(3, Math.round(total * 0.2));
-    const practice = total - learn - review;
-    const rangePercent = ((total - Number(studyRange.min)) / (Number(studyRange.max) - Number(studyRange.min))) * 100;
-    const unit = 1.15;
-
-    studyRange.style.setProperty("--range-p", `${rangePercent}%`);
-    if (studyOutputs.total) studyOutputs.total.textContent = `${total} min`;
-    if (studyOutputs.learnText) studyOutputs.learnText.textContent = `${learn} min`;
-    if (studyOutputs.practiceText) studyOutputs.practiceText.textContent = `${practice} min`;
-    if (studyOutputs.reviewText) studyOutputs.reviewText.textContent = `${review} min`;
-    studyOutputs.learnBar?.style.setProperty("--bar-h", `${clamp(learn * unit, 12, 56)}px`);
-    studyOutputs.practiceBar?.style.setProperty("--bar-h", `${clamp(practice * unit, 22, 64)}px`);
-    studyOutputs.reviewBar?.style.setProperty("--bar-h", `${clamp(review * unit, 12, 56)}px`);
-  };
-  studyRange?.addEventListener("input", updateStudyPlan);
-  updateStudyPlan();
-
-  /* ---------- 11. Draggable and keyboard-accessible study cube ---------- */
-  const studyCube = $("[data-study-cube]");
-  if (studyCube) {
-    const cubeBody = $(".study-cube__body", studyCube);
-    let rotationX = -22;
-    let rotationY = 34;
-    let dragging = false;
-    let startX = 0;
-    let startY = 0;
-    let initialX = rotationX;
-    let initialY = rotationY;
-
-    const applyCubeRotation = () => {
-      cubeBody?.style.setProperty("--rx", `${rotationX}deg`);
-      cubeBody?.style.setProperty("--ry", `${rotationY}deg`);
-    };
-
-    studyCube.addEventListener("pointerdown", (event) => {
-      dragging = true;
-      startX = event.clientX;
-      startY = event.clientY;
-      initialX = rotationX;
-      initialY = rotationY;
-      studyCube.classList.add("is-dragging");
-      studyCube.setPointerCapture?.(event.pointerId);
-    });
-    studyCube.addEventListener("pointermove", (event) => {
-      if (!dragging) return;
-      rotationY = initialY + (event.clientX - startX) * 0.55;
-      rotationX = clamp(initialX - (event.clientY - startY) * 0.45, -75, 75);
-      applyCubeRotation();
-    });
-
-    const releaseCube = (event) => {
-      if (!dragging) return;
-      dragging = false;
-      studyCube.classList.remove("is-dragging");
-      studyCube.releasePointerCapture?.(event.pointerId);
-    };
-    studyCube.addEventListener("pointerup", releaseCube);
-    studyCube.addEventListener("pointercancel", releaseCube);
-
-    studyCube.addEventListener("keydown", (event) => {
-      const step = event.shiftKey ? 30 : 12;
-      if (event.key === "ArrowLeft") rotationY -= step;
-      else if (event.key === "ArrowRight") rotationY += step;
-      else if (event.key === "ArrowUp") rotationX = clamp(rotationX - step, -75, 75);
-      else if (event.key === "ArrowDown") rotationX = clamp(rotationX + step, -75, 75);
-      else return;
-      event.preventDefault();
-      studyCube.classList.add("is-dragging");
-      applyCubeRotation();
-      window.setTimeout(() => studyCube.classList.remove("is-dragging"), 350);
+      card.addEventListener("pointermove", mover);
+      card.addEventListener("pointerleave", sair);
     });
   }
 
-  /* ---------- 12. Count-up metrics ---------- */
-  const counters = $$('[data-counter]');
-  const animateCounter = (element) => {
-    const target = Number(element.dataset.counter) || 0;
-    if (reducedMotion) {
-      element.textContent = String(target);
-      return;
+
+  /* ---------------------------------------------------------
+     07. Botões magnéticos
+     --------------------------------------------------------- */
+  if (temHover && !semMovimento) {
+    $$("[data-magnetico]").forEach((btn) => {
+      btn.addEventListener("pointermove", (e) => {
+        const r = btn.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = `translate(${dx * 0.16}px, ${dy * 0.24 - 2}px)`;
+      });
+      btn.addEventListener("pointerleave", () => {
+        btn.style.transform = "";
+      });
+    });
+  }
+
+
+  /* ---------------------------------------------------------
+     08. Parallax do núcleo 3D e do celular
+     --------------------------------------------------------- */
+  const parallax3d = (el, maxX, maxY) => {
+    if (!el || !temHover || semMovimento) return;
+    window.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const nx = limitar((e.clientX - cx) / (window.innerWidth / 2), -1, 1);
+      const ny = limitar((e.clientY - cy) / (window.innerHeight / 2), -1, 1);
+      el.style.setProperty("--ry", `${nx * maxY}deg`);
+      el.style.setProperty("--rx", `${-ny * maxX}deg`);
+    }, { passive: true });
+  };
+
+  parallax3d($("[data-nucleo] .nucleo__palco"), 14, 18);
+  parallax3d($("[data-dynamic-universo]"), 8, 12);
+
+  const device = $("[data-device] .device");
+  if (device && temHover && !semMovimento) {
+    const palco = device.parentElement;
+    palco.addEventListener("pointermove", (e) => {
+      const r = palco.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      device.style.setProperty("--ry", `${-17 + x * 26}deg`);
+      device.style.setProperty("--rx", `${6 - y * 18}deg`);
+    });
+    palco.addEventListener("pointerleave", () => {
+      device.style.setProperty("--ry", "-17deg");
+      device.style.setProperty("--rx", "6deg");
+    });
+  }
+
+
+  /* ---------------------------------------------------------
+     09. Texto que se digita
+     --------------------------------------------------------- */
+  const typed = $("[data-typed]");
+
+  if (typed) {
+    const saida = $(".typed__texto", typed);
+    const palavras = (typed.dataset.palavras || "").split("|").filter(Boolean);
+
+    if (saida && palavras.length) {
+      if (semMovimento) {
+        saida.textContent = palavras[0];
+      } else {
+        let indice = 0;
+        let letra = 0;
+        let apagando = false;
+
+        const passo = () => {
+          const palavra = palavras[indice];
+          letra += apagando ? -1 : 1;
+          saida.textContent = palavra.slice(0, letra);
+
+          let espera = apagando ? 45 : 85;
+
+          if (!apagando && letra === palavra.length) {
+            apagando = true;
+            espera = 1900;
+          } else if (apagando && letra === 0) {
+            apagando = false;
+            indice = (indice + 1) % palavras.length;
+            espera = 320;
+          }
+
+          setTimeout(passo, espera);
+        };
+
+        passo();
+      }
     }
-    const startedAt = performance.now();
-    const duration = 900;
-    const step = (now) => {
-      const progress = clamp((now - startedAt) / duration, 0, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      element.textContent = String(Math.round(target * eased));
-      if (progress < 1) requestAnimationFrame(step);
+  }
+
+
+  /* ---------------------------------------------------------
+     10. Contadores
+     --------------------------------------------------------- */
+  const contadores = $$("[data-contador]");
+
+  if (contadores.length) {
+    const animar = (el) => {
+      const alvo = Number(el.dataset.contador) || 0;
+      if (semMovimento) {
+        el.textContent = String(alvo);
+        return;
+      }
+
+      const duracao = 1400;
+      const inicio = performance.now();
+
+      const passo = (agora) => {
+        const t = limitar((agora - inicio) / duracao, 0, 1);
+        const suave = 1 - Math.pow(1 - t, 3);
+        el.textContent = String(Math.round(alvo * suave));
+        if (t < 1) requestAnimationFrame(passo);
+      };
+
+      requestAnimationFrame(passo);
     };
-    requestAnimationFrame(step);
+
+    if ("IntersectionObserver" in window) {
+      const obs = new IntersectionObserver((entradas, o) => {
+        entradas.forEach((e) => {
+          if (!e.isIntersecting) return;
+          animar(e.target);
+          o.unobserve(e.target);
+        });
+      }, { threshold: 0.5 });
+
+      contadores.forEach((el) => obs.observe(el));
+    } else {
+      contadores.forEach(animar);
+    }
+  }
+
+
+  /* ---------------------------------------------------------
+     11. Prisma 3D — arrastar para girar
+     --------------------------------------------------------- */
+  const palcoPrisma = $("[data-prisma]");
+
+  if (palcoPrisma) {
+    const prisma = $(".prisma", palcoPrisma);
+    let arrastando = false;
+    let inicioX = 0;
+    let anguloInicial = 0;
+    let angulo = 0;
+
+    const lerAngulo = () => {
+      const valor = getComputedStyle(prisma).getPropertyValue("--gy").trim();
+      return parseFloat(valor) || 0;
+    };
+
+    /* A transform aplicada é Rx(-12°)·Ry(θ). Nessa composição a primeira
+       coluna da matriz é (cos θ, …) e a terceira é (sen θ, …), então
+       θ = atan2(m31, m11). Serve para continuar do ângulo em que a
+       animação estava, sem o cubo saltar ao ser agarrado. */
+    const anguloVisivel = () => {
+      try {
+        const m = new DOMMatrixReadOnly(getComputedStyle(prisma).transform);
+        return Math.atan2(m.m31, m.m11) * (180 / Math.PI);
+      } catch {
+        return lerAngulo();
+      }
+    };
+
+    palcoPrisma.addEventListener("pointerdown", (e) => {
+      arrastando = true;
+      inicioX = e.clientX;
+      anguloInicial = anguloVisivel();
+      angulo = anguloInicial;
+      palcoPrisma.classList.add("is-arrastando");
+      palcoPrisma.setPointerCapture?.(e.pointerId);
+    });
+
+    palcoPrisma.addEventListener("pointermove", (e) => {
+      if (!arrastando) return;
+      angulo = anguloInicial + (e.clientX - inicioX) * 0.45;
+      prisma.style.setProperty("--gy", `${angulo}deg`);
+    });
+
+    const soltar = (e) => {
+      if (!arrastando) return;
+      arrastando = false;
+      palcoPrisma.classList.remove("is-arrastando");
+      palcoPrisma.releasePointerCapture?.(e.pointerId);
+    };
+
+    palcoPrisma.addEventListener("pointerup", soltar);
+    palcoPrisma.addEventListener("pointercancel", soltar);
+  }
+
+
+  /* ---------------------------------------------------------
+     12. Calculadora FinCK of Reality
+         Mesmas fórmulas do motor do aplicativo:
+           valor_dia  = renda / dias
+           valor_hora = valor_dia / horas
+           custo      = preço / valor_hora
+     --------------------------------------------------------- */
+  const calc = $("[data-calc]");
+
+  if (calc) {
+    const campos = {
+      renda: $("#calcRenda"),
+      dias: $("#calcDias"),
+      horas: $("#calcHoras"),
+      preco: $("#calcPreco"),
+    };
+
+    const saidas = {
+      reais: $("[data-prisma-reais]"),
+      horas: $("[data-prisma-horas]"),
+      dias: $("[data-prisma-dias]"),
+      percent: $("[data-prisma-percent]"),
+      resumo: $("[data-calc-resumo]"),
+    };
+
+    const moeda = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    const numero = (valor, casas = 1) =>
+      new Intl.NumberFormat("pt-BR", {
+        minimumFractionDigits: casas,
+        maximumFractionDigits: casas,
+      }).format(valor);
+
+    const recalcular = () => {
+      const renda = Math.max(0, Number(campos.renda?.value) || 0);
+      const dias = limitar(Number(campos.dias?.value) || 22, 1, 31);
+      const horas = limitar(Number(campos.horas?.value) || 8, 1, 24);
+      const preco = Math.max(0, Number(campos.preco?.value) || 0);
+
+      const valorDia = renda > 0 ? renda / dias : 0;
+      const valorHora = valorDia > 0 ? valorDia / horas : 0;
+
+      const custoHoras = valorHora > 0 ? preco / valorHora : 0;
+      const custoDias = valorDia > 0 ? preco / valorDia : 0;
+      const percentual = renda > 0 ? (preco / renda) * 100 : 0;
+
+      if (saidas.reais) saidas.reais.textContent = moeda.format(preco);
+      if (saidas.horas) saidas.horas.textContent = `${numero(custoHoras)} h`;
+      if (saidas.dias) saidas.dias.textContent = `${numero(custoDias)} dias`;
+      if (saidas.percent) saidas.percent.textContent = `${numero(percentual)}%`;
+
+      if (saidas.resumo) {
+        saidas.resumo.innerHTML = renda > 0
+          ? `Sua hora vale <strong>${moeda.format(valorHora)}</strong> e seu dia vale <strong>${moeda.format(valorDia)}</strong>.`
+          : `Informe sua renda mensal para ver quanto vale a sua hora.`;
+      }
+    };
+
+    Object.values(campos).forEach((campo) => {
+      campo?.addEventListener("input", recalcular);
+    });
+
+    calc.addEventListener("submit", (e) => e.preventDefault());
+
+    recalcular();
+  }
+
+
+  /* ---------------------------------------------------------
+     13. Laboratório DynamiCK — uma sessão que se recompõe
+     --------------------------------------------------------- */
+  const estudoRange = $("[data-study-range]");
+
+  if (estudoRange) {
+    const saidaTempo = $("[data-study-time]");
+    const segmentos = {
+      aprender: $("[data-study-learn]"),
+      praticar: $("[data-study-practice]"),
+      revisar: $("[data-study-review]"),
+    };
+    const textos = {
+      aprender: $("[data-study-learn-text]"),
+      praticar: $("[data-study-practice-text]"),
+      revisar: $("[data-study-review-text]"),
+    };
+
+    const atualizarSessao = () => {
+      const tempo = Number(estudoRange.value);
+      const minimo = Number(estudoRange.min);
+      const maximo = Number(estudoRange.max);
+      const progressoRange = ((tempo - minimo) / (maximo - minimo)) * 100;
+
+      const aprender = Math.max(4, Math.round(tempo * (tempo <= 25 ? 0.27 : 0.2)));
+      const revisar = Math.max(3, Math.round(tempo * 0.2));
+      const praticar = Math.max(5, tempo - aprender - revisar);
+      const total = aprender + praticar + revisar;
+
+      const atualizarBloco = (nome, minutos) => {
+        segmentos[nome]?.style.setProperty("--segment-p", `${(minutos / total) * 100}%`);
+        if (textos[nome]) textos[nome].textContent = `${minutos} min`;
+      };
+
+      estudoRange.style.setProperty("--range-p", `${progressoRange}%`);
+      if (saidaTempo) saidaTempo.textContent = `${tempo} min`;
+      atualizarBloco("aprender", aprender);
+      atualizarBloco("praticar", praticar);
+      atualizarBloco("revisar", revisar);
+    };
+
+    estudoRange.addEventListener("input", atualizarSessao);
+    atualizarSessao();
+  }
+
+
+  /* ---------------------------------------------------------
+     14. Objetos 3D livres — cubo e núcleo de aprendizagem
+     --------------------------------------------------------- */
+  const tornarGiravel = ({ palco, objeto, varX, varY, classe, rx = -18, ry = 32 }) => {
+    if (!palco || !objeto) return;
+    let arrastando = false;
+    let inicioX = 0;
+    let inicioY = 0;
+    let baseX = rx;
+    let baseY = ry;
+    let anguloX = rx;
+    let anguloY = ry;
+
+    const renderizar = () => {
+      objeto.style.setProperty(varX, `${anguloX}deg`);
+      objeto.style.setProperty(varY, `${anguloY}deg`);
+    };
+
+    palco.addEventListener("pointerdown", (e) => {
+      arrastando = true;
+      inicioX = e.clientX;
+      inicioY = e.clientY;
+      baseX = anguloX;
+      baseY = anguloY;
+      palco.classList.add(classe);
+      palco.setPointerCapture?.(e.pointerId);
+    });
+
+    palco.addEventListener("pointermove", (e) => {
+      if (!arrastando) return;
+      anguloY = baseY + (e.clientX - inicioX) * 0.55;
+      anguloX = limitar(baseX - (e.clientY - inicioY) * 0.45, -75, 75);
+      renderizar();
+    });
+
+    const soltar = (e) => {
+      if (!arrastando) return;
+      arrastando = false;
+      palco.classList.remove(classe);
+      palco.releasePointerCapture?.(e.pointerId);
+    };
+
+    palco.addEventListener("pointerup", soltar);
+    palco.addEventListener("pointercancel", soltar);
+    palco.addEventListener("keydown", (e) => {
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+      e.preventDefault();
+      if (e.key === "ArrowLeft") anguloY -= 12;
+      if (e.key === "ArrowRight") anguloY += 12;
+      if (e.key === "ArrowUp") anguloX = limitar(anguloX - 10, -75, 75);
+      if (e.key === "ArrowDown") anguloX = limitar(anguloX + 10, -75, 75);
+      renderizar();
+    });
   };
 
-  if ("IntersectionObserver" in window) {
-    const counterObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.6 });
-    counters.forEach((counter) => counterObserver.observe(counter));
-  } else {
-    counters.forEach(animateCounter);
+  const cuboEstudo = $("[data-study-cube]");
+  tornarGiravel({
+    palco: cuboEstudo,
+    objeto: cuboEstudo && $(".study-cube__body", cuboEstudo),
+    varX: "--rx",
+    varY: "--ry",
+    classe: "is-dragging",
+    rx: -22,
+    ry: 34,
+  });
+
+  const nucleoConhecimento = $("[data-knowledge-core]");
+  tornarGiravel({
+    palco: nucleoConhecimento,
+    objeto: nucleoConhecimento && $(".knowledge-prism", nucleoConhecimento),
+    varX: "--k-rx",
+    varY: "--k-ry",
+    classe: "is-dragging",
+    rx: -18,
+    ry: 32,
+  });
+
+
+  /* ---------------------------------------------------------
+     15. Mesa de fusão das duas identidades CK
+     --------------------------------------------------------- */
+  const mixOrigem = $("[data-mix-origin]");
+  const mixFuturo = $("[data-mix-future]");
+  const visualFusao = $("[data-fusion-visual]");
+
+  if (mixOrigem && mixFuturo && visualFusao) {
+    const atualizarMistura = () => {
+      const origem = Number(mixOrigem.value);
+      const futuro = Number(mixFuturo.value);
+      const origemTexto = $("[data-mix-origin-value]");
+      const futuroTexto = $("[data-mix-future-value]");
+
+      mixOrigem.style.setProperty("--range-p", `${origem}%`);
+      mixFuturo.style.setProperty("--range-p", `${futuro}%`);
+      visualFusao.style.setProperty("--mix-origin", String(origem / 100));
+      visualFusao.style.setProperty("--mix-future", String(futuro / 100));
+      if (origemTexto) origemTexto.textContent = `${origem}%`;
+      if (futuroTexto) futuroTexto.textContent = `${futuro}%`;
+    };
+
+    mixOrigem.addEventListener("input", atualizarMistura);
+    mixFuturo.addEventListener("input", atualizarMistura);
+    atualizarMistura();
   }
+
 })();
