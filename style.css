@@ -6112,3 +6112,591 @@ body[data-tema="futuro"] .entregavel {
     display: none !important;
   }
 }
+
+
+/* ============================================================
+   21. ENTREGÁVEIS — CONTAINERS DA ENTREGA FINAL
+   Mesma gramática do resto do site: vidro escuro, fio de luz no
+   topo, roxo como luz e ouro como sinal. O que muda aqui é a
+   profundidade: cada cartão ganha um índice fantasma ao fundo,
+   um brasão em relevo e um rodapé com estado e ação. Os cartões
+   que apontam para um entregável real (app, site, documento,
+   apresentação) recebem o tratamento "vivo".
+   ============================================================ */
+
+.entregaveis {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 292px), 1fr));
+  gap: 1.15rem;
+}
+
+.entregavel {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: .55rem;
+  padding: 1.5rem 1.4rem 1.25rem;
+  border-radius: var(--radius-lg);
+  transition:
+    border-color .45s var(--ease),
+    box-shadow .45s var(--ease),
+    transform .45s var(--ease);
+}
+
+.entregavel:hover,
+.entregavel:focus-within {
+  border-color: var(--border-strong);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .5), 0 0 0 1px rgba(168, 85, 247, .1) inset;
+}
+
+/* índice fantasma: dá escala ao cartão sem disputar leitura */
+.entregavel__indice {
+  position: absolute;
+  top: .35rem;
+  right: .9rem;
+  font-family: var(--font-display);
+  font-size: 4.6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.05em;
+  color: rgba(255, 255, 255, .028);
+  pointer-events: none;
+  transition: color .45s var(--ease), transform .55s var(--ease);
+}
+
+.entregavel:hover .entregavel__indice {
+  color: rgba(var(--card-rgb, 168, 85, 247), .11);
+  transform: translateY(-3px);
+}
+
+/* brasão: placa de vidro com o ícone em relevo */
+.entregavel__brasao {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--card-rgb, 168, 85, 247), .26);
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, .06), transparent 62%),
+    rgba(var(--card-rgb, 168, 85, 247), .08);
+  color: rgb(var(--card-rgb, 168, 85, 247));
+  box-shadow: 0 0 22px rgba(var(--card-rgb, 168, 85, 247), .1);
+  transform: translateZ(42px);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+
+.entregavel__brasao svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.6;
+}
+
+.entregavel:hover .entregavel__brasao {
+  box-shadow: 0 0 34px rgba(var(--card-rgb, 168, 85, 247), .24);
+  transform: translateZ(52px) translateY(-2px);
+}
+
+.entregavel__tag {
+  justify-self: start;
+  margin-bottom: 0;
+}
+
+.entregavel h3 {
+  margin-bottom: 0;
+  font-family: var(--font-display);
+  letter-spacing: -.01em;
+}
+
+.entregavel p {
+  align-self: start;
+  font-size: .88rem;
+  line-height: 1.62;
+}
+
+/* rodapé: estado à esquerda, ação à direita */
+.entregavel__rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  flex-wrap: wrap;
+  margin-top: .35rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--border);
+  transform: translateZ(18px);
+}
+
+.entregavel__estado {
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.entregavel__estado::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--verde);
+  box-shadow: 0 0 9px var(--verde);
+}
+
+.entregavel__estado[data-estado="agora"] {
+  color: var(--yellow-300);
+}
+
+.entregavel__estado[data-estado="agora"]::before {
+  background: var(--yellow-400);
+  box-shadow: 0 0 10px var(--yellow-400);
+  animation: entregavel-pulsa 2s ease-in-out infinite;
+}
+
+@keyframes entregavel-pulsa {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: .4;
+    transform: scale(.8);
+  }
+}
+
+.entregavel__acao {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .42rem .85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--card-rgb, 168, 85, 247), .3);
+  background: rgba(var(--card-rgb, 168, 85, 247), .08);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-1);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    border-color .3s var(--ease),
+    background .3s var(--ease),
+    color .3s var(--ease),
+    transform .3s var(--ease);
+}
+
+.entregavel__acao:hover,
+.entregavel__acao:focus-visible {
+  border-color: var(--yellow-400);
+  background: var(--yellow-fraco);
+  color: var(--yellow-300);
+  transform: translateY(-2px);
+}
+
+.entregavel__seta {
+  display: inline-block;
+  transition: transform .3s var(--ease);
+}
+
+.entregavel__acao:hover .entregavel__seta {
+  transform: translate(3px, -2px);
+}
+
+/* cartões que apontam para algo que a banca pode abrir agora */
+.entregavel--vivo {
+  border-color: rgba(var(--card-rgb, 168, 85, 247), .2);
+  background:
+    linear-gradient(165deg, rgba(28, 17, 46, .84), rgba(7, 6, 12, .94));
+}
+
+.entregavel--vivo::before {
+  transform: scaleX(.34);
+}
+
+.entregavel--vivo:hover::before {
+  transform: scaleX(1);
+}
+
+/* o cartão da defesa é o destaque da seção */
+.entregavel:last-child {
+  border-color: rgba(254, 200, 0, .26);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(254, 200, 0, .1), transparent 58%),
+    linear-gradient(165deg, rgba(28, 20, 40, .86), rgba(7, 6, 12, .94));
+}
+
+.entregavel:last-child .entregavel__brasao {
+  --card-rgb: 254, 200, 0;
+}
+
+.entregavel:last-child .entregavel__acao {
+  border-color: rgba(254, 200, 0, .38);
+  background: var(--yellow-fraco);
+  color: var(--yellow-300);
+}
+
+.entregavel:last-child .entregavel__acao:hover {
+  background: rgba(254, 200, 0, .18);
+  color: #fff3cf;
+}
+
+@media (max-width: 620px) {
+  .entregavel {
+    padding: 1.3rem 1.15rem 1.1rem;
+  }
+
+  .entregavel__indice {
+    font-size: 3.6rem;
+  }
+
+  .entregavel__rodape {
+    gap: .55rem;
+  }
+
+  .entregavel__acao {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+
+/* ============================================================
+   22. PERFIL LEVE — A MESMA DECORAÇÃO, DESENHADA MAIS BARATO
+
+   Medição em celular emulado (390x844, DPR 2, CPU 6x mais lenta):
+   a página rodava a 12 fps. Os dois custos dominantes eram as
+   auroras com filter: blur em elementos de meia tela e o
+   backdrop-filter espalhado por dezenas de cartões — cada quadro
+   exigia um buffer fora de tela para desfocar de novo.
+
+   Nada aqui apaga decoração. O que muda é a técnica:
+   · aurora vira gradiente de queda suave (mesmo brilho, sem filtro)
+   · vidro vira camada opaca com reflexo (mesma leitura, sem blur)
+   · camadas animadas em tela cheia ficam paradas, não somem
+   · o que está fora da tela não é pintado até chegar perto
+   ============================================================ */
+
+/* — auroras: o brilho vem do próprio gradiente — */
+html[data-perf="leve"] .orbe {
+  filter: none;
+  opacity: .85;
+}
+
+html[data-perf="leve"] .orbe--1 {
+  width: 78vw;
+  height: 78vw;
+  top: -26vw;
+  left: -22vw;
+  background: radial-gradient(circle,
+      rgba(147, 51, 196, .30) 0%,
+      rgba(147, 51, 196, .19) 24%,
+      rgba(147, 51, 196, .08) 46%,
+      transparent 72%);
+}
+
+html[data-perf="leve"] .orbe--2 {
+  width: 68vw;
+  height: 68vw;
+  right: -26vw;
+  background: radial-gradient(circle,
+      rgba(104, 12, 144, .28) 0%,
+      rgba(104, 12, 144, .17) 26%,
+      rgba(104, 12, 144, .07) 48%,
+      transparent 72%);
+}
+
+html[data-perf="leve"] .orbe--3 {
+  width: 56vw;
+  height: 56vw;
+  bottom: -20vw;
+  background: radial-gradient(circle,
+      rgba(254, 200, 0, .10) 0%,
+      rgba(254, 200, 0, .06) 28%,
+      rgba(254, 200, 0, .02) 50%,
+      transparent 74%);
+}
+
+html[data-perf="leve"] .orbe--4 {
+  width: 82vw;
+  height: 82vw;
+  right: -36vw;
+  background: radial-gradient(circle,
+      rgba(37, 240, 162, .13) 0%,
+      rgba(11, 169, 183, .07) 30%,
+      rgba(11, 169, 183, .02) 52%,
+      transparent 74%);
+}
+
+html[data-perf="leve"] .orbe--5 {
+  width: 62vw;
+  height: 62vw;
+  bottom: -26vw;
+  background: radial-gradient(circle,
+      rgba(50, 215, 230, .10) 0%,
+      rgba(37, 240, 162, .05) 32%,
+      transparent 72%);
+}
+
+/* sem o filtro, mover a aurora é barato: o movimento continua */
+html[data-perf="leve"] .orbe--3,
+html[data-perf="leve"] .orbe--5 {
+  animation: none;
+}
+
+/* — vidro sem backdrop-filter — */
+/* O desfoque do fundo era recalculado para cada cartão em cena.
+   A leitura de vidro se mantém com uma camada opaca escura mais o
+   reflexo diagonal que o design já usa. */
+html[data-perf="leve"] *,
+html[data-perf="leve"] *::before,
+html[data-perf="leve"] *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html[data-perf="leve"] body > header {
+  background: linear-gradient(180deg, rgba(6, 5, 11, .96), rgba(6, 5, 11, .88));
+}
+
+html[data-perf="leve"] .metric-card,
+html[data-perf="leve"] .pilar,
+html[data-perf="leve"] .funcao,
+html[data-perf="leve"] .entregavel,
+html[data-perf="leve"] .fluxo__passo,
+html[data-perf="leve"] .numero,
+html[data-perf="leve"] .membro__frente,
+html[data-perf="leve"] .membro__verso,
+html[data-perf="leve"] .timeline__corpo,
+html[data-perf="leve"] .classroom,
+html[data-perf="leve"] .identity-matrix article,
+html[data-perf="leve"] .dynamic-funcao {
+  background-color: rgba(10, 8, 16, .92);
+}
+
+/* — camadas de tela cheia: presentes, paradas — */
+html[data-perf="leve"] .cena-fundo__grade,
+html[data-perf="leve"] .cena-fundo__ribbon,
+html[data-perf="leve"] .cena-fundo__portal {
+  animation: none;
+}
+
+html[data-perf="leve"] .cena-fundo__scan {
+  display: none;
+}
+
+/* a textura fica; o modo de mesclagem em tela cheia é que sai */
+html[data-perf="leve"] .cena-fundo__ruido {
+  mix-blend-mode: normal;
+  opacity: .022;
+}
+
+html[data-perf="leve"] .cena-fundo__canvas {
+  opacity: .5;
+}
+
+/* — o que está longe da tela não é pintado — */
+html[data-perf="leve"] main > section:not(#inicio) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
+}
+
+/* — cursor personalizado não existe em tela de toque — */
+html[data-perf="leve"] .cursor {
+  display: none;
+}
+
+/* — sombras gigantes empilhadas custam repintura — */
+html[data-perf="leve"] .entregavel:hover,
+html[data-perf="leve"] .entregavel:focus-within {
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+}
+
+/* — halos e sombras: o brilho é gradiente, o desfoque era só acabamento —
+   Estes nove elementos tinham filter: blur junto de uma animação em laço,
+   ou seja, o navegador refazia o desfoque a cada quadro. Todos já são
+   gradientes de queda suave: sem o filtro o desenho é praticamente o
+   mesmo e a animação passa a custar quase nada. */
+html[data-perf="leve"] .nucleo__halo,
+html[data-perf="leve"] .nucleo__palco::after,
+html[data-perf="leve"] .palco-device__sombra,
+html[data-perf="leve"] .prisma-palco__sombra,
+html[data-perf="leve"] .dynamic-universo__halo,
+html[data-perf="leve"] .knowledge-core::before,
+html[data-perf="leve"] .identity-totem__reflexo,
+html[data-perf="leve"] .identity-reactor::before,
+html[data-perf="leve"] .fusion-visual__campo,
+html[data-perf="leve"] .hero-brand::before,
+html[data-perf="leve"] .cena3d__brilho {
+  filter: none;
+}
+
+/* o reflexo que corre sobre o totem fica mais suave sem o desfoque */
+html[data-perf="leve"] .identity-totem__reflexo {
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, .06) 30%,
+      rgba(255, 255, 255, .13) 50%,
+      rgba(255, 255, 255, .06) 70%,
+      transparent);
+}
+
+/* — fitas e portal: as formas ficam, o acabamento caro sai —
+   As fitas eram elipses de 130vw com drop-shadow e rotação 3D; a sombra
+   projetada obrigava a redesenhar uma superfície enorme. O anel continua
+   desenhado pela borda, que é o que se enxerga. */
+html[data-perf="leve"] .cena-fundo__ribbon {
+  filter: none;
+  border-color: rgba(var(--tema-cor-rgb), .16);
+}
+
+html[data-perf="leve"] .cena-fundo__portal {
+  /* a máscara vira parte do próprio gradiente: um passo a menos por quadro */
+  mask-image: none;
+  -webkit-mask-image: none;
+  background:
+    radial-gradient(circle, transparent 58%, rgba(5, 4, 9, .9) 74%),
+    repeating-radial-gradient(circle, transparent 0 34px, rgba(var(--tema-cor-rgb), .03) 35px 36px);
+}
+
+
+/* ============================================================
+   23. ACABAMENTO DE CELULAR
+   Área segura de aparelhos com entalhe, alvos de toque no
+   tamanho certo e um menu que entra com ritmo. A atmosfera
+   deixa de flutuar sobre o texto e vai para o canto.
+   ============================================================ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 900px) {
+
+  /* — cabeçalho e rodapé respeitam o entalhe — */
+  body > header {
+    padding-left: max(1.15rem, env(safe-area-inset-left));
+    padding-right: max(1.15rem, env(safe-area-inset-right));
+  }
+
+  footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+  }
+
+  main > section {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  /* — menu: painel rolável, itens entrando em sequência — */
+  nav {
+    max-height: calc(100dvh - var(--header-h));
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+  }
+
+  nav ul {
+    gap: .25rem;
+  }
+
+  nav li {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+
+  nav.is-open li {
+    opacity: 1;
+    transform: none;
+  }
+
+  nav.is-open li:nth-child(1) { transition-delay: .04s; }
+  nav.is-open li:nth-child(2) { transition-delay: .08s; }
+  nav.is-open li:nth-child(3) { transition-delay: .12s; }
+  nav.is-open li:nth-child(4) { transition-delay: .16s; }
+  nav.is-open li:nth-child(5) { transition-delay: .20s; }
+  nav.is-open li:nth-child(6) { transition-delay: .24s; }
+  nav.is-open li:nth-child(7) { transition-delay: .28s; }
+  nav.is-open li:nth-child(8) { transition-delay: .32s; }
+
+  nav a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+  }
+
+  nav a:active {
+    background: var(--purple-vidro);
+  }
+
+  .nav-toggle {
+    width: 46px;
+    height: 46px;
+  }
+
+  /* — alvos de toque confortáveis — */
+  .btn,
+  .membro,
+  .tema-dock button {
+    min-height: 44px;
+  }
+
+  .tema-dock button {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* — a atmosfera sai de cima do texto e vai para o canto —
+   Centralizada na base, a barra cobria justamente a linha que a
+   pessoa está lendo. No canto inferior direito ela continua ao
+   alcance do polegar e não disputa espaço com o conteúdo. */
+@media (max-width: 980px) {
+  .tema-dock {
+    left: auto;
+    right: max(.7rem, env(safe-area-inset-right));
+    bottom: max(.7rem, env(safe-area-inset-bottom));
+    transform: none;
+    opacity: .62;
+    transition: opacity .3s var(--ease);
+  }
+
+  .tema-dock:hover,
+  .tema-dock:focus-within,
+  .tema-dock:active {
+    opacity: 1;
+  }
+
+  /* com o menu aberto ela sai da frente */
+  body.is-travado .tema-dock {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* enquanto rola, a barra recolhe para a borda */
+@media (max-width: 980px) {
+  .tema-dock.is-recolhida {
+    opacity: 0;
+    transform: translateX(60%);
+    pointer-events: none;
+  }
+
+  .tema-dock {
+    transition: opacity .3s var(--ease), transform .35s var(--ease);
+  }
+}

@@ -104,8 +104,8 @@
   --t-num-g: 128px;
   --t-num-m: 40px;
 
-  --gap: 22px;
-  --pad-quadro: 46px 54px;
+  --gap: 20px;
+  --pad-quadro: 40px 52px;
 }
 
 
@@ -1423,8 +1423,8 @@ button {
 .citacao {
   padding-left: .9rem;
   border-left: 2px solid var(--yellow-400);
-  font-size: calc(var(--t-corpo) + 1px);
-  line-height: 1.5;
+  font-size: var(--t-corpo);
+  line-height: 1.48;
   font-style: italic;
   color: var(--text-1);
 }
@@ -1443,7 +1443,7 @@ button {
 }
 
 .modulo {
-  padding: 11px 14px;
+  padding: 9px 13px;
   border-radius: var(--r-sm);
   border: 1px solid var(--border);
   background: rgba(14, 11, 21, .58);
@@ -1462,13 +1462,14 @@ button {
 }
 
 .modulo p {
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 11px;
+  line-height: 1.35;
   color: var(--text-3);
 }
 
 .modulo--destaque {
   grid-column: span 2;
+  padding: 11px 14px;
   border-color: var(--border-forte);
   background: linear-gradient(120deg, rgba(147, 51, 196, .15), rgba(14, 11, 21, .6));
 }
@@ -1748,9 +1749,10 @@ button {
 .ods {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 18px;
+  gap: 16px;
   align-items: center;
-  padding: 20px 22px;
+  align-content: center;
+  padding: 18px 20px;
   border-radius: var(--r-lg);
   border: 1px solid rgba(191, 139, 45, .34);
   background: linear-gradient(135deg, rgba(191, 139, 45, .16), rgba(12, 10, 18, .7));
@@ -1759,12 +1761,12 @@ button {
 .ods__numero {
   display: grid;
   place-items: center;
-  width: 92px;
-  height: 92px;
+  width: 80px;
+  height: 80px;
   border-radius: 20px;
   background: linear-gradient(145deg, #d9a441, #a36f1d);
   font-family: var(--font-display);
-  font-size: 46px;
+  font-size: 40px;
   font-weight: 700;
   color: #1a1208;
   box-shadow: 0 12px 34px rgba(191, 139, 45, .34);
@@ -1791,7 +1793,7 @@ button {
 }
 
 .ponte__item {
-  padding: 15px 18px;
+  padding: 13px 16px;
   border-radius: var(--r-md);
   border: 1px solid var(--border);
   background: rgba(14, 11, 21, .6);
@@ -1838,7 +1840,7 @@ button {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 300px;
+  min-height: 280px;
   perspective: 1100px;
   touch-action: none;
   cursor: grab;
@@ -2169,12 +2171,12 @@ button {
   display: grid;
   place-items: center;
   perspective: 1300px;
-  min-height: 340px;
+  min-height: 300px;
 }
 
 .device {
   position: relative;
-  width: 214px;
+  width: 196px;
   transform-style: preserve-3d;
   transform: rotateY(-15deg) rotateX(5deg);
   animation: device-flutua 9s ease-in-out infinite;
@@ -2371,12 +2373,12 @@ button {
 .device__flutuante {
   position: absolute;
   display: grid;
-  padding: .45rem .7rem;
-  border-radius: 12px;
+  padding: .4rem .62rem;
+  border-radius: 11px;
   border: 1px solid var(--border-forte);
-  background: rgba(18, 13, 28, .92);
+  background: rgba(18, 13, 28, .94);
   box-shadow: var(--sombra-suave);
-  transform: translateZ(52px);
+  transform: translateZ(24px);
   animation: flutuante 7s ease-in-out infinite;
 }
 
@@ -2389,22 +2391,22 @@ button {
 
 .device__flutuante strong {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--yellow-300);
 }
 
-.device__flutuante--1 { top: 8%; left: -32%; }
-.device__flutuante--2 { bottom: 16%; right: -30%; animation-delay: 1.4s; }
+.device__flutuante--1 { top: 4%; left: -62%; }
+.device__flutuante--2 { bottom: 12%; right: -60%; animation-delay: 1.4s; }
 
 @keyframes flutuante {
 
   0%,
   100% {
-    transform: translateZ(52px) translateY(0);
+    transform: translateZ(24px) translateY(0);
   }
 
   50% {
-    transform: translateZ(52px) translateY(-9px);
+    transform: translateZ(24px) translateY(-9px);
   }
 }
 
@@ -3567,4 +3569,21 @@ html[data-perf="leve"] .device__flutuante {
   .notas-palco {
     display: none !important;
   }
+}
+
+/* — slides densos —
+   Dois slides carregam mais blocos que os outros (os oito módulos do
+   produto e o par ODS + meta com a ponte embaixo). Aqui o respiro é
+   menor, e só aqui: o resto da apresentação mantém o ritmo original. */
+.slide--denso .quadro {
+  gap: 14px;
+}
+
+.slide--denso .remate {
+  padding: .7rem 1rem;
+  font-size: var(--t-corpo);
+}
+
+.slide--denso .cab__titulo {
+  font-size: calc(var(--t-h2) - 4px);
 }

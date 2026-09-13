@@ -9,6 +9,9 @@
   "use strict";
 
   const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Definido no <head>, antes da primeira pintura. Em aparelho modesto
+     a decoração continua a mesma; o que muda é quanto ela custa por quadro. */
+  const perfLeve = document.documentElement.dataset.perf === "leve";
   const temHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
@@ -108,6 +111,7 @@
     toggle.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Abrir menu");
+    document.body.classList.remove("is-travado");
   };
 
   toggle?.addEventListener("click", () => {
@@ -115,6 +119,8 @@
     toggle.classList.toggle("is-open", aberto);
     toggle.setAttribute("aria-expanded", String(aberto));
     toggle.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+    // a página para de rolar atrás do menu e a barra de atmosfera sai da frente
+    document.body.classList.toggle("is-travado", aberto);
   });
 
   navLinks.forEach((link) => link.addEventListener("click", fecharMenu));
@@ -132,10 +138,21 @@
   progresso.setAttribute("aria-hidden", "true");
   document.body.appendChild(progresso);
 
+  /* a barra de atmosfera recolhe enquanto a pessoa rola e volta na pausa:
+     em tela estreita ela fica no canto e não pode disputar a linha de leitura */
+  const dock = $(".tema-dock");
+  let pausaRolagem;
+
   const aoRolar = () => {
     const y = window.scrollY;
 
     header?.classList.toggle("is-scrolled", y > 24);
+
+    if (dock) {
+      dock.classList.add("is-recolhida");
+      clearTimeout(pausaRolagem);
+      pausaRolagem = setTimeout(() => dock.classList.remove("is-recolhida"), 620);
+    }
 
     if (y > 140 && !nav?.classList.contains("is-open")) {
       if (y > ultimoY + 8) header?.classList.add("is-hidden");
@@ -280,8 +297,12 @@
       });
     });
 
+    // as ligações entre vizinhos são O(n²): é o trecho caro do laço
+    const LIGA = perfLeve ? 0 : 130;
+    const LIGA2 = LIGA * LIGA;
+
     const dimensionar = () => {
-      dpr = limitar(window.devicePixelRatio || 1, 1, 2);
+      dpr = limitar(window.devicePixelRatio || 1, 1, perfLeve ? 1 : 2);
       largura = canvas.clientWidth;
       altura = canvas.clientHeight;
       canvas.width = Math.floor(largura * dpr);
@@ -289,7 +310,9 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       // densidade proporcional à área, com teto para não pesar
-      const quantidade = limitar(Math.round((largura * altura) / 16000), 26, 92);
+      const teto = perfLeve ? 30 : 92;
+      const piso = perfLeve ? 14 : 26;
+      const quantidade = limitar(Math.round((largura * altura) / (perfLeve ? 26000 : 16000)), piso, teto);
       particulas = Array.from({ length: quantidade }, () => ({
         x: Math.random() * largura,
         y: Math.random() * altura,
@@ -301,23 +324,33 @@
       }));
     };
 
-    const desenhar = () => {
+    const INTERVALO = perfLeve ? 33 : 0;
+    let ultimoQuadro = 0;
+
+    const desenhar = (agora) => {
       if (!animando) return;
       quadro = requestAnimationFrame(desenhar);
+
+      if (INTERVALO) {
+        if (agora - ultimoQuadro < INTERVALO) return;
+        ultimoQuadro = agora;
+      }
 
       ctx.clearRect(0, 0, largura, altura);
 
       for (let i = 0; i < particulas.length; i++) {
         const p = particulas[i];
 
-        // repulsão suave em torno do ponteiro
-        const dxm = p.x - ponteiro.x;
-        const dym = p.y - ponteiro.y;
-        const distM = Math.hypot(dxm, dym);
-        if (distM < 130 && distM > 0.1) {
-          const forca = (130 - distM) / 130 * 0.7;
-          p.vx += (dxm / distM) * forca * 0.12;
-          p.vy += (dym / distM) * forca * 0.12;
+        // repulsão suave em torno do ponteiro (só onde existe ponteiro)
+        if (temHover) {
+          const dxm = p.x - ponteiro.x;
+          const dym = p.y - ponteiro.y;
+          const distM = Math.hypot(dxm, dym);
+          if (distM < 130 && distM > 0.1) {
+            const forca = (130 - distM) / 130 * 0.7;
+            p.vx += (dxm / distM) * forca * 0.12;
+            p.vy += (dym / distM) * forca * 0.12;
+          }
         }
 
         // atrito para a velocidade não escapar
@@ -338,13 +371,15 @@
         ctx.fill();
 
         // linhas entre vizinhos próximos
+        if (!LIGA) continue;
+
         for (let j = i + 1; j < particulas.length; j++) {
           const q = particulas[j];
           const dx = p.x - q.x;
           const dy = p.y - q.y;
           const dist2 = dx * dx + dy * dy;
-          if (dist2 > 16900) continue; // 130²
-          const alpha = (1 - Math.sqrt(dist2) / 130) * 0.16;
+          if (dist2 > LIGA2) continue;
+          const alpha = (1 - Math.sqrt(dist2) / LIGA) * 0.16;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
