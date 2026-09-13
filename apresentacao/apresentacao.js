@@ -70,8 +70,8 @@
     clearTimeout(medindo);
     medindo = setTimeout(() => {
       medir();
-      ajustarDensidade(slides[atual]);
-    }, 120);
+      resolverDensidades();
+    }, 180);
   };
   window.addEventListener("resize", remedir, { passive: true });
   window.addEventListener("orientationchange", remedir);
@@ -132,7 +132,8 @@
      precisa saber que isso existe.
      --------------------------------------------------------- */
   const CAIXAS = ".quadro, .duo, .trio, .grade-tres, .pilha, .modulos, .acoes," +
-    " .confronto, .tabela-quadro, .fluxo, .entregas, .coluna-direita, .motor, .painel";
+    " .confronto, .confronto__lado, .tabela-quadro, .fluxo, .entregas," +
+    " .coluna-direita, .motor, .painel, .cartao-tec, .ficha, .entrega, .modulo";
 
   // folga de alguns pixels: enfeites posicionados de forma absoluta podem
   // sobrar uma fração da caixa sem que nada fique cortado de fato
@@ -145,33 +146,34 @@
       return;
     }
 
-    slide.style.setProperty("--densidade", "1");
-    if (!transborda(slide)) return;
+    // mede com os blocos já na posição final, sem o deslocamento de entrada
+    slide.classList.add("is-medindo");
 
-    for (let d = 0.97; d >= 0.70; d -= 0.03) {
-      slide.style.setProperty("--densidade", d.toFixed(2));
+    try {
+      slide.style.setProperty("--densidade", "1");
       if (!transborda(slide)) return;
+
+      for (let d = 0.97; d >= 0.70; d -= 0.03) {
+        slide.style.setProperty("--densidade", d.toFixed(2));
+        if (!transborda(slide)) return;
+      }
+    } finally {
+      slide.classList.remove("is-medindo");
     }
   };
 
-  /* Medir no instante da troca pega o slide antes de a entrada terminar
-     e antes de fontes e imagens assentarem: o transbordo aparente sai
-     maior que o real e o slide encolhe à toa. A primeira medida é
-     imediata, para não existir salto visível; as seguintes refazem a
-     conta conforme o layout estabiliza. Cada passagem custa algumas
-     leituras de layout, então dá para repetir sem peso. */
-  const agendarAjuste = (slide) => {
-    ajustarDensidade(slide);
-
-    requestAnimationFrame(() => requestAnimationFrame(() => ajustarDensidade(slide)));
-
-    slide.addEventListener("animationend", function refaz(e) {
-      if (e.target !== slide) return;
-      slide.removeEventListener("animationend", refaz);
-      ajustarDensidade(slide);
-    });
-
-    setTimeout(() => ajustarDensidade(slide), 700);
+  /* A densidade de TODOS os slides é resolvida de uma vez, ainda atrás
+     da tela de carga, e depois não se mexe mais. Ajustar durante a
+     entrada fazia o texto mudar de tamanho na frente de quem assiste —
+     o slide parecia se redesenhar. Slide oculto tem layout: dá para
+     medir os catorze sem mostrar nenhum. A única coisa que refaz a
+     conta é redimensionar a janela, porque aí a altura útil mudou. */
+  const resolverDensidades = () => {
+    if (modo !== "palco") {
+      slides.forEach((s) => s.style.removeProperty("--densidade"));
+      return;
+    }
+    slides.forEach(ajustarDensidade);
   };
 
 
@@ -268,7 +270,6 @@
 
     atual = destino;
     atualizarHud();
-    agendarAjuste(proximo);
     contadoresDoSlide(proximo).forEach(rodarContador);
 
     if (history.replaceState) {
@@ -644,38 +645,6 @@
   }
 
 
-  /* ---------------------------------------------------------
-     10. Inclinação 3D dos cartões
-     Só em aparelho com mouse e fôlego de sobra.
-     --------------------------------------------------------- */
-  if (temHover && !semMovimento && !perfLeve) {
-    $$("[data-tilt]").forEach((card) => {
-      let quadro = 0;
-
-      const mover = (e) => {
-        if (quadro) return;
-        quadro = requestAnimationFrame(() => {
-          quadro = 0;
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - 0.5;
-          const y = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform =
-            `perspective(760px) rotateX(${(-y * 6).toFixed(2)}deg) ` +
-            `rotateY(${(x * 6).toFixed(2)}deg) translateY(-3px)`;
-        });
-      };
-
-      const sair = () => {
-        cancelAnimationFrame(quadro);
-        quadro = 0;
-        card.style.transform = "";
-      };
-
-      card.addEventListener("pointermove", mover);
-      card.addEventListener("pointerleave", sair);
-    });
-  }
-
 
   /* ---------------------------------------------------------
      11. Constelação de fundo
@@ -811,8 +780,8 @@
     iniciado = true;
 
     medir();
+    resolverDensidades();
     encerrarCarga();
-    agendarAjuste(slides[atual]);
     contadoresDoSlide(slides[atual]).forEach(rodarContador);
 
     // dica de deslizar, uma única vez por aparelho
@@ -835,15 +804,23 @@
     }
   };
 
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => ajustarDensidade(slides[atual]));
-  }
+  /* As fontes definem a altura de cada bloco, então a conta de densidade
+     precisa delas. Espera enquanto a tela de carga está no ar, mas com
+     prazo: rede ruim não pode segurar a apresentação. */
+  const partir = () => {
+    const fontes = document.fonts && document.fonts.ready
+      ? document.fonts.ready
+      : Promise.resolve();
+
+    Promise.race([fontes, new Promise((r) => setTimeout(r, 1800))]).then(() => {
+      setTimeout(iniciar, semMovimento ? 0 : 160);
+    });
+  };
 
   if (document.readyState === "complete") {
-    setTimeout(iniciar, semMovimento ? 0 : 260);
+    partir();
   } else {
-    window.addEventListener("load", () => setTimeout(iniciar, semMovimento ? 0 : 260));
-    // rede lenta não pode segurar a apresentação
-    setTimeout(iniciar, 3800);
+    window.addEventListener("load", partir);
+    setTimeout(iniciar, 4200);
   }
 })();
