@@ -68,7 +68,10 @@
   let medindo;
   const remedir = () => {
     clearTimeout(medindo);
-    medindo = setTimeout(medir, 120);
+    medindo = setTimeout(() => {
+      medir();
+      ajustarDensidade(slides[atual]);
+    }, 120);
   };
   window.addEventListener("resize", remedir, { passive: true });
   window.addEventListener("orientationchange", remedir);
@@ -115,6 +118,40 @@
   };
 
   const contadoresDoSlide = (slide) => $$("[data-contador]", slide);
+
+
+  /* ---------------------------------------------------------
+     02b. Ajuste automático de densidade
+
+     O palco tem altura fixa (720 px de projeto). Um título que
+     quebra em duas linhas, ou um parágrafo que cresce numa
+     revisão de texto, empurraria o conteúdo para fora do quadro.
+     Em vez de calibrar cada slide à mão, o deck mede o transbordo
+     e reduz a densidade daquele slide — tipografia, respiros e
+     peças 3D — até tudo caber. Quem editar o texto depois não
+     precisa saber que isso existe.
+     --------------------------------------------------------- */
+  const CAIXAS = ".quadro, .duo, .trio, .grade-tres, .pilha, .modulos, .acoes," +
+    " .confronto, .tabela-quadro, .fluxo, .entregas, .coluna-direita, .motor, .painel";
+
+  const transborda = (slide) =>
+    $$(CAIXAS, slide).some((el) => el.scrollHeight > el.clientHeight + 2);
+
+  const ajustarDensidade = (slide) => {
+    if (modo !== "palco") {
+      slide.style.removeProperty("--densidade");
+      return;
+    }
+
+    slide.style.setProperty("--densidade", "1");
+    if (!transborda(slide)) return;
+
+    // passos de 4%, até 76% do tamanho de projeto
+    for (let d = 0.96; d >= 0.76; d -= 0.04) {
+      slide.style.setProperty("--densidade", d.toFixed(2));
+      if (!transborda(slide)) return;
+    }
+  };
 
 
   /* ---------------------------------------------------------
@@ -210,6 +247,7 @@
 
     atual = destino;
     atualizarHud();
+    ajustarDensidade(proximo);
     contadoresDoSlide(proximo).forEach(rodarContador);
 
     if (history.replaceState) {
@@ -502,7 +540,7 @@
     };
 
     const recalcular = () => {
-      const renda = ler(campos.renda, 3500);
+      const renda = ler(campos.renda, 1800);
       const dias = limitar(ler(campos.dias, 22), 1, 31);
       const horas = limitar(ler(campos.horas, 8), 1, 24);
       const preco = Math.max(0, parseFloat(campos.preco?.value) || 0);
@@ -753,6 +791,7 @@
 
     medir();
     encerrarCarga();
+    ajustarDensidade(slides[atual]);
     contadoresDoSlide(slides[atual]).forEach(rodarContador);
 
     // dica de deslizar, uma única vez por aparelho

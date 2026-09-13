@@ -95,17 +95,18 @@
   --escala: 1;
 
   /* tipografia do palco (px do palco de referência) */
-  --t-h2: 46px;
-  --t-h3: 20px;
-  --t-h4: 18px;
-  --t-corpo: 16px;
-  --t-peq: 13px;
-  --t-fonte: 11px;
-  --t-num-g: 128px;
-  --t-num-m: 40px;
+  --t-h2-base: 46px;
+  --t-h3-base: 20px;
+  --t-h4-base: 18px;
+  --t-corpo-base: 16px;
+  --t-peq-base: 13px;
+  --t-fonte-base: 11px;
+  --t-num-g-base: 128px;
+  --t-num-m-base: 40px;
 
-  --gap: 20px;
-  --pad-quadro: 40px 52px;
+  --gap-base: 20px;
+  --pad-quadro-v: 40px;
+  --pad-quadro-h: 52px;
 }
 
 
@@ -427,7 +428,22 @@ button {
   transform-origin: center center;
 }
 
+/* --densidade é o fator de ajuste automático: 1 significa o slide no
+   tamanho de projeto; valores menores encolhem tipografia, respiros e
+   peças 3D até o conteúdo caber sem corte. Quem decide é o script. */
 .slide {
+  --densidade: 1;
+
+  --t-h2: calc(var(--t-h2-base) * var(--densidade));
+  --t-h3: calc(var(--t-h3-base) * var(--densidade));
+  --t-h4: calc(var(--t-h4-base) * var(--densidade));
+  --t-corpo: calc(var(--t-corpo-base) * var(--densidade));
+  --t-peq: calc(var(--t-peq-base) * var(--densidade));
+  --t-fonte: calc(var(--t-fonte-base) * var(--densidade));
+  --t-num-g: calc(var(--t-num-g-base) * var(--densidade));
+  --t-num-m: calc(var(--t-num-m-base) * var(--densidade));
+  --gap: calc(var(--gap-base) * var(--densidade));
+
   position: absolute;
   inset: 0;
   display: grid;
@@ -475,7 +491,7 @@ button {
   gap: var(--gap);
   width: calc(var(--palco-l) - 72px);
   height: calc(var(--palco-a) - 56px);
-  padding: var(--pad-quadro);
+  padding: calc(var(--pad-quadro-v) * var(--densidade)) var(--pad-quadro-h);
   border-radius: var(--r-xl);
   border: 1px solid var(--border);
   background:
@@ -1840,8 +1856,8 @@ button {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 280px;
   perspective: 1100px;
+  min-height: calc(280px * var(--densidade));
   touch-action: none;
   cursor: grab;
 }
@@ -2053,13 +2069,13 @@ button {
 .ciclo {
   display: grid;
   place-items: center;
-  min-height: 330px;
+  min-height: calc(330px * var(--densidade));
 }
 
 .ciclo__palco {
   position: relative;
-  width: 330px;
-  height: 330px;
+  width: calc(330px * var(--densidade));
+  height: calc(330px * var(--densidade));
   display: grid;
   place-items: center;
 }
@@ -2108,7 +2124,7 @@ button {
 }
 
 .ciclo__no {
-  --raio: 132px;
+  --raio: calc(132px * var(--densidade));
   position: absolute;
   width: 108px;
   display: grid;
@@ -2171,7 +2187,7 @@ button {
   display: grid;
   place-items: center;
   perspective: 1300px;
-  min-height: 300px;
+  min-height: calc(300px * var(--densidade));
 }
 
 .device {
@@ -2425,7 +2441,7 @@ button {
   display: grid;
   place-items: center;
   width: 100%;
-  height: 210px;
+  height: calc(210px * var(--densidade));
   perspective: 900px;
 }
 
@@ -3217,7 +3233,10 @@ kbd {
   filter: blur(34px);
 }
 
-.deck[data-modo="fluido"] {
+/* No celular o slide rola, então não há o que comprimir: a densidade
+   volta a 1 e a tipografia passa a ser fluida em relação à tela. */
+.deck[data-modo="fluido"] .slide {
+  --densidade: 1;
   --t-h2: clamp(1.6rem, 7.4vw, 2.3rem);
   --t-h3: clamp(1rem, 4.2vw, 1.15rem);
   --t-h4: clamp(.95rem, 4vw, 1.05rem);
@@ -3586,4 +3605,395 @@ html[data-perf="leve"] .device__flutuante {
 
 .slide--denso .cab__titulo {
   font-size: calc(var(--t-h2) - 4px);
+}
+
+
+/* ============================================================
+   14. COMPONENTES DO CONTEÚDO DO TCC
+   Peças que existem por causa do documento: o quadro comparativo
+   com os concorrentes, o confronto entre contêineres e serverless,
+   as ações locais e a conta da Matemática na virada.
+   ============================================================ */
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* — a conta do capítulo 11, em uma linha — */
+.virada__conta {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: .7rem 1.1rem;
+  border-radius: var(--r-md);
+  border: 1px dashed rgba(168, 85, 247, .3);
+  background: rgba(147, 51, 196, .07);
+  font-size: var(--t-corpo);
+  color: var(--text-2);
+}
+
+.virada__conta b {
+  color: var(--text-0);
+}
+
+.virada__conta code {
+  padding: .16rem .5rem;
+  border-radius: 7px;
+  background: rgba(6, 5, 11, .7);
+  font-family: var(--font-mono);
+  font-size: calc(var(--t-corpo) - 2px);
+  color: var(--yellow-300);
+}
+
+/* — nó de fechamento do ciclo — */
+.ciclo__no--vazio i {
+  border-style: dashed;
+  color: var(--text-3);
+}
+
+.slide.is-ativo .ciclo__no--vazio i {
+  animation: none;
+}
+
+.ciclo__no--vazio em {
+  color: var(--text-3);
+  font-style: italic;
+}
+
+/* — cartão em destaque dentro de uma pilha — */
+.cartao-tec--foco {
+  border-color: var(--border-forte);
+  background:
+    linear-gradient(120deg, rgba(147, 51, 196, .15), rgba(13, 10, 20, .66));
+}
+
+.cartao-tec--foco p b {
+  color: var(--yellow-300);
+}
+
+/* — módulo ligado ao eixo ambiental — */
+.modulo--verde {
+  border-color: rgba(31, 209, 143, .3);
+  background: linear-gradient(120deg, rgba(31, 209, 143, .1), rgba(14, 11, 21, .6));
+}
+
+.modulo--verde h4 {
+  color: var(--mint-300);
+}
+
+/* — ações locais — */
+.acoes {
+  display: grid;
+  gap: .7rem;
+  padding: 18px 20px;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(31, 209, 143, .26);
+  background:
+    var(--grad-vidro),
+    linear-gradient(150deg, rgba(31, 209, 143, .08), rgba(12, 10, 18, .7));
+}
+
+.acoes__titulo {
+  font-size: var(--t-corpo);
+  color: var(--text-2);
+}
+
+.acoes__titulo b {
+  color: var(--mint-300);
+}
+
+.acoes__lista {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  list-style: none;
+}
+
+.acoes__lista li {
+  display: grid;
+  justify-items: center;
+  gap: .15rem;
+  padding: 12px 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: rgba(6, 5, 11, .5);
+  text-align: center;
+  transition: border-color .3s var(--ease), transform .3s var(--ease);
+}
+
+.acoes__lista li:hover {
+  border-color: rgba(31, 209, 143, .4);
+  transform: translateY(-2px);
+}
+
+.acoes__icone {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid rgba(31, 209, 143, .3);
+  background: rgba(31, 209, 143, .08);
+  color: var(--mint-400);
+}
+
+.acoes__icone svg {
+  width: 17px;
+  height: 17px;
+}
+
+.acoes__lista b {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  color: var(--text-0);
+}
+
+.acoes__lista small {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--text-3);
+}
+
+/* — confronto entre duas arquiteturas — */
+.confronto {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 18px;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+
+.confronto__lado {
+  display: grid;
+  gap: .4rem;
+  align-content: start;
+  padding: 20px 22px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--grad-vidro), rgba(12, 10, 18, .66);
+}
+
+.confronto__lado--escolhido {
+  border-color: var(--border-forte);
+  background:
+    radial-gradient(110% 80% at 100% 0%, rgba(147, 51, 196, .16), transparent 60%),
+    var(--grad-vidro),
+    rgba(12, 10, 18, .7);
+}
+
+.confronto__selo {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.confronto__lado--escolhido .confronto__selo {
+  color: var(--yellow-300);
+}
+
+.confronto__lado h3 {
+  font-family: var(--font-display);
+  font-size: calc(var(--t-h3) + 3px);
+  font-weight: 600;
+  color: var(--text-0);
+}
+
+.confronto__lado p {
+  font-size: var(--t-peq);
+  line-height: 1.52;
+  color: var(--text-2);
+}
+
+.confronto__lado p b {
+  color: var(--text-0);
+}
+
+.confronto__vs {
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 30px;
+  color: var(--purple-400);
+}
+
+/* — quadro comparativo — */
+.tabela-quadro {
+  display: grid;
+  gap: .6rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.quadro-comp {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  font-size: var(--t-peq);
+}
+
+.quadro-comp th,
+.quadro-comp td {
+  padding: 9px 14px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border);
+}
+
+.quadro-comp tbody tr:last-child th,
+.quadro-comp tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.quadro-comp thead th {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: rgba(255, 255, 255, .026);
+}
+
+.quadro-comp tbody th {
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.quadro-comp td {
+  color: var(--text-2);
+}
+
+.quadro-comp__nao {
+  color: var(--text-3);
+}
+
+.quadro-comp thead .quadro-comp__nosso {
+  color: var(--yellow-300);
+  background: rgba(254, 200, 0, .07);
+}
+
+.quadro-comp td.quadro-comp__nosso {
+  color: var(--text-1);
+  background: rgba(147, 51, 196, .08);
+}
+
+.quadro-comp td.quadro-comp__nosso b {
+  color: var(--yellow-300);
+}
+
+.quadro-comp tbody tr:hover td,
+.quadro-comp tbody tr:hover th {
+  background-color: rgba(255, 255, 255, .022);
+}
+
+
+/* — modo fluido: as peças novas em coluna — */
+.deck[data-modo="fluido"] .confronto,
+.deck[data-modo="fluido"] .acoes__lista {
+  grid-template-columns: 1fr;
+}
+
+.deck[data-modo="fluido"] .acoes__lista {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.deck[data-modo="fluido"] .confronto__vs {
+  justify-self: center;
+}
+
+.deck[data-modo="fluido"] .virada__conta {
+  font-size: calc(var(--t-peq));
+}
+
+/* a tabela rola na horizontal em vez de espremer as colunas */
+.deck[data-modo="fluido"] .tabela-quadro {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.deck[data-modo="fluido"] .quadro-comp {
+  min-width: 520px;
+}
+
+/* — quadro comparativo no celular —
+   Rolar a tabela na horizontal esconderia justamente a coluna do FinCK,
+   que é o motivo do quadro existir. Aqui cada linha vira um cartão com
+   as duas leituras empilhadas e rotuladas. */
+.deck[data-modo="fluido"] .tabela-quadro {
+  overflow-x: visible;
+}
+
+.deck[data-modo="fluido"] .quadro-comp {
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.deck[data-modo="fluido"] .quadro-comp thead {
+  display: none;
+}
+
+.deck[data-modo="fluido"] .quadro-comp tbody,
+.deck[data-modo="fluido"] .quadro-comp tr {
+  display: block;
+}
+
+.deck[data-modo="fluido"] .quadro-comp tr {
+  margin-bottom: 10px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--grad-vidro), rgba(14, 11, 21, .6);
+  overflow: hidden;
+}
+
+.deck[data-modo="fluido"] .quadro-comp tbody th {
+  display: block;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, .026);
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  color: var(--text-0);
+}
+
+/* rótulo em cima do valor: em grade, o <b> e o texto ao lado dele
+   viravam duas células e quebravam a linha no meio da frase */
+.deck[data-modo="fluido"] .quadro-comp td {
+  display: block;
+  padding: 8px 14px 10px;
+  border-bottom: 0;
+  line-height: 1.45;
+}
+
+.deck[data-modo="fluido"] .quadro-comp td + td {
+  border-top: 1px solid var(--border);
+}
+
+.deck[data-modo="fluido"] .quadro-comp td::before {
+  content: attr(data-rotulo);
+  display: block;
+  margin-bottom: .12rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.deck[data-modo="fluido"] .quadro-comp td.quadro-comp__nosso::before {
+  color: var(--yellow-300);
 }
