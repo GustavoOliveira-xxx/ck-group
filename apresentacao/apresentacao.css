@@ -95,18 +95,18 @@
   --escala: 1;
 
   /* tipografia do palco (px do palco de referência) */
-  --t-h2-base: 46px;
-  --t-h3-base: 20px;
-  --t-h4-base: 18px;
-  --t-corpo-base: 16px;
-  --t-peq-base: 13px;
-  --t-fonte-base: 11px;
-  --t-num-g-base: 128px;
-  --t-num-m-base: 40px;
+  --t-h2-base: 53px;
+  --t-h3-base: 23px;
+  --t-h4-base: 20px;
+  --t-corpo-base: 18.5px;
+  --t-peq-base: 15px;
+  --t-fonte-base: 12.5px;
+  --t-num-g-base: 140px;
+  --t-num-m-base: 47px;
 
-  --gap-base: 20px;
-  --pad-quadro-v: 40px;
-  --pad-quadro-h: 52px;
+  --gap-base: 18px;
+  --pad-quadro-v: 32px;
+  --pad-quadro-h: 46px;
 }
 
 
@@ -144,9 +144,16 @@ img {
 }
 
 /* <picture> existe só para oferecer o WebP: some da árvore de caixas
-   para que o <img> continue sendo filho direto de quem o posiciona. */
+   para que o <img> continue sendo filho direto de quem o posiciona.
+   Com isso os <source> também viram filhos diretos — e em grade ou flex
+   virariam itens de layout, empurrando a imagem para a linha seguinte.
+   Por isso ficam explicitamente fora do fluxo. */
 picture {
   display: contents;
+}
+
+picture > source {
+  display: none;
 }
 
 svg {
@@ -423,7 +430,6 @@ button {
   left: 50%;
   width: var(--palco-l);
   height: var(--palco-a);
-  perspective: 2000px;
   transform: translate(-50%, -50%) scale(var(--escala));
   transform-origin: center center;
 }
@@ -434,13 +440,13 @@ button {
 .slide {
   --densidade: 1;
 
-  --t-h2: calc(var(--t-h2-base) * var(--densidade));
+  --t-h2: calc(var(--t-h2-base) * var(--densidade) * var(--densidade));
   --t-h3: calc(var(--t-h3-base) * var(--densidade));
   --t-h4: calc(var(--t-h4-base) * var(--densidade));
   --t-corpo: calc(var(--t-corpo-base) * var(--densidade));
   --t-peq: calc(var(--t-peq-base) * var(--densidade));
   --t-fonte: calc(var(--t-fonte-base) * var(--densidade));
-  --t-num-g: calc(var(--t-num-g-base) * var(--densidade));
+  --t-num-g: calc(var(--t-num-g-base) * var(--densidade) * var(--densidade));
   --t-num-m: calc(var(--t-num-m-base) * var(--densidade));
   --gap: calc(var(--gap-base) * var(--densidade));
 
@@ -450,37 +456,83 @@ button {
   place-items: center;
   opacity: 0;
   visibility: hidden;
-  transform: translate3d(0, 0, -360px) rotateY(16deg);
-  transform-style: preserve-3d;
-  transition:
-    opacity .58s var(--ease),
-    transform .68s var(--ease),
-    visibility .68s;
   pointer-events: none;
 }
 
+/* A troca de slide é animação de quadro-chave, não transição. Uma
+   transição interrompida no meio deixa o slide parado num estado
+   intermediário — era daí que vinha o quadro entrando torto. Com
+   keyframes e fill-mode "both" o repouso é sempre o último quadro,
+   ou seja transform: none. E o movimento perdeu a rotação: desliza e
+   ganha profundidade por escala, então não existe ângulo em que ele
+   possa travar. */
 .slide.is-ativo {
-  opacity: 1;
   visibility: visible;
-  transform: none;
   pointer-events: auto;
   z-index: 2;
+  animation: slide-entra .56s var(--ease-out) both;
 }
 
-/* saída no sentido oposto ao da entrada */
 .slide.is-saindo {
-  opacity: 0;
   visibility: visible;
-  transform: translate3d(0, 0, -360px) rotateY(-16deg);
   z-index: 1;
+  animation: slide-sai .42s var(--ease) both;
 }
 
-.deck[data-sentido="tras"] .slide {
-  transform: translate3d(0, 0, -360px) rotateY(-16deg);
+.deck[data-sentido="tras"] .slide.is-ativo {
+  animation-name: slide-entra-tras;
 }
 
 .deck[data-sentido="tras"] .slide.is-saindo {
-  transform: translate3d(0, 0, -360px) rotateY(16deg);
+  animation-name: slide-sai-tras;
+}
+
+@keyframes slide-entra {
+  from {
+    opacity: 0;
+    transform: translate3d(3.5%, 0, 0) scale(.955);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-sai {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-3.5%, 0, 0) scale(.955);
+  }
+}
+
+@keyframes slide-entra-tras {
+  from {
+    opacity: 0;
+    transform: translate3d(-3.5%, 0, 0) scale(.955);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-sai-tras {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(3.5%, 0, 0) scale(.955);
+  }
 }
 
 /* o quadro é a moldura de vidro de cada slide */
@@ -489,14 +541,14 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-  width: calc(var(--palco-l) - 72px);
-  height: calc(var(--palco-a) - 56px);
+  width: calc(var(--palco-l) - 26px);
+  height: calc(var(--palco-a) - 22px);
   padding: calc(var(--pad-quadro-v) * var(--densidade)) var(--pad-quadro-h);
   border-radius: var(--r-xl);
   border: 1px solid var(--border);
   background:
     var(--grad-vidro),
-    linear-gradient(168deg, rgba(20, 15, 32, .9), rgba(8, 6, 14, .94));
+    linear-gradient(168deg, rgba(20, 15, 32, .82), rgba(8, 6, 14, .88));
   box-shadow: var(--sombra-funda), 0 0 0 1px rgba(168, 85, 247, .07) inset;
   overflow: hidden;
 }
@@ -580,7 +632,7 @@ button {
 }
 
 .hud__marca img {
-  width: 30px;
+  width: 34px;
   height: auto;
   filter: drop-shadow(0 0 12px var(--purple-glow));
 }
@@ -864,7 +916,7 @@ button {
   font-family: var(--font-display);
   font-size: var(--t-h2);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.04;
   letter-spacing: -.02em;
   color: var(--text-0);
 }
@@ -1099,7 +1151,7 @@ button {
 
 .destaque-dado__frase {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 34px;
   line-height: 1.24;
   color: var(--text-1);
 }
@@ -1148,8 +1200,8 @@ button {
 .ficha__icone {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   border: 1px solid var(--border-forte);
   background: var(--purple-vidro);
@@ -1157,8 +1209,8 @@ button {
 }
 
 .ficha__icone svg {
-  width: 17px;
-  height: 17px;
+  width: 22px;
+  height: 22px;
 }
 
 .ficha__num {
@@ -1201,7 +1253,7 @@ button {
 .cartao-dado strong {
   grid-row: span 2;
   font-family: var(--font-display);
-  font-size: 42px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -.03em;
@@ -1316,7 +1368,7 @@ button {
 
 .barras__valor {
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 20px;
   color: var(--text-0);
   min-width: 44px;
   text-align: right;
@@ -1346,7 +1398,7 @@ button {
 
 .juros__valor {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--text-0);
   font-variant-numeric: tabular-nums;
@@ -1478,8 +1530,8 @@ button {
 }
 
 .modulo p {
-  font-size: 11px;
-  line-height: 1.35;
+  font-size: 13px;
+  line-height: 1.38;
   color: var(--text-3);
 }
 
@@ -1553,8 +1605,8 @@ button {
 }
 
 .fluxo__passo p {
-  font-size: 12px;
-  line-height: 1.42;
+  font-size: 13.5px;
+  line-height: 1.44;
   color: var(--text-3);
 }
 
@@ -1594,8 +1646,8 @@ button {
 .pilar__icone {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 12px;
   border: 1px solid var(--border-forte);
   background: var(--purple-vidro);
@@ -1603,8 +1655,8 @@ button {
 }
 
 .pilar__icone svg {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 /* — números do projeto — */
@@ -1627,7 +1679,7 @@ button {
 
 .numero strong {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 700;
   line-height: 1;
   background: var(--grad-mista);
@@ -1690,8 +1742,8 @@ button {
 }
 
 .entrega p {
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13.5px;
+  line-height: 1.42;
   color: var(--text-3);
 }
 
@@ -1857,7 +1909,7 @@ button {
   display: grid;
   place-items: center;
   perspective: 1100px;
-  min-height: calc(280px * var(--densidade));
+  min-height: calc(246px * var(--densidade));
   touch-action: none;
   cursor: grab;
 }
@@ -1874,8 +1926,8 @@ button {
 
 .prisma {
   position: relative;
-  width: 230px;
-  height: 176px;
+  width: 214px;
+  height: 164px;
   transform-style: preserve-3d;
   animation: prisma-gira 22s linear infinite;
 }
@@ -1905,21 +1957,21 @@ button {
   backface-visibility: hidden;
 }
 
-.prisma__face--frente { transform: translateZ(115px); }
-.prisma__face--direita { transform: rotateY(90deg) translateZ(115px); }
-.prisma__face--tras { transform: rotateY(180deg) translateZ(115px); }
-.prisma__face--esquerda { transform: rotateY(-90deg) translateZ(115px); }
+.prisma__face--frente { transform: translateZ(107px); }
+.prisma__face--direita { transform: rotateY(90deg) translateZ(107px); }
+.prisma__face--tras { transform: rotateY(180deg) translateZ(107px); }
+.prisma__face--esquerda { transform: rotateY(-90deg) translateZ(107px); }
 
 .prisma__face--topo,
 .prisma__face--base {
-  height: 230px;
-  top: -27px;
+  height: 214px;
+  top: -25px;
   background: linear-gradient(150deg, rgba(24, 17, 38, .8), rgba(8, 6, 13, .8));
   box-shadow: none;
 }
 
-.prisma__face--topo { transform: rotateX(90deg) translateZ(88px); }
-.prisma__face--base { transform: rotateX(-90deg) translateZ(88px); }
+.prisma__face--topo { transform: rotateX(90deg) translateZ(82px); }
+.prisma__face--base { transform: rotateX(-90deg) translateZ(82px); }
 
 .prisma__rotulo {
   font-family: var(--font-mono);
@@ -1931,7 +1983,7 @@ button {
 
 .prisma__valor {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--text-0);
@@ -1958,9 +2010,11 @@ button {
   filter: blur(10px);
 }
 
+/* dentro da caixa: 4 px para fora bastavam para o ajuste de densidade
+   enxergar transbordo permanente e encolher o slide até o limite */
 .prisma-dica {
   position: absolute;
-  bottom: -4px;
+  bottom: 2px;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: .12em;
@@ -1987,6 +2041,7 @@ button {
 
 .calc__campos label {
   display: grid;
+  min-width: 0;
   gap: .25rem;
   font-size: 11px;
   letter-spacing: .06em;
@@ -1994,7 +2049,11 @@ button {
   color: var(--text-3);
 }
 
+/* campo de número tem largura intrínseca própria: sem width e min-width
+   explícitos ele estoura a coluna da grade em tela estreita */
 .calc__campos input {
+  width: 100%;
+  min-width: 0;
   padding: .5rem .7rem;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -2069,13 +2128,13 @@ button {
 .ciclo {
   display: grid;
   place-items: center;
-  min-height: calc(330px * var(--densidade));
+  min-height: calc(286px * var(--densidade));
 }
 
 .ciclo__palco {
   position: relative;
-  width: calc(330px * var(--densidade));
-  height: calc(330px * var(--densidade));
+  width: calc(286px * var(--densidade));
+  height: calc(286px * var(--densidade));
   display: grid;
   place-items: center;
 }
@@ -2101,8 +2160,8 @@ button {
 .ciclo__nucleo {
   display: grid;
   place-items: center;
-  width: 108px;
-  height: 108px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   border: 1px solid var(--border-forte);
   background: radial-gradient(circle, rgba(147, 51, 196, .3), rgba(8, 6, 14, .9));
@@ -2124,7 +2183,7 @@ button {
 }
 
 .ciclo__no {
-  --raio: calc(132px * var(--densidade));
+  --raio: calc(114px * var(--densidade));
   position: absolute;
   width: 108px;
   display: grid;
@@ -2187,12 +2246,12 @@ button {
   display: grid;
   place-items: center;
   perspective: 1300px;
-  min-height: calc(300px * var(--densidade));
+  min-height: calc(262px * var(--densidade));
 }
 
 .device {
   position: relative;
-  width: 196px;
+  width: 178px;
   transform-style: preserve-3d;
   transform: rotateY(-15deg) rotateX(5deg);
   animation: device-flutua 9s ease-in-out infinite;
@@ -2441,7 +2500,7 @@ button {
   display: grid;
   place-items: center;
   width: 100%;
-  height: calc(210px * var(--densidade));
+  height: calc(186px * var(--densidade));
   perspective: 900px;
 }
 
@@ -2751,7 +2810,7 @@ button {
 
 .conversor__valor {
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--text-2);
@@ -3738,8 +3797,8 @@ html[data-perf="leve"] .device__flutuante {
 .acoes__icone {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   border-radius: 10px;
   border: 1px solid rgba(31, 209, 143, .3);
   background: rgba(31, 209, 143, .08);
@@ -3747,8 +3806,8 @@ html[data-perf="leve"] .device__flutuante {
 }
 
 .acoes__icone svg {
-  width: 17px;
-  height: 17px;
+  width: 21px;
+  height: 21px;
 }
 
 .acoes__lista b {
@@ -3860,7 +3919,7 @@ html[data-perf="leve"] .device__flutuante {
 
 .quadro-comp thead th {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -3996,4 +4055,346 @@ html[data-perf="leve"] .device__flutuante {
 
 .deck[data-modo="fluido"] .quadro-comp td.quadro-comp__nosso::before {
   color: var(--yellow-300);
+}
+
+
+/* ============================================================
+   15. FUNDO VIVO E A MARCA DO FINCK
+
+   O cenário deixa de ser um pano de fundo parado: ganha duas
+   fitas em órbita, uma aurora que respira, uma varredura de luz
+   que atravessa a tela e uma grade que desliza. Tudo em
+   transform e opacity — o compositor resolve, a CPU não entra.
+   O perfil leve reduz o número de camadas em movimento, nunca a
+   decoração.
+   ============================================================ */
+
+/* — quarta aurora, do lado menta — */
+.orbe--4 {
+  width: 34vw;
+  height: 34vw;
+  top: 8%;
+  right: 4%;
+  background: radial-gradient(circle, rgba(37, 240, 162, .34), transparent 66%);
+  opacity: .16;
+  animation: flutua 30s var(--ease) infinite reverse;
+}
+
+/* — fitas em órbita: dois anéis largos, inclinados e lentos — */
+.cenario__fita {
+  position: absolute;
+  left: -18vw;
+  width: 136vw;
+  height: 34vw;
+  border: 1px solid rgba(168, 85, 247, .24);
+  border-radius: 50%;
+  opacity: .8;
+}
+
+.cenario__fita::before,
+.cenario__fita::after {
+  content: "";
+  position: absolute;
+  inset: 16%;
+  border: inherit;
+  border-radius: inherit;
+}
+
+.cenario__fita::after {
+  inset: 34%;
+}
+
+.cenario__fita--a {
+  top: 14%;
+  transform: rotate(-11deg);
+  animation: fita-a 26s ease-in-out infinite alternate;
+}
+
+.cenario__fita--b {
+  top: 58%;
+  border-color: rgba(120, 239, 248, .2);
+  transform: rotate(13deg);
+  animation: fita-b 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes fita-a {
+  from {
+    transform: rotate(-11deg) translate3d(-2%, 0, 0) scale(1);
+  }
+
+  to {
+    transform: rotate(-6deg) translate3d(3%, -2%, 0) scale(1.06);
+  }
+}
+
+@keyframes fita-b {
+  from {
+    transform: rotate(13deg) translate3d(2%, 0, 0) scale(1.04);
+  }
+
+  to {
+    transform: rotate(8deg) translate3d(-3%, 2%, 0) scale(1);
+  }
+}
+
+/* — aurora que respira no alto da cena — */
+.cenario__aurora {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 120vw;
+  height: 80vh;
+  margin-left: -60vw;
+  background:
+    radial-gradient(60% 50% at 30% 50%, rgba(147, 51, 196, .26), transparent 70%),
+    radial-gradient(52% 46% at 68% 42%, rgba(37, 240, 162, .16), transparent 70%),
+    radial-gradient(40% 40% at 50% 60%, rgba(254, 200, 0, .1), transparent 72%);
+  opacity: .9;
+  animation: aurora-respira 16s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-respira {
+  from {
+    transform: translate3d(-4%, 0, 0) scale(1);
+    opacity: .6;
+  }
+
+  to {
+    transform: translate3d(4%, 5%, 0) scale(1.18);
+    opacity: 1;
+  }
+}
+
+/* — varredura: uma lâmina de luz cruzando a cena — */
+.cenario__varredura {
+  position: absolute;
+  top: -20%;
+  left: -40%;
+  width: 40%;
+  height: 140%;
+  background: linear-gradient(100deg,
+      transparent,
+      rgba(192, 132, 252, .1) 42%,
+      rgba(254, 200, 0, .07) 56%,
+      transparent);
+  transform: rotate(14deg);
+  animation: varredura 15s linear infinite;
+}
+
+.cenario__varredura::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg,
+      transparent,
+      rgba(37, 240, 162, .07) 48%,
+      transparent);
+  animation: varredura 15s linear infinite;
+  animation-delay: -7.5s;
+}
+
+@keyframes varredura {
+  0% {
+    transform: rotate(14deg) translateX(0);
+    opacity: 0;
+  }
+
+  12%,
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(14deg) translateX(430%);
+    opacity: 0;
+  }
+}
+
+/* — a grade deixa de ser estática —
+   Deslizar por background-position obrigaria a repintar a tela inteira
+   a cada quadro; deslocar por transform é trabalho do compositor. A
+   grade é desenhada maior que a tela para o deslocamento nunca mostrar
+   a borda. */
+.cenario__grade {
+  inset: -12%;
+  animation: grade-desliza 30s linear infinite;
+}
+
+@keyframes grade-desliza {
+  to {
+    transform: translate3d(72px, 72px, 0);
+  }
+}
+
+/* o canvas ganha presença: a constelação é parte da cena, não um véu */
+.cenario__canvas {
+  opacity: .72;
+}
+
+
+/* — marca do FinCK — */
+/* especificidade maior que a de .hud__marca span, que é grid e
+   empilhava as duas marcas uma sobre a outra */
+.hud__marca .hud__marcas {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  flex: none;
+}
+
+.hud__finck {
+  width: 42px;
+  height: auto;
+  filter: drop-shadow(0 0 12px var(--yellow-glow));
+}
+
+.hud__marca:hover .hud__finck {
+  filter: drop-shadow(0 0 16px var(--yellow-400));
+}
+
+/* cabeçalho com a marca à direita do título */
+.cab--marca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.cab__logo {
+  width: calc(84px * var(--densidade));
+  height: auto;
+  filter: drop-shadow(0 6px 22px rgba(147, 51, 196, .55));
+  animation: capa-flutua 8s ease-in-out infinite;
+}
+
+/* a marca ao fundo do aparelho, como um selo do produto */
+/* Centralizada por inset + margin auto, e não por translate: assim a
+   caixa da marca nunca passa da caixa do palco. Com translate, o
+   navegador ainda contava a posição original no scrollHeight do pai e
+   o ajuste de densidade enxergava um transbordo que não existia. */
+.palco-device__marca {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-width: calc(300px * var(--densidade));
+  max-height: 100%;
+  object-fit: contain;
+  opacity: .09;
+  filter: saturate(1.4);
+  pointer-events: none;
+}
+
+/* encerramento: as duas marcas lado a lado */
+.final__marcas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.6rem, 2vw, 1.4rem);
+}
+
+.final__marca--finck img {
+  width: 104px;
+  filter: drop-shadow(0 0 26px var(--yellow-glow));
+}
+
+.final__marca--finck .capa__anel--b {
+  inset: 8px;
+  border-color: rgba(254, 200, 0, .26);
+}
+
+.final__mais {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--border-forte);
+  background: var(--purple-vidro);
+  position: relative;
+  flex: none;
+}
+
+.final__mais::before,
+.final__mais::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--purple-300);
+  transform: translate(-50%, -50%);
+}
+
+.final__mais::before {
+  width: 11px;
+  height: 1.5px;
+}
+
+.final__mais::after {
+  width: 1.5px;
+  height: 11px;
+}
+
+
+/* — perfil leve: as camadas continuam em cena, menos delas em movimento — */
+html[data-perf="leve"] .cenario__fita--b,
+html[data-perf="leve"] .cenario__varredura,
+html[data-perf="leve"] .cenario__grade {
+  animation: none;
+}
+
+html[data-perf="leve"] .cenario__aurora {
+  animation-duration: 34s;
+}
+
+html[data-perf="leve"] .orbe--4 {
+  animation: none;
+}
+
+html[data-perf="leve"] .cenario__canvas {
+  opacity: .6;
+}
+
+
+/* — modo fluido: marcas menores, fundo mais discreto — */
+.deck[data-modo="fluido"] .cab--marca {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .6rem;
+}
+
+.deck[data-modo="fluido"] .cab__logo {
+  width: 62px;
+}
+
+.deck[data-modo="fluido"] .hud__finck {
+  width: 26px;
+}
+
+.deck[data-modo="fluido"] .final__marca--finck img {
+  width: 76px;
+}
+
+.deck[data-modo="fluido"] .cenario__fita,
+.deck[data-modo="fluido"] .cenario__varredura {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cenario__fita,
+  .cenario__aurora,
+  .cenario__varredura,
+  .cenario__grade,
+  .cab__logo {
+    animation: none !important;
+  }
+}
+
+
+/* no celular a marca do cabeçalho cede espaço ao título */
+.deck[data-modo="fluido"] .cab--marca {
+  align-items: start;
+}
+
+.deck[data-modo="fluido"] .cab__logo {
+  width: 54px;
 }

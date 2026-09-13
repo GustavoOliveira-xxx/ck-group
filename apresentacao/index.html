@@ -67,6 +67,11 @@
     <span class="orbe orbe--1"></span>
     <span class="orbe orbe--2"></span>
     <span class="orbe orbe--3"></span>
+    <span class="orbe orbe--4"></span>
+    <span class="cenario__fita cenario__fita--a"></span>
+    <span class="cenario__fita cenario__fita--b"></span>
+    <span class="cenario__aurora"></span>
+    <span class="cenario__varredura"></span>
     <span class="cenario__grade"></span>
     <span class="cenario__vinheta"></span>
   </div>
@@ -79,14 +84,21 @@
     <!-- ---------- BARRA SUPERIOR ---------- -->
     <header class="hud hud--topo">
       <a class="hud__marca" href="../index.html" title="Voltar ao site da Conscious Knowledge">
-        <picture>
-          <source type="image/webp" srcset="../midia/logo-ck-origem-120.webp">
-          <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="32" height="48"
-            decoding="async">
-        </picture>
+        <span class="hud__marcas">
+          <picture>
+            <source type="image/webp" srcset="../midia/logo-ck-origem-120.webp">
+            <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="32" height="48"
+              decoding="async">
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../midia/logo-finck-reality-145.webp">
+            <img class="hud__finck" src="../midia/logo-finck-reality-290.png" alt="FinCK of Reality"
+              width="145" height="170" decoding="async">
+          </picture>
+        </span>
         <span>
           <strong>Conscious Knowledge</strong>
-          <small>Trabalho de Conclusão de Curso · 2026</small>
+          <small>FinCK of Reality · TCC 2026</small>
         </span>
       </a>
 
@@ -280,8 +292,7 @@
 
               <p class="painel__leitura">
                 Quase todo mundo sabe que o tema importa. <b>Mais da metade admite não entendê-lo.</b>
-                A vontade existe; o que falta é a informação em uma linguagem que não exija
-                conhecimento técnico prévio.
+                A vontade existe — falta a informação em linguagem que não exija conhecimento prévio.
               </p>
               <p class="fonte">
                 Fonte: Observatório Febraban / Ipespe, jun./2025 — 3 mil pessoas em cinco regiões
@@ -307,9 +318,8 @@
           <div class="tese" data-surge="3">
             <span class="tese__aspas" aria-hidden="true">“</span>
             <p>
-              Se o gatilho da compra é <b>emocional antes de ser racional</b>, nenhuma solução baseada
-              só em disciplina e planilha resolve. É preciso interromper o ciclo <b>no instante da
-              decisão</b>.
+              Se o gatilho é <b>emocional antes de racional</b>, disciplina e planilha não resolvem.
+              É preciso interromper o ciclo <b>no instante da decisão</b>.
             </p>
           </div>
 
@@ -359,27 +369,27 @@
             <div class="pilha" data-surge="2">
               <article class="cartao-tec" data-tilt>
                 <h4>A parcela esconde o compromisso</h4>
-                <p>Diluir o total em parcelas faz o comprador avaliar só se “cabe” a parcela do mês,
-                  sem enxergar o efeito acumulado de vários parcelamentos ao mesmo tempo.</p>
+                <p>Avalia-se só se “cabe” a parcela do mês, sem enxergar o efeito acumulado de
+                  vários parcelamentos somados.</p>
               </article>
 
               <article class="cartao-tec" data-tilt>
                 <h4>O descarte rápido é projetado</h4>
-                <p>Moda de ciclo curto e eletrônicos com obsolescência programada incentivam trocar
-                  o que ainda funciona, em vez de reparar ou reutilizar.</p>
+                <p>Moda de ciclo curto e obsolescência programada incentivam trocar o que ainda
+                  funciona, em vez de reparar.</p>
               </article>
 
               <article class="cartao-tec cartao-tec--foco" data-tilt>
                 <h4>O custo real nunca aparece</h4>
-                <p>O preço da etiqueta quase nunca é traduzido em tempo de trabalho, em fatia da renda
-                  ou no que ele tira das outras prioridades. <b>É este o ponto que o FinCK ataca.</b></p>
+                <p>A etiqueta nunca é traduzida em tempo de trabalho nem em fatia da renda.
+                  <b>É este o ponto que o FinCK ataca.</b></p>
               </article>
             </div>
           </div>
 
           <p class="remate remate--critico" data-surge="3">
-            As quatro primeiras engrenagens já são estudadas e combatidas. <b>A quinta — o custo real
-            invisível — é o ponto cego das ferramentas financeiras que existem hoje.</b>
+            As quatro primeiras já são estudadas e combatidas. <b>A quinta — o custo real invisível —
+            é o ponto cego das ferramentas que existem hoje.</b>
           </p>
 
         </div>
@@ -466,8 +476,8 @@
           </div>
 
           <p class="remate remate--critico" data-surge="3">
-            É aqui que o tema fecha: <b>o mesmo impulso que esvazia a conta bancária é, em escala, o
-            que alimenta o descarte precoce</b> e a pressão sobre os recursos naturais.
+            É aqui que o tema fecha: <b>o mesmo impulso que esvazia a conta bancária alimenta,
+            em escala, o descarte precoce.</b>
           </p>
 
         </div>
@@ -551,9 +561,18 @@
         data-titulo="O motor · demo ao vivo" aria-label="Slide 7: o motor FinCK of Reality">
         <div class="quadro">
 
-          <header class="cab">
-            <p class="cab__indice">06 — O motor <span class="selo-vivo">demonstração ao vivo</span></p>
-            <h2 class="cab__titulo">FinCK <em>of Reality</em></h2>
+          <header class="cab cab--marca">
+            <div>
+              <p class="cab__indice">06 — O motor <span class="selo-vivo">demonstração ao vivo</span></p>
+              <h2 class="cab__titulo">FinCK <em>of Reality</em></h2>
+            </div>
+            <picture>
+              <source type="image/webp"
+                srcset="../midia/logo-finck-reality-145.webp 145w, ../midia/logo-finck-reality-290.webp 290w"
+                sizes="96px">
+              <img class="cab__logo" src="../midia/logo-finck-reality-290.png"
+                alt="Logotipo FinCK of Reality" width="290" height="340" loading="lazy" decoding="async">
+            </picture>
           </header>
 
           <div class="duo duo--6-6">
@@ -626,19 +645,15 @@
             </div>
           </div>
 
-          <p class="remate" data-surge="3">
-            Informando o uso esperado, o app calcula ainda o <b>custo por mês de uso</b> — o número que
-            separa o item barato e descartável do item caro, porém durável.
-          </p>
-
         </div>
 
         <div class="notas" data-notas>
           <p><b>Gabriel · slide 2 de 2 (~60 s) — DEMONSTRAÇÃO.</b> Começa no exemplo do documento.
             Trocar o preço ao vivo para R$ 4.000 (celular novo) e deixar a banca ver o semáforo virar.</p>
           <p>Girar o prisma com o mouse enquanto fala: as quatro faces mudam juntas.</p>
-          <p>O “custo por mês de uso” liga de volta à cultura do descarte do slide 4 — é a resposta
-            técnica à obsolescência programada.</p>
+          <p>Se sobrar fôlego, citar o <b>custo por mês de uso</b>: informando quanto tempo pretende
+            usar o item, o app mostra quanto ele custa por mês de uso — é o que separa o barato
+            descartável do caro durável, e a resposta técnica à obsolescência programada do slide 4.</p>
           <p>Se o tempo apertar: só a troca de preço, sem girar o prisma.</p>
         </div>
       </section>
@@ -659,6 +674,13 @@
           <div class="duo duo--5-7">
 
             <div class="palco-device" data-surge="1">
+              <picture>
+                <source type="image/webp"
+                  srcset="../midia/logo-finck-reality-290.webp 290w, ../midia/logo-finck-reality-435.webp 435w"
+                  sizes="300px">
+                <img class="palco-device__marca" src="../midia/logo-finck-reality-290.png" alt=""
+                  width="290" height="340" loading="lazy" decoding="async">
+              </picture>
               <div class="device">
                 <div class="device__moldura">
                   <span class="device__ilha"></span>
@@ -713,8 +735,7 @@
           </div>
 
           <p class="remate" data-surge="3">
-            PWA instalável, <b>funcionando offline</b> por camada local de reserva — inclusive nesta sala,
-            sem depender do Wi-Fi.
+            PWA instalável e <b>funcionando offline</b> — inclusive nesta sala, sem depender do Wi-Fi.
           </p>
 
         </div>
@@ -1087,14 +1108,25 @@
         data-titulo="Obrigado" aria-label="Slide 14: encerramento">
         <div class="quadro quadro--centro">
 
-          <div class="final__marca" data-orbital>
-            <span class="capa__anel capa__anel--a"></span>
-            <span class="capa__anel capa__anel--b"></span>
-            <picture>
-              <source type="image/webp" srcset="../midia/logo-ck-origem-240.webp">
-              <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="120" height="180"
-                loading="lazy" decoding="async">
-            </picture>
+          <div class="final__marcas" data-orbital>
+            <div class="final__marca">
+              <span class="capa__anel capa__anel--a"></span>
+              <span class="capa__anel capa__anel--b"></span>
+              <picture>
+                <source type="image/webp" srcset="../midia/logo-ck-origem-240.webp">
+                <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="120" height="180"
+                  loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <span class="final__mais" aria-hidden="true"></span>
+            <div class="final__marca final__marca--finck">
+              <span class="capa__anel capa__anel--b"></span>
+              <picture>
+                <source type="image/webp" srcset="../midia/logo-finck-reality-290.webp">
+                <img src="../midia/logo-finck-reality-290.png" alt="FinCK of Reality" width="290" height="340"
+                  loading="lazy" decoding="async">
+              </picture>
+            </div>
           </div>
 
           <h2 class="final__titulo" data-surge="1">Obrigado.</h2>

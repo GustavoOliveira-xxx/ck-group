@@ -134,8 +134,10 @@
   const CAIXAS = ".quadro, .duo, .trio, .grade-tres, .pilha, .modulos, .acoes," +
     " .confronto, .tabela-quadro, .fluxo, .entregas, .coluna-direita, .motor, .painel";
 
+  // folga de alguns pixels: enfeites posicionados de forma absoluta podem
+  // sobrar uma fração da caixa sem que nada fique cortado de fato
   const transborda = (slide) =>
-    $$(CAIXAS, slide).some((el) => el.scrollHeight > el.clientHeight + 2);
+    $$(CAIXAS, slide).some((el) => el.scrollHeight > el.clientHeight + 6);
 
   const ajustarDensidade = (slide) => {
     if (modo !== "palco") {
@@ -146,11 +148,30 @@
     slide.style.setProperty("--densidade", "1");
     if (!transborda(slide)) return;
 
-    // passos de 4%, até 76% do tamanho de projeto
-    for (let d = 0.96; d >= 0.76; d -= 0.04) {
+    for (let d = 0.97; d >= 0.70; d -= 0.03) {
       slide.style.setProperty("--densidade", d.toFixed(2));
       if (!transborda(slide)) return;
     }
+  };
+
+  /* Medir no instante da troca pega o slide antes de a entrada terminar
+     e antes de fontes e imagens assentarem: o transbordo aparente sai
+     maior que o real e o slide encolhe à toa. A primeira medida é
+     imediata, para não existir salto visível; as seguintes refazem a
+     conta conforme o layout estabiliza. Cada passagem custa algumas
+     leituras de layout, então dá para repetir sem peso. */
+  const agendarAjuste = (slide) => {
+    ajustarDensidade(slide);
+
+    requestAnimationFrame(() => requestAnimationFrame(() => ajustarDensidade(slide)));
+
+    slide.addEventListener("animationend", function refaz(e) {
+      if (e.target !== slide) return;
+      slide.removeEventListener("animationend", refaz);
+      ajustarDensidade(slide);
+    });
+
+    setTimeout(() => ajustarDensidade(slide), 700);
   };
 
 
@@ -247,7 +268,7 @@
 
     atual = destino;
     atualizarHud();
-    ajustarDensidade(proximo);
+    agendarAjuste(proximo);
     contadoresDoSlide(proximo).forEach(rodarContador);
 
     if (history.replaceState) {
@@ -791,7 +812,7 @@
 
     medir();
     encerrarCarga();
-    ajustarDensidade(slides[atual]);
+    agendarAjuste(slides[atual]);
     contadoresDoSlide(slides[atual]).forEach(rodarContador);
 
     // dica de deslizar, uma única vez por aparelho
@@ -813,6 +834,10 @@
       }
     }
   };
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ajustarDensidade(slides[atual]));
+  }
 
   if (document.readyState === "complete") {
     setTimeout(iniciar, semMovimento ? 0 : 260);

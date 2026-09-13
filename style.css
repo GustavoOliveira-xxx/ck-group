@@ -162,9 +162,16 @@ img {
 }
 
 /* <picture> existe só para oferecer o WebP: some da árvore de caixas
-   para que o <img> continue sendo filho direto de quem o posiciona. */
+   para que o <img> continue sendo filho direto de quem o posiciona.
+   Com isso os <source> também viram filhos diretos — e em grade ou flex
+   virariam itens de layout, empurrando a imagem para a linha seguinte.
+   Por isso ficam explicitamente fora do fluxo. */
 picture {
   display: contents;
+}
+
+picture > source {
+  display: none;
 }
 
 svg {
