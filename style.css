@@ -161,6 +161,12 @@ img {
   display: block;
 }
 
+/* <picture> existe só para oferecer o WebP: some da árvore de caixas
+   para que o <img> continue sendo filho direto de quem o posiciona. */
+picture {
+  display: contents;
+}
+
 svg {
   fill: none;
   stroke: currentColor;
@@ -837,7 +843,7 @@ nav a.is-active::after {
   height: 22px;
   border-radius: 50%;
   background:
-    url("Logo CK - Oficial.png") center / cover no-repeat,
+    url("midia/icone-ck-64.png") center / 84% no-repeat,
     radial-gradient(circle, rgba(147, 51, 196, .4), rgba(8, 8, 12, .95));
   box-shadow: 0 0 14px var(--purple-glow), inset 0 0 0 1px rgba(254, 200, 0, .3);
   animation: ck-spin 2.6s linear infinite;
@@ -3624,12 +3630,16 @@ body[data-tema="futuro"] .orbe--5 {
   height: 62px;
 }
 
+.logo-container__dupla picture {
+  display: contents;
+}
+
 .logo-container__dupla img {
   position: absolute;
   object-fit: contain;
 }
 
-.logo-container__dupla img:first-child {
+.logo-container__dupla .marca-dupla--origem {
   z-index: 2;
   left: 0;
   top: 1px;
@@ -3638,7 +3648,7 @@ body[data-tema="futuro"] .orbe--5 {
   transform: rotate(-5deg);
 }
 
-.logo-container__dupla img:last-child {
+.logo-container__dupla .marca-dupla--futuro {
   right: -2px;
   bottom: 6px;
   width: 58px;
@@ -3647,11 +3657,11 @@ body[data-tema="futuro"] .orbe--5 {
   transform: rotate(6deg);
 }
 
-.logo-container a:hover .logo-container__dupla img:first-child {
+.logo-container a:hover .logo-container__dupla .marca-dupla--origem {
   transform: translateX(-4px) rotate(-10deg) scale(1.05);
 }
 
-.logo-container a:hover .logo-container__dupla img:last-child {
+.logo-container a:hover .logo-container__dupla .marca-dupla--futuro {
   transform: translateX(5px) rotate(11deg) scale(1.06);
 }
 
@@ -5482,12 +5492,16 @@ body[data-tema="futuro"] nav a::after {
   height: 82px;
 }
 
+.footer-marca__dupla picture {
+  display: contents;
+}
+
 .footer-marca__dupla img {
   position: absolute;
   object-fit: contain;
 }
 
-.footer-marca__dupla img:first-child {
+.footer-marca__dupla .marca-dupla--origem {
   z-index: 2;
   left: 0;
   width: 48px;
@@ -5495,7 +5509,7 @@ body[data-tema="futuro"] nav a::after {
   filter: drop-shadow(0 0 14px var(--purple-glow));
 }
 
-.footer-marca__dupla img:last-child {
+.footer-marca__dupla .marca-dupla--futuro {
   right: 0;
   bottom: 7px;
   width: 72px;
