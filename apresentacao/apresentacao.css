@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* ============================================================
-   FinCK of Reality — Apresentação final
+   FinCK — Apresentação final
    Conscious Knowledge · Projeto Interdisciplinar 2026
 
    Palco fixo de 1280×720 escalado por transform no desktop e
@@ -3678,7 +3678,7 @@ html[data-perf="leve"] .device__flutuante {
 
 
 /* ============================================================
-   14. COMPONENTES DO CONTEÚDO DO TCC
+   14. COMPONENTES DO CONTEÚDO DOS SLIDES
    Peças que existem por causa do documento: o quadro comparativo
    com os concorrentes, o confronto entre contêineres e serverless,
    as ações locais e a conta da Matemática na virada.
@@ -4769,3 +4769,166 @@ html[data-perf="leve"] .pilha3d__cubo {
     animation: none !important;
   }
 }
+
+
+/* ---------------------------------------------------------
+   A CADEIA — o elo visível entre o cálculo e a ODS 12.
+   Fica no slide da demonstração porque é lá que a banca precisa
+   ver o número virando ação, e não só ouvir falar. Uma linha só:
+   o slide já está cheio e o texto não pode encolher.
+   --------------------------------------------------------- */
+.cadeia {
+  margin-top: calc(var(--gap) * .5);
+  padding-top: calc(var(--gap) * .45);
+  border-top: 1px solid var(--border);
+  perspective: 800px;
+}
+
+.cadeia__titulo {
+  margin-bottom: calc(var(--gap) * .38);
+  font-size: var(--t-peq);
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.cadeia__titulo em {
+  font-style: normal;
+  color: var(--yellow-300);
+}
+
+.cadeia__trilha {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--gap) * .3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+/* o pulso viaja pela fita: mostra que a cadeia tem sentido único */
+.cadeia__trilha::after {
+  content: "";
+  position: absolute;
+  inset-block: -2px;
+  left: 0;
+  width: 90px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(90deg,
+    rgba(254, 200, 0, 0), rgba(254, 200, 0, .16), rgba(254, 200, 0, 0));
+  pointer-events: none;
+  opacity: 0;
+}
+
+.slide.is-ativo .cadeia__trilha::after {
+  animation: cadeia-pulso 5s var(--ease) infinite;
+}
+
+@keyframes cadeia-pulso {
+  0%   { opacity: 0;   transform: translate3d(0, 0, 0); }
+  10%  { opacity: 1; }
+  80%  { opacity: 1; }
+  95%  { opacity: 0;   transform: translate3d(1080px, 0, 0); }
+  100% { opacity: 0;   transform: translate3d(1080px, 0, 0); }
+}
+
+.cadeia__elo {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: .45em;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: calc(var(--gap) * .36) calc(var(--gap) * .5);
+  border-radius: var(--r-sm);
+  background:
+    var(--grad-vidro),
+    linear-gradient(160deg, rgba(147, 51, 196, .2), rgba(12, 10, 18, .92));
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 22px -18px rgba(0, 0, 0, .95);
+  transform: rotateY(6deg);
+  transform-origin: left center;
+  transition: transform .3s var(--ease-out), border-color .3s var(--ease);
+}
+
+.cadeia__elo:nth-child(even) { transform: rotateY(-6deg); }
+
+.cadeia__elo:hover {
+  transform: rotateY(0deg) translate3d(0, -2px, 12px);
+  border-color: var(--border-forte);
+}
+
+/* a seta entre os elos: a cadeia tem direção */
+.cadeia__elo:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--gap) * -.3);
+  width: calc(var(--gap) * .3);
+  height: 1px;
+  background: var(--purple-400);
+  opacity: .5;
+}
+
+/* os dois últimos elos são a parte ambiental: existem no app hoje */
+.cadeia__elo--verde {
+  background:
+    var(--grad-vidro),
+    linear-gradient(160deg, rgba(31, 209, 143, .22), rgba(9, 18, 15, .92));
+  border-color: rgba(31, 209, 143, .32);
+}
+
+.cadeia__elo--verde::after { background: var(--mint-500); }
+
+.cadeia__num {
+  flex: 0 0 auto;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: calc(var(--t-fonte) * .92);
+  letter-spacing: .08em;
+  color: var(--purple-300);
+}
+
+.cadeia__elo--verde .cadeia__num { color: var(--mint-400); }
+
+.cadeia__elo b {
+  font-size: var(--t-fonte);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-ativo .cadeia__trilha::after { animation: none; }
+}
+
+html[data-perf="leve"] .slide.is-ativo .cadeia__trilha::after { animation: none; }
+html[data-perf="leve"] .cadeia__elo { transform: none; }
+
+/* No celular a fita vira pilha: cinco chips numa linha de 358px cortariam
+   todo o texto, e a cadeia só serve se der para ler cada elo. */
+.deck[data-modo="fluido"] .cadeia__trilha {
+  flex-direction: column;
+  align-items: stretch;
+  gap: calc(var(--gap) * .38);
+}
+
+.deck[data-modo="fluido"] .cadeia__elo {
+  flex: 0 0 auto;
+  transform: none;
+}
+
+.deck[data-modo="fluido"] .cadeia__elo b { white-space: normal; }
+
+.deck[data-modo="fluido"] .cadeia__elo:not(:last-child)::after {
+  right: auto;
+  left: calc(var(--gap) * .5);
+  bottom: calc(var(--gap) * -.38);
+  width: 1px;
+  height: calc(var(--gap) * .38);
+}
+
+.deck[data-modo="fluido"] .cadeia__trilha::after { display: none; }

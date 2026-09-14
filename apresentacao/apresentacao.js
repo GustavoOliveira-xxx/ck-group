@@ -1,5 +1,5 @@
 /* ============================================================
-   FinCK of Reality — motor da apresentação
+   FinCK — motor da apresentação
    Conscious Knowledge · Projeto Interdisciplinar 2026
 
    Tudo é progressivo: sem JavaScript a apresentação continua
@@ -133,7 +133,8 @@
      --------------------------------------------------------- */
   const CAIXAS = ".quadro, .duo, .trio, .grade-tres, .pilha, .modulos, .acoes," +
     " .confronto, .confronto__lado, .tabela-quadro, .fluxo, .entregas," +
-    " .coluna-direita, .motor, .painel, .cartao-tec, .ficha, .entrega, .modulo";
+    " .coluna-direita, .motor, .painel, .cartao-tec, .ficha, .entrega, .modulo," +
+    " .cadeia, .cadeia__elo";
 
   // folga de alguns pixels: enfeites posicionados de forma absoluta podem
   // sobrar uma fração da caixa sem que nada fique cortado de fato
@@ -550,6 +551,13 @@
     const luzes = $$("[data-luz]");
     const txtSemaforo = $("[data-semaforo-texto]");
 
+    // os elos 02, 03 e 04 da cadeia acompanham o cálculo ao vivo
+    const cadeia = {
+      tempo: $("[data-cadeia-tempo]"),
+      risco: $("[data-cadeia-risco]"),
+      alt: $("[data-cadeia-alt]"),
+    };
+
     const moeda = (v) =>
       v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
@@ -597,6 +605,20 @@
 
       luzes.forEach((l) => l.classList.toggle("is-on", l.dataset.luz === cor));
       if (txtSemaforo) txtSemaforo.textContent = texto;
+
+      // a cadeia repete o que o app de verdade faz depois do número: o peso da
+      // alternativa muda com o tamanho do impacto, mas ela nunca some — no
+      // FinCK as quatro alternativas aparecem em qualquer resultado.
+      if (cadeia.tempo) cadeia.tempo.textContent = `${num(custoHoras)} h de trabalho`;
+      if (cadeia.risco) cadeia.risco.textContent = texto.toLowerCase();
+      if (cadeia.alt) {
+        cadeia.alt.textContent =
+          cor === "vermelho"
+            ? "adiar 30 dias · reparar · usado"
+            : cor === "amarelo"
+              ? "reparar · usado · alugar"
+              : "comparar durabilidade e uso";
+      }
     };
 
     Object.values(campos).forEach((el) => el?.addEventListener("input", recalcular));
