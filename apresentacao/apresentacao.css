@@ -1069,6 +1069,15 @@ button {
   gap: var(--gap);
 }
 
+/* quatro selos: um por exigência da lousa — funcional, local, mitiga, rastreável.
+   Em quatro colunas o rótulo tem menos largura: "Rastreável" estoura o cartão
+   no corpo de três colunas, então o número da ficha encolhe junto. */
+.trio--quatro { grid-template-columns: repeat(4, 1fr); }
+
+.trio--quatro .ficha__num { font-size: calc(var(--t-num-m) * .74); }
+
+.trio--quatro .ficha { padding-inline: calc(var(--gap) * .8); }
+
 .grade-tres {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1235,6 +1244,22 @@ button {
 
 .ficha--alerta .ficha__num {
   color: var(--yellow-300);
+}
+
+/* o selo da mitigação usa o verde da ODS, o mesmo dos elos da cadeia no
+   slide do motor: a banca liga um ao outro sem precisar de legenda */
+.ficha--verde::before {
+  background: linear-gradient(90deg, var(--verde), var(--mint-400));
+}
+
+.ficha--verde .ficha__num {
+  color: var(--mint-400);
+}
+
+.ficha--verde .ficha__icone {
+  border-color: rgba(31, 209, 143, .38);
+  background: rgba(31, 209, 143, .12);
+  color: var(--mint-400);
 }
 
 .ficha__rotulo {
@@ -3331,6 +3356,10 @@ kbd {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+/* no celular os quatro selos empilham e recuperam a largura toda: o rótulo
+   volta ao corpo cheio, já que ali não disputa espaço com os outros três */
+.deck[data-modo="fluido"] .trio--quatro .ficha__num { font-size: var(--t-num-m); }
+
 .deck[data-modo="fluido"] .numeros,
 .deck[data-modo="fluido"] .capa__equipe,
 .deck[data-modo="fluido"] .final__equipe {
@@ -4932,3 +4961,105 @@ html[data-perf="leve"] .cadeia__elo { transform: none; }
 }
 
 .deck[data-modo="fluido"] .cadeia__trilha::after { display: none; }
+
+
+/* ---------------------------------------------------------
+   RANQUE — posição, não proporção.
+   Antes este bloco usava .barras com larguras de 100/78/56/40/34%
+   rotuladas 1º a 5º. Como a barra sugere quantidade, sobrava a
+   pergunta "34% de quê?" — e não há resposta, porque eram só
+   posições. Agora a ordem é a informação, e o único número na
+   tela é o que tem fonte: as toneladas do Brasil.
+   --------------------------------------------------------- */
+.ranque {
+  display: grid;
+  gap: calc(var(--gap) * .38);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  perspective: 700px;
+}
+
+.ranque__item {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--gap) * .5);
+  padding: calc(var(--gap) * .3) calc(var(--gap) * .5);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--grad-vidro), rgba(147, 51, 196, .08);
+  transform: rotateY(5deg);
+  transform-origin: left center;
+  transition: transform .3s var(--ease-out), border-color .3s var(--ease);
+}
+
+.slide.is-ativo .ranque__item {
+  animation: ranque-entra .5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * .09s + .25s);
+}
+
+@keyframes ranque-entra {
+  from { opacity: 0; transform: rotateY(5deg) translate3d(-18px, 0, 0); }
+  to   { opacity: 1; transform: rotateY(5deg); }
+}
+
+.ranque__item:hover {
+  transform: rotateY(0deg) translate3d(0, 0, 12px);
+  border-color: var(--border-forte);
+}
+
+.ranque__pos {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  border: 1px solid var(--border-forte);
+  background: var(--purple-vidro);
+  font-family: var(--font-mono);
+  font-size: var(--t-peq);
+  font-weight: 700;
+  color: var(--purple-200);
+}
+
+.ranque__item b {
+  font-size: var(--t-peq);
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+/* o Brasil é o motivo do slide: é o único que carrega o dado */
+.ranque__item--foco {
+  background: var(--grad-vidro), rgba(254, 200, 0, .1);
+  border-color: rgba(254, 200, 0, .34);
+  box-shadow: 0 0 26px -12px var(--yellow-glow);
+}
+
+.ranque__item--foco .ranque__pos {
+  border-color: rgba(254, 200, 0, .5);
+  background: rgba(254, 200, 0, .16);
+  color: var(--yellow-300);
+}
+
+.ranque__item--foco b { color: var(--text-0); font-weight: 700; }
+
+.ranque__dado {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--t-fonte);
+  font-weight: 700;
+  color: var(--yellow-300);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-ativo .ranque__item { animation: none; }
+}
+
+html[data-perf="leve"] .slide.is-ativo .ranque__item { animation: none; }
+html[data-perf="leve"] .ranque__item { transform: none; }
+
+/* no celular o dado cai para baixo do nome em vez de espremer a linha */
+.deck[data-modo="fluido"] .ranque__item { flex-wrap: wrap; transform: none; }
+.deck[data-modo="fluido"] .ranque__dado { margin-left: 0; flex-basis: 100%; }

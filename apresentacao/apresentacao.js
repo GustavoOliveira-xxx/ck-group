@@ -134,7 +134,7 @@
   const CAIXAS = ".quadro, .duo, .trio, .grade-tres, .pilha, .modulos, .acoes," +
     " .confronto, .confronto__lado, .tabela-quadro, .fluxo, .entregas," +
     " .coluna-direita, .motor, .painel, .cartao-tec, .ficha, .entrega, .modulo," +
-    " .cadeia, .cadeia__elo";
+    " .cadeia, .cadeia__elo, .ranque, .ranque__item";
 
   // folga de alguns pixels: enfeites posicionados de forma absoluta podem
   // sobrar uma fração da caixa sem que nada fique cortado de fato

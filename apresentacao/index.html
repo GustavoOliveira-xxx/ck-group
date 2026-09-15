@@ -202,8 +202,9 @@
 
           <div class="duo duo--6-6" data-surge="1">
             <div class="painel painel--ouro">
-              <h3 class="painel__titulo">Duas exigências do briefing</h3>
+              <h3 class="painel__titulo">Três exigências do briefing</h3>
               <ul class="criterios criterios--simples">
+                <li><span><b>Mitigar o impacto</b> — na sociedade e na natureza, não apenas descrevê-lo.</span></li>
                 <li><span><b>Aplicabilidade local</b> — e não um discurso genérico sobre sustentabilidade.</span></li>
                 <li><span><b>Produto funcional</b> — aplicativo hospedado e operante, não uma simulação de telas.</span></li>
               </ul>
@@ -249,7 +250,8 @@
 
         <div class="notas" data-notas>
           <p><b>Gustavo · slide 1 de 2 (~55 s).</b> Deixar claro que o tema foi <em>dado</em> pela escola —
-            consumo desenfreado e natureza — e que as duas exigências valem nota.</p>
+            consumo desenfreado e natureza — e que as três exigências valem nota. O Thiago retoma as três
+            no slide de resultado, uma a uma.</p>
           <p>Os 48% que recebem até um salário mínimo justificam o público-alvo jovem (seção 4.1 do
             documento). Guardar esse gancho.</p>
           <p>Ler o problema de pesquisa e a hipótese devagar: é o que a banca cobra.</p>
@@ -421,39 +423,30 @@
             <div class="painel" data-surge="1">
               <h3 class="painel__titulo">Maiores geradores de lixo eletrônico do mundo</h3>
 
-              <div class="barras">
-                <div class="barras__linha">
-                  <span class="barras__rotulo">China</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--neutro" style="--p:100%"></i></span>
-                  <b class="barras__valor">1º</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Estados Unidos</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--neutro" style="--p:78%"></i></span>
-                  <b class="barras__valor">2º</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Índia</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--neutro" style="--p:56%"></i></span>
-                  <b class="barras__valor">3º</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Japão</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--neutro" style="--p:40%"></i></span>
-                  <b class="barras__valor">4º</b>
-                </div>
-                <div class="barras__linha barras__linha--foco">
-                  <span class="barras__rotulo">Brasil</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--alerta" style="--p:34%"></i></span>
-                  <b class="barras__valor">5º</b>
-                </div>
-              </div>
+              <ol class="ranque">
+                <li class="ranque__item" style="--i:0">
+                  <span class="ranque__pos">1</span><b>China</b>
+                </li>
+                <li class="ranque__item" style="--i:1">
+                  <span class="ranque__pos">2</span><b>Estados Unidos</b>
+                </li>
+                <li class="ranque__item" style="--i:2">
+                  <span class="ranque__pos">3</span><b>Índia</b>
+                </li>
+                <li class="ranque__item" style="--i:3">
+                  <span class="ranque__pos">4</span><b>Japão</b>
+                </li>
+                <li class="ranque__item ranque__item--foco" style="--i:4">
+                  <span class="ranque__pos">5</span><b>Brasil</b>
+                  <span class="ranque__dado">≈ 2,4 mi de toneladas/ano</span>
+                </li>
+              </ol>
 
               <p class="painel__leitura">
-                <b>≈ 2,4 milhões de toneladas por ano</b> — e só uma pequena parte vai para
-                reciclagem adequada.
+                E só uma pequena parte desse volume chega à <b>reciclagem adequada</b>.
               </p>
-              <p class="fonte">Fonte: Olhar Digital, abr./2026. Posições relativas; o Brasil é o 5º colocado.</p>
+              <p class="fonte">Fonte: Global E-waste Monitor (ONU/UNITAR), reportado por Olhar Digital,
+                abr./2026. Ordem de geração total anual — não são proporções.</p>
             </div>
 
             <div class="pilha" data-surge="2">
@@ -673,6 +666,11 @@
             alternativa e mostra o ponto da nossa cidade que resolve. Os dois últimos elos estão
             na tela do resultado, e o Paulo mostra daqui a pouco.”</p>
           <p>Se o tempo apertar: só a troca de preço, sem girar o prisma — mas não pular a fita.</p>
+          <p><b>ANTES DE APRESENTAR:</b> entrar na conta que será usada na demonstração e cadastrar em
+            <em>Ações locais</em> pelo menos quatro pontos reais de Taboão — uma assistência técnica, um
+            brechó, alguém que alugue e o ponto de coleta de eletrônico. Sem isso, o resultado do app
+            mostra “você ainda não cadastrou nenhum ponto” bem na hora em que este slide promete o
+            contrário.</p>
         </div>
       </section>
 
@@ -816,8 +814,8 @@
               </span><b>Doação</b><small>tirar o item do descarte</small></li>
             </ul>
             <p class="fonte">
-              Não é um diretório comercial do FinCK nem uma rede de parceiros: é uma ferramenta pessoal,
-              cujo conteúdo é definido pelo território real em que cada usuário vive.
+              Não é diretório comercial nem rede de parceiros: cadastrar a assistência do bairro ou o
+              brechó da esquina é uma empresa de Taboão entrando no app.
             </p>
           </div>
 
@@ -933,7 +931,7 @@
               <h3>Contêineres orquestrados</h3>
               <p>Docker, Kubernetes e Swarm; escalonamento vertical e horizontal, autoescalonamento
                 e balanceamento de carga entre instâncias — tudo configurado e mantido à mão.</p>
-              <p class="fonte">Disciplina de Computação em Nuvem</p>
+              <p class="fonte">Arquitetura avaliada</p>
             </article>
 
             <span class="confronto__vs" aria-hidden="true">×</span>
@@ -947,9 +945,9 @@
               </div>
               <span class="confronto__selo">o que escolhemos</span>
               <h3>Serverless gerenciado</h3>
-              <p>Vercel e Supabase entregam o <b>mesmo</b> escalonamento horizontal e o mesmo
-                balanceamento de carga automaticamente. Sem servidor fixo ocioso, sem cluster para
-                manter.</p>
+              <p>Vercel e Supabase <b>abstraem a infraestrutura</b>: escala e distribuição como
+                serviço gerenciado, sem servidor ocioso e sem cluster para manter — menos controle
+                fino, nenhuma operação no nosso colo.</p>
               <p class="fonte">Arquitetura real do FinCK</p>
             </article>
           </div>
@@ -1000,7 +998,7 @@
               <thead>
                 <tr>
                   <th scope="col">Recurso</th>
-                  <th scope="col">Mobills · Organizze · GuiaBolso</th>
+                  <th scope="col">Mobills · Organizze</th>
                   <th scope="col" class="quadro-comp__nosso">FinCK</th>
                 </tr>
               </thead>
@@ -1072,7 +1070,7 @@
             <h2 class="cab__titulo">Um aplicativo em produção, <em>não uma simulação</em></h2>
           </header>
 
-          <div class="trio" data-surge="1">
+          <div class="trio trio--quatro" data-surge="1">
             <article class="ficha" data-tilt>
               <span class="ficha__icone" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
@@ -1087,6 +1085,14 @@
               </span>
               <strong class="ficha__num">Local</strong>
               <p class="ficha__rotulo">Ações locais resolvem a aplicabilidade no território de cada usuário</p>
+            </article>
+
+            <article class="ficha ficha--verde" data-tilt>
+              <span class="ficha__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M21 3v6h-6"/><path d="M9 12l2 2 4-4"/></svg>
+              </span>
+              <strong class="ficha__num">Mitiga</strong>
+              <p class="ficha__rotulo">Intervém antes da compra e abre caminho para reparo, reuso, troca, aluguel e doação</p>
             </article>
 
             <article class="ficha ficha--alerta" data-tilt>
@@ -1106,6 +1112,8 @@
                 <li><span>Calculadora de decisão de compra em tempo real</span></li>
                 <li><span>Arquitetura em nuvem adequada ao porte do projeto</span></li>
                 <li><span>Aplicabilidade local concreta e mensurável</span></li>
+                <li><span><b>Mitigação do impacto</b> — intervenção antes da compra e estímulo ao
+                  reparo, reuso, troca, aluguel e doação</span></li>
                 <li><span>Documentação conforme as normas do Centro Paula Souza</span></li>
               </ul>
             </div>
@@ -1123,8 +1131,10 @@
         </div>
 
         <div class="notas" data-notas>
-          <p><b>Thiago · slide 2 de 2 (~45 s).</b> Os três selos respondem exatamente ao briefing:
-            funcional, local e rastreável.</p>
+          <p><b>Thiago · slide 2 de 2 (~45 s).</b> Os quatro selos respondem item a item ao que a
+            escola pediu: <em>funcional</em> (não é mockup), <em>local</em>, <em>mitiga o impacto</em>
+            e <em>rastreável</em>. Apontar para eles na ordem, sem ler o texto de baixo.</p>
+          <p>Se a banca cobrar a palavra “mitigar”, ela está no selo verde e na lista ao lado.</p>
           <p>As continuidades vêm da conclusão do documento — elas mostram que o projeto tem futuro,
             não que está incompleto.</p>
           <p>Fechar e passar para o encerramento.</p>
@@ -1284,6 +1294,8 @@
         <li>DOCKER. <b>What is a container?</b> Docker Docs. [S. l.]: Docker Inc., 2026.</li>
         <li>FEBRABAN. <b>Maioria dos brasileiros admite entender pouco de educação financeira,
           mostra pesquisa.</b> [S. l.]: Febraban, 21 jul. 2025.</li>
+        <li>GLOBAL E-WASTE STATISTICS PARTNERSHIP. <b>The Global E-waste Monitor.</b> Bonn/Genebra:
+          UNITAR; ITU, 2024.</li>
         <li>IBM. <b>What is container orchestration?</b> [S. l.]: IBM, 2026.</li>
         <li>NAÇÕES UNIDAS NO BRASIL. <b>Objetivo de Desenvolvimento Sustentável 12: Consumo e
           produção responsáveis.</b> [S. l.]: ONU Brasil, 2026.</li>
