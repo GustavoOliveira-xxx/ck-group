@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>FinCK — O app por dentro · Prévia do projeto</title>
+  <meta name="description"
+    content="Passagem tela a tela pelo FinCK: o que já está no ar e funcionando, e o que ainda vem pela frente.">
+  <meta name="author" content="Conscious Knowledge">
+  <meta name="theme-color" content="#050409">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../midia/icone-ck-32.png">
+  <link rel="apple-touch-icon" href="../midia/icone-ck-180.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FinCK — O app por dentro">
+  <meta property="og:description"
+    content="Uma passagem tela a tela pelo aplicativo FinCK, do primeiro acesso ao Assistente.">
+  <meta property="og:image" content="../midia/logo-finck-480.webp">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="../midia/logo-finck-480.webp">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="../apresentacao/apresentacao.css">
+  <link rel="stylesheet" href="projeto.css">
+
+  <script>
+    /* Perfil de desempenho decidido antes da primeira pintura:
+       o CSS pesado só entra em aparelho que aguenta. */
+    (() => {
+      const r = document.documentElement;
+      const nav = navigator;
+      const leve =
+        (nav.connection && (nav.connection.saveData || /2g/.test(nav.connection.effectiveType || ""))) ||
+        (nav.deviceMemory && nav.deviceMemory <= 4) ||
+        (nav.hardwareConcurrency && nav.hardwareConcurrency <= 4) ||
+        window.matchMedia("(max-width: 860px)").matches;
+      r.dataset.perf = leve ? "leve" : "pleno";
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) r.dataset.motion = "reduzido";
+    })();
+  </script>
+</head>
+
+<body>
+
+  <!-- ================= CARREGAMENTO ================= -->
+  <div class="carga" data-carga aria-hidden="true">
+    <div class="carga__nucleo">
+      <span class="carga__anel"></span>
+      <span class="carga__anel carga__anel--2"></span>
+      <img src="../midia/logo-ck-origem-240.webp" alt="" width="120" height="180" decoding="async">
+    </div>
+    <p class="carga__marca">Conscious Knowledge</p>
+    <div class="carga__barra"><span></span></div>
+  </div>
+
+  <!-- ================= CENÁRIO DE FUNDO ================= -->
+  <div class="cenario" aria-hidden="true">
+    <canvas class="cenario__canvas" data-canvas></canvas>
+    <span class="orbe orbe--1"></span>
+    <span class="orbe orbe--2"></span>
+    <span class="orbe orbe--3"></span>
+    <span class="orbe orbe--4"></span>
+    <span class="cenario__fita cenario__fita--a"></span>
+    <span class="cenario__fita cenario__fita--b"></span>
+    <span class="cenario__aurora"></span>
+    <span class="cenario__varredura"></span>
+    <span class="cenario__grade"></span>
+    <span class="cenario__vinheta"></span>
+  </div>
+
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ================= DECK ================= -->
+  <div class="deck" data-deck id="conteudo">
+
+    <!-- ---------- BARRA SUPERIOR ---------- -->
+    <header class="hud hud--topo">
+      <a class="hud__marca" href="../index.html" title="Voltar ao site da Conscious Knowledge">
+        <span class="hud__marcas">
+          <picture>
+            <source type="image/webp" srcset="../midia/logo-ck-origem-120.webp">
+            <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="32" height="48"
+              decoding="async">
+          </picture>
+          <picture>
+            <source type="image/webp" srcset="../midia/logo-finck-120.webp 120w, ../midia/logo-finck-240.webp 240w"
+              sizes="46px">
+            <img class="hud__finck" src="../midia/logo-finck-300.png" alt="FinCK"
+              width="945" height="965" decoding="async">
+          </picture>
+        </span>
+        <span>
+          <strong>Conscious Knowledge</strong>
+          <small>FinCK · Prévia do projeto</small>
+        </span>
+      </a>
+
+      <div class="hud__fala" data-hud-fala>
+        <span class="hud__fala-rotulo">Fala</span>
+        <span class="hud__fala-nome" data-hud-nome>Abertura</span>
+      </div>
+    </header>
+
+    <!-- ---------- PALCO DOS SLIDES ---------- -->
+    <div class="palco-caixa" data-palco-caixa>
+    <div class="palco" data-palco>
+
+      <!-- ======================================================
+           01 · CAPA
+           ====================================================== -->
+      <section class="slide slide--capa" data-slide data-fala="Todos" data-secao="Abertura"
+        data-titulo="Capa" aria-label="Slide 1: capa">
+        <div class="quadro quadro--centro">
+
+          <div class="capa__marca" data-orbital>
+            <span class="capa__anel capa__anel--a"></span>
+            <span class="capa__anel capa__anel--b"></span>
+            <span class="capa__anel capa__anel--c"></span>
+            <span class="capa__brilho"></span>
+            <picture>
+              <source type="image/webp"
+                srcset="../midia/logo-finck-240.webp 240w, ../midia/logo-finck-360.webp 360w, ../midia/logo-finck-480.webp 480w"
+                sizes="(max-width: 860px) 46vw, 300px">
+              <img class="capa__logo" src="../midia/logo-finck-300.png"
+                alt="Logotipo do FinCK" width="945" height="965" fetchpriority="high">
+            </picture>
+          </div>
+
+          <p class="capa__eyebrow" data-surge="1">
+            <span class="ponto-vivo"></span>
+            Prévia do projeto · estado atual do aplicativo
+          </p>
+
+          <h1 class="capa__titulo" data-surge="2">
+            <span class="capa__titulo-a">FinCK</span>
+            <span class="capa__titulo-b">o app por dentro</span>
+          </h1>
+
+          <p class="capa__tese" data-surge="3">
+            Uma passagem tela a tela pelo que já está <strong>no ar e funcionando</strong>,
+            e pelo que ainda vem pela frente.
+          </p>
+
+          <div class="capa__meta" data-surge="4">
+            <div>
+              <span>Curso</span>
+              <strong>Técnico em Informática para Internet</strong>
+            </div>
+            <div>
+              <span>Turma</span>
+              <strong>2º C · 2026</strong>
+            </div>
+            <div>
+              <span>Orientador</span>
+              <strong>Prof. Sullivan Franco</strong>
+            </div>
+            <div>
+              <span>Equipe</span>
+              <strong>Conscious Knowledge · 6 integrantes</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Abertura (20 s).</b> Esta não é a defesa final: é a prévia do projeto. O objetivo é
+            mostrar o aplicativo funcionando e dizer com honestidade em que ponto ele está.</p>
+          <p>Se o professor quiser abrir o app junto, o endereço é finck-app.vercel.app e há um modo
+            demonstração que não exige cadastro.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           02 · A IDEIA
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Gustavo" data-secao="A ideia"
+        data-titulo="A ideia em uma frase" aria-label="Slide 2: a ideia do projeto">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">01 · A ideia</p>
+            <h2 class="cab__titulo">Todo preço tem <em>duas etiquetas</em></h2>
+          </header>
+
+          <div class="duo duo--6-6" data-surge="1">
+            <div class="painel painel--ouro">
+              <h3 class="painel__titulo">A que está na vitrine</h3>
+              <p class="painel__leitura">
+                <b>R$ 350,00.</b> Um número abstrato, que o cérebro processa em um segundo e
+                esquece no seguinte.
+              </p>
+            </div>
+
+            <div class="painel">
+              <h3 class="painel__titulo">A que ninguém mostra</h3>
+              <p class="painel__leitura">
+                <b>34,2 horas da sua vida.</b> O tempo de trabalho que você precisa entregar
+                para pagar por aquilo.
+              </p>
+            </div>
+          </div>
+
+          <div class="trio" data-surge="2">
+            <article class="ficha" data-tilt>
+              <strong class="ficha__num"><span data-contador="82">82</span>%</strong>
+              <p class="ficha__rotulo">das famílias brasileiras estão endividadas</p>
+              <p class="fonte">Peic/CNC, jul./2026</p>
+            </article>
+
+            <article class="ficha ficha--alerta" data-tilt>
+              <strong class="ficha__num"><span data-contador="46">46</span>%</strong>
+              <p class="ficha__rotulo">já compraram por impulso para se sentir melhor</p>
+              <p class="fonte">Serasa / Opinion Box, 2025</p>
+            </article>
+
+            <article class="ficha ficha--verde" data-tilt>
+              <strong class="ficha__num"><span data-contador="3">3</span>%</strong>
+              <p class="ficha__rotulo">do lixo eletrônico do país é reciclado corretamente</p>
+              <p class="fonte">ABES-DF, 2025</p>
+            </article>
+          </div>
+
+          <p class="remate" data-surge="3">
+            O FinCK atua no instante entre o desejo e a compra: <b>traduz o preço em tempo de vida,
+            mostra o efeito no mês e oferece a alternativa</b>, sem nunca bloquear a escolha.
+          </p>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Gustavo (~45 s).</b> Os três números resumem o projeto inteiro: o financeiro, o
+            emocional e o ambiental. Não precisa ler as fontes em voz alta, estão na tela.</p>
+          <p>A frase que fecha é a tese do produto. Dizer devagar.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           03 · ENTRADA E PRIMEIRO USO
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Éric" data-secao="Demonstração"
+        data-titulo="Por onde se entra" aria-label="Slide 3: entrada e primeiro uso">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">02 · Primeiro contato</p>
+            <h2 class="cab__titulo">Entrar leva <em>menos de um minuto</em></h2>
+          </header>
+
+          <div class="duo duo--5-7">
+
+            <div class="palco-device" data-surge="1">
+              <div class="device">
+                <div class="device__moldura">
+                  <span class="device__ilha"></span>
+                  <div class="device__tela">
+                    <div class="tela-entrada">
+                      <span class="tela-entrada__marca"></span>
+                      <b>FinCK</b>
+                      <small>consumo consciente</small>
+                      <span class="tela-campo"></span>
+                      <span class="tela-campo"></span>
+                      <span class="tela-botao">Entrar</span>
+                      <span class="tela-botao tela-botao--fantasma">Modo demonstração</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="palco-device__sombra" aria-hidden="true"></span>
+            </div>
+
+            <div class="pilha" data-surge="2">
+              <div class="painel">
+                <h3 class="painel__titulo">Três formas de entrar</h3>
+                <ul class="criterios criterios--simples">
+                  <li><span><b>Conta real</b>, com e-mail confirmado e dados no banco em nuvem.</span></li>
+                  <li><span><b>Modo demonstração</b>, sem cadastro, guardando tudo no próprio navegador.</span></li>
+                  <li><span><b>Recuperação de senha</b> por e-mail, já funcionando em produção.</span></li>
+                </ul>
+              </div>
+
+              <div class="painel painel--ouro">
+                <h3 class="painel__titulo">O que o app pergunta antes de começar</h3>
+                <p class="painel__leitura">
+                  Renda mensal, dias trabalhados no mês e horas por dia. São os três números que
+                  alimentam todo o resto: sem eles, o motor não tem como traduzir preço em tempo.
+                </p>
+                <p class="fonte">Seção 5.1 do documento.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Éric (~40 s).</b> O modo demonstração é o atalho para mostrar o app sem pedir cadastro
+            a ninguém. Vale citar que ele guarda no navegador, e não no banco.</p>
+          <p>Se o professor quiser testar depois, é por aí que ele entra.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           04 · INÍCIO
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Éric" data-secao="Demonstração"
+        data-titulo="A tela de início" aria-label="Slide 4: a tela de início">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">03 · Início</p>
+            <h2 class="cab__titulo">O mês inteiro <em>em uma tela</em></h2>
+          </header>
+
+          <div class="duo duo--5-7">
+
+            <div class="palco-device" data-surge="1">
+              <div class="device">
+                <div class="device__moldura">
+                  <span class="device__ilha"></span>
+                  <div class="device__tela">
+                    <div class="mini-topo">
+                      <span class="mini-avatar"></span>
+                      <div>
+                        <small>Olá, Gustavo</small>
+                        <strong>Seu mês em foco</strong>
+                      </div>
+                    </div>
+                    <div class="mini-saldo">
+                      <small>Saldo atual</small>
+                      <p>R$ 1.240,00</p>
+                      <div class="mini-saldo__linhas">
+                        <span><i>Entradas</i><b class="verde">R$ 1.800</b></span>
+                        <span><i>Saídas</i><b class="vermelho">R$ 560</b></span>
+                      </div>
+                    </div>
+                    <div class="mini-card mini-card--reality">
+                      <small>Sua hora vale</small>
+                      <strong>R$ 10,23</strong>
+                      <p>seu dia vale R$ 81,82</p>
+                    </div>
+                    <div class="mini-barras">
+                      <span style="--h:62%"></span><span style="--h:38%"></span>
+                      <span style="--h:81%"></span><span style="--h:46%"></span>
+                      <span style="--h:70%"></span>
+                    </div>
+                    <div class="mini-nav"><span class="ativo"></span><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+                <div class="device__flutuante device__flutuante--1"><span>Horas preservadas</span><strong>128 h</strong></div>
+                <div class="device__flutuante device__flutuante--2"><span>Compras evitadas</span><strong>17</strong></div>
+              </div>
+              <span class="palco-device__sombra" aria-hidden="true"></span>
+            </div>
+
+            <div class="pilha" data-surge="2">
+              <div class="painel">
+                <h3 class="painel__titulo">O que aparece logo de cara</h3>
+                <ul class="criterios criterios--simples">
+                  <li><span><b>Saldo real</b> somando contas, entradas e saídas do mês.</span></li>
+                  <li><span><b>Valor da sua hora e do seu dia</b>, calculados do seu perfil.</span></li>
+                  <li><span><b>Prisma de quatro faces</b>: o mesmo valor em reais, horas, dias e porcentagem.</span></li>
+                  <li><span><b>Atalhos</b> para o motor, metas, jornada e perfil.</span></li>
+                </ul>
+              </div>
+
+              <div class="painel painel--ouro">
+                <h3 class="painel__titulo">Funciona offline</h3>
+                <p class="painel__leitura">
+                  O FinCK é um aplicativo web instalável. Depois da primeira visita, abre e
+                  responde <b>sem internet</b>, o que importa para quem usa dados móveis contados.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Éric (~40 s).</b> Mostrar o aplicativo de verdade aqui, não só o slide. O prisma gira
+            com o mouse e é o elemento que costuma chamar mais atenção.</p>
+          <p>Citar o offline: é um diferencial técnico real e fácil de demonstrar desligando o Wi-Fi.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           05 · O MOTOR, AO VIVO
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Gabriel" data-secao="Demonstração"
+        data-titulo="O motor · demo ao vivo" aria-label="Slide 5: o motor FinCK of Reality">
+        <div class="quadro">
+
+          <header class="cab cab--marca">
+            <div>
+              <p class="cab__indice">04 · O motor <span class="selo-vivo">demonstração ao vivo</span></p>
+              <h2 class="cab__titulo">FinCK <em>of Reality</em></h2>
+            </div>
+            <picture>
+              <source type="image/webp"
+                srcset="../midia/logo-finck-reality-145.webp 145w, ../midia/logo-finck-reality-290.webp 290w"
+                sizes="96px">
+              <img class="cab__logo" src="../midia/logo-finck-reality-290.png"
+                alt="Logotipo FinCK of Reality" width="290" height="340" decoding="async">
+            </picture>
+          </header>
+
+          <div class="duo duo--6-6">
+
+            <div class="motor" data-surge="1">
+              <form class="calc" data-calc autocomplete="off">
+                <div class="calc__campos">
+                  <label>Renda mensal (R$)
+                    <input type="number" data-calc-renda value="1800" min="0" step="100" inputmode="decimal">
+                  </label>
+                  <label>Dias por mês
+                    <input type="number" data-calc-dias value="22" min="1" max="31" step="1" inputmode="numeric">
+                  </label>
+                  <label>Horas por dia
+                    <input type="number" data-calc-horas value="8" min="1" max="24" step="1" inputmode="numeric">
+                  </label>
+                  <label>Preço do item (R$)
+                    <input type="number" data-calc-preco value="350" min="0" step="50" inputmode="decimal">
+                  </label>
+                </div>
+              </form>
+
+              <div class="formulas">
+                <code>valor_dia = renda ÷ dias</code>
+                <code>valor_hora = valor_dia ÷ horas</code>
+                <code>custo_horas = preço ÷ valor_hora</code>
+              </div>
+
+              <p class="motor__saida" aria-live="polite" data-calc-resumo>
+                Sua hora vale <strong>R$ 10,23</strong> · seu dia vale <strong>R$ 81,82</strong>.
+              </p>
+
+              <div class="semaforo" data-semaforo>
+                <span class="semaforo__luz" data-luz="verde"></span>
+                <span class="semaforo__luz" data-luz="amarelo"></span>
+                <span class="semaforo__luz" data-luz="vermelho"></span>
+                <p class="semaforo__texto" data-semaforo-texto>Impacto moderado no mês</p>
+              </div>
+            </div>
+
+            <div class="prisma-palco" data-prisma data-surge="2">
+              <div class="prisma-orbita">
+                <div class="prisma">
+                  <div class="prisma__face prisma__face--frente">
+                    <span class="prisma__rotulo">Preço</span>
+                    <strong class="prisma__valor" data-prisma-reais>R$ 350,00</strong>
+                    <span class="prisma__nota">o que a etiqueta mostra</span>
+                  </div>
+                  <div class="prisma__face prisma__face--direita">
+                    <span class="prisma__rotulo">Em trabalho</span>
+                    <strong class="prisma__valor" data-prisma-horas>34,2 h</strong>
+                    <span class="prisma__nota">horas para ganhar esse valor</span>
+                  </div>
+                  <div class="prisma__face prisma__face--tras">
+                    <span class="prisma__rotulo">Em dias</span>
+                    <strong class="prisma__valor" data-prisma-dias>4,3 dias</strong>
+                    <span class="prisma__nota">dias de trabalho equivalentes</span>
+                  </div>
+                  <div class="prisma__face prisma__face--esquerda">
+                    <span class="prisma__rotulo">Da sua renda</span>
+                    <strong class="prisma__valor" data-prisma-percent>19,4%</strong>
+                    <span class="prisma__nota">fatia do mês comprometida</span>
+                  </div>
+                  <div class="prisma__face prisma__face--topo" aria-hidden="true"></div>
+                  <div class="prisma__face prisma__face--base" aria-hidden="true"></div>
+                </div>
+              </div>
+              <span class="prisma-palco__sombra" aria-hidden="true"></span>
+              <span class="prisma-dica">arraste para girar · o mesmo valor, quatro leituras</span>
+            </div>
+          </div>
+
+          <div class="cadeia" data-surge="3">
+            <p class="cadeia__titulo">
+              O app não para no número: tudo isto sai na <em>mesma tela</em> do resultado:
+            </p>
+            <ol class="cadeia__trilha" data-cadeia>
+              <li class="cadeia__elo"><i class="cadeia__num">01</i><b>Preço</b></li>
+              <li class="cadeia__elo"><i class="cadeia__num">02</i><b data-cadeia-tempo>34,2 h de trabalho</b></li>
+              <li class="cadeia__elo"><i class="cadeia__num">03</i><b data-cadeia-risco>impacto moderado</b></li>
+              <li class="cadeia__elo cadeia__elo--verde"><i class="cadeia__num">04</i><b data-cadeia-alt>reparar · usado · alugar</b></li>
+              <li class="cadeia__elo cadeia__elo--verde"><i class="cadeia__num">05</i><b>o ponto da sua cidade</b></li>
+            </ol>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Gabriel (~60 s), DEMONSTRAÇÃO.</b> Trocar o preço ao vivo para R$ 4.000 e deixar o
+            professor ver o semáforo virar e a fita de baixo mudar junto.</p>
+          <p>A ideia não é nossa: Thoreau escreveu em 1854 que o custo de uma coisa é a quantidade de
+            vida trocada por ela. O que é nosso é a velocidade, porque o app responde antes de a
+            compra acontecer.</p>
+          <p><b>ANTES DE APRESENTAR:</b> cadastrar quatro pontos reais em Ações locais na conta da
+            demonstração, senão os dois últimos elos aparecem vazios.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           06 · DEPOIS DO NÚMERO
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Gabriel" data-secao="Demonstração"
+        data-titulo="Depois do número" aria-label="Slide 6: alternativas e ações locais">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">05 · A saída</p>
+            <h2 class="cab__titulo">A alternativa vira <em>endereço</em></h2>
+          </header>
+
+          <div class="duo duo--6-6" data-surge="1">
+            <div class="painel">
+              <h3 class="painel__titulo">Quatro alternativas, sempre</h3>
+              <ul class="criterios criterios--simples">
+                <li><span><b>Comprar usado</b> ou recondicionado</span></li>
+                <li><span><b>Reparar</b> o que você já tem</span></li>
+                <li><span><b>Alugar, emprestar ou compartilhar</b></span></li>
+                <li><span><b>Adiar 30 dias</b> e reavaliar</span></li>
+              </ul>
+              <p class="fonte">
+                As faixas de economia são hipótese de design do projeto, declaradas como tal na tela,
+                e não dado de pesquisa.
+              </p>
+            </div>
+
+            <div class="painel painel--ouro">
+              <h3 class="painel__titulo">E o ponto real da sua cidade</h3>
+              <p class="painel__leitura">
+                Cada alternativa puxa os pontos que o próprio usuário cadastrou em
+                <b>Ações locais</b>: a assistência do bairro, o brechó da esquina, quem aluga.
+                Desde setembro, uma busca pelo <b>Google Maps</b> completa o cadastro de quem
+                ainda não tem ponto nenhum.
+              </p>
+            </div>
+          </div>
+
+          <div class="acoes" data-surge="2">
+            <p class="acoes__titulo">Declarar o destino do item também gera consequência na tela:</p>
+            <ul class="acoes__lista">
+              <li><span class="acoes__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4.5 4.5 0 0 1-5.9 5.9L4 17v3h3l4.8-4.8a4.5 4.5 0 0 1 5.9-5.9l-2.6 2.6-2.1-2.1 2.6-2.6Z"/></svg>
+              </span><b>Conserto</b><small>reparar em vez de trocar</small></li>
+              <li><span class="acoes__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 7h11a3 3 0 0 1 3 3v1M15 4l3 3-3 3"/><path d="M20 17H9a3 3 0 0 1-3-3v-1M9 20l-3-3 3-3"/></svg>
+              </span><b>Usado e troca</b><small>circular o que já existe</small></li>
+              <li><span class="acoes__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg>
+              </span><b>Aluguel</b><small>usar sem precisar possuir</small></li>
+              <li><span class="acoes__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z"/></svg>
+              </span><b>Doação</b><small>tirar o item do descarte</small></li>
+            </ul>
+          </div>
+
+          <p class="remate" data-surge="3">
+            É aqui que o projeto encosta na <b>meta 12.5 da ODS 12</b>, aplicada não a política
+            pública, mas à decisão de uma pessoa, no bairro onde ela mora.
+          </p>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Gabriel (~45 s).</b> Este slide responde à exigência de aplicabilidade local. A frase
+            que importa: o impacto ambiental é a soma de decisões individuais tomadas em um lugar
+            concreto.</p>
+          <p>Ser honesto sobre as faixas de economia: são hipótese nossa, e o app diz isso na tela.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           07 · ORGANIZAR O MÊS
+           ====================================================== -->
+      <section class="slide slide--denso" data-slide data-fala="Paulo" data-secao="Demonstração"
+        data-titulo="Organizar o mês" aria-label="Slide 7: contas, planejamento e metas">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">06 · O dia a dia</p>
+            <h2 class="cab__titulo">O resto do app <em>sustenta o motor</em></h2>
+          </header>
+
+          <div class="modulos" data-surge="1">
+            <article class="modulo" data-tilt>
+              <h4>Contas e recorrentes</h4>
+              <p>Contas, cartões e lançamentos fixos em uma visão só, com saldo por instituição.</p>
+            </article>
+            <article class="modulo" data-tilt>
+              <h4>Planejamento</h4>
+              <p>Projeção de saldo, parcelas em aberto e teto por categoria, com aviso aos 75%.</p>
+            </article>
+            <article class="modulo" data-tilt>
+              <h4>Metas</h4>
+              <p>O que você deixa de gastar vira progresso visível, com aporte e estorno rastreados.</p>
+            </article>
+            <article class="modulo" data-tilt>
+              <h4>Cenários</h4>
+              <p>Simulações do tipo “e se eu não comprar isso?”, comparadas ao histórico real.</p>
+            </article>
+            <article class="modulo" data-tilt>
+              <h4>Relatórios e Análises</h4>
+              <p>Gastos por categoria e período, com exportação em planilha.</p>
+            </article>
+            <article class="modulo" data-tilt>
+              <h4>Perfil</h4>
+              <p>Renda, jornada e reserva. Mudou a renda, todo o cálculo acompanha.</p>
+            </article>
+          </div>
+
+          <div class="duo duo--6-6" data-surge="2">
+            <div class="painel">
+              <h3 class="painel__titulo">Por que isso importa para o motor</h3>
+              <p class="painel__leitura">
+                O FinCK of Reality não responde só com o preço: ele usa o saldo real, as despesas
+                fixas, as parcelas já assumidas e as metas em andamento. <b>Sem o resto do app, a
+                resposta seria um palpite.</b>
+              </p>
+            </div>
+
+            <div class="painel painel--ouro">
+              <h3 class="painel__titulo">Integridade dos dados</h3>
+              <p class="painel__leitura">
+                Lançamento que falha pela metade não deixa rastro no caixa. Há estorno, fila de
+                reconciliação e registro de eventos de integridade, tudo testado.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Paulo (~45 s).</b> Passar rápido pelos seis módulos, sem ler um a um. O que precisa
+            ficar é o painel da esquerda: o motor depende do resto do app para dar resposta de verdade.</p>
+          <p>Se perguntarem sobre confiabilidade, o painel da direita responde.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           08 · DECISÕES CONSCIENTES
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Paulo" data-secao="Demonstração"
+        data-titulo="Decisões conscientes" aria-label="Slide 8: decisões e indicador de responsabilidade">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">07 · O registro</p>
+            <h2 class="cab__titulo">A decisão fica <em>guardada e revisitável</em></h2>
+          </header>
+
+          <div class="duo duo--7-5">
+
+            <div class="pilha" data-surge="1">
+              <div class="painel">
+                <h3 class="painel__titulo">Seis perguntas antes de concluir</h3>
+                <p class="painel__leitura">
+                  Necessidade, uso previsto, durabilidade, existência de alternativa, peso no
+                  orçamento e destino depois do uso. As respostas geram um
+                  <b>indicador de responsabilidade</b> da decisão.
+                </p>
+                <div class="selos-dado">
+                  <span class="selo-dado">
+                    O indicador resume <i>só o que a pessoa declarou</i>. O app não mede CO₂,
+                    água nem resíduo, e diz isso na própria tela.
+                  </span>
+                </div>
+              </div>
+
+              <div class="painel painel--ouro">
+                <h3 class="painel__titulo">E depois de 30 dias?</h3>
+                <p class="painel__leitura">
+                  A pessoa volta e registra o que aconteceu de verdade: manteve a decisão, resolveu
+                  com reparo ou reuso, ou comprou depois. <b>É o único jeito honesto de medir</b>, e
+                  mede comportamento declarado, não impacto ambiental.
+                </p>
+              </div>
+            </div>
+
+            <div class="palco-device" data-surge="2">
+              <div class="device">
+                <div class="device__moldura">
+                  <span class="device__ilha"></span>
+                  <div class="device__tela">
+                    <div class="mini-topo">
+                      <span class="mini-avatar"></span>
+                      <div>
+                        <small>Decisões</small>
+                        <strong>Histórico real</strong>
+                      </div>
+                    </div>
+                    <div class="mini-card">
+                      <small>Fone bluetooth · R$ 800</small>
+                      <strong>Adiar a compra</strong>
+                      <div class="mini-semaforo"><span></span><span></span><span class="ativo"></span></div>
+                      <p>70,4 h de trabalho · 40% da renda</p>
+                    </div>
+                    <div class="mini-card mini-card--reality">
+                      <small>Depois de 30 dias</small>
+                      <strong>Resolvi com reparo</strong>
+                      <p>+30 XP · decisão consciente</p>
+                    </div>
+                    <div class="mini-nav"><span></span><span></span><span class="ativo"></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+              <span class="palco-device__sombra" aria-hidden="true"></span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Paulo (~40 s).</b> O ponto forte aqui é a honestidade: o indicador mede o que a pessoa
+            declarou, e a tela do app assume isso. Se a banca cobrar “vocês medem impacto ambiental?”,
+            a resposta já está dada antes da pergunta.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           09 · JORNADA
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Pedro" data-secao="Demonstração"
+        data-titulo="A jornada (XP)" aria-label="Slide 9: gamificação">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">08 · A constância</p>
+            <h2 class="cab__titulo">Decidir bem <em>uma vez</em> é fácil</h2>
+          </header>
+
+          <div class="duo duo--6-6" data-surge="1">
+            <div class="painel">
+              <h3 class="painel__titulo">Vinte níveis, ganhos por comportamento</h3>
+              <p class="painel__leitura">
+                Cada decisão consciente registrada vale XP: adiar, pesquisar alternativa, comprar
+                usado ou reparar valem mais do que comprar na hora. Vinte títulos, com limiares
+                fixos e visíveis.
+              </p>
+            </div>
+
+            <div class="painel painel--ouro">
+              <h3 class="painel__titulo">Regras anti-farm</h3>
+              <ul class="criterios criterios--simples">
+                <li><span><b>Teto diário</b> de XP, para não premiar repetição vazia.</span></li>
+                <li><span><b>Valor mínimo</b> de compra para a análise contar.</span></li>
+                <li><span><b>Chave de operação</b>: a mesma decisão não pontua duas vezes.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="trio" data-surge="2">
+            <article class="ficha" data-tilt>
+              <strong class="ficha__num">20</strong>
+              <p class="ficha__rotulo">níveis, do primeiro cálculo ao topo da trilha</p>
+            </article>
+            <article class="ficha ficha--verde" data-tilt>
+              <strong class="ficha__num">+30</strong>
+              <p class="ficha__rotulo">XP pela decisão de comprar usado, a mais pontuada</p>
+            </article>
+            <article class="ficha ficha--alerta" data-tilt>
+              <strong class="ficha__num">+5</strong>
+              <p class="ficha__rotulo">XP por comprar na hora: registra, mas quase não premia</p>
+            </article>
+          </div>
+
+          <p class="remate" data-surge="3">
+            A gamificação existe para sustentar o comportamento <b>quando a disciplina pessoal
+            falha</b>, que é justamente quando a compra por impulso acontece.
+          </p>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Pedro (~40 s).</b> O contraste entre +30 e +5 diz tudo sem precisar explicar: o app
+            registra a compra por impulso, mas não a celebra.</p>
+          <p>As regras anti-farm costumam impressionar: mostram que pensamos em quem tentaria burlar.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           10 · ASSISTENTE
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Pedro" data-secao="Demonstração"
+        data-titulo="Assistente FinCK" aria-label="Slide 10: o assistente de inteligência artificial">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">09 · O mais novo <span class="selo-vivo">outubro</span></p>
+            <h2 class="cab__titulo">Assistente FinCK <em>e o FinCK Index</em></h2>
+          </header>
+
+          <div class="duo duo--6-6" data-surge="1">
+            <div class="painel">
+              <h3 class="painel__titulo">Seis dimensões em uma nota</h3>
+              <ul class="criterios criterios--simples">
+                <li><span>Fluxo do mês</span></li>
+                <li><span>Capacidade de poupança</span></li>
+                <li><span>Reserva de emergência</span></li>
+                <li><span>Parcelas e compromissos</span></li>
+                <li><span>Progresso das metas</span></li>
+                <li><span>Consumo consciente</span></li>
+              </ul>
+              <p class="fonte">
+                Pesos diferentes entre si: fluxo e poupança pesam mais do que consumo consciente
+                isoladamente.
+              </p>
+            </div>
+
+            <div class="pilha" data-surge="2">
+              <div class="painel painel--ouro">
+                <h3 class="painel__titulo">O que ele devolve</h3>
+                <p class="painel__leitura">
+                  Um diagnóstico em português dos <b>seus próprios dados</b>, um plano de ação
+                  priorizado e resposta a perguntas livres do tipo “o que eu deveria priorizar
+                  este mês?”.
+                </p>
+              </div>
+
+              <div class="painel">
+                <h3 class="painel__titulo">Limites éticos, por projeto</h3>
+                <ul class="criterios criterios--simples">
+                  <li><span>Nunca indica banco, corretora, investimento, empréstimo ou cartão.</span></li>
+                  <li><span>Dívida acima do saldo? Orienta negociar com o credor e procurar o Procon.</span></li>
+                  <li><span>Apoiado na Lei nº 14.181/2021, do superendividamento.</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <p class="remate" data-surge="3">
+            É o princípio de <b>ética por padrão</b> da Conscious Knowledge aplicado ao recurso que
+            mais precisava dele, porque gera texto livre.
+          </p>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Pedro (~45 s).</b> Este é o recurso mais recente e o que mais chama atenção. Começar
+            pelo FinCK Index, que é o que torna o diagnóstico acompanhável ao longo do tempo.</p>
+          <p>Os limites éticos não são enfeite: são a resposta pronta para “e se ele der conselho
+            financeiro errado?”.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           11 · COMO ESTÁ CONSTRUÍDO
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Thiago" data-secao="Técnico"
+        data-titulo="Como está construído" aria-label="Slide 11: a arquitetura">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">10 · Por baixo</p>
+            <h2 class="cab__titulo">Do <em>MySQL na nossa máquina</em> à nuvem</h2>
+          </header>
+
+          <ol class="fluxo" data-surge="1">
+            <li class="fluxo__passo" data-tilt>
+              <span class="fluxo__num">01</span>
+              <h4>Prototipagem local</h4>
+              <p>MySQL Workbench, PHP e Xampp para provar a modelagem antes de subir qualquer coisa.</p>
+            </li>
+            <li class="fluxo__passo" data-tilt>
+              <span class="fluxo__num">02</span>
+              <h4>Banco definitivo</h4>
+              <p>PostgreSQL no Supabase, com autenticação e política de acesso por usuário.</p>
+            </li>
+            <li class="fluxo__passo" data-tilt>
+              <span class="fluxo__num">03</span>
+              <h4>Código de servidor</h4>
+              <p>Edge Functions em TypeScript e Deno, mais funções serverless na Vercel.</p>
+            </li>
+            <li class="fluxo__passo" data-tilt>
+              <span class="fluxo__num">04</span>
+              <h4>Publicação contínua</h4>
+              <p>Git e GitHub no controle de versão, com deploy automático a cada envio.</p>
+            </li>
+          </ol>
+
+          <div class="duo duo--6-6" data-surge="2">
+            <div class="painel">
+              <h3 class="painel__titulo">Sem framework, por escolha</h3>
+              <p class="painel__leitura">
+                HTML5, CSS3 e JavaScript puro. Cada linha é compreendida e defendida pela equipe.
+                Três serviços externos entram só onde agregam: <b>Claude</b> no Assistente,
+                <b>Gemini</b> na busca de preço e <b>Maps</b> nas alternativas locais.
+              </p>
+            </div>
+
+            <div class="painel painel--ouro">
+              <h3 class="painel__titulo">O que isso garante</h3>
+              <ul class="criterios criterios--simples">
+                <li><span><b>Chaves no servidor</b>, nunca no navegador.</span></li>
+                <li><span><b>Dados por usuário</b>, isolados por política no banco.</span></li>
+                <li><span><b>Código público</b> no GitHub, auditável a qualquer momento.</span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Thiago (~45 s).</b> O caminho da esquerda para a direita é a história real do projeto,
+            e vale dizer que a prototipagem local não foi desperdício: ela provou a modelagem.</p>
+          <p>Se perguntarem por que não usamos framework: porque o critério do trabalho é demonstrar
+            domínio, e framework esconde justamente o que precisamos provar que sabemos.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           12 · ESTADO DO PROJETO
+           ====================================================== -->
+      <section class="slide" data-slide data-fala="Thiago" data-secao="Fechamento"
+        data-titulo="Estado do projeto" aria-label="Slide 12: o que está pronto e o que vem">
+        <div class="quadro">
+
+          <header class="cab">
+            <p class="cab__indice">11 · Onde estamos</p>
+            <h2 class="cab__titulo">O que está pronto, <em>e o que ainda não</em></h2>
+          </header>
+
+          <div class="trio" data-surge="1">
+            <article class="ficha ficha--verde" data-tilt>
+              <span class="ficha__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <strong class="ficha__num">No ar</strong>
+              <p class="ficha__rotulo">App publicado, banco real, autenticação e todas as telas operantes</p>
+            </article>
+
+            <article class="ficha" data-tilt>
+              <span class="ficha__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 7v5l3.2 2"/><circle cx="12" cy="12" r="8.5"/></svg>
+              </span>
+              <strong class="ficha__num">Em curso</strong>
+              <p class="ficha__rotulo">Assistente e busca local recém-entregues, ainda recebendo ajuste de uso</p>
+            </article>
+
+            <article class="ficha ficha--alerta" data-tilt>
+              <span class="ficha__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg>
+              </span>
+              <strong class="ficha__num">A fazer</strong>
+              <p class="ficha__rotulo">Teste com usuários reais e o registro dos retornos no documento</p>
+            </article>
+          </div>
+
+          <div class="duo duo--6-6" data-surge="2">
+            <div class="painel">
+              <h3 class="painel__titulo">Entregas já fechadas</h3>
+              <ul class="criterios criterios--simples">
+                <li><span><b>Aplicativo funcional</b>, que era a exigência central do briefing.</span></li>
+                <li><span><b>Aplicabilidade local</b> resolvida pelo módulo de Ações locais.</span></li>
+                <li><span><b>Documentação em ABNT</b> com a problemática em dados públicos.</span></li>
+                <li><span><b>Apresentação final</b> montada e ensaiada.</span></li>
+              </ul>
+            </div>
+
+            <div class="painel painel--ouro">
+              <h3 class="painel__titulo">O próximo passo</h3>
+              <p class="painel__leitura">
+                Aplicar o FinCK com colegas e familiares, recolher os retornos sobre o motor e a
+                gamificação, e registrar no capítulo 12 do documento <b>o que mudou no app por causa
+                desses retornos</b>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Thiago (~45 s).</b> Ser direto sobre o que falta. Dizer que o teste com usuários reais
+            ainda não foi registrado vale mais do que fingir que está pronto, e o professor cobra isso
+            de qualquer jeito.</p>
+          <p>Perguntar se ele quer sugerir um recorte de teste: isso transforma a cobrança em
+            orientação.</p>
+        </div>
+      </section>
+
+
+      <!-- ======================================================
+           13 · FECHAMENTO
+           ====================================================== -->
+      <section class="slide slide--final" data-slide data-fala="Todos" data-secao="Fechamento"
+        data-titulo="Obrigado" aria-label="Slide 13: encerramento">
+        <div class="quadro quadro--centro">
+
+          <div class="final__marcas" data-surge="0">
+            <div class="final__marca">
+              <span class="capa__anel capa__anel--a"></span>
+              <picture>
+                <source type="image/webp" srcset="../midia/logo-ck-origem-240.webp">
+                <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="120" height="180"
+                  loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <span class="final__mais" aria-hidden="true"></span>
+            <div class="final__marca final__marca--finck">
+              <span class="capa__anel capa__anel--b"></span>
+              <picture>
+                <source type="image/webp" srcset="../midia/logo-finck-240.webp 240w, ../midia/logo-finck-360.webp 360w"
+                  sizes="120px">
+                <img src="../midia/logo-finck-300.png" alt="FinCK" width="945" height="965"
+                  decoding="async">
+              </picture>
+            </div>
+          </div>
+
+          <h2 class="final__titulo" data-surge="1">Obrigado.</h2>
+
+          <p class="final__frase" data-surge="2">
+            O app está no ar agora.<br>
+            <b>Pode abrir e testar enquanto a gente responde.</b>
+          </p>
+
+          <div class="final__acoes" data-surge="3">
+            <a class="btn btn--primario" href="https://finck-app.vercel.app"
+              target="_blank" rel="noopener">
+              <span>Abrir o FinCK</span>
+            </a>
+            <a class="btn btn--fantasma" href="../index.html">
+              <span>Site da Conscious Knowledge</span>
+            </a>
+            <a class="btn btn--fantasma" href="../apresentacao/index.html">
+              <span>Apresentação final</span>
+            </a>
+          </div>
+
+          <ul class="final__equipe" data-surge="4">
+            <li><b>Éric Estrela Vieira</b><span>Desenvolvimento</span></li>
+            <li><b>Gabriel Heanna dos Reis</b><span>Desenvolvimento</span></li>
+            <li><b>Gustavo Oliveira dos Santos</b><span>Idealizador</span></li>
+            <li><b>Paulo Henrique de Lima Silva</b><span>Desenvolvimento</span></li>
+            <li><b>Pedro Alcantara dos Santos Fialho</b><span>Desenvolvimento</span></li>
+            <li><b>Thiago Wilson Vieira Serbino</b><span>Desenvolvimento</span></li>
+          </ul>
+
+          <p class="final__rodape" data-surge="5">
+            Conscious Knowledge · Etec Taboão da Serra · Orientador: Prof. Sullivan Franco
+          </p>
+
+        </div>
+
+        <div class="notas" data-notas>
+          <p><b>Fechamento (~20 s).</b> Deixar o app aberto no projetor durante as perguntas. É mais
+            convincente do que qualquer slide.</p>
+        </div>
+      </section>
+
+    </div><!-- /palco -->
+    </div><!-- /palco-caixa -->
+
+    <!-- ---------- NOTAS DO APRESENTADOR ----------
+         O conteúdo vem do slide ativo. Fica em uma faixa própria
+         para encolher o palco em vez de cobrir o slide. -->
+    <aside class="notas-palco" data-notas-palco aria-live="polite" aria-label="Notas do apresentador"></aside>
+
+    <!-- ---------- BARRA INFERIOR ---------- -->
+    <footer class="hud hud--base">
+      <div class="hud__controles">
+        <button type="button" class="hud__btn" data-anterior aria-label="Slide anterior" title="Slide anterior (←)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button type="button" class="hud__btn" data-proximo aria-label="Próximo slide" title="Próximo slide (→)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div class="trilha" data-trilha role="tablist" aria-label="Navegar entre os slides"></div>
+
+      <div class="hud__direita">
+        <button type="button" class="hud__pill" data-cronometro title="Cronômetro da apresentação (T)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.6M9.5 2h5"/></svg>
+          <span data-cronometro-texto>00:00</span>
+        </button>
+        <button type="button" class="hud__pill hud__pill--ghost" data-toggle-notas title="Notas do apresentador (N)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h5"/></svg>
+          <span>Notas</span>
+        </button>
+        <button type="button" class="hud__pill hud__pill--ghost" data-toggle-mapa title="Mapa de slides (O)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span>Mapa</span>
+        </button>
+        <span class="hud__contador"><b data-atual>01</b><i>/</i><span data-total>14</span></span>
+      </div>
+
+      <div class="progresso" data-progresso aria-hidden="true"><span></span></div>
+    </footer>
+
+  </div><!-- /deck -->
+
+
+  <!-- ================= MAPA DE SLIDES ================= -->
+  <div class="sobreposicao" data-mapa hidden>
+    <div class="sobreposicao__caixa">
+      <header class="sobreposicao__cab">
+        <h2>Mapa da apresentação</h2>
+        <button type="button" class="sobreposicao__fechar" data-fechar aria-label="Fechar">✕</button>
+      </header>
+      <div class="mapa" data-mapa-grade></div>
+    </div>
+  </div>
+
+  <!-- ================= REFERÊNCIAS ================= -->
+  <div class="sobreposicao" data-refs hidden>
+    <div class="sobreposicao__caixa sobreposicao__caixa--texto">
+      <header class="sobreposicao__cab">
+        <h2>Referências</h2>
+        <button type="button" class="sobreposicao__fechar" data-fechar aria-label="Fechar">✕</button>
+      </header>
+
+      <ol class="refs">
+        <li>AGÊNCIA BRASIL. <b>CNC: endividamento das famílias sobe para 82%, mas inadimplência
+          cai.</b> Brasília: EBC, 6 ago. 2026.</li>
+        <li>AMAZON WEB SERVICES. <b>Horizontal scaling.</b> AWS Well-Architected Framework.
+          [S. l.]: AWS, 2020.</li>
+        <li>BORA INVESTIR (B3). <b>46% dos brasileiros já realizaram compras por impulso para se
+          sentirem melhor emocionalmente.</b> São Paulo: B3, 29 set. 2025.</li>
+        <li>CENTRO ESTADUAL DE EDUCAÇÃO TECNOLÓGICA PAULA SOUZA. <b>Manual para a elaboração do
+          Trabalho de Conclusão de Curso das Escolas Técnicas do Centro Paula Souza.</b>
+          1. ed. São Paulo: CEETEPS, 2015.</li>
+        <li>CNN BRASIL. <b>Inadimplência atinge 81,7 milhões e cresce 38% em 10 anos no Brasil.</b>
+          São Paulo: CNN Brasil, 24 mar. 2026.</li>
+        <li>CONSCIOUS KNOWLEDGE. <b>Conscious Knowledge: FinCK · DynamiCK · Tecnologia
+          consciente</b> [site institucional]. [S. l.]: Conscious Knowledge, 2026.</li>
+        <li>DOCKER. <b>What is a container?</b> Docker Docs. [S. l.]: Docker Inc., 2026.</li>
+        <li>FEBRABAN. <b>Maioria dos brasileiros admite entender pouco de educação financeira,
+          mostra pesquisa.</b> [S. l.]: Febraban, 21 jul. 2025.</li>
+        <li>GLOBAL E-WASTE STATISTICS PARTNERSHIP. <b>The Global E-waste Monitor.</b> Bonn/Genebra:
+          UNITAR; ITU, 2024.</li>
+        <li>IBM. <b>What is container orchestration?</b> [S. l.]: IBM, 2026.</li>
+        <li>NAÇÕES UNIDAS NO BRASIL. <b>Objetivo de Desenvolvimento Sustentável 12: Consumo e
+          produção responsáveis.</b> [S. l.]: ONU Brasil, 2026.</li>
+        <li>OLHAR DIGITAL. <b>Brasil é o quinto país que mais produz lixo eletrônico no mundo.</b>
+          [S. l.]: Olhar Digital, 26 abr. 2026.</li>
+        <li>OLIVEIRA, Gustavo <i>et al.</i> <b>FinCK: repositório do projeto.</b> [S. l.]: GitHub, 2026.</li>
+        <li>RED HAT. <b>What is Kubernetes?</b> [S. l.]: Red Hat, 2024.</li>
+      </ol>
+
+      <p class="refs__nota">
+        Lista reduzida às fontes citadas nesta apresentação. A relação completa está nas
+        Referências do documento do projeto, junto das obras consultadas
+        sobre arquitetura de sistemas, contêineres e computação em nuvem.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ATALHOS ================= -->
+  <div class="sobreposicao" data-ajuda hidden>
+    <div class="sobreposicao__caixa sobreposicao__caixa--texto">
+      <header class="sobreposicao__cab">
+        <h2>Atalhos do apresentador</h2>
+        <button type="button" class="sobreposicao__fechar" data-fechar aria-label="Fechar">✕</button>
+      </header>
+      <dl class="atalhos">
+        <div><dt><kbd>→</kbd> <kbd>Espaço</kbd></dt><dd>Próximo slide</dd></div>
+        <div><dt><kbd>←</kbd></dt><dd>Slide anterior</dd></div>
+        <div><dt><kbd>Home</kbd> / <kbd>End</kbd></dt><dd>Primeiro / último slide</dd></div>
+        <div><dt><kbd>1</kbd> … <kbd>9</kbd></dt><dd>Ir direto ao slide</dd></div>
+        <div><dt><kbd>N</kbd></dt><dd>Notas do apresentador</dd></div>
+        <div><dt><kbd>O</kbd></dt><dd>Mapa de slides</dd></div>
+        <div><dt><kbd>T</kbd></dt><dd>Iniciar / pausar o cronômetro</dd></div>
+        <div><dt><kbd>R</kbd></dt><dd>Referências</dd></div>
+        <div><dt><kbd>F</kbd></dt><dd>Tela cheia</dd></div>
+        <div><dt><kbd>?</kbd></dt><dd>Esta ajuda</dd></div>
+        <div><dt><kbd>Esc</kbd></dt><dd>Fechar painéis</dd></div>
+      </dl>
+      <p class="refs__nota">No celular ou no tablet, deslize para os lados para trocar de slide.</p>
+    </div>
+  </div>
+
+  <button type="button" class="botao-ajuda" data-toggle-ajuda aria-label="Atalhos do apresentador" title="Atalhos (?)">?</button>
+
+  <script src="../apresentacao/apresentacao.js" defer></script>
+</body>
+
+</html>

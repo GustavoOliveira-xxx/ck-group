@@ -6707,3 +6707,256 @@ body {
     transition: opacity .3s var(--ease), transform .35s var(--ease);
   }
 }
+
+/* =====================================================================
+   24. PALCO — as apresentações do FinCK
+   Dois cartões que são, eles mesmos, pilhas de slides em perspectiva.
+   A folha da frente desenha um slide esquemático; as de trás ficam
+   deslocadas em profundidade e sobem quando o ponteiro chega.
+   ===================================================================== */
+.palcos-secao { position: relative; }
+
+.palcos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 1.6rem;
+  perspective: 1400px;
+}
+
+.palco-cartao {
+  position: relative;
+  border-radius: var(--radius-xl);
+  background: var(--grad-vidro), var(--glass);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.45s var(--ease-out),
+              border-color 0.45s var(--ease-out),
+              box-shadow 0.45s var(--ease-out);
+}
+
+.palco-cartao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% -20%, var(--purple-vidro), transparent 62%);
+  opacity: .9;
+  pointer-events: none;
+}
+
+.palco-cartao:hover,
+.palco-cartao:focus-within {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+  box-shadow: 0 30px 70px -40px rgba(0, 0, 0, .95);
+}
+
+.palco-cartao__link {
+  display: grid;
+  gap: 1rem;
+  padding: 1.6rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- a pilha de folhas --- */
+.palco-cartao__pilha {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  max-width: 100%;
+  border-radius: var(--radius-lg);
+  transform-style: preserve-3d;
+  transform: rotateX(8deg) rotateY(-9deg);
+  transition: transform 0.45s var(--ease-out);
+}
+
+.palco-cartao:hover .palco-cartao__pilha,
+.palco-cartao:focus-within .palco-cartao__pilha {
+  transform: rotateX(3deg) rotateY(-3deg);
+}
+
+.palco-cartao__folha {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: linear-gradient(150deg, var(--bg-4), var(--bg-1));
+  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, .95);
+}
+
+.palco-cartao__folha--1 {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 0 11%;
+  transform: translateZ(26px);
+  border-color: rgba(147, 51, 196, .34);
+}
+
+.palco-cartao__folha--2 { transform: translate3d(18px, 13px, 12px); opacity: .55; }
+.palco-cartao__folha--3 { transform: translate3d(36px, 26px, 0); opacity: .28; }
+
+.palco-cartao__barra {
+  width: 46%;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--grad-mista);
+}
+
+.palco-cartao__linha {
+  height: 5px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .17);
+}
+
+.palco-cartao__linha--curta { width: 62%; }
+
+.palco-cartao__blocos { display: flex; gap: 7px; margin-top: 5px; }
+
+.palco-cartao__blocos i {
+  flex: 1;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid rgba(147, 51, 196, .3);
+  background: rgba(147, 51, 196, .16);
+}
+
+.palco-cartao__aparelho {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.palco-cartao__aparelho i {
+  width: 22px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid rgba(31, 209, 143, .34);
+  background: rgba(31, 209, 143, .14);
+}
+
+.palco-cartao__aparelho i:nth-child(2) { height: 42px; background: rgba(31, 209, 143, .22); }
+
+.palco-cartao__brilho {
+  position: absolute;
+  inset: -12% -6% auto;
+  height: 58%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--purple-glow), transparent 72%);
+  opacity: .5;
+  transform: translateZ(-20px);
+  pointer-events: none;
+}
+
+.palco-cartao--previa .palco-cartao__folha--1 { border-color: rgba(31, 209, 143, .32); }
+.palco-cartao--previa .palco-cartao__barra { background: linear-gradient(120deg, var(--verde), #64ffc1); }
+.palco-cartao--previa .palco-cartao__brilho { background: radial-gradient(closest-side, rgba(31, 209, 143, .4), transparent 72%); }
+
+/* --- o texto --- */
+.palco-cartao__corpo { display: grid; gap: .55rem; }
+
+.palco-cartao__tag {
+  justify-self: start;
+  padding: .2rem .62rem;
+  border-radius: 99px;
+  border: 1px solid rgba(254, 200, 0, .34);
+  background: var(--yellow-fraco);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--yellow-400);
+}
+
+.palco-cartao__tag--menta {
+  border-color: rgba(31, 209, 143, .34);
+  background: var(--mint-vidro);
+  color: var(--verde);
+}
+
+.palco-cartao__corpo h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.15;
+  color: var(--text-0);
+}
+
+.palco-cartao__corpo > p {
+  font-size: .94rem;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.palco-cartao__ficha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.3rem;
+  margin-top: .2rem;
+  padding-top: .7rem;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.palco-cartao__ficha li { display: grid; gap: .1rem; }
+
+.palco-cartao__ficha b {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  color: var(--yellow-400);
+}
+
+.palco-cartao--previa .palco-cartao__ficha b { color: var(--verde); }
+
+.palco-cartao__ficha span {
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.palco-cartao__acao {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .2rem;
+  font-weight: 700;
+  color: var(--purple-300);
+}
+
+.palco-cartao__seta { transition: transform 0.22s var(--ease-out); }
+.palco-cartao:hover .palco-cartao__seta { transform: translate(3px, -3px); }
+
+.palcos__nota {
+  margin-top: 1.6rem;
+  font-size: .86rem;
+  line-height: 1.7;
+  color: var(--text-3);
+}
+
+.palcos__nota kbd {
+  padding: .1em .45em;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, .05);
+  font-family: var(--font-mono);
+  font-size: .82em;
+  color: var(--text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .palco-cartao,
+  .palco-cartao__pilha,
+  .palco-cartao__seta { transition: none; }
+}
+
+html[data-perf="leve"] .palco-cartao__pilha { transform: none; }
+html[data-perf="leve"] .palco-cartao__brilho { display: none; }
+
+@media (max-width: 620px) {
+  .palco-cartao__pilha { transform: none; }
+  .palco-cartao__folha--2,
+  .palco-cartao__folha--3 { display: none; }
+  .palco-cartao__folha--1 { transform: none; }
+}

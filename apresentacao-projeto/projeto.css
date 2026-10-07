@@ -1,0 +1,75 @@
+/* =====================================================================
+   FinCK — O app por dentro
+   Peças exclusivas da prévia do projeto. O motor visual, a tipografia e
+   os componentes comuns vêm de ../apresentacao/apresentacao.css; aqui
+   ficam só as telas de aplicativo que esta apresentação desenha.
+   ===================================================================== */
+
+/* --- tela de entrada dentro do aparelho --- */
+.tela-entrada {
+  display: grid;
+  gap: 7px;
+  place-content: center;
+  height: 100%;
+  padding: 0 14px;
+  text-align: center;
+}
+
+.tela-entrada__marca {
+  justify-self: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  background: var(--grad-mista);
+  box-shadow: 0 0 22px var(--purple-glow);
+}
+
+.tela-entrada b {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--text-0);
+  letter-spacing: -.02em;
+}
+
+.tela-entrada small {
+  margin-bottom: 6px;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.tela-campo {
+  height: 22px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, .04);
+}
+
+.tela-botao {
+  display: grid;
+  place-items: center;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--grad-marca);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tela-botao--fantasma {
+  background: transparent;
+  border: 1px solid rgba(254, 200, 0, .4);
+  color: var(--yellow-300);
+}
+
+/* --- o cartão do motor dentro do aparelho ganha vida própria --- */
+.mini-card--reality strong { color: var(--yellow-300); }
+
+/* --- a prévia é mais clara sobre o que é demonstração ao vivo --- */
+.selo-vivo { vertical-align: middle; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tela-entrada__marca { box-shadow: none; }
+}
