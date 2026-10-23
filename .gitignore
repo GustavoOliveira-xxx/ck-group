@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+*.log
+# Evidências e relatórios preenchidos permanecem locais.
+atividade-docker/evidencias/
+atividade-docker/relatorio-preenchido*
+atividade-docker/Relatorio_Docker_*.pdf

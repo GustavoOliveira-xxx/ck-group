@@ -1,0 +1,13 @@
+# Contexto do site completo: somente os arquivos servidos pelo Nginx.
+**
+!Dockerfile
+!.dockerignore
+!index.html
+!style.css
+!script.js
+!midia/
+!midia/**
+!apresentacao/
+!apresentacao/**
+!apresentacao-projeto/
+!apresentacao-projeto/**
