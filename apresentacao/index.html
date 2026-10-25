@@ -1,1404 +1,526 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-  <title>FinCK — Apresentação Final · Projeto Interdisciplinar 2026</title>
-  <meta name="description"
-    content="Apresentação final do FinCK: o problema do endividamento brasileiro em dados oficiais e a solução construída pela Conscious Knowledge.">
-  <meta name="author" content="Conscious Knowledge">
-  <meta name="theme-color" content="#050409">
-  <meta name="robots" content="index, follow">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinCK | Apresentação do projeto</title>
+  <meta name="description" content="Apresentação de defesa do FinCK, projeto interdisciplinar da Etec Taboão da Serra sobre consumo desenfreado e seu impacto na natureza.">
+  <meta name="theme-color" content="#0f0a1a">
   <link rel="icon" type="image/png" sizes="32x32" href="../midia/icone-ck-32.png">
-  <link rel="apple-touch-icon" href="../midia/icone-ck-180.png">
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="FinCK — Apresentação Final">
-  <meta property="og:description"
-    content="82% das famílias brasileiras estão endividadas. O FinCK traduz preço em horas de vida antes da decisão.">
-  <meta property="og:image" content="../midia/logo-finck-480.webp">
-  <meta property="og:locale" content="pt_BR">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="../midia/logo-finck-480.webp">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
-    rel="stylesheet">
-
-  <link rel="stylesheet" href="apresentacao.css">
-
-  <script>
-    /* Perfil de desempenho decidido antes da primeira pintura:
-       o CSS pesado só entra em aparelho que aguenta. */
-    (() => {
-      const r = document.documentElement;
-      const nav = navigator;
-      const leve =
-        (nav.connection && (nav.connection.saveData || /2g/.test(nav.connection.effectiveType || ""))) ||
-        (nav.deviceMemory && nav.deviceMemory <= 4) ||
-        (nav.hardwareConcurrency && nav.hardwareConcurrency <= 4) ||
-        window.matchMedia("(max-width: 860px)").matches;
-      r.dataset.perf = leve ? "leve" : "pleno";
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) r.dataset.motion = "reduzido";
-    })();
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="defesa.css">
 </head>
-
 <body>
+<div class="palco-wrap">
+<main class="palco" aria-live="polite">
 
-  <!-- ================= CARREGAMENTO ================= -->
-  <div class="carga" data-carga aria-hidden="true">
-    <div class="carga__nucleo">
-      <span class="carga__anel"></span>
-      <span class="carga__anel carga__anel--2"></span>
-      <img src="../midia/logo-ck-origem-240.webp" alt="" width="120" height="180" decoding="async">
-    </div>
-    <p class="carga__marca">Conscious Knowledge</p>
-    <div class="carga__barra"><span></span></div>
+<!-- 1 CAPA -->
+<section class="slide capa" data-parte="Abertura">
+  <div class="esq">
+    <h1>FinCK</h1>
+    <p class="sub">Consumo consciente, decisão em tempo real e o impacto do descontrole financeiro na sociedade e no meio ambiente</p>
+    <p class="rodape-capa">
+      Projeto interdisciplinar · Técnico em Informática para Internet<br>
+      <b>Etec Taboão da Serra</b>, Centro Paula Souza<br>
+      Orientador: <b>Prof. Sullivan Franco Juvenasso</b><br>
+      Conscious Knowledge, 2026
+    </p>
   </div>
-
-  <!-- ================= CENÁRIO DE FUNDO ================= -->
-  <div class="cenario" aria-hidden="true">
-    <canvas class="cenario__canvas" data-canvas></canvas>
-    <span class="orbe orbe--1"></span>
-    <span class="orbe orbe--2"></span>
-    <span class="orbe orbe--3"></span>
-    <span class="orbe orbe--4"></span>
-    <span class="cenario__fita cenario__fita--a"></span>
-    <span class="cenario__fita cenario__fita--b"></span>
-    <span class="cenario__aurora"></span>
-    <span class="cenario__varredura"></span>
-    <span class="cenario__grade"></span>
-    <span class="cenario__vinheta"></span>
-  </div>
-
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
-
-  <!-- ================= DECK ================= -->
-  <div class="deck" data-deck id="conteudo">
-
-    <!-- ---------- BARRA SUPERIOR ---------- -->
-    <header class="hud hud--topo">
-      <a class="hud__marca" href="../index.html" title="Voltar ao site da Conscious Knowledge">
-        <span class="hud__marcas">
-          <picture>
-            <source type="image/webp" srcset="../midia/logo-ck-origem-120.webp">
-            <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="32" height="48"
-              decoding="async">
-          </picture>
-          <picture>
-            <source type="image/webp" srcset="../midia/logo-finck-120.webp 120w, ../midia/logo-finck-240.webp 240w"
-              sizes="46px">
-            <img class="hud__finck" src="../midia/logo-finck-300.png" alt="FinCK"
-              width="945" height="965" decoding="async">
-          </picture>
-        </span>
-        <span>
-          <strong>Conscious Knowledge</strong>
-          <small>FinCK · Projeto Interdisciplinar 2026</small>
-        </span>
-      </a>
-
-      <div class="hud__fala" data-hud-fala>
-        <span class="hud__fala-rotulo">Fala</span>
-        <span class="hud__fala-nome" data-hud-nome>Abertura</span>
-      </div>
-    </header>
-
-    <!-- ---------- PALCO DOS SLIDES ---------- -->
-    <div class="palco-caixa" data-palco-caixa>
-    <div class="palco" data-palco>
-
-      <!-- ======================================================
-           01 · CAPA
-           ====================================================== -->
-      <section class="slide slide--capa" data-slide data-fala="Todos" data-secao="Abertura"
-        data-titulo="Capa" aria-label="Slide 1: capa">
-        <div class="quadro quadro--centro">
-
-          <div class="capa__marca" data-orbital>
-            <span class="capa__anel capa__anel--a"></span>
-            <span class="capa__anel capa__anel--b"></span>
-            <span class="capa__anel capa__anel--c"></span>
-            <span class="capa__brilho"></span>
-            <picture>
-              <source type="image/webp"
-                srcset="../midia/logo-finck-240.webp 240w, ../midia/logo-finck-360.webp 360w, ../midia/logo-finck-480.webp 480w, ../midia/logo-finck-640.webp 640w"
-                sizes="(max-width: 860px) 46vw, 300px">
-              <img class="capa__logo" src="../midia/logo-finck-300.png"
-                alt="Logotipo do FinCK" width="945" height="965" fetchpriority="high">
-            </picture>
-          </div>
-
-          <p class="capa__eyebrow" data-surge="1">
-            <span class="ponto-vivo"></span>
-            Projeto Interdisciplinar · Monografia em normas ABNT
-          </p>
-
-          <h1 class="capa__titulo" data-surge="2">
-            <span class="capa__titulo-a">FinCK</span>
-            <span class="capa__titulo-b">app de consumo consciente</span>
-          </h1>
-
-          <p class="capa__tese" data-surge="3">
-            Consumo consciente, decisão em tempo real e o impacto do descontrole
-            financeiro <strong>na sociedade e no meio ambiente.</strong>
-          </p>
-
-          <div class="capa__meta" data-surge="4">
-            <div>
-              <span>Curso</span>
-              <strong>Técnico em Informática para Internet</strong>
-            </div>
-            <div>
-              <span>Turma</span>
-              <strong>2º C · 2026</strong>
-            </div>
-            <div>
-              <span>Orientador</span>
-              <strong>Prof. Sullivan Franco</strong>
-            </div>
-            <div>
-              <span>Unidade</span>
-              <strong>Etec Taboão da Serra · Centro Paula Souza</strong>
-            </div>
-          </div>
-
-          <ul class="capa__equipe" data-surge="5">
-            <li><b>Éric Estrela Vieira</b><span>Desenvolvimento</span></li>
-            <li><b>Gabriel Heanna dos Reis</b><span>Desenvolvimento</span></li>
-            <li><b>Gustavo Oliveira dos Santos</b><span>Idealizador</span></li>
-            <li><b>Paulo Henrique de Lima Silva</b><span>Desenvolvimento</span></li>
-            <li><b>Pedro Alcantara dos Santos Fialho</b><span>Desenvolvimento</span></li>
-            <li><b>Thiago Wilson Vieira Serbino</b><span>Desenvolvimento</span></li>
-          </ul>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Abertura (30 s).</b> Cumprimentar a banca e o Prof. Sullivan, nomear o trabalho e o tema.</p>
-          <p>Frase de entrada sugerida: “Boa noite. Nosso projeto começa com uma conta que o brasileiro faz
-            errado todos os dias, e termina em um aterro de lixo eletrônico.”</p>
-          <p>Não ler os seis nomes: a banca já tem a folha de rosto. Ir direto para o slide 2.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           02 · GUSTAVO — O tema e o problema de pesquisa
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Gustavo" data-secao="Problema"
-        data-titulo="O tema e o problema" aria-label="Slide 2: o tema e o problema de pesquisa">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">01 — O tema proposto</p>
-            <h2 class="cab__titulo">O paradigma do consumo desenfreado<br><em>e seu impacto na natureza</em></h2>
-          </header>
-
-          <div class="duo duo--6-6" data-surge="1">
-            <div class="painel painel--ouro">
-              <h3 class="painel__titulo">Três exigências do briefing</h3>
-              <ul class="criterios criterios--simples">
-                <li><span><b>Mitigar o impacto</b>: na sociedade e na natureza, não apenas descrevê-lo.</span></li>
-                <li><span><b>Aplicabilidade local</b>, e não um discurso genérico sobre sustentabilidade.</span></li>
-                <li><span><b>Produto funcional</b>: aplicativo hospedado e operante, não uma simulação de telas.</span></li>
-              </ul>
-              <p class="fonte">Tema e exigências definidos pelo corpo docente da Etec Taboão da Serra.</p>
-            </div>
-
-            <div class="painel">
-              <h3 class="painel__titulo">Problema de pesquisa</h3>
-              <p class="painel__leitura">
-                É possível reduzir o consumo por impulso e seu impacto ambiental por meio de uma
-                ferramenta que traduza o preço de uma compra para uma linguagem imediatamente
-                compreensível, <b>sem depender de educação financeira prévia?</b>
-              </p>
-            </div>
-          </div>
-
-          <div class="trio" data-surge="2">
-            <article class="ficha" data-tilt>
-              <strong class="ficha__num"><span data-contador="82">82</span>%</strong>
-              <p class="ficha__rotulo">das famílias brasileiras estão endividadas, sexto mês consecutivo no topo da série</p>
-              <p class="fonte">Peic/CNC, jul./2026 · 18 mil famílias (AGÊNCIA BRASIL, 2026)</p>
-            </article>
-
-            <article class="ficha ficha--alerta" data-tilt>
-              <strong class="ficha__num"><span data-contador="29.5" data-decimais="1">29,5</span>%</strong>
-              <p class="ficha__rotulo">da renda familiar comprometida, em média, com o pagamento de dívidas</p>
-              <p class="fonte">Peic/CNC, jul./2026 (AGÊNCIA BRASIL, 2026)</p>
-            </article>
-
-            <article class="ficha" data-tilt>
-              <strong class="ficha__num"><span data-contador="81.7" data-decimais="1">81,7</span> mi</strong>
-              <p class="ficha__rotulo">de inadimplentes, alta de 38,1% em dez anos, e <b>48% recebem até um salário mínimo</b></p>
-              <p class="fonte">Serasa, 2025 (CNN BRASIL, 2026)</p>
-            </article>
-          </div>
-
-          <p class="remate" data-surge="3">
-            <b>Hipótese:</b> traduzir o preço em tempo de trabalho, percentual de renda e efeito sobre
-            metas torna a decisão mais consciente <b>mesmo para quem nunca teve educação financeira.</b>
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Gustavo · slide 1 de 2 (~55 s).</b> Deixar claro que o tema foi <em>dado</em> pela escola,
-            consumo desenfreado e natureza, e que as três exigências valem nota. O Thiago retoma as três
-            no slide de resultado, uma a uma.</p>
-          <p>Os 48% que recebem até um salário mínimo justificam o público-alvo jovem (seção 4.1 do
-            documento). Guardar esse gancho.</p>
-          <p>Ler o problema de pesquisa e a hipótese devagar: é o que a banca cobra.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           03 · GUSTAVO — Não é força de vontade
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Gustavo" data-secao="Problema"
-        data-titulo="Não é força de vontade" aria-label="Slide 3: a raiz do problema">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">02 — A raiz</p>
-            <h2 class="cab__titulo">Não é falta de força de vontade.<br><em>É informação que chega tarde demais.</em></h2>
-          </header>
-
-          <div class="duo duo--7-5">
-
-            <div class="painel" data-surge="1">
-              <h3 class="painel__titulo">O que o brasileiro sabe sobre o próprio dinheiro</h3>
-
-              <div class="barras">
-                <div class="barras__linha barras__linha--foco">
-                  <span class="barras__rotulo">Entende pouco ou nada</span>
-                  <span class="barras__trilho">
-                    <i class="barras__preenche barras__preenche--alerta" style="--p:55%"></i>
-                  </span>
-                  <b class="barras__valor">55%</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Reconhece a importância</span>
-                  <span class="barras__trilho">
-                    <i class="barras__preenche barras__preenche--neutro" style="--p:91%"></i>
-                  </span>
-                  <b class="barras__valor">91%</b>
-                </div>
-              </div>
-
-              <p class="painel__leitura">
-                Quase todo mundo sabe que o tema importa. <b>Mais da metade admite não entendê-lo.</b>
-                A vontade existe. Falta a informação em linguagem que não exija conhecimento prévio.
-              </p>
-
-              <div class="selos-dado">
-                <span class="selo-dado">
-                  <b>416</b> pontos no PISA de letramento financeiro: <i>17º entre 20 países</i>
-                </span>
-                <span class="selo-dado">
-                  <b>15%</b> dos jovens apontam a escola como principal fonte sobre dinheiro,
-                  contra <b>27%</b> que apontam as redes
-                </span>
-              </div>
-
-              <p class="fonte">
-                Fontes: Observatório Febraban / Ipespe, jun./2025, com 3 mil pessoas em cinco regiões
-                (FEBRABAN, 2025); OCDE, PISA 2022 (JEDUCA, 2024).
-              </p>
-            </div>
-
-            <div class="pilha" data-surge="2">
-              <article class="cartao-dado" data-tilt>
-                <strong><span data-contador="46">46</span>%</strong>
-                <p>já compraram por impulso <b>para se sentir melhor emocionalmente</b>.</p>
-                <p class="fonte">Serasa / Opinion Box (BORA INVESTIR, 2025)</p>
-              </article>
-
-              <article class="cartao-dado cartao-dado--critico" data-tilt>
-                <strong><span data-contador="54">54</span>%</strong>
-                <p>já acumularam dívidas <b>motivadas por questões emocionais</b>, não por planejamento.</p>
-                <p class="fonte">Serasa / Opinion Box (BORA INVESTIR, 2025)</p>
-              </article>
-            </div>
-          </div>
-
-          <div class="tese" data-surge="3">
-            <span class="tese__aspas" aria-hidden="true">“</span>
-            <p>
-              Se o gatilho é <b>emocional antes de racional</b>, disciplina e planilha não resolvem.
-              É preciso interromper o ciclo <b>no instante da decisão</b>.
-            </p>
-          </div>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Gustavo · slide 2 de 2 (~50 s).</b> O contraste 91% × 55% é o argumento: o problema não
-            é desinteresse, é acesso à informação.</p>
-          <p>Os 46% e 54% derrubam a objeção “basta ter força de vontade”, e é o que sustenta a
-            gamificação (seção 4.8 do documento).</p>
-          <p>Passar a palavra: “O Éric vai mostrar o que alimenta esse ciclo, e onde ele termina.”</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           04 · ÉRIC — Os cinco alimentadores
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Éric" data-secao="Problema"
-        data-titulo="Os cinco alimentadores" aria-label="Slide 4: os pilares da problemática">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">03 — O mecanismo</p>
-            <h2 class="cab__titulo">Cinco engrenagens que <em>alimentam o consumo desenfreado</em></h2>
-          </header>
-
-          <div class="duo duo--6-6">
-
-            <div class="ciclo" data-ciclo data-surge="1">
-              <div class="ciclo__palco">
-                <span class="ciclo__aro ciclo__aro--externo"></span>
-                <span class="ciclo__aro ciclo__aro--interno"></span>
-                <span class="ciclo__nucleo">
-                  <b>Consumo</b>
-                  <small>desenfreado</small>
-                </span>
-                <span class="ciclo__no" style="--i:0"><i>01</i><em>Publicidade e redes sociais</em></span>
-                <span class="ciclo__no" style="--i:1"><i>02</i><em>Parcelamento e crédito fácil</em></span>
-                <span class="ciclo__no" style="--i:2"><i>03</i><em>Gatilhos emocionais</em></span>
-                <span class="ciclo__no" style="--i:3"><i>04</i><em>Cultura do descarte rápido</em></span>
-                <span class="ciclo__no" style="--i:4"><i>05</i><em>Custo real invisível</em></span>
-                <span class="ciclo__no ciclo__no--vazio" style="--i:5"><i>→</i><em>e o ciclo recomeça</em></span>
-              </div>
-            </div>
-
-            <div class="pilha" data-surge="2">
-              <article class="cartao-tec" data-tilt>
-                <h4>A parcela esconde o compromisso</h4>
-                <p>Avalia-se só se “cabe” a parcela do mês, sem enxergar o efeito acumulado de
-                  vários parcelamentos somados.</p>
-              </article>
-
-              <article class="cartao-tec" data-tilt>
-                <h4>O descarte rápido é projetado</h4>
-                <p>Moda de ciclo curto e obsolescência programada incentivam trocar o que ainda
-                  funciona, em vez de reparar.</p>
-              </article>
-
-              <article class="cartao-tec cartao-tec--foco" data-tilt>
-                <h4>O custo real nunca aparece</h4>
-                <p>A etiqueta nunca é traduzida em tempo de trabalho nem em fatia da renda.
-                  <b>É este o ponto que o FinCK ataca.</b></p>
-              </article>
-            </div>
-          </div>
-
-          <p class="remate remate--critico" data-surge="3">
-            As quatro primeiras já são estudadas e combatidas. <b>A quinta, o custo real invisível,
-            é o ponto cego das ferramentas que existem hoje.</b>
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Éric · slide 1 de 2 (~55 s).</b> Percorrer o círculo com a mão e mostrar que ele se fecha.</p>
-          <p>Não ler as cinco: citar parcelamento e descarte rápido, e parar na quinta, porque ela é a ponte
-            para a solução.</p>
-          <p>A “cultura do descarte” já prepara o próximo slide, que é o lado ambiental.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           05 · ÉRIC — Do carrinho ao aterro
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Éric" data-secao="Problema"
-        data-titulo="Do carrinho ao aterro" aria-label="Slide 5: o impacto ambiental">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">04 — O impacto na natureza</p>
-            <h2 class="cab__titulo">Cada compra por impulso <em>deixa um rastro</em></h2>
-          </header>
-
-          <div class="duo duo--6-6">
-
-            <div class="painel" data-surge="1">
-              <h3 class="painel__titulo">Maiores geradores de lixo eletrônico do mundo</h3>
-
-              <ol class="ranque">
-                <li class="ranque__item" style="--i:0">
-                  <span class="ranque__pos">1</span><b>China</b>
-                </li>
-                <li class="ranque__item" style="--i:1">
-                  <span class="ranque__pos">2</span><b>Estados Unidos</b>
-                </li>
-                <li class="ranque__item" style="--i:2">
-                  <span class="ranque__pos">3</span><b>Índia</b>
-                </li>
-                <li class="ranque__item" style="--i:3">
-                  <span class="ranque__pos">4</span><b>Japão</b>
-                </li>
-                <li class="ranque__item ranque__item--foco" style="--i:4">
-                  <span class="ranque__pos">5</span><b>Brasil</b>
-                  <span class="ranque__dado">≈ 2,4 mi de toneladas/ano</span>
-                </li>
-              </ol>
-
-              <p class="painel__leitura">
-                Desse volume, <b>apenas 3% chega à reciclagem adequada</b>. O resto vai para
-                lixões e aterros comuns, misturado a metais pesados.
-              </p>
-
-              <div class="selos-dado">
-                <span class="selo-dado">
-                  Não é só eletrônico: o Brasil descarta <b>4 mi</b> de toneladas de
-                  <i>resíduo têxtil</i> por ano, cerca de 5% de todo o resíduo sólido do país
-                </span>
-              </div>
-
-              <p class="fonte">Fontes: Global E-waste Monitor (ONU/UNITAR), via Olhar Digital, 2026;
-                ABES-DF, 2025; CNN Brasil, 2022. Ordem de geração anual, não são proporções.</p>
-            </div>
-
-            <div class="pilha" data-surge="2">
-              <div class="ods">
-                <span class="ods__numero">12</span>
-                <div class="ods__texto">
-                  <strong>Consumo e produção responsáveis</strong>
-                  <span>Objetivo de Desenvolvimento Sustentável · ONU</span>
-                </div>
-              </div>
-
-              <div class="painel painel--ouro">
-                <h3 class="painel__titulo">Meta 12.5</h3>
-                <blockquote class="citacao">
-                  “Reduzir substancialmente a geração de resíduos por meio da <b>prevenção, redução,
-                  reciclagem e reuso</b>” até 2030.
-                </blockquote>
-                <p class="fonte">Fonte: Nações Unidas no Brasil, 2026.</p>
-              </div>
-            </div>
-          </div>
-
-          <p class="remate remate--critico" data-surge="3">
-            É aqui que o tema fecha: <b>o mesmo impulso que esvazia a conta bancária alimenta,
-            em escala, o descarte precoce.</b>
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Éric · slide 2 de 2 (~50 s).</b> Este é o slide que amarra o financeiro ao ambiental,
-            é o coração do tema que a escola pediu.</p>
-          <p>Dizer os dois números em voz alta: <em>2,4 milhões de toneladas por ano</em>, quinto do mundo,
-            e <em>só 3% reciclado</em>. O segundo é o que choca, porque mostra que o problema não é
-            só gerar, é não tratar.</p>
-          <p>A meta 12.5 fala em prevenção e reuso: guardar isso, porque o Paulo retoma isso na
-            aplicabilidade local.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           06 · GABRIEL — A virada
-           ====================================================== -->
-      <section class="slide slide--virada" data-slide data-fala="Gabriel" data-secao="Solução"
-        data-titulo="A virada" aria-label="Slide 6: a hipótese do projeto">
-        <div class="quadro quadro--centro">
-
-          <p class="cab__indice cab__indice--centro" data-surge="1">05 — A virada</p>
-
-          <h2 class="virada__titulo" data-surge="2">
-            E se o preço viesse<br><em>em horas de vida?</em>
-          </h2>
-
-          <div class="conversor" data-conversor data-surge="3">
-            <div class="conversor__lado conversor__lado--antes">
-              <span class="conversor__selo">o que a etiqueta mostra</span>
-              <strong class="conversor__valor">R$ 350,00</strong>
-              <span class="conversor__nota">um número abstrato</span>
-            </div>
-
-            <span class="conversor__seta" aria-hidden="true">
-              <svg viewBox="0 0 64 24"><path d="M2 12h56M48 4l10 8-10 8"/></svg>
-            </span>
-
-            <div class="conversor__lado conversor__lado--depois">
-              <span class="conversor__selo">o que ela custa de verdade</span>
-              <strong class="conversor__valor conversor__valor--ouro">34,2 horas</strong>
-              <span class="conversor__nota">mais de quatro dias inteiros de trabalho</span>
-            </div>
-          </div>
-
-          <p class="virada__conta" data-surge="4">
-<code class="equacao">T = P ÷ V<sub>h</sub></code> Renda de <b>R$ 1.800</b>, 22 dias e 8 h por dia dão <code>R$ 10,23 por hora</code>, e a compra come <b>19,4% da renda do mês</b>.
-          </p>
-
-          <div class="linhagem" data-surge="4">
-            <blockquote class="linhagem__citacao">
-<p>“O custo de uma coisa é a quantidade daquilo que chamarei de <b>vida</b> que precisa ser trocado por ela.”</p>
-              <cite>Henry David Thoreau, <i>Walden</i>, 1854</cite>
-            </blockquote>
-
-            <ol class="linhagem__trilha">
-              <li class="linhagem__marco" style="--i:0">
-                <span class="linhagem__ano">1854</span><b>Thoreau formula a ideia</b>
-              </li>
-              <li class="linhagem__marco" style="--i:1">
-                <span class="linhagem__ano">1992</span><b>Robin e Dominguez viram método</b>
-              </li>
-              <li class="linhagem__marco linhagem__marco--nosso" style="--i:2">
-                <span class="linhagem__ano">2026</span><b>o FinCK responde em 1 segundo</b>
-              </li>
-            </ol>
-          </div>
-
-          <div class="tese tese--centro" data-surge="5">
-            <p>
-O FinCK <b>nunca bloqueia e nunca julga</b> uma compra. Só garante que a decisão seja tomada com todas as cartas na mesa, <b>antes</b> de ser concluída.
-            </p>
-          </div>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Gabriel · slide 1 de 2 (~50 s).</b> Este é o slide mais importante da defesa. Falar devagar.</p>
-          <p>O exemplo é o mesmo do capítulo 11 do documento (Matemática, Prof. Sullivan): R$ 1.800,
-            22 dias, 8 h, item de R$ 350. Se a banca pedir a conta, ela está no documento.</p>
-          <p>Frase que precisa ficar: <em>“Ninguém troca quatro dias de vida sem pensar. Mas troca
-            R$ 350 sem piscar.”</em></p>
-          <p>A citação de Thoreau está na seção 4.9.3 do documento. Se a banca perguntar se a ideia é
-            nossa, a resposta honesta vale ponto: a ideia é de 1854, virou método em 1992 com
-            Robin e Dominguez, e o que é nosso é a velocidade, porque o aplicativo responde no
-            instante em que a compra ainda pode ser desfeita.</p>
-          <p>Dizer “nunca bloqueia e nunca julga” derruba a objeção de app paternalista antes dela surgir.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           07 · GABRIEL — O motor (demo ao vivo)
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Gabriel" data-secao="Solução"
-        data-titulo="O motor · demo ao vivo" aria-label="Slide 7: o motor FinCK of Reality">
-        <div class="quadro">
-
-          <header class="cab cab--marca">
-            <div>
-              <p class="cab__indice">06 — O motor <span class="selo-vivo">demonstração ao vivo</span></p>
-              <h2 class="cab__titulo">FinCK <em>of Reality</em></h2>
-            </div>
-            <picture>
-              <source type="image/webp"
-                srcset="../midia/logo-finck-reality-145.webp 145w, ../midia/logo-finck-reality-290.webp 290w"
-                sizes="96px">
-              <img class="cab__logo" src="../midia/logo-finck-reality-290.png"
-                alt="Logotipo FinCK of Reality" width="290" height="340" decoding="async">
-            </picture>
-          </header>
-
-          <div class="duo duo--6-6">
-
-            <div class="motor" data-surge="1">
-              <form class="calc" data-calc autocomplete="off">
-                <div class="calc__campos">
-                  <label>Renda mensal (R$)
-                    <input type="number" data-calc-renda value="1800" min="0" step="100" inputmode="decimal">
-                  </label>
-                  <label>Dias por mês
-                    <input type="number" data-calc-dias value="22" min="1" max="31" step="1" inputmode="numeric">
-                  </label>
-                  <label>Horas por dia
-                    <input type="number" data-calc-horas value="8" min="1" max="24" step="1" inputmode="numeric">
-                  </label>
-                  <label>Preço do item (R$)
-                    <input type="number" data-calc-preco value="350" min="0" step="50" inputmode="decimal">
-                  </label>
-                </div>
-              </form>
-
-              <div class="formulas">
-                <code>valor_dia = renda ÷ dias</code>
-                <code>valor_hora = valor_dia ÷ horas</code>
-                <code>custo_horas = preço ÷ valor_hora</code>
-              </div>
-
-              <p class="motor__saida" aria-live="polite" data-calc-resumo>
-                Sua hora vale <strong>R$ 10,23</strong> · seu dia vale <strong>R$ 81,82</strong>.
-              </p>
-
-              <div class="semaforo" data-semaforo>
-                <span class="semaforo__luz" data-luz="verde"></span>
-                <span class="semaforo__luz" data-luz="amarelo"></span>
-                <span class="semaforo__luz" data-luz="vermelho"></span>
-                <p class="semaforo__texto" data-semaforo-texto>Impacto moderado no mês</p>
-              </div>
-            </div>
-
-            <div class="prisma-palco" data-prisma data-surge="2">
-              <div class="prisma-orbita">
-                <div class="prisma">
-                  <div class="prisma__face prisma__face--frente">
-                    <span class="prisma__rotulo">Preço</span>
-                    <strong class="prisma__valor" data-prisma-reais>R$ 350,00</strong>
-                    <span class="prisma__nota">o que a etiqueta mostra</span>
-                  </div>
-                  <div class="prisma__face prisma__face--direita">
-                    <span class="prisma__rotulo">Em trabalho</span>
-                    <strong class="prisma__valor" data-prisma-horas>34,2 h</strong>
-                    <span class="prisma__nota">horas para ganhar esse valor</span>
-                  </div>
-                  <div class="prisma__face prisma__face--tras">
-                    <span class="prisma__rotulo">Em dias</span>
-                    <strong class="prisma__valor" data-prisma-dias>4,3 dias</strong>
-                    <span class="prisma__nota">dias de trabalho equivalentes</span>
-                  </div>
-                  <div class="prisma__face prisma__face--esquerda">
-                    <span class="prisma__rotulo">Da sua renda</span>
-                    <strong class="prisma__valor" data-prisma-percent>19,4%</strong>
-                    <span class="prisma__nota">fatia do mês comprometida</span>
-                  </div>
-                  <div class="prisma__face prisma__face--topo" aria-hidden="true"></div>
-                  <div class="prisma__face prisma__face--base" aria-hidden="true"></div>
-                </div>
-              </div>
-              <span class="prisma-palco__sombra" aria-hidden="true"></span>
-              <span class="prisma-dica">arraste para girar · o mesmo valor, quatro leituras</span>
-            </div>
-          </div>
-
-          <!-- A cadeia: o elo que liga o número à ODS 12 dentro do produto. -->
-          <div class="cadeia" data-surge="3">
-            <p class="cadeia__titulo">
-              O app não para no número: tudo isto sai na <em>mesma tela</em> do resultado:
-            </p>
-            <ol class="cadeia__trilha" data-cadeia>
-              <li class="cadeia__elo"><i class="cadeia__num">01</i><b>Preço</b></li>
-              <li class="cadeia__elo"><i class="cadeia__num">02</i><b data-cadeia-tempo>34,2 h de trabalho</b></li>
-              <li class="cadeia__elo"><i class="cadeia__num">03</i><b data-cadeia-risco>impacto moderado</b></li>
-              <li class="cadeia__elo cadeia__elo--verde"><i class="cadeia__num">04</i><b data-cadeia-alt>reparar · usado · alugar</b></li>
-              <li class="cadeia__elo cadeia__elo--verde"><i class="cadeia__num">05</i><b>o ponto da sua cidade</b></li>
-            </ol>
-          </div>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Gabriel · slide 2 de 2 (~60 s), DEMONSTRAÇÃO.</b> Começa no exemplo do documento.
-            Trocar o preço ao vivo para R$ 4.000 (celular novo) e deixar a banca ver o semáforo virar.</p>
-          <p>Girar o prisma com o mouse enquanto fala: as quatro faces mudam juntas.</p>
-          <p>Se sobrar fôlego, citar o <b>custo por mês de uso</b>: informando quanto tempo pretende
-            usar o item, o app mostra quanto ele custa por mês de uso, que é o que separa o barato
-            descartável do caro durável, e a resposta técnica à obsolescência programada do slide 4.</p>
-          <p><b>Fechar apontando para a fita embaixo:</b> “o app não para no número: ele sugere a
-            alternativa e mostra o ponto da nossa cidade que resolve. Os dois últimos elos estão
-            na tela do resultado, e o Paulo mostra daqui a pouco.”</p>
-          <p>Se o tempo apertar: só a troca de preço, sem girar o prisma, mas não pular a fita.</p>
-          <p><b>ANTES DE APRESENTAR:</b> entrar na conta que será usada na demonstração e cadastrar em
-            <em>Ações locais</em> pelo menos quatro pontos reais de Taboão: uma assistência técnica, um
-            brechó, alguém que alugue e o ponto de coleta de eletrônico. Sem isso, o resultado do app
-            mostra “você ainda não cadastrou nenhum ponto” bem na hora em que este slide promete o
-            contrário.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           08 · PAULO — O produto
-           ====================================================== -->
-      <section class="slide slide--denso" data-slide data-fala="Paulo" data-secao="Produto"
-        data-titulo="O produto" aria-label="Slide 8: o produto">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">07 — O produto</p>
-            <h2 class="cab__titulo">Do cálculo <em>ao aplicativo</em></h2>
-          </header>
-
-          <div class="duo duo--5-7">
-
-            <div class="palco-device" data-surge="1">
-              <picture>
-                <source type="image/webp"
-                  srcset="../midia/logo-finck-240.webp 240w, ../midia/logo-finck-360.webp 360w, ../midia/logo-finck-480.webp 480w"
-                  sizes="320px">
-                <img class="palco-device__marca" src="../midia/logo-finck-300.png" alt=""
-                  width="945" height="965" decoding="async">
-              </picture>
-              <div class="device">
-                <div class="device__moldura">
-                  <span class="device__ilha"></span>
-                  <div class="device__tela">
-                    <div class="mini-topo">
-                      <span class="mini-avatar"></span>
-                      <div>
-                        <small>Olá, Gustavo</small>
-                        <strong>Seu mês em foco</strong>
-                      </div>
-                    </div>
-                    <div class="mini-saldo">
-                      <small>Saldo atual</small>
-                      <p>R$ 1.240,00</p>
-                      <div class="mini-saldo__linhas">
-                        <span><i>Entradas</i><b class="verde">R$ 1.800</b></span>
-                        <span><i>Saídas</i><b class="vermelho">R$ 560</b></span>
-                      </div>
-                    </div>
-                    <div class="mini-card">
-                      <small>FinCK of Reality</small>
-                      <strong>Fone · R$ 350,00</strong>
-                      <div class="mini-semaforo"><span></span><span class="ativo"></span><span></span></div>
-                      <p>≈ <b>34,2 h</b> de trabalho · 19,4% da renda</p>
-                    </div>
-                    <div class="mini-barras">
-                      <span style="--h:44%"></span><span style="--h:72%"></span><span style="--h:31%"></span>
-                      <span style="--h:88%"></span><span style="--h:57%"></span><span style="--h:66%"></span>
-                    </div>
-                    <div class="mini-nav"><span class="ativo"></span><span></span><span></span><span></span></div>
-                  </div>
-                </div>
-                <div class="device__flutuante device__flutuante--1"><span>Horas equivalentes</span><strong>128 h</strong></div>
-                <div class="device__flutuante device__flutuante--2"><span>Decisões conscientes</span><strong>17</strong></div>
-              </div>
-              <span class="palco-device__sombra" aria-hidden="true"></span>
-            </div>
-
-            <div class="modulos" data-surge="2">
-              <article class="modulo modulo--destaque" data-tilt>
-                <h4>FinCK of Reality</h4>
-                <p>O motor de decisão: horas, dias, % da renda, efeito no saldo e em cada meta.</p>
-              </article>
-              <article class="modulo" data-tilt><h4>Contas e recorrentes</h4><p>Contas, cartões e lançamentos fixos em uma visão só.</p></article>
-              <article class="modulo" data-tilt><h4>Planejamento</h4><p>Projeção de saldo, parcelas e teto por categoria.</p></article>
-              <article class="modulo" data-tilt><h4>Metas</h4><p>O que você deixa de gastar vira progresso visível.</p></article>
-              <article class="modulo" data-tilt><h4>Cenários</h4><p>Simulações do tipo “e se eu não comprar isso?”.</p></article>
-              <article class="modulo modulo--verde" data-tilt><h4>Decisões e Ações locais</h4><p>Indicador de responsabilidade e alternativas ao novo.</p></article>
-              <article class="modulo" data-tilt><h4>Relatórios e Análises</h4><p>Gastos por categoria, período e exportação.</p></article>
-              <article class="modulo" data-tilt><h4>Jornada (XP)</h4><p>Conquistas por constância, com regras anti-farm.</p></article>
-              <article class="modulo modulo--ia" data-tilt><h4>Assistente FinCK</h4><p>Lê os seus próprios dados e devolve diagnóstico e plano em português.</p></article>
-            </div>
-          </div>
-
-          <p class="remate" data-surge="3">
-            PWA <b>instalável na tela inicial</b> do celular, direto do navegador, sem passar por loja de aplicativos.
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Paulo · slide 1 de 2 (~50 s).</b> Não ler os nove módulos. Citar Reality, Cenários e
-            Decisões/Ações locais, e dizer “e mais seis”.</p>
-          <p>“Decisões e Ações locais” está destacado de propósito: é o próximo slide.</p>
-          <p>Não prometer uso sem internet: o app precisa de conexão. Plano B se a rede da escola cair: celular com dados móveis roteando para o notebook.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           09 · PAULO — Aplicabilidade local
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Paulo" data-secao="Produto"
-        data-titulo="Aplicabilidade local" aria-label="Slide 9: aplicabilidade local">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">08 — A exigência resolvida</p>
-            <h2 class="cab__titulo">Aplicabilidade local:<br><em>da decisão individual à ação no território</em></h2>
-          </header>
-
-          <div class="duo duo--6-6" data-surge="1">
-            <div class="painel">
-              <h3 class="painel__titulo">O que a gente não fez, e por quê</h3>
-              <p class="painel__leitura">
-                Não prometemos parcerias comerciais com lojas de Taboão da Serra. Seria uma promessa
-                que um projeto de ensino técnico <b>não teria como sustentar</b>, e nem é a leitura mais
-                correta do tema.
-              </p>
-            </div>
-
-            <div class="painel painel--ouro">
-              <h3 class="painel__titulo">O que a gente fez</h3>
-              <p class="painel__leitura">
-                O impacto ambiental de um padrão de consumo é <b>a soma de decisões individuais</b>
-                tomadas por pessoas que moram, trabalham e consomem em um lugar concreto. É ali que o
-                efeito acontece primeiro.
-              </p>
-            </div>
-          </div>
-
-          <div class="acoes" data-surge="2">
-            <p class="acoes__titulo">Módulo <b>Ações locais</b>, na interface “Alternativas perto de você”: o usuário registra os pontos que conhece na própria cidade.</p>
-            <ul class="acoes__lista">
-              <li><span class="acoes__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4.5 4.5 0 0 1-5.9 5.9L4 17v3h3l4.8-4.8a4.5 4.5 0 0 1 5.9-5.9l-2.6 2.6-2.1-2.1 2.6-2.6Z"/></svg>
-              </span><b>Conserto</b><small>reparar em vez de trocar</small></li>
-              <li><span class="acoes__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 7h11a3 3 0 0 1 3 3v1M15 4l3 3-3 3"/><path d="M20 17H9a3 3 0 0 1-3-3v-1M9 20l-3-3 3-3"/></svg>
-              </span><b>Usado e troca</b><small>circular o que já existe</small></li>
-              <li><span class="acoes__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg>
-              </span><b>Aluguel</b><small>usar sem precisar possuir</small></li>
-              <li><span class="acoes__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z"/></svg>
-              </span><b>Doação</b><small>tirar o item do descarte</small></li>
-            </ul>
-            <p class="fonte">
-              Desde setembro, uma busca automática pelo Google Maps completa o cadastro manual para
-              quem ainda não tem ponto nenhum. Ela não o substitui: a costureira do bairro e o grupo
-              de troca da rua nenhum mapa indexa, e é aí que o conhecimento local do usuário entra.
-            </p>
-          </div>
-
-          <p class="remate" data-surge="3">
-            Menos resíduo gerado <b>dentro da própria cidade</b>, mais circulação de bens na comunidade,
-            antes de qualquer efeito agregado em escala nacional. É a <b>meta 12.5 aplicada à decisão
-            de uma pessoa.</b>
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Paulo · slide 2 de 2 (~55 s).</b> Slide decisivo: a aplicabilidade local é exigência
-            explícita do briefing e vale nota.</p>
-          <p>Começar pelo que <em>não</em> fizemos, porque isso mostra critério, não falta de ambição.</p>
-          <p>Se perguntarem por que não há parcerias: está na seção 4.7 do documento, e aparece na
-            conclusão como frente de continuidade.</p>
-          <p>Passar: “O Pedro mostra que o app está de pé de verdade.”</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           10 · PEDRO — Do MySQL local à nuvem
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Pedro" data-secao="Execução"
-        data-titulo="A arquitetura" aria-label="Slide 10: a arquitetura do projeto">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">09 — A construção</p>
-            <h2 class="cab__titulo">Do MySQL na máquina <em>ao aplicativo em produção</em></h2>
-          </header>
-
-          <ol class="fluxo" data-surge="1">
-            <li class="fluxo__passo" data-tilt>
-              <span class="fluxo__num">01</span>
-              <h4>Prototipagem local</h4>
-              <p>MySQL Workbench, PHP e Xampp para validar a conexão entre HTML/JS e banco.</p>
-            </li>
-            <li class="fluxo__passo" data-tilt>
-              <span class="fluxo__num">02</span>
-              <h4>Banco definitivo</h4>
-              <p>PostgreSQL no Supabase, com autenticação e acesso por usuário.</p>
-            </li>
-            <li class="fluxo__passo" data-tilt>
-              <span class="fluxo__num">03</span>
-              <h4>Funções de servidor</h4>
-              <p>Edge Functions em TypeScript/Deno no Supabase e função serverless na Vercel.</p>
-            </li>
-            <li class="fluxo__passo" data-tilt>
-              <span class="fluxo__num">04</span>
-              <h4>Publicação contínua</h4>
-              <p>Git e GitHub como controle de versão; Vercel com deploy a cada envio.</p>
-            </li>
-          </ol>
-
-          <div class="duo duo--7-5" data-surge="2">
-            <div class="painel">
-              <h3 class="painel__titulo">Sem framework, por escolha</h3>
-              <p class="painel__leitura">
-                HTML5, CSS3 e JavaScript puro. Cada linha do projeto é compreendida e defendida pela
-                equipe, sem caixa-preta na entrega. A interface é toda em português, sem anúncios,
-                com foco visível, marcação semântica e alto contraste.
-              </p>
-
-              <div class="selos-dado">
-                <span class="selo-dado">
-                  A IA entra só onde agrega: <b>Gemini</b> na busca de preço, na estimativa de impacto
-                  ambiental e na busca de lugares pelo <b>Google Maps</b>; modelos gratuitos via
-                  <b>OpenRouter</b> no Assistente.
-                  As chaves ficam no servidor, nunca no navegador.
-                </span>
-              </div>
-            </div>
-
-            <div class="painel painel--ouro">
-              <h3 class="painel__titulo">Não é uma simulação</h3>
-              <ul class="criterios criterios--simples">
-                <li><span><b>App no ar</b> em finck-app.vercel.app</span></li>
-                <li><span><b>Banco real</b> com autenticação de usuários</span></li>
-                <li><span><b>Código público</b> no GitHub, auditável pela banca</span></li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Pedro · slide 1 de 2 (~45 s), CORRER.</b> A banca não precisa de detalhe técnico;
-            precisa saber que a equipe domina o que construiu.</p>
-          <p>O ponto forte é a segunda coluna: o briefing exigia <em>produto funcional</em>, e o app
-            está publicado, com banco real e código aberto.</p>
-          <p>Se perguntarem “por que não usaram framework?”: porque o critério do trabalho é demonstrar
-            domínio, e framework esconde justamente o que precisamos provar que sabemos.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           11 · PEDRO — Contêineres × serverless
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Pedro" data-secao="Execução"
-        data-titulo="Contêineres × serverless" aria-label="Slide 11: a decisão de arquitetura">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">10 — A decisão de arquitetura</p>
-            <h2 class="cab__titulo">Não usamos contêineres.<br><em>E isso foi uma escolha, não uma lacuna.</em></h2>
-          </header>
-
-          <div class="confronto" data-surge="1">
-            <article class="confronto__lado">
-              <div class="pilha3d" aria-hidden="true">
-                <span class="pilha3d__cubo" style="--n:0"></span>
-                <span class="pilha3d__cubo" style="--n:1"></span>
-                <span class="pilha3d__cubo" style="--n:2"></span>
-                <span class="pilha3d__cubo" style="--n:3"></span>
-                <span class="pilha3d__base"></span>
-              </div>
-              <span class="confronto__selo">o que estudamos</span>
-              <h3>Contêineres orquestrados</h3>
-              <p>Docker, Kubernetes e Swarm; escalonamento vertical e horizontal, autoescalonamento
-                e balanceamento de carga entre instâncias, tudo configurado e mantido à mão.</p>
-              <p class="fonte">Arquitetura avaliada</p>
-            </article>
-
-            <span class="confronto__vs" aria-hidden="true">×</span>
-
-            <article class="confronto__lado confronto__lado--escolhido">
-              <div class="nuvem3d" aria-hidden="true">
-                <span class="nuvem3d__nucleo"></span>
-                <span class="nuvem3d__orbita nuvem3d__orbita--a"><i></i></span>
-                <span class="nuvem3d__orbita nuvem3d__orbita--b"><i></i></span>
-                <span class="nuvem3d__orbita nuvem3d__orbita--c"><i></i></span>
-              </div>
-              <span class="confronto__selo">o que escolhemos</span>
-              <h3>Serverless gerenciado</h3>
-              <p>Vercel e Supabase <b>abstraem a infraestrutura</b>: escala e distribuição como
-                serviço gerenciado, sem servidor ocioso e sem cluster para manter: menos controle
-                fino, nenhuma operação no nosso colo.</p>
-              <p class="fonte">Arquitetura real do FinCK</p>
-            </article>
-          </div>
-
-          <div class="tese" data-surge="2">
-            <span class="tese__aspas" aria-hidden="true">“</span>
-            <p>
-              Foi justamente <b>ter estudado</b> contêineres e orquestradores que permitiu reconhecer,
-              com critério técnico, que o projeto não precisava deles. Para uma equipe pequena de
-              ensino técnico, em um semestre, essa é a decisão <b>tecnicamente mais adequada</b>, e não
-              uma alternativa inferior.
-            </p>
-          </div>
-
-          <p class="remate" data-surge="3">
-            A mesma lógica vale para o banco: <b>MySQL local para prototipar, PostgreSQL gerenciado
-            em produção.</b> Em ambos os casos, a escolha não foi a mais elaborada, foi a mais
-            adequada ao contexto real.
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Pedro · slide 2 de 2 (~50 s).</b> Este slide responde de véspera a pergunta mais
-            provável da banca técnica: “por que não usaram Docker/Kubernetes?”.</p>
-          <p>A frase-chave: <em>não foi por não saber, foi por saber.</em></p>
-          <p>Está detalhado na seção 10.2 do documento, se quiserem aprofundar.</p>
-          <p>Passar: “O Thiago fecha com o diferencial e o resultado.”</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           12 · THIAGO — O diferencial
-           ====================================================== -->
-      <section class="slide slide--denso" data-slide data-fala="Thiago" data-secao="Impacto"
-        data-titulo="O diferencial" aria-label="Slide 12: o diferencial do FinCK">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">11 — O diferencial</p>
-            <h2 class="cab__titulo">O que já existe <em>e o que ficou faltando</em></h2>
-          </header>
-
-          <div class="tabela-quadro" data-surge="1">
-            <table class="quadro-comp">
-              <caption class="visualmente-oculto">Comparação entre o FinCK e aplicativos financeiros tradicionais</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Recurso</th>
-                  <th scope="col">Mobills · Organizze</th>
-                  <th scope="col" class="quadro-comp__nosso">FinCK</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Momento de atuação</th>
-                  <td data-rotulo="Tradicionais">Depois da compra já realizada</td>
-                  <td class="quadro-comp__nosso" data-rotulo="FinCK"><b>Antes</b>, no momento da decisão</td>
-                </tr>
-                <tr>
-                  <th scope="row">Preço em tempo de trabalho</th>
-                  <td class="quadro-comp__nao" data-rotulo="Tradicionais">Não oferecido</td>
-                  <td class="quadro-comp__nosso" data-rotulo="FinCK"><b>Função central</b> (FinCK of Reality)</td>
-                </tr>
-                <tr>
-                  <th scope="row">Indicador de responsabilidade</th>
-                  <td class="quadro-comp__nao" data-rotulo="Tradicionais">Não oferecido</td>
-                  <td class="quadro-comp__nosso" data-rotulo="FinCK">Presente</td>
-                </tr>
-                <tr>
-                  <th scope="row">Ligação explícita com o ODS 12</th>
-                  <td class="quadro-comp__nao" data-rotulo="Tradicionais">Não oferecido</td>
-                  <td class="quadro-comp__nosso" data-rotulo="FinCK">Presente (Ações locais)</td>
-                </tr>
-                <tr>
-                  <th scope="row">Gamificação por XP</th>
-                  <td data-rotulo="Tradicionais">Raro ou ausente</td>
-                  <td class="quadro-comp__nosso" data-rotulo="FinCK">Presente</td>
-                </tr>
-                <tr>
-                  <th scope="row">Modelo de negócio</th>
-                  <td data-rotulo="Tradicionais">Anúncios ou plano pago</td>
-                  <td class="quadro-comp__nosso" data-rotulo="FinCK"><b>Sem anúncios</b></td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="fonte">
-              Quadro 1 do documento, elaborado pelos autores a partir de observação direta das versões
-              gratuitas dos aplicativos citados (2026).
-            </p>
-          </div>
-
-          <p class="remate" data-surge="2">
-            Não viemos substituir um organizador financeiro. <b>Viemos preencher a lacuna que eles
-            deixam:</b> o instante da decisão de compra e a ligação dela com o impacto ambiental.
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Thiago · slide 1 de 2 (~50 s).</b> Não ler a tabela linha a linha: apontar as três
-            linhas em que a coluna do meio diz “não oferecido”.</p>
-          <p>Ser justo com os concorrentes: eles têm conexão bancária automática, que o FinCK não tem.
-            Isso mostra honestidade e desarma a banca.</p>
-          <p>A palavra certa é <em>complementaridade de escopo</em>, não superioridade.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           13 · THIAGO — Resultado e continuidade
-           ====================================================== -->
-      <section class="slide" data-slide data-fala="Thiago" data-secao="Impacto"
-        data-titulo="Resultado" aria-label="Slide 13: resultado e continuidade">
-        <div class="quadro">
-
-          <header class="cab">
-            <p class="cab__indice">12 — O resultado</p>
-            <h2 class="cab__titulo">Um aplicativo em produção, <em>não uma simulação</em></h2>
-          </header>
-
-          <div class="trio trio--quatro" data-surge="1">
-            <article class="ficha" data-tilt>
-              <span class="ficha__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
-              </span>
-              <strong class="ficha__num">Funcional</strong>
-              <p class="ficha__rotulo">App publicado, com banco de dados real, autenticação e todas as telas operantes</p>
-            </article>
-
-            <article class="ficha" data-tilt>
-              <span class="ficha__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z"/></svg>
-              </span>
-              <strong class="ficha__num">Local</strong>
-              <p class="ficha__rotulo">Ações locais resolvem a aplicabilidade no território de cada usuário</p>
-            </article>
-
-            <article class="ficha ficha--verde" data-tilt>
-              <span class="ficha__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M21 3v6h-6"/><path d="M9 12l2 2 4-4"/></svg>
-              </span>
-              <strong class="ficha__num">Mitiga</strong>
-              <p class="ficha__rotulo">Intervém antes da compra e abre caminho para reparo, reuso, troca, aluguel e doação</p>
-            </article>
-
-            <article class="ficha ficha--alerta" data-tilt>
-              <span class="ficha__icone" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 16V11M12.5 16V7M17 16v-3"/></svg>
-              </span>
-              <strong class="ficha__num">Rastreável</strong>
-              <p class="ficha__rotulo">Cada conta tem fórmula por trás, cada dado tem fonte citada e cada estimativa vem marcada como estimativa</p>
-            </article>
-          </div>
-
-          <div class="duo duo--6-6" data-surge="2">
-            <div class="painel">
-              <h3 class="painel__titulo">Objetivos específicos atingidos</h3>
-              <ul class="criterios criterios--simples">
-                <li><span>Pesquisa documental sobre endividamento e resíduos</span></li>
-                <li><span>Calculadora de decisão de compra em tempo real</span></li>
-                <li><span>Arquitetura em nuvem adequada ao porte do projeto</span></li>
-                <li><span>Aplicabilidade local concreta e mensurável</span></li>
-                <li><span><b>Mitigação do impacto</b>: intervenção antes da compra e estímulo ao
-                  reparo, reuso, troca, aluguel e doação</span></li>
-                <li><span>Documentação conforme as normas do Centro Paula Souza</span></li>
-              </ul>
-            </div>
-
-            <div class="painel painel--ouro">
-              <h3 class="painel__titulo">Continuidade além da entrega</h3>
-              <ul class="criterios criterios--simples">
-                <li><span><b>Uso sem internet</b>, com service worker e cache local dos dados.</span></li>
-                <li><span><b>Impacto agregado anônimo</b> entre usuários, para ver o efeito coletivo.</span></li>
-                <li><span><b>Parcerias com o comércio local</b> de Taboão da Serra.</span></li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Thiago · slide 2 de 2 (~45 s).</b> Os quatro selos respondem item a item ao que a
-            escola pediu: <em>funcional</em> (não é mockup), <em>local</em>, <em>mitiga o impacto</em>
-            e <em>rastreável</em>. Apontar para eles na ordem, sem ler o texto de baixo.</p>
-          <p>Se a banca cobrar a palavra “mitigar”, ela está no selo verde e na lista ao lado.</p>
-          <p>As continuidades vêm da conclusão do documento, e elas mostram que o projeto tem futuro,
-            não que está incompleto.</p>
-          <p>Fechar e passar para o encerramento.</p>
-        </div>
-      </section>
-
-
-      <!-- ======================================================
-           14 · OBRIGADO
-           ====================================================== -->
-      <section class="slide slide--final" data-slide data-fala="Todos" data-secao="Encerramento"
-        data-titulo="Obrigado" aria-label="Slide 14: encerramento">
-        <div class="quadro quadro--centro">
-
-          <div class="final__marcas" data-orbital>
-            <div class="final__marca">
-              <span class="capa__anel capa__anel--a"></span>
-              <span class="capa__anel capa__anel--b"></span>
-              <picture>
-                <source type="image/webp" srcset="../midia/logo-ck-origem-240.webp">
-                <img src="../midia/logo-ck-origem-360.png" alt="Conscious Knowledge" width="120" height="180"
-                  loading="lazy" decoding="async">
-              </picture>
-            </div>
-            <span class="final__mais" aria-hidden="true"></span>
-            <div class="final__marca final__marca--finck">
-              <span class="capa__anel capa__anel--b"></span>
-              <picture>
-                <source type="image/webp" srcset="../midia/logo-finck-240.webp 240w, ../midia/logo-finck-360.webp 360w"
-                  sizes="120px">
-                <img src="../midia/logo-finck-300.png" alt="FinCK" width="945" height="965"
-                  decoding="async">
-              </picture>
-            </div>
-          </div>
-
-          <h2 class="final__titulo" data-surge="1">Obrigado.</h2>
-
-          <p class="final__frase" data-surge="2">
-            O mesmo impulso que esvazia uma conta bancária<br>
-            <b>é o que enche um aterro de lixo eletrônico.</b>
-          </p>
-
-          <div class="final__acoes" data-surge="3">
-            <a class="btn btn--primario" href="https://finck-app.vercel.app"
-              target="_blank" rel="noopener">
-              <span>Abrir o FinCK</span>
-            </a>
-            <a class="btn btn--fantasma" href="../index.html">
-              <span>Site da Conscious Knowledge</span>
-            </a>
-            <button class="btn btn--fantasma" type="button" data-abrir-refs>
-              <span>Referências</span>
-            </button>
-          </div>
-
-          <ul class="final__equipe" data-surge="4">
-            <li><b>Éric Estrela Vieira</b><span>Desenvolvimento</span></li>
-            <li><b>Gabriel Heanna dos Reis</b><span>Desenvolvimento</span></li>
-            <li><b>Gustavo Oliveira dos Santos</b><span>Idealizador</span></li>
-            <li><b>Paulo Henrique de Lima Silva</b><span>Desenvolvimento</span></li>
-            <li><b>Pedro Alcantara dos Santos Fialho</b><span>Desenvolvimento</span></li>
-            <li><b>Thiago Wilson Vieira Serbino</b><span>Desenvolvimento</span></li>
-          </ul>
-
-          <p class="final__rodape" data-surge="5">
-            Conscious Knowledge · Técnico em Informática para Internet · Turma 2ºC ·
-            Etec Taboão da Serra · Orientador: Prof. Sullivan Franco · 2026
-          </p>
-
-        </div>
-
-        <div class="notas" data-notas>
-          <p><b>Encerramento (~20 s).</b> Fechar com a frase das duas pontas do problema e abrir para
-            perguntas.</p>
-          <p>Deixar este slide na tela durante a arguição: ele tem os nomes, o orientador e os links.</p>
-          <p>Se pedirem as fontes: apertar <kbd>R</kbd> ou clicar em “Referências”.</p>
-        </div>
-      </section>
-
-    </div><!-- /palco -->
-    </div><!-- /palco-caixa -->
-
-    <!-- ---------- NOTAS DO APRESENTADOR ----------
-         O conteúdo vem do slide ativo. Fica em uma faixa própria
-         para encolher o palco em vez de cobrir o slide. -->
-    <aside class="notas-palco" data-notas-palco aria-live="polite" aria-label="Notas do apresentador"></aside>
-
-    <!-- ---------- BARRA INFERIOR ---------- -->
-    <footer class="hud hud--base">
-      <div class="hud__controles">
-        <button type="button" class="hud__btn" data-anterior aria-label="Slide anterior" title="Slide anterior (←)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-        </button>
-        <button type="button" class="hud__btn" data-proximo aria-label="Próximo slide" title="Próximo slide (→)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-
-      <div class="trilha" data-trilha role="tablist" aria-label="Navegar entre os slides"></div>
-
-      <div class="hud__direita">
-        <button type="button" class="hud__pill" data-cronometro title="Cronômetro da apresentação (T)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.6M9.5 2h5"/></svg>
-          <span data-cronometro-texto>00:00</span>
-        </button>
-        <button type="button" class="hud__pill hud__pill--ghost" data-toggle-notas title="Notas do apresentador (N)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 9h8M8 13h8M8 17h5"/></svg>
-          <span>Notas</span>
-        </button>
-        <button type="button" class="hud__pill hud__pill--ghost" data-toggle-mapa title="Mapa de slides (O)">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          <span>Mapa</span>
-        </button>
-        <span class="hud__contador"><b data-atual>01</b><i>/</i><span data-total>14</span></span>
-      </div>
-
-      <div class="progresso" data-progresso aria-hidden="true"><span></span></div>
-    </footer>
-
-  </div><!-- /deck -->
-
-
-  <!-- ================= MAPA DE SLIDES ================= -->
-  <div class="sobreposicao" data-mapa hidden>
-    <div class="sobreposicao__caixa">
-      <header class="sobreposicao__cab">
-        <h2>Mapa da apresentação</h2>
-        <button type="button" class="sobreposicao__fechar" data-fechar aria-label="Fechar">✕</button>
-      </header>
-      <div class="mapa" data-mapa-grade></div>
+  <div class="dir">
+    <div>
+      <img class="logo" src="../midia/logo-finck-reality-580.webp" alt="Logotipo do FinCK of Reality">
+      <div class="conta"><div class="de">R$ 350,00 na etiqueta</div><div class="para">26 h 15 min de vida</div></div>
     </div>
   </div>
+  <aside class="nota"><p>Abertura (cerca de 30 segundos). Cumprimentar a banca e o Prof. Sullivan. Apresentar o nome do projeto e o tema.</p><p>Frase de entrada sugerida: "Um fone de ouvido de 350 reais custa, para quem ganha 1.600 por mês, 26 horas e 15 minutos de trabalho. Hoje vamos mostrar por que essa conta muda a decisão de compra, e o que ela tem a ver com o lixo que a gente produz."</p></aside>
+</section>
 
-  <!-- ================= REFERÊNCIAS ================= -->
-  <div class="sobreposicao" data-refs hidden>
-    <div class="sobreposicao__caixa sobreposicao__caixa--texto">
-      <header class="sobreposicao__cab">
-        <h2>Referências</h2>
-        <button type="button" class="sobreposicao__fechar" data-fechar aria-label="Fechar">✕</button>
-      </header>
+<!-- 2 ROTEIRO -->
+<section class="slide" data-parte="Roteiro">
+  <h2>O que vamos apresentar</h2>
+  <div class="corpo">
+    <ol class="passos" style="max-width:1100px">
+      <li><span><b>O tema e o problema</b>: o que o enunciado pediu e a pergunta que guiou o trabalho</span></li>
+      <li><span><b>Os dados</b>: endividamento, crédito, comportamento, meio ambiente e Taboão da Serra</span></li>
+      <li><span><b>A fundamentação</b>: por que informação no momento certo muda a decisão</span></li>
+      <li><span><b>A solução</b>: o FinCK funcionando, da compra ao impacto ambiental</span></li>
+      <li><span><b>Como foi feito</b>: metodologia, arquitetura, matemática e disciplinas</span></li>
+      <li><span><b>Resultados e conclusão</b>: o que foi entregue, a validação e os próximos passos</span></li>
+    </ol>
+  </div>
+  <aside class="nota"><p>Roteiro (cerca de 20 segundos). Ler os seis tópicos rapidamente. Dizer que a apresentação segue a estrutura do documento entregue em normas ABNT.</p></aside>
+</section>
 
-      <ol class="refs">
-        <li>ABES-DF. <b>Reciclagem eletrônica no Brasil: apenas 3% do lixo eletrônico é reciclado
-          corretamente.</b> Brasília: Associação Brasileira de Engenharia Sanitária e Ambiental,
-          Seção Distrito Federal, 2025.</li>
-        <li>AGÊNCIA BRASIL. <b>CNC: endividamento das famílias sobe para 82%, mas inadimplência
-          cai.</b> Brasília: EBC, 6 ago. 2026.</li>
-        <li>AMAZON WEB SERVICES. <b>Horizontal scaling.</b> AWS Well-Architected Framework.
-          [S. l.]: AWS, 2020.</li>
-        <li>BORA INVESTIR (B3). <b>46% dos brasileiros já realizaram compras por impulso para se
-          sentirem melhor emocionalmente.</b> São Paulo: B3, 29 set. 2025.</li>
-        <li>CENTRO ESTADUAL DE EDUCAÇÃO TECNOLÓGICA PAULA SOUZA. <b>Manual para a elaboração do
-          Trabalho de Conclusão de Curso das Escolas Técnicas do Centro Paula Souza.</b>
-          1. ed. São Paulo: CEETEPS, 2015.</li>
-        <li>CNN BRASIL. <b>Brasil descarta mais de 4 milhões de toneladas de resíduos têxteis por
-          ano; entenda os impactos do fast fashion.</b> São Paulo: CNN Brasil, 2022.</li>
-        <li>CNN BRASIL. <b>Inadimplência atinge 81,7 milhões e cresce 38% em 10 anos no Brasil.</b>
-          São Paulo: CNN Brasil, 24 mar. 2026.</li>
-        <li>CONSCIOUS KNOWLEDGE. <b>Conscious Knowledge: FinCK · DynamiCK · Tecnologia
-          consciente</b> [site institucional]. [S. l.]: Conscious Knowledge, 2026.</li>
-        <li>DOCKER. <b>What is a container?</b> Docker Docs. [S. l.]: Docker Inc., 2026.</li>
-        <li>DOMINGUEZ, Joe; ROBIN, Vicki. <b>Your money or your life</b>: transforming your
-          relationship with money and achieving financial independence. New York: Viking, 1992.</li>
-        <li>FEBRABAN. <b>Maioria dos brasileiros admite entender pouco de educação financeira,
-          mostra pesquisa.</b> [S. l.]: Febraban, 21 jul. 2025.</li>
-        <li>IBM. <b>What is container orchestration?</b> [S. l.]: IBM, 2026.</li>
-        <li>INTERNATIONAL TELECOMMUNICATION UNION; UNITAR. <b>Global E-waste Monitor 2024.</b>
-          Genebra/Bonn: ITU/UNITAR, 2024.</li>
-        <li>JEDUCA. <b>Brasil fica em 17º lugar entre 20 países em letramento financeiro no PISA
-          2022, mostra OCDE.</b> São Paulo: Jeduca, 2024.</li>
-        <li>NAÇÕES UNIDAS NO BRASIL. <b>Objetivo de Desenvolvimento Sustentável 12: Consumo e
-          produção responsáveis.</b> [S. l.]: ONU Brasil, 2026.</li>
-        <li>OLHAR DIGITAL. <b>Brasil é o quinto país que mais produz lixo eletrônico no mundo.</b>
-          [S. l.]: Olhar Digital, 26 abr. 2026.</li>
-        <li>OLIVEIRA, Gustavo <i>et al.</i> <b>FinCK: repositório do projeto.</b> [S. l.]: GitHub, 2026.</li>
-        <li>RED HAT. <b>What is Kubernetes?</b> [S. l.]: Red Hat, 2024.</li>
-        <li>THOREAU, Henry David. <b>Walden</b>; or, life in the woods. Boston: Ticknor and
-          Fields, 1854.</li>
+<!-- 3 TEMA -->
+<section class="slide" data-parte="Introdução">
+  <h2>O tema: o paradigma do consumo desenfreado e seu impacto na natureza</h2>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="dado"><span class="numero medio ouro">Mitigar</span><p>Encontrar uma solução que reduza o impacto do consumo na sociedade, e não apenas descrevê-lo.</p></div>
+      <div class="dado"><span class="numero medio ouro">Local</span><p>Ter aplicabilidade local, por exemplo em Taboão da Serra, e não um discurso genérico.</p></div>
+      <div class="dado"><span class="numero medio ouro">Funcional</span><p>Entregar um app web ou mobile que funcione de verdade, e não telas navegáveis.</p></div>
+    </div>
+  </div>
+  <p class="fonte">Exigências definidas pelo corpo docente da Etec Taboão da Serra, com entrega de documentação em ABNT, apresentação e aplicativo funcional.</p>
+  <aside class="nota"><p>Tema (cerca de 40 segundos). Explicar que o tema foi definido pelos professores e que havia três exigências: mitigar o impacto, ter aplicabilidade local e entregar um aplicativo funcional.</p><p>Antecipar: "Cada uma dessas três exigências tem uma resposta concreta no FinCK, e vamos mostrar onde."</p></aside>
+</section>
+
+<!-- 4 PROBLEMA E HIPÓTESE -->
+<section class="slide" data-parte="Introdução">
+  <h2>A pergunta que guiou o projeto</h2>
+  <div class="corpo">
+    <p class="citacao">É possível reduzir o consumo por impulso, e o impacto ambiental ligado a ele, com uma ferramenta que traduza o preço de uma compra para uma linguagem que a pessoa entenda na hora, sem precisar de educação financeira prévia?</p>
+    <div class="bloco" style="margin-top:44px;max-width:1150px">
+      <h3 class="ouro">Hipótese</h3>
+      <p>Mostrar o preço em horas de trabalho, em peso no mês e em atraso nas metas, no momento da decisão, torna a escolha mais consciente. Mostrar o efeito acumulado dos hábitos e oferecer alternativas ao item novo aproxima essa escolha do impacto ambiental.</p>
+    </div>
+  </div>
+  <aside class="nota"><p>Problema e hipótese (cerca de 45 segundos). Ler o problema de pesquisa. Explicar a hipótese em linguagem simples: o problema não é só força de vontade, é informação que chega tarde demais.</p></aside>
+</section>
+
+<!-- 5 DADO: 82% -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>Oito em cada dez famílias brasileiras estão endividadas</h2>
+  <div class="corpo">
+    <div class="grade g2" style="align-items:center;gap:70px">
+      <div>
+        <span class="numero gigante">82%</span>
+        <p class="lead" style="margin-top:12px">das famílias tinham dívidas em julho de 2026, o maior nível da série pelo sexto mês seguido. O cartão aparece em 85,3% dos casos.</p>
+      </div>
+      <table class="dados">
+        <thead><tr><th>% das famílias</th><th>Jul.</th><th>Ago.</th><th>Set.</th></tr></thead>
+        <tbody>
+          <tr class="forte"><td>Endividadas</td><td>82,0</td><td>82,0</td><td>81,7</td></tr>
+          <tr><td>Com contas em atraso</td><td>29,8</td><td>29,9</td><td>29,6</td></tr>
+          <tr><td>Sem condições de pagar</td><td>...</td><td>12,5</td><td>12,5</td></tr>
+          <tr><td>Renda comprometida</td><td>29,5</td><td>29,5</td><td>29,6</td></tr>
+          <tr><td>Mais da metade da renda comprometida</td><td>...</td><td>19,2</td><td>19,4</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="fonte">Fonte: Peic/CNC, julho a setembro de 2026, cerca de 18 mil famílias (AGÊNCIA BRASIL, 2026; BP MONEY, 2026; TVT NEWS, 2026). "..." indica dado não divulgado.</p>
+  <aside class="nota"><p>Endividamento (cerca de 40 segundos). A Peic é a pesquisa mensal da Confederação Nacional do Comércio com 18 mil famílias. Em julho de 2026, 82% estavam endividadas, recorde pelo sexto mês seguido. Quase 30% têm contas em atraso e cerca de 1 em cada 5 famílias compromete mais da metade da renda com dívidas.</p><p>Dado do Banco Central para reforçar, se perguntarem: em junho de 2026 o comprometimento de renda com dívidas foi de 28,9%, recorde da série iniciada em 2011.</p></aside>
+</section>
+
+<!-- 6 DADO: RENDA -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>Quem ganha menos se endivida mais e atrasa mais</h2>
+  <div class="corpo">
+    <figure class="barras" style="margin:0;max-width:1300px" data-max="100" data-sufixo="%" data-rotulo="470" data-largura="1300" aria-label="Endividamento e inadimplência por faixa de renda"
+      data-itens='[["Até 3 SM: endividadas",84.9,"#8b45e8"],["Até 3 SM: em atraso",38.5,"#f2b705"],["Mais de 10 SM: endividadas",72.0,"#8b45e8"],["Mais de 10 SM: em atraso",15.1,"#f2b705"]]'></figure>
+    <p class="lead">Nas famílias de até três salários mínimos, a inadimplência é <span class="ouro">2,5 vezes</span> maior. Em agosto, 18,3% delas disseram não ter como pagar as contas atrasadas.</p>
+  </div>
+  <p class="fonte">Fonte: Peic/CNC, julho e agosto de 2026 (AGÊNCIA BRASIL, 2026; BP MONEY, 2026). SM: salário mínimo.</p>
+  <aside class="nota"><p>Renda (cerca de 35 segundos). Mostrar que o problema pesa mais em quem ganha menos: 84,9% de endividamento e 38,5% de atraso até três salários mínimos, contra 72% e 15,1% acima de dez. É exatamente esse público que o FinCK quer alcançar, e é o perfil de boa parte de Taboão da Serra, como vamos ver.</p></aside>
+</section>
+
+<!-- 7 DADO: CRÉDITO -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>O crédito é caro, e esse custo não aparece na hora da compra</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1.35fr 1fr;gap:60px;align-items:center">
+      <figure class="barras" style="margin:0" data-sufixo="% a.a." data-rotulo="300" data-largura="980" data-destaque="0" aria-label="Juros ao ano por modalidade"
+        data-itens='[["Rotativo do cartão",444.9],["Cartão parcelado",192.1],["Cheque especial",130],["Crédito pessoal",106.6],["Taxa Selic",14.5]]'></figure>
+      <div>
+        <span class="numero grande ouro">4,9 meses</span>
+        <p class="lead" style="margin-top:14px">é o tempo para uma fatura não paga dobrar no rotativo, a 15,2% ao mês. Desde 2024, a lei limita os juros a 100% do valor original.</p>
+      </div>
+    </div>
+  </div>
+  <p class="fonte">Fonte: Banco Central (JORNAL DO COMÉRCIO, 2026; SENADO NOTÍCIAS, 2026); Lei nº 14.690/2023.</p>
+  <aside class="nota"><p>Crédito (cerca de 45 segundos). O rotativo do cartão chegou a 444,9% ao ano em agosto de 2026. Convertendo para taxa mensal por juros compostos, dá cerca de 15,2% ao mês. Com logaritmo, conteúdo de Matemática, descobrimos que a dívida dobra em 4,9 meses: n = log 2 dividido por log 1,152.</p><p>Quem parcela olha só se a parcela "cabe". O FinCK simula os próximos meses com esses juros e com o teto legal de 100%.</p></aside>
+</section>
+
+<!-- 8 DADO: COMPORTAMENTO -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>A compra por impulso é emocional e influenciada pelas redes</h2>
+  <div class="corpo">
+    <figure class="barras" style="margin:0;max-width:1350px" data-max="100" data-sufixo="%" data-rotulo="640" data-largura="1350" data-destaque="3,4" aria-label="Comportamentos de compra"
+      data-itens='[["Já compraram indicação de influenciador",80],["Já se arrependeram de compra no impulso",72],["Já compraram sem planejamento",71],["Acumularam dívidas por questões emocionais",54],["Compraram para se sentir melhor",46]]'></figure>
+  </div>
+  <p class="fonte">Fontes: Youpix e Nielsen (MEIO &amp; MENSAGEM, 2025); Serasa (2024); Serasa e Opinion Box (BORA INVESTIR, 2025). Pesquisas diferentes, com amostras diferentes.</p>
+  <aside class="nota"><p>Comportamento (cerca de 40 segundos). Mais da metade das pessoas já se endividou por questões emocionais, e quase metade compra para se sentir melhor. Por isso o FinCK não fala em tom de bronca: mostra o número e deixa a decisão com a pessoa. Comprar o que é necessário e cabe no orçamento também é consumo consciente.</p></aside>
+</section>
+
+<!-- 9 DADO: EDUCAÇÃO FINANCEIRA -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>Falta informação financeira, e a escola ainda não é onde ela chega</h2>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="dado"><span class="numero grande ouro">55%</span><p>dos brasileiros dizem entender pouco ou nada de educação financeira, mas 91% acham o tema importante.</p></div>
+      <div class="dado"><span class="numero grande">15%</span><p>apontam a escola como principal fonte sobre dinheiro. Canais digitais somam 40%.</p></div>
+      <div class="dado"><span class="numero grande">416</span><p>pontos do Brasil em letramento financeiro no PISA 2022, contra 498 da média da OCDE.</p></div>
+    </div>
+  </div>
+  <p class="fonte">Fontes: Observatório Febraban/Ipespe, 3 mil entrevistas, junho de 2025 (FEBRABAN, 2025); OCDE, PISA 2022 (SUPER RÁDIO TUPI, 2024).</p>
+  <aside class="nota"><p>Educação financeira (cerca de 35 segundos). Quase todo mundo sabe que o tema importa, mas mais da metade admite não entender. Por isso a solução não pode exigir conhecimento prévio: horas de trabalho é uma unidade que qualquer pessoa entende.</p></aside>
+</section>
+
+<!-- 10 DADO: SAÚDE -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>O descontrole financeiro também tira o sono</h2>
+  <div class="corpo">
+    <div class="grade g4">
+      <div class="dado"><span class="numero grande ouro">47%</span><p>relatam alto estresse financeiro, e outros 48% estresse médio.</p></div>
+      <div class="dado"><span class="numero grande">37%</span><p>perdem o sono por causa de dinheiro.</p></div>
+      <div class="dado"><span class="numero grande">49%</span><p>trabalham além do necessário para pagar contas.</p></div>
+      <div class="dado"><span class="numero grande">29%</span><p>têm conflitos familiares por dinheiro.</p></div>
+    </div>
+  </div>
+  <p class="fonte">Fonte: Anbima e Datafolha, Raio X do Investidor Brasileiro (SBT NEWS, 2026b).</p>
+  <aside class="nota"><p>Saúde (cerca de 25 segundos). O problema não é só de planilha, é de bem-estar. Isso justifica a linguagem do aplicativo, sem culpa e sem cobrança.</p></aside>
+</section>
+
+<!-- 11 DADO: AMBIENTE -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>Do carrinho ao aterro: o Brasil gera muito lixo eletrônico e recicla quase nada</h2>
+  <div class="corpo">
+    <div class="grade g4" style="gap:40px">
+      <div class="dado"><span class="numero grande lixo">22,3%</span><p>do lixo eletrônico do mundo tem coleta e reciclagem documentadas (62 milhões de t em 2022).</p></div>
+      <div class="dado"><span class="numero grande lixo ouro">3%</span><p>é a parcela reciclada corretamente no Brasil.</p></div>
+      <div class="dado"><span class="numero grande lixo ouro">2,4 mi t</span><p>de lixo eletrônico por ano: o Brasil é o 5º maior gerador do mundo.</p></div>
+      <div class="dado"><span class="numero grande lixo">4 mi t</span><p>de resíduos têxteis descartados pelos domicílios brasileiros por ano.</p></div>
+    </div>
+  </div>
+  <p class="fonte">Fontes: Global E-waste Monitor 2024 (INTERNATIONAL TELECOMMUNICATION UNION; UNITAR, 2024); Monitor Mercantil (2024); Tribuna de Minas (2025); Agência Brasil (2025).</p>
+  <aside class="nota"><p>Ambiente (cerca de 45 segundos). No mundo foram 62 milhões de toneladas de lixo eletrônico em 2022, com 22,3% reciclado de forma documentada. No Brasil, cerca de 3%. A geração cresce cinco vezes mais rápido que a reciclagem, então prevenir, usar por mais tempo e reparar é mais eficaz do que só reciclar. Isso liga o tema à Meta 12.5 da ODS 12: reduzir resíduos por prevenção, redução, reciclagem e reuso.</p></aside>
+</section>
+
+<!-- 12 DADO: TABOÃO -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>Taboão da Serra: a cidade mais densa do país, com renda abaixo da média do estado</h2>
+  <div class="corpo">
+    <div class="grade g3">
+      <div class="dado"><span class="numero grande compacto ouro">13.417</span><p>habitantes por km², a maior densidade demográfica do Brasil, com 273.542 moradores no Censo 2022.</p></div>
+      <div class="dado"><span class="numero grande compacto">R$ 3,4 mil</span><p>de remuneração média no emprego formal, contra R$ 4,4 mil no estado de São Paulo.</p></div>
+      <div class="dado"><span class="numero grande compacto">77,6 h</span><p>de trabalho para um celular de R$ 1.500 com essa renda: quase dez dias inteiros.</p></div>
+    </div>
+  </div>
+  <p class="fonte">Fontes: IBGE, Censo 2022 (XATAKA BRASIL, 2025); RAIS e IBGE compilados por Caravela (2026). Cálculo dos autores: 22 dias de 8 horas.</p>
+  <aside class="nota"><p>Taboão (cerca de 45 segundos). A exigência de aplicabilidade local pede olhar para a nossa cidade. Taboão é a cidade mais densa do país: muita gente, muito comércio e muito resíduo em pouco espaço, mas também consertos, brechós e pontos de coleta perto de casa. A renda média formal é menor que a do estado, e o PIB per capita é de 44,2 mil contra 77,6 mil. Em junho de 2026, 37,8 mil famílias estavam no Cadastro Único.</p></aside>
+</section>
+
+<!-- 13 SÍNTESE -->
+<section class="slide" data-parte="Problema em dados">
+  <h2>Cinco fatores alimentam o ciclo, e o último é o ponto cego</h2>
+  <div class="corpo">
+    <img class="tela" src="img/ciclo.png" alt="Diagrama dos cinco alimentadores do consumo desenfreado e do ponto de atuação do FinCK" style="width:1000px;border:none;background:#fff;padding:10px;margin-top:24px">
+  </div>
+  <aside class="nota"><p>Síntese (cerca de 40 segundos). Publicidade, crédito caro, emoção e descarte rápido já são conhecidos e combatidos. O quinto, o custo real invisível, é o ponto cego das ferramentas: ninguém traduz a etiqueta em tempo de trabalho antes da compra. É ali que o FinCK atua. E o aperto e o descarte alimentam o próximo impulso, fechando o ciclo.</p></aside>
+</section>
+
+<!-- 14 REFERENCIAL -->
+<section class="slide" data-parte="Fundamentação">
+  <h2>Por que informação no momento certo muda a decisão</h2>
+  <div class="corpo">
+    <div class="grade g2" style="gap:30px">
+      <div class="bloco"><h3>Psicologia econômica</h3><p>Katona (1975): compras do dia a dia são habituais, quase sem deliberação. Um estímulo concreto puxa a decisão para o modo deliberado.</p></div>
+      <div class="bloco"><h3>Economia comportamental</h3><p>Kahneman e Tversky (1979): perdas pesam mais que ganhos. Thaler e Sunstein (2008): o nudge orienta sem proibir.</p></div>
+      <div class="bloco"><h3>Finanças comportamentais</h3><p>Shefrin e Statman (1985) e Statman (2017): orçamento mental e excesso de confiança escondem o efeito somado dos pequenos gastos.</p></div>
+      <div class="bloco"><h3>O preço medido em vida</h3><p>Thoreau (1854) e Dominguez e Robin (1992): o custo de uma coisa é a vida que se troca por ela, em horas de trabalho.</p></div>
+    </div>
+  </div>
+  <aside class="nota"><p>Referencial (cerca de 60 segundos). Cada autor explica uma funcionalidade. Katona: o FinCK tira a compra do automático. Aversão à perda: horas de vida pesam mais que reais. Ancoragem: ao lado do "é só 50 reais", o FinCK põe outra âncora, as horas. Nudge: o app nunca bloqueia, só mostra. Orçamento mental: os hábitos somam os pequenos gastos. Thoreau: é a ideia central do FinCK of Reality.</p></aside>
+</section>
+
+<!-- 15 OBJETIVOS -->
+<section class="slide" data-parte="Fundamentação">
+  <h2>Objetivos</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1fr 1.3fr;gap:60px;align-items:start">
+      <div class="bloco" style="border-color:#5b3a99"><h3 class="ouro">Geral</h3><p style="font-size:24px">Desenvolver e documentar um aplicativo web funcional que ajude a pessoa a decidir compras de forma mais consciente, com efeito sobre as finanças e relação explícita com a redução de resíduos da ODS 12.</p></div>
+      <ul class="pontos" style="margin:0">
+        <li>Investigar com dados públicos o elo entre consumo, dívida, crédito e resíduos</li>
+        <li>Converter preço em horas, peso no mês e atraso em metas, antes da compra</li>
+        <li>Identificar hábitos que se acumulam e o efeito deles em 12 meses</li>
+        <li>Resolver a aplicabilidade local com alternativas reais perto da pessoa</li>
+        <li>Manter todos os cálculos determinísticos, com IA apenas opcional</li>
+        <li>Planejar a validação com usuários e documentar em ABNT</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="nota"><p>Objetivos (cerca de 35 segundos). Ler o objetivo geral e passar rapidamente pelos específicos. Cada um será mostrado nos próximos slides.</p></aside>
+</section>
+
+<!-- 16 METODOLOGIA -->
+<section class="slide" data-parte="Como foi feito">
+  <h2>Metodologia: pesquisa, construção em ciclos e testes</h2>
+  <div class="corpo">
+    <div class="grade g4 metodo">
+      <div class="dado"><span class="numero medio ouro">Bibliográfica</span><p>Psicologia econômica, economia e finanças comportamentais, sociologia do consumo.</p></div>
+      <div class="dado"><span class="numero medio ouro">Documental</span><p>Indicadores de 2025 e 2026 da CNC, BC, Serasa, Febraban, IBGE e ONU, conferidos na fonte.</p></div>
+      <div class="dado"><span class="numero medio ouro">Iterativa</span><p>81 versões publicadas de julho a outubro de 2026, com três rodadas de revisão de uso.</p></div>
+      <div class="dado"><span class="numero medio ouro">Empírica</span><p>Validação com 5 a 10 usuários, com roteiro, indicadores e cuidados da LGPD.</p></div>
+    </div>
+  </div>
+  <p class="fonte">Do protótipo local em MySQL, PHP e Xampp até a arquitetura em nuvem no Supabase e na Vercel.</p>
+  <aside class="nota"><p>Metodologia (cerca de 45 segundos). Quatro procedimentos. Destacar que o desenvolvimento foi iterativo: 81 versões publicadas no GitHub, três rodadas de revisão da experiência de uso, com auditorias feitas no ChatGPT e no Manus e medições automáticas em telas de 320 a 1280 pixels. Na terceira rodada, a distância até o botão de decisão no celular caiu de 4.603 para 1.933 pixels.</p></aside>
+</section>
+
+<!-- 17 A SOLUÇÃO -->
+<section class="slide" data-parte="Solução">
+  <h2>O FinCK calcula primeiro, você decide, e a IA só ajuda se você pedir</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1fr 1fr;gap:70px;align-items:center">
+      <div>
+        <div class="equacao">T = P ÷ V(h)<small>tempo de trabalho = preço ÷ valor da hora</small></div>
+        <div class="equacao" style="margin-top:22px">V(h) = R ÷ (D × H)<small>renda ÷ (dias × horas por dia)</small></div>
+        <p class="lead">Renda de R$ 1.600, 20 dias de 6 horas: a hora vale <span class="ouro">R$ 13,33</span>. Um fone de R$ 350 custa <span class="ouro">26 h 15 min</span>.</p>
+      </div>
+      <div class="celulares" style="justify-content:center">
+        <img class="celular" src="img/mob01_inicio.jpg" alt="Tela de início do FinCK no celular">
+        <img class="celular" src="img/mob02_reality.jpg" alt="Resultado do FinCK of Reality no celular" style="width:280px">
+      </div>
+    </div>
+  </div>
+  <aside class="nota"><p>Solução (cerca de 45 segundos). Apresentar o FinCK: um aplicativo web instalável no celular, publicado em finck-app.vercel.app, com banco de dados real. A frase-guia resume a postura: todos os números são calculados por regras testadas, a pessoa decide, e a inteligência artificial só entra quando ela pede.</p><p>Explicar a conta com os números reais da conta do grupo.</p></aside>
+</section>
+
+<!-- 18 REALITY -->
+<section class="slide" data-parte="Solução">
+  <h2>FinCK of Reality: o preço vira horas, peso no mês e atraso na meta</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1.55fr 1fr;gap:50px;align-items:center">
+      <img class="tela" src="img/reality_impacto.jpg" alt="Resultado do FinCK of Reality para um fone de ouvido de R$ 350,00" style="width:100%">
+      <ul class="pontos" style="margin:0">
+        <li><b class="ouro">26 h 15 min</b> do trabalho da pessoa</li>
+        <li><b class="ouro">40%</b> da sobra do mês, depois das contas fixas</li>
+        <li><b class="ouro">+9 dias</b> no prazo da meta “Canadá”</li>
+        <li>Cada número tem “Como foi calculado?” e selo de dado confirmado ou estimativa</li>
+        <li>Nunca bloqueia: “a decisão continua sendo sua”</li>
+      </ul>
+    </div>
+  </div>
+  <p class="fonte">Captura do FinCK em produção, com os dados reais da conta do grupo (2026).</p>
+  <aside class="nota"><p>Demonstração (cerca de 60 segundos; se houver internet, abrir o app ao vivo em finck-app.vercel.app). O fluxo tem três etapas: Compra, Impacto e Decisão. Mostrar a cadeia: preço, horas, dias, peso na sobra do mês e atraso na meta. O selo "impacto alto" mede o peso no dinheiro de agora, não se a pessoa deve comprar. Na decisão, quatro caminhos: comprar, esperar, não comprar ou buscar alternativa.</p></aside>
+</section>
+
+<!-- 19 PRÓXIMOS MESES -->
+<section class="slide" data-parte="Solução">
+  <h2>Parcelar cabe hoje? O FinCK simula os próximos meses, com juros e imprevisto</h2>
+  <div class="corpo">
+    <img class="tela" src="img/linha_tempo.jpg" alt="Simulação dos próximos meses de uma compra parcelada" style="width:1100px;margin-top:20px">
+    <div class="grade g3" style="margin-top:34px;max-width:1300px">
+      <div class="equacao" style="font-size:26px">i(m) = (1 + i(a))^(1/12) − 1<small>taxa anual vira mensal</small></div>
+      <div class="equacao" style="font-size:26px">PMT = V·i ÷ [1 − (1+i)^−n]<small>parcela pela Tabela Price</small></div>
+      <div class="equacao" style="font-size:26px">juros ≤ 100% do valor<small>teto da Lei nº 14.690/2023</small></div>
+    </div>
+  </div>
+  <aside class="nota"><p>Próximos meses (cerca de 45 segundos). Uma compra parcelada é um filme, não uma foto. O FinCK simula mês a mês com a renda, os fixos e as parcelas, e testa um imprevisto. No exemplo, parcelando em 10 vezes de 35 reais, faltaria dinheiro mesmo sem imprevisto. As fórmulas são as da Matemática do 1º bimestre: taxa equivalente, juros compostos e Tabela Price.</p></aside>
+</section>
+
+<!-- 20 HÁBITOS E REVISÃO -->
+<section class="slide" data-parte="Solução">
+  <h2>Hábitos de consumo: o que pesa só aparece quando se olha o conjunto</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1.25fr 1fr;gap:50px;align-items:center">
+      <img class="tela" src="img/espelho.jpg" alt="Espelho financeiro com os meses lado a lado" style="width:100%">
+      <div>
+        <span class="numero grande ouro">R$ 4.304</span>
+        <p class="lead" style="margin-top:12px">por ano em sete contas fixas pequenas da própria conta do grupo, ou 322,8 horas de trabalho.</p>
+        <ul class="pontos"><li>Oito padrões de hábito, com efeito em 12 meses</li><li>Simulação de 10%, 15% ou 20% a menos</li><li>Índice FinCK em seis dimensões</li></ul>
+      </div>
+    </div>
+  </div>
+  <aside class="nota"><p>Hábitos (cerca de 50 segundos). O Reality olha uma compra; os hábitos olham o conjunto: pequenos gastos que somam, gasto que se repete, categoria em alta, o que já tem destino todo mês, a sobra do mês e compras frequentes de eletrônicos e roupas, com selo ODS 12. A Revisão financeira junta tudo no Espelho financeiro e no Índice FinCK, com as próximas ações. Se os compromissos passam do saldo, a orientação é renegociar com o credor ou procurar o Procon, nunca pegar mais crédito.</p></aside>
+</section>
+
+<!-- 21 ODS 12 E LOCAL -->
+<section class="slide" data-parte="Solução">
+  <h2>ODS 12 e aplicabilidade local: da decisão individual ao território</h2>
+  <div class="corpo">
+    <div class="grade g2" style="gap:40px;align-items:start">
+      <div>
+        <img class="tela" src="img/sustentabilidade.jpg" alt="Impacto ambiental estimado de um fone de ouvido" style="width:100%">
+        <p class="lead" style="font-size:21px">Fone de ouvido: <span class="verde">5 a 20 kg de CO₂e</span>, 85% na fabricação. Comprar recondicionado evita a maior parte.</p>
+      </div>
+      <div>
+        <img class="tela" src="img/locais.jpg" alt="Busca de alternativas locais no Google Maps" style="width:100%">
+        <p class="lead" style="font-size:21px">Conserto, usado, troca, aluguel, doação e descarte correto em lugares reais do Google Maps, mais a rede da própria pessoa.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="nota"><p>ODS 12 e local (cerca de 60 segundos). Na sustentabilidade, a estimativa é feita por IA e aparece sempre como estimativa, em faixas. A aplicabilidade local não foi resolvida com promessas de parceria comercial, que um projeto escolar não sustentaria. O FinCK leva a decisão para o território real: busca lugares reais no Google Maps, sem inventar endereço, e a pessoa monta a própria rede, incluindo pontos que mapa nenhum conhece, como a costureira da rua.</p><p>Desafio da turma: cada pessoa cadastra um ponto real, analisa uma compra e, em 30 dias, registra o que aconteceu. Assim medimos o próprio comportamento, sem depender de ninguém.</p></aside>
+</section>
+
+<!-- 22 ARQUITETURA -->
+<section class="slide" data-parte="Como foi feito">
+  <h2>Arquitetura: nenhuma conta depende de um modelo de linguagem</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1.3fr 1fr;gap:50px;align-items:center">
+      <img class="tela" src="img/arquitetura.png" alt="Arquitetura do FinCK em três camadas" style="width:100%;background:#fff;padding:8px;border:none">
+      <div>
+        <ul class="pontos" style="margin:0">
+          <li>HTML, CSS e JavaScript, sem framework</li>
+          <li>PostgreSQL no Supabase com Row Level Security</li>
+          <li>Funções atômicas: aporte, parcela e transferência sem duplicar</li>
+          <li>Serverless na Vercel, em vez de contêineres</li>
+          <li>IA só por clique, com dados agregados e resposta conferida</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="nota"><p>Arquitetura (cerca de 50 segundos). Três camadas: o sistema financeiro e as regras do FinCK rodam no navegador e são determinísticos e testados. A IA fica nas funções da Vercel e é opcional: se cair, tudo continua. No banco, cada usuário só vê as próprias linhas, pela Row Level Security, e operações sensíveis são transações atômicas com chave de idempotência.</p><p>Sobre contêineres, conteúdo de Computação em Nuvem: não usamos por escolha. A plataforma serverless entrega escala e balanceamento sem a equipe precisar operar servidor, banco e redes de contêiner.</p></aside>
+</section>
+
+<!-- 23 MATEMÁTICA -->
+<section class="slide" data-parte="Como foi feito">
+  <h2>A Matemática está em cada número da tela</h2>
+  <div class="corpo">
+    <div class="grade g3 eqs" style="gap:26px">
+      <div class="equacao">V(h) = R ÷ (D × H)<small>razões: o valor da hora</small></div>
+      <div class="equacao">W = P ÷ (R − F) × 100<small>porcentagem: peso na sobra do mês</small></div>
+      <div class="equacao">M = C · (1 + i)^n<small>função exponencial: a dívida cresce</small></div>
+      <div class="equacao">n = log 2 ÷ log(1 + i)<small>logaritmo: em quanto tempo dobra</small></div>
+      <div class="equacao">PMT = V·i ÷ [1 − (1+i)^−n]<small>Tabela Price: a parcela</small></div>
+      <div class="equacao">I = Σ pesos × notas<small>média ponderada: Índice FinCK</small></div>
+    </div>
+    <p class="lead" style="margin-top:34px">Exemplo do documento: R$ 350 em 10 vezes a 2,99% ao mês dá parcela de R$ 41,01 e R$ 60,10 de juros, cerca de 4,5 horas de trabalho a mais.</p>
+  </div>
+  <p class="fonte">Conteúdos do plano de trabalho de Matemática de 2026: matemática financeira, orçamento familiar, juros, Price e SAC, exponencial, logaritmo e matrizes.</p>
+  <aside class="nota"><p>Matemática (cerca de 50 segundos). Orientação do Prof. Sullivan. Cada fórmula corresponde a um conteúdo do ano e a um número que aparece no app. Se perguntarem sobre SAC: no SAC as parcelas começam maiores e diminuem; o FinCK usa a Price porque é o que o comércio pratica, com parcelas iguais.</p></aside>
+</section>
+
+<!-- 24 DISCIPLINAS -->
+<section class="slide" data-parte="Como foi feito">
+  <h2>Todas as disciplinas do ano aparecem no projeto</h2>
+  <div class="corpo">
+    <div class="grade g3" style="gap:18px 34px;font-size:21px;line-height:1.4">
+      <p><b class="ouro">Português</b>: Realismo e o nome “of Reality”; textos multimodais</p>
+      <p><b class="ouro">Inglês</b>: consumo responsável, Abstract e documentação</p>
+      <p><b class="ouro">Educação Física</b>: suplementos, mídia e níveis da Jornada</p>
+      <p><b class="ouro">Química</b>: termoquímica da fabricação e química ambiental</p>
+      <p><b class="ouro">Física</b>: leitura de dados e gráficos; eletrônica</p>
+      <p><b class="ouro">Biologia</b>: densidade populacional e método científico</p>
+      <p><b class="ouro">História</b>: liberalismo, Marx e revoluções industriais</p>
+      <p><b class="ouro">Geografia</b>: território e indicadores socioeconômicos</p>
+      <p><b class="ouro">Matemática</b>: juros, Price, exponencial e logaritmo</p>
+      <p><b class="ouro">Banco de Dados</b>: modelagem, ACID, GRANT e RLS</p>
+      <p><b class="ouro">Nuvem</b>: IaaS, PaaS, contêineres e a escolha serverless</p>
+      <p><b class="ouro">Dispositivos Móveis</b>: abas, diálogos e dados locais</p>
+      <p><b class="ouro">Interfaces Web II</b>: DOM, eventos, Fetch API e promessas</p>
+      <p><b class="ouro">Sistemas Web I</b>: REST, CRUD, migrações e testes</p>
+    </div>
+  </div>
+  <p class="fonte">Relações detalhadas no capítulo 10 do documento, com base nos planos de trabalho docente de 2026.</p>
+  <aside class="nota"><p>Disciplinas (cerca de 50 segundos). Escolher três exemplos fortes: Sistemas Web I teve um projeto de "app financeiro com CRUD e REST", do qual o FinCK é descendente direto; Banco de Dados ensinou ACID, que sustenta as funções atômicas; e Biologia trabalhou densidade populacional, e Taboão é a cidade mais densa do país. Dizer que, quando não havia relação, o documento diz isso com honestidade.</p></aside>
+</section>
+
+<!-- 25 RESULTADOS -->
+<section class="slide" data-parte="Resultados">
+  <h2>Resultado: um aplicativo em produção, não uma simulação</h2>
+  <div class="corpo">
+    <div class="grade g4">
+      <div class="dado"><span class="numero grande ouro">457</span><p>testes automatizados no navegador, além de oito ferramentas de teste das rotas de IA.</p></div>
+      <div class="dado"><span class="numero grande">20</span><p>tabelas no banco, criadas por 13 migrações versionadas.</p></div>
+      <div class="dado"><span class="numero grande">81</span><p>versões publicadas no GitHub entre julho e outubro de 2026.</p></div>
+      <div class="dado"><span class="numero grande">0</span><p>números calculados por IA: todos vêm de regras do FinCK.</p></div>
+    </div>
+    <div class="grade g3" style="margin-top:44px;gap:30px">
+      <p class="lead" style="margin:0;font-size:22px"><b class="ouro">Funcional</b>: publicado em finck-app.vercel.app, com conta, banco e modo de demonstração.</p>
+      <p class="lead" style="margin:0;font-size:22px"><b class="ouro">Local</b>: alternativas reais no território de cada pessoa e o desafio da turma.</p>
+      <p class="lead" style="margin:0;font-size:22px"><b class="ouro">Mitiga</b>: atua antes da compra e propõe reparo, usado, troca e descarte correto.</p>
+    </div>
+  </div>
+  <aside class="nota"><p>Resultados (cerca de 45 segundos). Voltar às três exigências do tema e mostrar como cada uma foi atendida. Diferencial em relação a apps como Mobills e Organizze: eles registram depois da compra; o FinCK atua antes, converte em horas, simula juros, liga a decisão à ODS 12 e não tem anúncios.</p></aside>
+</section>
+
+<!-- 26 VALIDAÇÃO -->
+<section class="slide" data-parte="Resultados">
+  <h2>Validação com usuários: protocolo pronto dentro do próprio app</h2>
+  <div class="corpo">
+    <div class="grade" style="grid-template-columns:1fr 1fr;gap:60px">
+      <ol class="passos">
+        <li><span><b>Situação fictícia</b>: renda de R$ 3.500 e um fone de R$ 800</span></li>
+        <li><span><b>Sem o FinCK</b>: compraria? o que pesou?</span></li>
+        <li><span><b>Com o FinCK</b>: analisar no Reality e abrir a Revisão</span></li>
+        <li><span><b>Depois</b>: o que faria agora? qual a diferença entre preço e impacto?</span></li>
+        <li><span><b>Questionário</b> de 1 a 5: clareza, facilidade e utilidade</span></li>
       </ol>
-
-      <p class="refs__nota">
-        Lista reduzida às fontes citadas nesta apresentação. A relação completa está nas
-        Referências do documento do projeto, junto das obras consultadas
-        sobre arquitetura de sistemas, contêineres e computação em nuvem.
-      </p>
+      <table class="dados">
+        <thead><tr><th>Indicador</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Entenderam o impacto da compra</td><td>80%</td></tr>
+          <tr><td>Perceberam gastos acumulados</td><td>70%</td></tr>
+          <tr><td>Explicaram preço × impacto</td><td>70%</td></tr>
+          <tr><td>Concluíram sem ajuda</td><td>80%</td></tr>
+          <tr><td>Clareza, facilidade, utilidade</td><td>≥ 4</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
+  <p class="fonte">De 5 a 10 voluntários, sem dados pessoais nem financeiros reais, conforme a LGPD. Mudar a escolha não é medida de acerto: comprar também pode ser consciente.</p>
+  <aside class="nota"><p>Validação (cerca de 45 segundos). A página "Avaliação do projeto", no Perfil, guia as sessões e calcula os indicadores automaticamente. Ninguém é identificado e o teste usa a demonstração. Se a validação já tiver sido aplicada até a data da apresentação, trocar este slide pelos resultados.</p></aside>
+</section>
 
-  <!-- ================= ATALHOS ================= -->
-  <div class="sobreposicao" data-ajuda hidden>
-    <div class="sobreposicao__caixa sobreposicao__caixa--texto">
-      <header class="sobreposicao__cab">
-        <h2>Atalhos do apresentador</h2>
-        <button type="button" class="sobreposicao__fechar" data-fechar aria-label="Fechar">✕</button>
-      </header>
-      <dl class="atalhos">
-        <div><dt><kbd>→</kbd> <kbd>Espaço</kbd></dt><dd>Próximo slide</dd></div>
-        <div><dt><kbd>←</kbd></dt><dd>Slide anterior</dd></div>
-        <div><dt><kbd>Home</kbd> / <kbd>End</kbd></dt><dd>Primeiro / último slide</dd></div>
-        <div><dt><kbd>1</kbd> … <kbd>9</kbd></dt><dd>Ir direto ao slide</dd></div>
-        <div><dt><kbd>N</kbd></dt><dd>Notas do apresentador</dd></div>
-        <div><dt><kbd>O</kbd></dt><dd>Mapa de slides</dd></div>
-        <div><dt><kbd>T</kbd></dt><dd>Iniciar / pausar o cronômetro</dd></div>
-        <div><dt><kbd>R</kbd></dt><dd>Referências</dd></div>
-        <div><dt><kbd>F</kbd></dt><dd>Tela cheia</dd></div>
-        <div><dt><kbd>?</kbd></dt><dd>Esta ajuda</dd></div>
-        <div><dt><kbd>Esc</kbd></dt><dd>Fechar painéis</dd></div>
-      </dl>
-      <p class="refs__nota">No celular ou no tablet, deslize para os lados para trocar de slide.</p>
+<!-- 27 CONCLUSÃO -->
+<section class="slide" data-parte="Conclusão">
+  <h2>Conclusão</h2>
+  <div class="corpo">
+    <p class="citacao" style="font-size:36px">Traduzir o preço para tempo de trabalho, no momento da decisão, é uma forma concreta e local de aproximar a escolha de cada pessoa do impacto coletivo do consumo.</p>
+    <div class="grade g2" style="margin-top:44px;gap:40px">
+      <div class="bloco"><h3>Limitações</h3><p>Depende do que a pessoa registra; estimativas ambientais são ordens de grandeza; exige internet; o efeito educativo depende da validação.</p></div>
+      <div class="bloco"><h3>Próximos passos</h3><p>Aplicar a validação, funcionar sem conexão, relatório anônimo do impacto da turma e parceria com os ecopontos da prefeitura.</p></div>
     </div>
   </div>
+  <aside class="nota"><p>Conclusão (cerca de 50 segundos). Responder ao problema: sim, é possível construir essa ferramenta, e ela está publicada. A hipótese está fundamentada e incorporada em cada tela; a confirmação com pessoas vem da validação. Citar as limitações com tranquilidade: mostrar limites é sinal de rigor.</p></aside>
+</section>
 
-  <button type="button" class="botao-ajuda" data-toggle-ajuda aria-label="Atalhos do apresentador" title="Atalhos (?)">?</button>
+<!-- 28 REFERÊNCIAS -->
+<section class="slide" data-parte="Referências">
+  <h2>Principais referências</h2>
+  <div class="corpo">
+    <div class="grade g2" style="gap:14px 50px;font-size:18px;line-height:1.45;color:#d8d0e6">
+      <p>AGÊNCIA BRASIL. CNC: endividamento das famílias sobe para 82%, mas inadimplência cai. O Povo, 6 ago. 2026.</p>
+      <p>BRASIL. Lei nº 14.181, de 1º de julho de 2021 (superendividamento).</p>
+      <p>BRASIL. Lei nº 14.690, de 3 de outubro de 2023 (Desenrola Brasil e teto de juros do cartão).</p>
+      <p>DOMINGUEZ, J.; ROBIN, V. Your money or your life. New York: Viking, 1992.</p>
+      <p>FEBRABAN. Maioria dos brasileiros admite entender pouco de educação financeira. 21 jul. 2025.</p>
+      <p>INTERNATIONAL TELECOMMUNICATION UNION; UNITAR. The global e-waste monitor 2024.</p>
+      <p>JORNAL DO COMÉRCIO. Juro médio do rotativo sobe a 444,9% ao ano em agosto. 29 set. 2026.</p>
+      <p>KAHNEMAN, D.; TVERSKY, A. Prospect theory. Econometrica, 1979.</p>
+      <p>KATONA, G. Psychological economics. New York: Elsevier, 1975.</p>
+      <p>NAÇÕES UNIDAS BRASIL. ODS 12: consumo e produção responsáveis. 2026.</p>
+      <p>SERASA. 10 anos do Mapa da Inadimplência. mar. 2026.</p>
+      <p>THALER, R.; SUNSTEIN, C. Nudge. New Haven: Yale University Press, 2008.</p>
+      <p>THOREAU, H. D. Walden; or, life in the woods. Boston, 1854.</p>
+      <p>XATAKA BRASIL. Taboão da Serra, a cidade mais “apertada” do Brasil. 16 out. 2025.</p>
+    </div>
+  </div>
+  <p class="fonte">Lista completa, com endereços e datas de acesso, nas Referências do documento ABNT.</p>
+  <aside class="nota"><p>Referências (cerca de 10 segundos). Não ler. Deixar na tela e dizer que a lista completa está no documento.</p></aside>
+</section>
 
-  <script src="apresentacao.js" defer></script>
+<!-- 29 ENCERRAMENTO -->
+<section class="slide" data-parte="Encerramento">
+  <div class="corpo" style="flex-direction:row;align-items:center;gap:90px">
+    <div style="flex:1">
+      <h2 style="font-size:80px">Obrigado.</h2>
+      <p class="lead" style="font-size:32px">O mesmo impulso que esvazia uma conta bancária é o que enche um aterro de lixo eletrônico. O FinCK mostra a conta a tempo.</p>
+      <p class="lead" style="font-size:22px;margin-top:34px">Perguntas da banca são bem-vindas.</p>
+    </div>
+    <div style="display:grid;gap:26px;text-align:center">
+      <figure style="margin:0"><img src="img/qr_app.png" alt="QR code para abrir o FinCK" style="width:230px;border-radius:12px"><figcaption style="font-size:19px;color:#a69db8;margin-top:8px">Abrir o FinCK<br><a href="https://finck-app.vercel.app">finck-app.vercel.app</a></figcaption></figure>
+      <figure style="margin:0"><img src="img/qr_site.png" alt="QR code para o site da Conscious Knowledge" style="width:150px;border-radius:10px"><figcaption style="font-size:17px;color:#a69db8;margin-top:6px">Site da Conscious Knowledge</figcaption></figure>
+    </div>
+  </div>
+  <aside class="nota"><p>Encerramento (cerca de 20 segundos). Repetir a frase final e abrir para perguntas. Deixar este slide na tela durante a arguição: os QR codes permitem que a banca abra o app no celular e teste a demonstração sem cadastro.</p><p>Perguntas prováveis: por que não usar contêineres; de onde vêm os números; o que a IA faz e o que não faz; como a aplicabilidade local foi resolvida sem parcerias; e o que foi medido com usuários.</p></aside>
+</section>
+
+</main>
+</div>
+
+<div class="progresso" aria-hidden="true"></div>
+<div class="notas" aria-label="Notas do apresentador"><h4></h4><div class="texto-notas"></div></div>
+<p class="ajuda"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>N</kbd> notas · <kbd>F</kbd> tela cheia · imprimir gera PDF</p>
+<div class="controles">
+  <button type="button" data-acao="ant" aria-label="Slide anterior">Anterior</button>
+  <button type="button" data-acao="notas">Notas</button>
+  <button type="button" data-acao="prox" aria-label="Próximo slide">Próximo</button>
+</div>
+<script src="defesa.js"></script>
 </body>
-
 </html>
