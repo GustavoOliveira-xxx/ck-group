@@ -31,6 +31,9 @@
   const TOTAL = slides.length;
   let atual = 0;
 
+  // a defesa marca a parte (data-secao); a apresentação do projeto marca quem fala (data-fala)
+  const parteDo = (slide) => slide.dataset.fala || slide.dataset.secao || "";
+
 
   /* ---------------------------------------------------------
      01. Escala do palco e escolha do modo de exibição
@@ -134,7 +137,8 @@
   const CAIXAS = ".quadro, .duo, .trio, .grade-tres, .pilha, .modulos, .acoes," +
     " .confronto, .confronto__lado, .tabela-quadro, .fluxo, .entregas," +
     " .coluna-direita, .motor, .painel, .cartao-tec, .ficha, .entrega, .modulo," +
-    " .cadeia, .cadeia__elo, .ranque, .ranque__item, .linhagem, .linhagem__marco";
+    " .cadeia, .cadeia__elo, .ranque, .ranque__item, .linhagem, .linhagem__marco," +
+    " .colunas, .coluna, .telas, .camadas, .disciplinas, .matematica, .linhas-teoria, .mini-ficha";
 
   // folga de alguns pixels: enfeites posicionados de forma absoluta podem
   // sobrar uma fração da caixa sem que nada fique cortado de fato
@@ -202,9 +206,8 @@
       b.setAttribute("role", "tab");
       b.setAttribute("aria-label", `Slide ${i + 1}: ${slide.dataset.titulo || ""}`);
 
-      // marca o início da fala de cada integrante
-      const falaAnterior = i > 0 ? slides[i - 1].dataset.fala : null;
-      if (i > 0 && slide.dataset.fala !== falaAnterior) b.dataset.marco = "1";
+      // marca o início de cada parte da defesa
+      if (i > 0 && parteDo(slide) !== parteDo(slides[i - 1])) b.dataset.marco = "1";
 
       const dica = document.createElement("span");
       dica.className = "trilha__dica";
@@ -230,7 +233,7 @@
         `<span class="mapa__t"></span>` +
         `<span class="mapa__f"></span>`;
       b.querySelector(".mapa__t").textContent = slide.dataset.titulo || `Slide ${i + 1}`;
-      b.querySelector(".mapa__f").textContent = slide.dataset.fala || "";
+      b.querySelector(".mapa__f").textContent = parteDo(slide);
       b.addEventListener("click", () => {
         irPara(i);
         fecharSobreposicoes();
@@ -282,7 +285,7 @@
     const slide = slides[atual];
 
     if (elAtual) elAtual.textContent = String(atual + 1).padStart(2, "0");
-    if (elNome) elNome.textContent = slide.dataset.fala || "—";
+    if (elNome) elNome.textContent = parteDo(slide) || "—";
 
     if (notasPalco) {
       const fonte = slide.querySelector(".notas");
@@ -321,6 +324,7 @@
     mapa: $("[data-mapa]"),
     refs: $("[data-refs]"),
     ajuda: $("[data-ajuda]"),
+    zoom: $("[data-zoom-caixa]"),
   };
 
   const fecharSobreposicoes = () => {
@@ -348,7 +352,19 @@
 
   $("[data-toggle-mapa]")?.addEventListener("click", () => alternarSobreposicao("mapa"));
   $("[data-toggle-ajuda]")?.addEventListener("click", () => alternarSobreposicao("ajuda"));
-  $("[data-abrir-refs]")?.addEventListener("click", () => alternarSobreposicao("refs"));
+  $$("[data-abrir-refs]").forEach((b) => b.addEventListener("click", () => alternarSobreposicao("refs")));
+
+  /* capturas de tela: clicar amplia, para a banca ler os números da tela */
+  const zoomImg = $("[data-zoom-img]");
+  const zoomLegenda = $("[data-zoom-legenda]");
+  $$("[data-zoom]").forEach((b) => b.addEventListener("click", () => {
+    const img = $("img", b);
+    if (!img || !zoomImg) return;
+    zoomImg.src = img.currentSrc || img.src;
+    zoomImg.alt = img.alt;
+    if (zoomLegenda) zoomLegenda.textContent = b.dataset.legenda || "";
+    alternarSobreposicao("zoom");
+  }));
 
 
   /* ---------------------------------------------------------
