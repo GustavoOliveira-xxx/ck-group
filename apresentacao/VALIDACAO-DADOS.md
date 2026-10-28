@@ -99,3 +99,12 @@ Não foram testados nesta execução o login real, a autorização entre usuári
 - Conferidas as contas de projeção anual, conversão de taxa, valor aproximado da curva e horas de trabalho. Os resultados de demonstração do app não foram anunciados como medições de comportamento.
 
 Esta revisão melhora a rastreabilidade e a precisão das afirmações. Não transforma pesquisas amostrais, estimativas ou registros internos em verdades sem incerteza.
+
+## Roteiro e encerramento do grupo — 28/10/2026
+
+- Organizadas 12 partes de conteúdo, duas por integrante, além da capa e do agradecimento: continuam sendo 14 telas de navegação.
+- O antigo quadro final de resultados foi substituído pelo agradecimento. As verificações técnicas e suas limitações permanecem na metodologia, nas notas e neste relatório.
+- Nomes completos, turma 2º C e curso M-Tec Informática para Internet conferidos na seção Equipe do site da CK. A distribuição de falas segue essa ordem; não é uma atribuição histórica de autoria das funcionalidades.
+- As falas e os tempos-alvo estão em [ROTEIRO-GRUPO.md](ROTEIRO-GRUPO.md) e no [PDF para o grupo](roteiro-finck-8-minutos.pdf). Oito minutos é a meta de ensaio, com 7min20s de fala-base e 40 segundos reservados para trocas e margem.
+- Notas dos 12 itens alinhadas às falas do roteiro; explicações detalhadas ficam recolhidas como apoio para as perguntas. Mantidas as distinções entre pesquisas externas, simulações, registros internos e validação com usuários ainda pendente.
+- Conferidos os 14 slides no navegador, os seis nomes do agradecimento, a distribuição de dois itens por pessoa, as notas e o encerramento em celular. PDF de oito páginas renderizado e inspecionado visualmente.
