@@ -1,0 +1,491 @@
+{
+  "data": "2026-10-28",
+  "natureza": "Registro de reprodução local; não é auditoria externa ou teste com usuários",
+  "repositorio": "https://github.com/GustavoOliveira-xxx/finck-app",
+  "commit": "912b0c13abeb6b164cda79ad4617bf078d3865bb",
+  "ambiente": {
+    "sistema": "Windows",
+    "node": "v24.22.1",
+    "navegador": "Chrome headless",
+    "rede": "Navegador: somente HTTP local. Node: modo padrão com mocks, sem --ao-vivo.",
+    "dependencias": "Versões do package-lock.json, integridade conferida, sem scripts de instalação."
+  },
+  "navegador": {
+    "entrada": "testes.html",
+    "total": 457,
+    "aprovados": 457,
+    "falhas": 0,
+    "errosJavaScript": [],
+    "suites": [
+      {
+        "nome": "Motor de cálculo (FinckReality)",
+        "casos": 13,
+        "aprovados": 13,
+        "falhas": 0
+      },
+      {
+        "nome": "Regras financeiras (FinckFinance)",
+        "casos": 6,
+        "aprovados": 6,
+        "falhas": 0
+      },
+      {
+        "nome": "Gamificação (FinckGame)",
+        "casos": 9,
+        "aprovados": 9,
+        "falhas": 0
+      },
+      {
+        "nome": "Camada de dados (FinckStore)",
+        "casos": 6,
+        "aprovados": 6,
+        "falhas": 0
+      },
+      {
+        "nome": "Importação e demonstração (integração)",
+        "casos": 8,
+        "aprovados": 8,
+        "falhas": 0
+      },
+      {
+        "nome": "Planejamento (FinckPlano)",
+        "casos": 24,
+        "aprovados": 24,
+        "falhas": 0
+      },
+      {
+        "nome": "Contas (FinckContas)",
+        "casos": 17,
+        "aprovados": 17,
+        "falhas": 0
+      },
+      {
+        "nome": "Campo de dinheiro (FinckMoeda)",
+        "casos": 17,
+        "aprovados": 17,
+        "falhas": 0
+      },
+      {
+        "nome": "Formatação (FinckUtils)",
+        "casos": 8,
+        "aprovados": 8,
+        "falhas": 0
+      },
+      {
+        "nome": "Invariantes de contabilidade (ponta a ponta)",
+        "casos": 30,
+        "aprovados": 30,
+        "falhas": 0
+      },
+      {
+        "nome": "Livro-razão das metas (6.1)",
+        "casos": 7,
+        "aprovados": 7,
+        "falhas": 0
+      },
+      {
+        "nome": "Invariantes contábeis do relatório (6.1)",
+        "casos": 15,
+        "aprovados": 15,
+        "falhas": 0
+      },
+      {
+        "nome": "Reconciliador financeiro (fase 3)",
+        "casos": 14,
+        "aprovados": 14,
+        "falhas": 0
+      },
+      {
+        "nome": "Recorrências e parcelas (6.2)",
+        "casos": 17,
+        "aprovados": 17,
+        "falhas": 0
+      },
+      {
+        "nome": "Concorrência e falha (6.3)",
+        "casos": 10,
+        "aprovados": 10,
+        "falhas": 0
+      },
+      {
+        "nome": "Importação hostil (6.4)",
+        "casos": 10,
+        "aprovados": 10,
+        "falhas": 0
+      },
+      {
+        "nome": "Semáforo por prioridade (4.2)",
+        "casos": 10,
+        "aprovados": 10,
+        "falhas": 0
+      },
+      {
+        "nome": "Leitura do print (FinckPrint)",
+        "casos": 9,
+        "aprovados": 9,
+        "falhas": 0
+      },
+      {
+        "nome": "Impacto ambiental (FinckImpacto)",
+        "casos": 7,
+        "aprovados": 7,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: categoria, tempo, síntese e comparação (UX)",
+        "casos": 11,
+        "aprovados": 11,
+        "falhas": 0
+      },
+      {
+        "nome": "Metas: ritmo de aportes e atraso de uma compra",
+        "casos": 5,
+        "aprovados": 5,
+        "falhas": 0
+      },
+      {
+        "nome": "Revisão financeira: diagnóstico da vida financeira (FinckDiagnostico)",
+        "casos": 19,
+        "aprovados": 19,
+        "falhas": 0
+      },
+      {
+        "nome": "Linha do tempo da compra (FinckLinhaTempo)",
+        "casos": 13,
+        "aprovados": 13,
+        "falhas": 0
+      },
+      {
+        "nome": "Linha do tempo: leitura, origem dos números e ajuda opcional (UX)",
+        "casos": 13,
+        "aprovados": 13,
+        "falhas": 0
+      },
+      {
+        "nome": "Linha do tempo: tela sem cara de IA",
+        "casos": 1,
+        "aprovados": 1,
+        "falhas": 0
+      },
+      {
+        "nome": "O que merece atenção: pontos e relevância",
+        "casos": 9,
+        "aprovados": 9,
+        "falhas": 0
+      },
+      {
+        "nome": "O que merece atenção: confirmado, estimativa e explicação",
+        "casos": 6,
+        "aprovados": 6,
+        "falhas": 0
+      },
+      {
+        "nome": "O que merece atenção: perguntas de informação faltante",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "Comparar formas de decidir: cenários",
+        "casos": 4,
+        "aprovados": 4,
+        "falhas": 0
+      },
+      {
+        "nome": "Tirar uma dúvida: respostas calculadas",
+        "casos": 5,
+        "aprovados": 5,
+        "falhas": 0
+      },
+      {
+        "nome": "Tirar uma dúvida: contexto enviado à ajuda opcional",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "O que merece atenção: tela",
+        "casos": 11,
+        "aprovados": 11,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: a revelação, do preço ao impacto (UX)",
+        "casos": 16,
+        "aprovados": 16,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: o que acontece ao salvar a decisão (UX)",
+        "casos": 4,
+        "aprovados": 4,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: o histórico como aprendizado (UX)",
+        "casos": 4,
+        "aprovados": 4,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: os mesmos nomes da página inicial (UX)",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: leitura do histórico, feita por regra (UX)",
+        "casos": 1,
+        "aprovados": 1,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: compra, impacto e decisão, sem cara de IA (UX)",
+        "casos": 9,
+        "aprovados": 9,
+        "falhas": 0
+      },
+      {
+        "nome": "Reality: a reflexão é retrato, não prova (UX)",
+        "casos": 2,
+        "aprovados": 2,
+        "falhas": 0
+      },
+      {
+        "nome": "Painel: projeções com nome e janela (home)",
+        "casos": 5,
+        "aprovados": 5,
+        "falhas": 0
+      },
+      {
+        "nome": "Painel: programação de 60 dias",
+        "casos": 7,
+        "aprovados": 7,
+        "falhas": 0
+      },
+      {
+        "nome": "Painel: três perguntas e próximo passo",
+        "casos": 8,
+        "aprovados": 8,
+        "falhas": 0
+      },
+      {
+        "nome": "Painel: primeira visita e convite de instalação",
+        "casos": 6,
+        "aprovados": 6,
+        "falhas": 0
+      },
+      {
+        "nome": "Painel: registro rápido e contas",
+        "casos": 4,
+        "aprovados": 4,
+        "falhas": 0
+      },
+      {
+        "nome": "Demonstração: contas de exemplo",
+        "casos": 14,
+        "aprovados": 14,
+        "falhas": 0
+      },
+      {
+        "nome": "Nomenclatura: análise, não cálculo",
+        "casos": 2,
+        "aprovados": 2,
+        "falhas": 0
+      },
+      {
+        "nome": "Linguagem: demais telas sem cara de IA",
+        "casos": 4,
+        "aprovados": 4,
+        "falhas": 0
+      },
+      {
+        "nome": "Previsões: previsto, vencido e confirmado",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "Jornada: progresso como consequência do uso",
+        "casos": 1,
+        "aprovados": 1,
+        "falhas": 0
+      },
+      {
+        "nome": "Hábitos: padrões encontrados no histórico",
+        "casos": 9,
+        "aprovados": 9,
+        "falhas": 0
+      },
+      {
+        "nome": "Hábitos: a tela",
+        "casos": 2,
+        "aprovados": 2,
+        "falhas": 0
+      },
+      {
+        "nome": "Hábitos: confiança pelo tamanho do histórico",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "Hábitos: simulação e histórico da categoria",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "Decisões: comprar também pode ser consciente",
+        "casos": 2,
+        "aprovados": 2,
+        "falhas": 0
+      },
+      {
+        "nome": "Validação com usuários: indicadores",
+        "casos": 3,
+        "aprovados": 3,
+        "falhas": 0
+      },
+      {
+        "nome": "Demonstração: quatro meses de histórico",
+        "casos": 2,
+        "aprovados": 2,
+        "falhas": 0
+      }
+    ],
+    "arquivosTeste": [
+      {
+        "caminho": "js/testes-dados.js",
+        "sha256": "55660f2db7372aeba22ee6bd83e23feb956c4887144dd6597aa75cacf7753b4b"
+      },
+      {
+        "caminho": "js/testes-habitos.js",
+        "sha256": "5dd1a132aa282ed1107fc0a8a9d67300ff800a73e4c6a135db9a7c73ed1a0760"
+      },
+      {
+        "caminho": "js/testes-inteligencia.js",
+        "sha256": "3128931777e611883ea5b143385babaa2555c0780313e57cc499c5b57af91d09"
+      },
+      {
+        "caminho": "js/testes-linha-tempo.js",
+        "sha256": "97ce1172a8ee9913ad70c91c5bfb3830d4fba66ee1b361f51c3a9ff8b8b9ab22"
+      },
+      {
+        "caminho": "js/testes-painel.js",
+        "sha256": "82da73549a4a5f4e541b2afd27cf3553fb23de6729827e82f7baabd44ee4c8b0"
+      },
+      {
+        "caminho": "js/testes-reality.js",
+        "sha256": "dad03ce1079303605404bab90cb283db2cc5cc71ec93f05a8f1d9f087cfa1290"
+      },
+      {
+        "caminho": "js/testes.js",
+        "sha256": "7be99388639b8d4d9acd51b61aca75ee400abcbe4c7129254c1486dd9c3d7dab"
+      }
+    ]
+  },
+  "node": {
+    "total": 515,
+    "aprovados": 515,
+    "falhas": 0,
+    "suites": [
+      {
+        "arquivo": "ferramentas/testar-assistente.mjs",
+        "comando": "node ferramentas/testar-assistente.mjs",
+        "aprovados": 131,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "3fed971b94d82f9ea294a7f5f4fbb01bda2e84558db9563d80120aa3a7751719"
+      },
+      {
+        "arquivo": "ferramentas/testar-ia.mjs",
+        "comando": "node ferramentas/testar-ia.mjs",
+        "aprovados": 77,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "29d0a923803a1fda09bdaab62351da071da1c11a341a57ccc4bc845881dce149"
+      },
+      {
+        "arquivo": "ferramentas/testar-impacto.mjs",
+        "comando": "node ferramentas/testar-impacto.mjs",
+        "aprovados": 31,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "4ba96c3d19a7d092c1812e40b14681239d3bccb70426f6d933e0a42c4129efd1"
+      },
+      {
+        "arquivo": "ferramentas/testar-print.mjs",
+        "comando": "node ferramentas/testar-print.mjs",
+        "aprovados": 51,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "7053c3d9c2e96b9ded1785f297d7dc4e7e69b6a0e4de3fec902e60c6e1440e8b"
+      },
+      {
+        "arquivo": "ferramentas/testar-extracao.mjs",
+        "comando": "node ferramentas/testar-extracao.mjs",
+        "aprovados": 95,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "67a2866cd90970e20c424538342d200bcba27de39a91cd3cd8cf6ee39e5e7243"
+      },
+      {
+        "arquivo": "ferramentas/testar-locais.mjs",
+        "comando": "node ferramentas/testar-locais.mjs",
+        "aprovados": 22,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "b6136cbdaafb4f496174b36fbd92d41fac6b83a37cac86d287be12ec28db0e59"
+      },
+      {
+        "arquivo": "ferramentas/testar-ocorrencias.mjs",
+        "comando": "node ferramentas/testar-ocorrencias.mjs",
+        "aprovados": 53,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "360ee7f7d5c58b6a36700ccad93e34d114bf77fc5ed4bdae42944ec109b42543"
+      },
+      {
+        "arquivo": "ferramentas/testar-programacao.mjs",
+        "comando": "node ferramentas/testar-programacao.mjs",
+        "aprovados": 55,
+        "falhas": 0,
+        "codigoSaida": 0,
+        "sha256": "4a508faa5b977710fbf19ccebb12d33145a0aa836f9a10f129b00bb674c4da25"
+      }
+    ]
+  },
+  "soma": {
+    "verificacoes": 972,
+    "aprovadas": 972,
+    "falhas": 0,
+    "nota": "Soma de casos no navegador e verificações nos scripts; granularidades distintas. Não representa percentual de cobertura."
+  },
+  "documentosSerasa": [
+    {
+      "edicao": "abril/2025",
+      "paginaMediaGeral": 5,
+      "paginaFaixasEtarias": 7,
+      "mediaGeral": 548,
+      "media18a25": 505,
+      "sha256": "9226383cef2736d928f0a5b7034eb7fabfeef1a31ace94b03f74ef038a7bae2e",
+      "conferencia": "Extração de texto e inspeção visual das páginas 5 e 7"
+    },
+    {
+      "edicao": "abril/2026",
+      "paginaMediaGeral": 5,
+      "paginaFaixasEtarias": 7,
+      "mediaGeral": 542,
+      "media18a25": 500,
+      "sha256": "79bd2ca413192b46b3012374c7e3d42f9911ac1b25e7638f6711d9c35912143c",
+      "conferencia": "Extração de texto e inspeção visual das páginas 5 e 7"
+    }
+  ],
+  "limites": [
+    "Não testa banco de produção, login real, políticas RLS ou RPCs implantadas.",
+    "Não mede qualidade de respostas ao vivo de provedores de IA.",
+    "Não mede redução de consumo, confiança, compreensão ou resíduos com usuários.",
+    "Não reproduz a latência pontual registrada em 15/10/2026."
+  ]
+}

@@ -505,14 +505,14 @@
                   <p>pessoas de <b>18 a 25 que negociaram</b> no Serasa Limpa Nome (jan.–jul. 2025 × 2024)</p>
                 </div>
                 <div class="mini-ficha mini-ficha--ouro">
-                  <strong>505</strong>
-                  <p>score médio de 18 a 25 anos, <b>o menor entre as faixas</b> (abr. 2025; geral: 548)</p>
+                  <strong>500</strong>
+                  <p>score médio de 18 a 25 anos, <b>o menor entre as faixas</b> (abr. 2026; geral: 542)</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <p class="fonte" data-surge="3">Fontes: ANBIMA (2026); Serasa, YOUPIX/Nielsen e Febraban (2025); OCDE (2024). PISA: ordem das médias, sem afirmar diferenças estatísticas.</p>
+          <p class="fonte" data-surge="3">Fontes: ANBIMA (2026); Serasa (2025; Mapa Score abr. 2026, p. 5 e 7); YOUPIX/Nielsen e Febraban (2025); OCDE (2024). PISA: ordem das médias, sem afirmar diferenças estatísticas.</p>
 
         </div>
 
@@ -521,7 +521,8 @@
           <p>Na pesquisa Serasa/Opinion Box (1.240 entrevistas online, agosto de 2025), 46% relataram compra por impulso para se sentir melhor e 54% relataram dívidas ligadas a problemas emocionais. São relatos, sem comprovação causal. Os 80% são da pesquisa YOUPIX/Nielsen publicada em 2025, outro levantamento e outro público.</p>
           <p>Brasil: 18º entre 20 países e economias por ordenação da pontuação média no PISA 2022 de letramento financeiro; 416 pontos e 45,1% abaixo do nível 2, o nível básico. A posição não significa diferença estatisticamente significativa frente aos vizinhos do ranking (OCDE, Volume IV, 2024).</p>
           <p>Febraban: os 15% e 18% são do conjunto dos entrevistados, respectivamente ensino formal e redes sociais, não um recorte de jovens. Serasa: +49% no número de pessoas de 18 a 25 anos que negociaram na plataforma, jan.–jul. 2025 contra 2024. Não prova aumento da inadimplência nem tendência anual permanente.</p>
-          <p>Score: retrato de abril de 2025. A pontuação também depende do histórico de crédito; não mede isoladamente educação financeira. A escolha do público-alvo é uma decisão de projeto, não um resultado experimental.</p>
+          <p>Score: o relatório original Mapa Score do Brasil, abril de 2026, traz 542 pontos para a média geral na página 5 e 500 para 18 a 25 anos na página 7, a menor das seis faixas apresentadas. A edição de abril de 2025 também foi conferida e confirma os valores históricos 548 e 505; aqui usamos o recorte de 2026. A divergência das imagens da página de divulgação não foi usada como evidência.</p>
+          <p>A pontuação de crédito considera, entre outros fatores, histórico de pagamentos e tempo de relacionamento com o mercado. Não mede isoladamente educação financeira, não é o Índice FinCK e não demonstra maior inadimplência dos jovens. A escolha do público-alvo é uma decisão de projeto, não um resultado experimental.</p>
         </div>
       </section>
 
@@ -808,7 +809,7 @@
             <li class="etapa">
               <span class="etapa__quando">out. 2026</span>
               <h4>Testes e produção</h4>
-              <p>973 testes automatizados e verificação das rotas de IA no ar.</p>
+              <p>457 casos no navegador e 515 verificações em Node.js; execução local sem falhas.</p>
             </li>
             <li class="etapa etapa--proxima">
               <span class="etapa__quando">Próxima etapa</span>
@@ -1007,8 +1008,8 @@
                 <div>
                   <h4>Sistema financeiro</h4>
                   <p>Contas, lançamentos, parcelas e metas em <b>PostgreSQL</b>: 20 tabelas, 13 migrações,
-                    <b>63 políticas RLS</b> (políticas para isolar dados por usuário) e 14 funções SQL que fazem as
-                    operações sensíveis de uma vez. Estorno marca, nada é apagado.</p>
+                    <b>políticas RLS</b> para isolar dados por usuário e 14 funções SQL para operações e validações.
+                    Estornos preservam o histórico.</p>
                 </div>
                 <span class="camada__onde">Supabase</span>
               </li>
@@ -1026,8 +1027,8 @@
                 <div>
                   <h4>IA opcional, só a pedido</h4>
                   <p><b>Gemini</b> por rotas serverless: lê preço em foto ou página, estima impacto ambiental
-                    (com o selo Estimativa) e explica números que o app já calculou. Recebe só <b>dados
-                    agregados</b>, com limites por hora e tetos diários; a chave fica no servidor.</p>
+                    (com o selo Estimativa) e explica números calculados pelo app. A Revisão envia um <b>panorama
+                    agregado</b>; a extração recebe foto ou link. Há limites de uso; a chave fica no servidor.</p>
                 </div>
                 <span class="camada__onde">Vercel</span>
               </li>
@@ -1059,9 +1060,7 @@
         <div class="notas" data-notas>
           <p><b>Arquitetura (cerca de 50 s).</b> Três camadas, e a ordem importa: primeiro o registro seguro,
             depois as regras que calculam, e só por último, se a pessoa pedir, a IA.</p>
-          <p>Segurança em uma frase: o banco só entrega a cada pessoa as linhas dela (63 políticas RLS), e as
-            operações de dinheiro passam por funções que gravam tudo de uma vez, sem duplicar se o botão for
-            clicado duas vezes.</p>
+          <p>As políticas RLS definidas no projeto se destinam a restringir os dados por usuário. Os testes locais não comprovam que as regras estão corretamente aplicadas no banco publicado. A leitura dos arquivos de migração confirmou definições de 20 tabelas e 14 funções SQL em 13 arquivos, não uma inspeção do esquema implantado. Há funções de operações, validações e gatilhos; nem toda função é uma operação financeira atômica.</p>
           <p>Se perguntarem por que não usaram framework: o critério do trabalho é demonstrar domínio, e cada
             linha precisava ser explicável. Se perguntarem sobre Docker: “não foi por não saber, foi por saber”.</p>
           <p>O app precisa de internet: o uso sem conexão está nas frentes de continuidade.</p>
@@ -1150,8 +1149,8 @@
 
           <div class="mini-fichas mini-fichas--4" data-surge="1">
             <div class="mini-ficha mini-ficha--verde">
-              <strong><span data-contador="973" data-milhar="1">973</span></strong>
-              <p>testes aprovados <b>no registro interno da equipe</b> (458 no navegador e 515 em Node.js)</p>
+              <strong><span data-contador="972" data-milhar="1">972</span></strong>
+              <p>verificações aprovadas <b>na execução local de 28/10/2026</b> (457 casos no navegador + 515 em Node.js)</p>
             </div>
             <div class="mini-ficha">
               <strong>No ar</strong>
@@ -1173,7 +1172,7 @@
               <ul class="checagem">
                 <li><span class="checagem__marca"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
                   <span><b>Entregas técnicas registradas:</b> Reality, hábitos e Revisão, alternativas locais, infraestrutura em nuvem e integração dos componentes do ano.</span></li>
-                <li><span class="checagem__marca"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <li><span class="checagem__marca checagem__marca--pendente"><svg viewBox="0 0 24 24"><path d="M12 7v6M12 17h.01"/></svg></span>
                   <span><b>H2 a validar com usuários:</b> cálculos reproduzíveis e IA opcional implementados; o efeito sobre a confiança não foi medido.</span></li>
                 <li><span class="checagem__marca checagem__marca--pendente"><svg viewBox="0 0 24 24"><path d="M12 7v6M12 17h.01"/></svg></span>
                   <span><b>H1 a validar com usuários:</b> recurso implementado; não há evidência de redução do consumo impulsivo. Metas de 70% a 80% e SUS pertencem ao protocolo.</span></li>
@@ -1208,13 +1207,14 @@
 
         <div class="notas" data-notas>
           <p><b>Resultados e conclusão (cerca de 60 s).</b> Retomar as duas exigências do slide 2: o app é
-            funcional (está no ar, com 973 testes) e tem aplicabilidade local (Alternativas perto de você e o
+            funcional (com demonstração e verificações locais) e tem aplicabilidade local (Alternativas perto de você e o
             Desafio da turma).</p>
           <p>Hipóteses: H1 e H2 seguem sem validação com usuários. Revisões internas e testes de cálculo não comprovam efeito sobre confiança, compreensão, economia ou consumo. As metas do protocolo não são resultados. O protocolo já está pronto no app
             (Perfil, Validação com usuários).</p>
           <p>Frase final: “O FinCK oferece informação antes da compra. Seu efeito sobre decisões e resíduos será avaliado com usuários.”
             Deixar este slide na tela durante as perguntas: os QR codes abrem o app e o código.</p>
-          <p>Os 973 testes, 1,2 s, quatro correções e métricas de UX são registros técnicos internos preservados, não auditoria externa ou resultados de um estudo com usuários. Capturas e valores do modo de demonstração são exemplos simulados. A latência pontual não é garantia de desempenho.</p>
+          <p>Em 28/10/2026, a versão 912b0c1 do FinCK foi executada localmente: 457 casos passaram no navegador e 515 verificações passaram nos oito scripts Node.js, sem falhas. A soma de 972 reúne contagens de granularidade diferente; não é percentual de cobertura. Os scripts de IA usaram respostas simuladas, sem chamadas a provedores. O teste não comprova funcionamento do login, das políticas RLS ou das funções SQL no banco publicado.</p>
+          <p>Os 1,2 s, quatro correções e métricas de UX permanecem registros da equipe. Capturas e valores do modo de demonstração são exemplos simulados. A latência pontual não é garantia de desempenho; não há resultado de estudo com usuários.</p>
           <p>Se pedirem as fontes: tecla <kbd>R</kbd> ou o botão Referências.</p>
         </div>
       </section>
@@ -1324,7 +1324,7 @@
         <li>SERASA; OPINION BOX. <b>46% dos brasileiros já realizaram compras por impulso para se sentirem melhor emocionalmente</b>. 2025. Release da assessoria; 1.240 entrevistas online, 8–19 ago. 2025. Disponível em: &lt;<a href="https://saladeimprensa.trevocomunica.com/releases/46-dos-brasileiros-ja-realizaram-compras-por-impulso-para-se-sentirem-melhor-emocionalmente-revela-pesquisa-serasa/1008832" target="_blank" rel="noopener">https://saladeimprensa.trevocomunica.com/releases/46-dos-brasileiros-ja-realizaram-compras-por-impulso-para-se-sentirem-melhor-emocionalmente-revela-pesquisa-serasa/1008832</a>&gt;. Acesso em: 28 out. 2026.</li>
         <li>SERASA. <b>42% dos brasileiros inadimplentes em 2026 já enfrentaram restrições há 10 anos, revela Serasa</b>. São Paulo: Serasa, mar. 2026. Disponível em: &lt;<a href="https://www.serasa.com.br/imprensa/10-anos-do-mapa-de-inadimplencia/" target="_blank" rel="noopener">https://www.serasa.com.br/imprensa/10-anos-do-mapa-de-inadimplencia/</a>&gt;. Acesso em: 26 out. 2026.</li>
         <li>SERASA. <b>Geração Z é o público que mais cresce nas negociações de dívidas</b>. 2025. Disponível em: &lt;<a href="https://www.serasa.com.br/imprensa/geracao-z-e-o-publico-que-mais-cresce-nas-negociacoes-de-dividas/" target="_blank" rel="noopener">https://www.serasa.com.br/imprensa/geracao-z-e-o-publico-que-mais-cresce-nas-negociacoes-de-dividas/</a>&gt;. Acesso em: 28 out. 2026.</li>
-        <li>SERASA. <b>Média Score Serasa: conheça o Mapa Score do Brasil</b>. 2025. Retrato de abril de 2025. Disponível em: &lt;<a href="https://www.serasa.com.br/score/blog/media-score-serasa-conheca-mapa-score/" target="_blank" rel="noopener">https://www.serasa.com.br/score/blog/media-score-serasa-conheca-mapa-score/</a>&gt;. Acesso em: 28 out. 2026.</li>
+        <li>SERASA. <b>Mapa Score do Brasil</b>. Abril de 2026. Relatório original, p. 5 (média geral: 542) e p. 7 (18 a 25 anos: 500). Disponível em: &lt;<a href="https://www.serasa.com.br/score/mapa-do-score/" target="_blank" rel="noopener">página oficial do Mapa Score</a>&gt;; &lt;<a href="https://cdn.builder.io/o/assets%2Fb212bb18f00a40869a6cd42f77cbeefc%2F367df22cb3fe49ff9040988e2fdd48fe?alt=media&amp;apiKey=b212bb18f00a40869a6cd42f77cbeefc&amp;token=6543980c-bb06-4faf-b30e-4d52cc2c0bef" target="_blank" rel="noopener">PDF original de abril de 2026</a>&gt;. Acesso em: 28 out. 2026.</li>
         <li>SERASA. <b>Negociação de dívidas cresce 36% e crescimento da inadimplência desacelera</b>. 2026. Disponível em: &lt;<a href="https://www.serasa.com.br/imprensa/negociacao-de-dividas-cresce-36/" target="_blank" rel="noopener">https://www.serasa.com.br/imprensa/negociacao-de-dividas-cresce-36/</a>&gt;. Acesso em: 28 out. 2026.</li>
         <li>SHEFRIN, Hersh; STATMAN, Meir. The disposition to sell winners too early and ride losers too long: theory and evidence. <b>The Journal of Finance</b>, [S.l.], v. 40, n. 3, p. 777-790, jul. 1985.</li>
         <li>SIMON, Herbert A. <b>Models of man</b>: social and rational. New York: John Wiley &amp; Sons, 1957.</li>

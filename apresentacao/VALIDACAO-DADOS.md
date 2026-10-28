@@ -26,7 +26,7 @@ Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo no
 | Sono, trabalho excessivo e conflitos familiares atribuídos à edição 2026 da ANBIMA | Os indicadores não foram localizados no relatório completo da 9ª edição. Substituídos por indicadores efetivamente presentes: 34% com gastos superiores à renda nos seis meses anteriores; 31% sem reserva para imprevistos; 29% com alguma dívida em atraso. Mantidos os 47% classificados com alto estresse. São dados de 2025, publicados em 2026. [Relatório, p. 52–58](https://www.anbima.com.br/data/files/BE/05/B0/55/1EABD91008E6DAD9F82BA2A8/Raio-X-do-Investidor-9-edicao.pdf). |
 | Comparação 15% × 27% apresentada como informação sobre jovens | O [guia oficial da Febraban](https://cmsarquivos.febraban.org.br/Arquivos/documentos/PDF/febraban-guia%20de%20boas%20pr%C3%A1ticas-v7-web.pdf) informa 15% para ensino formal e 18% para redes sociais no total dos entrevistados. Corrigidos público e percentual. Mantidos 91% que reconhecem importância e 55% que entendem pouco ou nada, com referência ao Observatório de julho de 2025. |
 | +49% da Serasa | Corrigido o objeto: número de pessoas de 18 a 25 anos que negociaram no Serasa Limpa Nome, janeiro a julho de 2025 comparado ao mesmo período de 2024. Não equivale a crescimento da inadimplência nem demonstra tendência contínua. [Fonte primária](https://www.serasa.com.br/imprensa/geracao-z-e-o-publico-que-mais-cresce-nas-negociacoes-de-dividas/). |
-| Score 505 e média 548 sem data | Identificados como retrato de abril de 2025, conforme o [texto da Serasa](https://www.serasa.com.br/score/blog/media-score-serasa-conheca-mapa-score/). Score não foi tratado como teste de educação financeira. A página consultada contém imagens/textos alternativos com números diferentes dos parágrafos; a apresentação usa os valores explicitamente publicados nos parágrafos. |
+| Score 505 e média 548; divergência entre texto e imagens da página | Pendência resolvida na rechecagem: o PDF original de abril de 2025 confirma 548 na página 5 e 505 para 18–25 anos na página 7. Também foi consultado o PDF de abril de 2026, disponibilizado na [página oficial da Serasa](https://www.serasa.com.br/score/mapa-do-score/): 542 na página 5 e 500 para 18–25 anos na página 7. O cartão, as notas e a referência foram atualizados para abril de 2026. A conferência incluiu texto e renderização visual dos dois PDFs. As imagens divergentes da página de divulgação não foram usadas como evidência. |
 | 19,4% de comprometimento superior à metade da renda, setembro de 2026 | Não localizado no comunicado primário consultado. Substituído por 19,0% de julho de 2026, explicitamente publicado pela [CNC em 6/8/2026](https://portaldocomercio.org.br/acoes-institucionais/cnc-endividamento-e-o-maior-da-serie-historica/). Não se declarou falso o número anterior. |
 | Cartão como “principal dívida” de 85,3% | Corrigido para proporção dos endividados que citaram cartão entre as dívidas, julho de 2026. Não é proporção de todas as famílias nem uma pergunta exclusiva sobre a dívida principal. |
 | “2,5 vezes maior” | Precisado como “2,5 vezes a proporção”, comparação aproximada de 38,5% com 15,1%, nas faixas de renda indicadas. |
@@ -35,6 +35,9 @@ Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo no
 | Teoria apresentada como eficácia do recurso | Retiradas afirmações de que o custo em horas provoca deliberação ou pesa mais que preço monetário. Mantidas como hipóteses de desenho, sem confirmação no FinCK. Shefrin e Statman (1985) identificados pelo tema real, efeito disposição em investimentos. |
 | “Equação de Thoreau” | Identificada como adaptação didática. A frase foi conferida em [Walden, capítulo Economy](https://www.gutenberg.org/files/205/205-h/205-h.htm). Substituída página específica por capítulo, pois a paginação depende da edição. A fórmula financeira não foi atribuída como equação publicada por Thoreau. |
 | “Auditorias externas” e “H2 confirmada” | Substituídas por revisões técnicas internas e hipótese pendente de validação com usuários. |
+| Contagem de 973 testes (458 no navegador + 515 em Node.js) | A reexecução de 28/10/2026, no commit 912b0c1 do FinCK, encontrou 457 casos no navegador e 515 verificações nos scripts Node.js, todos aprovados: soma de 972. Apresentação e notas corrigidas para essa execução identificada. A soma reúne casos de teste e verificações com granularidades diferentes; não mede cobertura, segurança em produção ou eficácia educativa. Não se concluiu que a contagem histórica de outra versão era falsa. |
+| “63 políticas RLS” | O código usa criação dinâmica e substituição de políticas entre migrações, não apenas declarações individuais que possam ser somadas. A leitura não sustentou o total 63, e o banco publicado não foi consultado. Retirada a contagem, preservando a descrição de políticas para isolamento por usuário. Definir uma política no código não comprova sua implantação ou eficácia em produção. |
+| IA recebe “só dados agregados” | Precisado o escopo: o panorama da Revisão é agregado; os recursos de extração recebem foto ou link. Não se estendeu a todas as rotas uma propriedade do panorama da Revisão. |
 
 ## Dados externos preservados
 
@@ -46,11 +49,47 @@ Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo no
 
 ## Limites e dados internos
 
-Foram preservados os números técnicos internos solicitados: 973 testes registrados, divisão 458/515, rodadas de UX, distância até decisão, etapas, termos de IA, 1,2 s em verificação pontual, quatro correções, tabelas, migrações, políticas, funções, níveis, conquistas e regras de XP. A revisão não reproduziu a suíte do aplicativo, nem reexecutou a verificação de produção de 15/10/2026. Esses números não receberam status de auditados externamente.
+Na primeira revisão foram preservados os números internos, sem reprodução da suíte. Na rechecagem de 28/10/2026, a suíte foi efetivamente executada na cópia local do commit `912b0c13abeb6b164cda79ad4617bf078d3865bb` do FinCK: 457 casos no navegador e 515 verificações nos oito scripts Node.js, sem falhas. A apresentação agora usa essa contagem observada, e não o total anterior de 973. O [registro da execução](evidencias/verificacao-local-2026-10-28.json) identifica versão, ambiente, scripts, quantidades e limites.
+
+A leitura estática das migrações confirmou definições de 20 tabelas e 14 nomes de funções SQL em 13 arquivos. Isso descreve o código versionado, não o esquema efetivamente implantado. A contagem de políticas RLS foi retirada, pois não foi confirmada. Não foram usados dados reais, credenciais de usuário ou consultas ao banco de produção.
+
+Rodadas de UX, distância até decisão, etapas, termos de IA, 1,2 s em verificação pontual, quatro correções, níveis, conquistas e regras de XP permanecem como registros ou características internas. Foram localizados os registros de UX em `docs/ux-sem-cara-de-ia.md` e o registro pontual de 1,2 s em `docs/criterios-de-entrega.md` do FinCK. A medição de latência de 15/10/2026 não foi reexecutada e não representa média, percentil ou garantia de desempenho. Nenhum desses registros foi denominado auditoria externa.
 
 Valores nas capturas e na demonstração não representam um estudo de usuários. “Economia confirmada” é o nome de um registro baseado no relato posterior da pessoa, sem comprovação independente. Não há mensuração apresentada de redução de consumo impulsivo, confiança ou resíduos.
 
 Os documentos internos da escola e os registros de desenvolvimento foram preservados como fontes internas; esta revisão não constitui autenticação desses documentos.
+
+## Rechecagem do score e testes locais — 28/10/2026
+
+### Relatórios originais da Serasa
+
+- [Abril de 2025: PDF original ligado pelo blog da Serasa](https://cdn.builder.io/o/assets%2Fb212bb18f00a40869a6cd42f77cbeefc%2F238c18617229425bb8ba9eafed0ce0c9?alt=media&apiKey=b212bb18f00a40869a6cd42f77cbeefc&token=475dd68f-919b-4286-9868-4acfa40eb3da): 548 geral (p. 5), 505 para 18–25 anos (p. 7).
+- [Abril de 2026: PDF original ligado na página oficial do Mapa Score](https://cdn.builder.io/o/assets%2Fb212bb18f00a40869a6cd42f77cbeefc%2F367df22cb3fe49ff9040988e2fdd48fe?alt=media&apiKey=b212bb18f00a40869a6cd42f77cbeefc&token=6543980c-bb06-4faf-b30e-4d52cc2c0bef): 542 geral (p. 5), 500 para 18–25 anos (p. 7). É o recorte usado na apresentação.
+- O [comunicado oficial da Serasa de agosto de 2026](https://www.serasa.com.br/imprensa/primeiro-ano-mapa-score-brasil/) também informa os valores de 2026. A escolha das páginas do PDF evita misturar o histórico de 2025 com o recorte de 2026.
+- SHA-256 dos arquivos consultados: 2025, `9226383cef2736d928f0a5b7034eb7fabfeef1a31ace94b03f74ef038a7bae2e`; 2026, `79bd2ca413192b46b3012374c7e3d42f9911ac1b25e7638f6711d9c35912143c`.
+
+O score é uma pontuação de crédito. Não é uma avaliação isolada de educação financeira, não é o Índice FinCK e não comprova que jovens são mais inadimplentes. A menor média se refere às seis faixas apresentadas naquele relatório.
+
+### Reprodução local das verificações técnicas
+
+| Suíte | Aprovadas | Falhas |
+|---|---:|---:|
+| `testes.html`, no navegador | 457 | 0 |
+| `node ferramentas/testar-assistente.mjs` | 131 | 0 |
+| `node ferramentas/testar-ia.mjs` | 77 | 0 |
+| `node ferramentas/testar-impacto.mjs` | 31 | 0 |
+| `node ferramentas/testar-print.mjs` | 51 | 0 |
+| `node ferramentas/testar-extracao.mjs` | 95 | 0 |
+| `node ferramentas/testar-locais.mjs` | 22 | 0 |
+| `node ferramentas/testar-ocorrencias.mjs` | 53 | 0 |
+| `node ferramentas/testar-programacao.mjs` | 55 | 0 |
+| **Node.js, subtotal** | **515** | **0** |
+
+Ambiente: Windows, Node.js v24.22.1 e Chrome headless. Navegador com contexto novo e servidor HTTP local; conexões externas bloqueadas. Scripts Node.js executados no modo padrão de testes simulados, sem `--ao-vivo`; as dependências foram extraídas das versões e integridades do lockfile, sem scripts de instalação. Não houve chamadas pagas a provedores de IA.
+
+Uma tentativa inicial pelo protocolo `file://` falhou em 11 casos que dependiam de `fetch` dos arquivos locais; a execução adequada em HTTP local concluiu os 457 casos sem falhas. Isso foi uma limitação do ambiente inicial, não uma correção no app. Não foram alterados os arquivos do FinCK para obter os resultados.
+
+Não foram testados nesta execução o login real, a autorização entre usuários no banco publicado, as RPCs em produção, a qualidade das respostas de modelos ao vivo ou o efeito educativo com participantes. Um conjunto de testes aprovado não implica cobertura integral do aplicativo.
 
 ## Verificação da apresentação
 
