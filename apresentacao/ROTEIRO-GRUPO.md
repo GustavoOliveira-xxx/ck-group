@@ -6,38 +6,40 @@
 
 **Duração-alvo: cerca de 8 minutos.** A fala-base ocupa 7min20s; reservar cerca de 20 segundos para trocas e 20 segundos de margem.
 
+**Única atribuição confirmada: Gustavo Oliveira dos Santos nos itens de conteúdo 01 e 02.** Os responsáveis pelos itens 03 a 12, pela capa e pelo agradecimento estão a definir. Os demais pares são blocos de organização, sem nomes atribuídos.
+
 ## Como usar
 
-- Cada integrante apresenta dois itens de conteúdo, com numeração 01 a 12 no cabeçalho. A capa e o agradecimento ficam fora dessa divisão.
-- A navegação tem 14 telas: capa, 12 itens e agradecimento. O item 01 corresponde à tela 02/14; o item 12, à tela 13/14. A última é 14/14 e não tem fala de conteúdo.
-- Falar apenas o texto de **Fala**. As orientações de ação, passagem e apoio são para ensaio. O ritmo exato precisa ser cronometrado pelo grupo.
+- A divisão planejada mantém dois itens de conteúdo por integrante. Apenas o primeiro par está confirmado.
+- Use a numeração 01 a 12 no cabeçalho dos slides. A navegação tem 14 telas: capa, 12 itens e agradecimento. Item 01 = tela 02/14; item 12 = tela 13/14; agradecimento = tela 14/14.
+- Falar apenas o texto de **Fala**. Ação, passagem e apoio são orientações de ensaio. Os tempos precisam ser cronometrados pelo grupo.
 - Usar as capturas já nos slides. Abrir o aplicativo ao vivo apenas se a banca pedir.
-- Não ler todos os números, autores, disciplinas ou nomes da equipe.
+- As passagens são neutras: nenhum outro integrante foi confirmado como apresentador.
 
 ## Divisão das falas
 
-| Integrante | Itens de conteúdo | Tema | Tempo dos dois itens |
+| Responsável | Itens de conteúdo | Tema | Tempo dos dois itens |
 |---|---|---|---|
-| Gustavo Oliveira dos Santos | 01 e 02 | Abertura e problema | 1min05s |
-| Éric Estrela Vieira | 03 e 04 | Crédito e formação financeira | 1min10s |
-| Gabriel Heanna dos Reis | 05 e 06 | Meio ambiente e aplicação local | 1min05s |
-| Paulo Henrique de Lima Silva | 07 e 08 | Fundamentação e método | 1min10s |
-| Pedro Alcantara dos Santos Fialho | 09 e 10 | O aplicativo na prática | 1min15s |
-| Thiago Wilson Vieira Serbino | 11 e 12 | Desenvolvimento e conclusão | 1min05s |
+| Gustavo Oliveira dos Santos (confirmado) | 01 e 02 | Abertura e problema | 1min05s |
+| A definir | 03 e 04 | Crédito e formação financeira | 1min10s |
+| A definir | 05 e 06 | Meio ambiente e aplicação local | 1min05s |
+| A definir | 07 e 08 | Fundamentação e método | 1min10s |
+| A definir | 09 e 10 | O aplicativo na prática | 1min15s |
+| A definir | 11 e 12 | Desenvolvimento e conclusão | 1min05s |
 
-Abertura na capa: Gustavo, 20 segundos. Agradecimento: Thiago, 10 segundos, em nome de todos. A ordem foi organizada para este roteiro; o grupo pode trocar os responsáveis mantendo os pares e os tempos.
+Capa: responsável a definir, 20 segundos. Agradecimento: responsável a definir, 10 segundos, em nome de todos.
 
 ## Abertura na capa
 
-**Gustavo · 20 segundos**
+**Responsável a definir · 20 segundos**
 
 Bom dia, banca. Somos a Conscious Knowledge, do segundo C de Informática para Internet. Hoje apresentamos o FinCK, uma aplicação web que mostra o impacto financeiro de uma compra antes da decisão. Vamos apresentar o problema, a solução e o que já verificamos.
 
-*Ação:* Deixe a capa na tela, cumprimente a banca e avance. Não leia os nomes dos seis integrantes nesta abertura.
+**Ação:** Deixe a capa na tela, cumprimente a banca e avance. Não leia os nomes dos seis integrantes nesta abertura.
 
 ## Gustavo Oliveira dos Santos
 
-Abertura e problema · tempo-alvo dos dois itens: 1min05s.
+**Responsável: Gustavo Oliveira dos Santos (confirmado).** Abertura e problema · tempo-alvo dos dois itens: 1min05s.
 
 ### Item 01 Tema, problema e hipóteses
 
@@ -63,11 +65,11 @@ A dimensão do problema aparece na pesquisa da CNC: em julho de 2026, 82% das fa
 
 **Não esquecer:** Dívida a vencer e inadimplência são conceitos diferentes.
 
-**Passagem:** Éric continua com crédito e formação financeira.
+**Passagem:** Agora seguimos com crédito e formação financeira.
 
-## Éric Estrela Vieira
+## Itens 03 e 04 - a definir
 
-Crédito e formação financeira · tempo-alvo dos dois itens: 1min10s.
+**Responsável: A definir.** Crédito e formação financeira · tempo-alvo dos dois itens: 1min10s.
 
 ### Item 03 Crédito caro e inadimplência
 
@@ -93,11 +95,11 @@ O problema também envolve formação e comportamento. Na pesquisa da Febraban d
 
 **Não esquecer:** Pesquisas externas contextualizam o problema; não medem os resultados do app.
 
-**Passagem:** Gabriel apresenta o ambiente e a aplicação local.
+**Passagem:** A seguir, o ambiente e a aplicação local.
 
-## Gabriel Heanna dos Reis
+## Itens 05 e 06 - a definir
 
-Meio ambiente e aplicação local · tempo-alvo dos dois itens: 1min05s.
+**Responsável: A definir.** Meio ambiente e aplicação local · tempo-alvo dos dois itens: 1min05s.
 
 ### Item 05 Consumo e resíduos eletrônicos
 
@@ -123,11 +125,11 @@ A aplicação local é Taboão da Serra, que tinha mais de 273 mil habitantes no
 
 **Não esquecer:** Aplicação local concreta, sem inventar parceria ou impacto medido.
 
-**Passagem:** Paulo explica a fundamentação e o método.
+**Passagem:** Passamos à fundamentação e ao método.
 
-## Paulo Henrique de Lima Silva
+## Itens 07 e 08 - a definir
 
-Fundamentação e método · tempo-alvo dos dois itens: 1min10s.
+**Responsável: A definir.** Fundamentação e método · tempo-alvo dos dois itens: 1min10s.
 
 ### Item 07 Fundamentação teórica
 
@@ -153,11 +155,11 @@ O trabalho combinou pesquisa bibliográfica, consulta a dados externos e desenvo
 
 **Não esquecer:** Separar testes técnicos já executados da validação com pessoas ainda pendente.
 
-**Passagem:** Pedro mostra o aplicativo na prática.
+**Passagem:** Agora, o aplicativo na prática.
 
-## Pedro Alcantara dos Santos Fialho
+## Itens 09 e 10 - a definir
 
-O aplicativo na prática · tempo-alvo dos dois itens: 1min15s.
+**Responsável: A definir.** O aplicativo na prática · tempo-alvo dos dois itens: 1min15s.
 
 ### Item 09 FinCK of Reality
 
@@ -183,11 +185,11 @@ O aplicativo também mostra o efeito acumulado dos hábitos. Na demonstração, 
 
 **Não esquecer:** Distinguir projeção, valor potencial e relato posterior.
 
-**Passagem:** Thiago conclui com desenvolvimento e interdisciplinaridade.
+**Passagem:** Por fim, desenvolvimento e interdisciplinaridade.
 
-## Thiago Wilson Vieira Serbino
+## Itens 11 e 12 - a definir
 
-Desenvolvimento e conclusão · tempo-alvo dos dois itens: 1min05s.
+**Responsável: A definir.** Desenvolvimento e conclusão · tempo-alvo dos dois itens: 1min05s.
 
 ### Item 11 Arquitetura e IA opcional
 
@@ -213,11 +215,11 @@ O projeto reúne conhecimentos do curso: Banco de Dados na organização dos reg
 
 **Não esquecer:** Fechar a apresentação aqui; a próxima tela é somente agradecimento.
 
-**Passagem:** Avance para o agradecimento. Faça o encerramento em nome de todos e deixe a tela aberta para as perguntas.
+**Passagem:** Avance para o agradecimento e deixe a tela aberta para as perguntas. O grupo ainda definirá quem fará a fala final.
 
 ## Agradecimento
 
-**Tela 14/14 · Thiago, em nome do grupo · 10 segundos**
+**Tela 14/14 · responsável a definir, em nome do grupo · 10 segundos**
 
 Obrigado pela atenção. Estamos à disposição para as perguntas da banca.
 
@@ -253,16 +255,15 @@ Não apresentamos esses efeitos como comprovados. Economia registrada depende do
 
 ## Ensaio e operação
 
-1. Fazer uma rodada completa com cronômetro, na mesma ordem. Se ultrapassar oito minutos, reduzir pausas e exemplos extras; não retirar as ressalvas essenciais.
-2. Uma pessoa controla os slides para o grupo inteiro; seguir a fala, não avançar no meio da frase.
-3. Fazer as cinco trocas de integrante em até quatro segundos cada, sem nova apresentação pessoal.
-4. Antes da banca, abrir a apresentação, conferir tela cheia e deixar o app em uma segunda aba.
-5. Durante a projeção, manter o painel de notas fechado. N abre notas; R abre referências; setas mudam slides; F alterna tela cheia.
-6. Se houver pergunta durante a fala, responder brevemente e retomar o item onde parou. Para explicações longas, usar o momento final de perguntas, conforme a orientação da banca.
+1. Combinar os responsáveis pelos cinco pares restantes, pela abertura e pelo agradecimento.
+2. Fazer uma rodada completa com cronômetro. Se ultrapassar oito minutos, reduzir pausas e comentários extras; preservar as ressalvas essenciais.
+3. Uma pessoa controla os slides para todo o grupo. Reservar cerca de quatro segundos para cada troca, sem nova apresentação pessoal.
+4. Antes da banca, conferir a tela cheia e deixar o aplicativo preparado em uma segunda aba.
+5. Manter as notas fechadas durante a projeção. N abre notas; R abre referências; setas mudam slides; F alterna tela cheia.
 
 ## Fontes e limites
 
-Os nomes e a turma foram copiados da seção Equipe do site da CK. As falas seguem os dados e limites da apresentação revisada. Os tempos são metas de ensaio, não medições de leitura do grupo. Testes locais, projeções, dados de demonstração e pesquisas externas mantêm suas naturezas distintas. A retirada do antigo quadro de resultados do encerramento não cria nova evidência de eficácia; os resultados técnicos entram no item 08 e no apoio para a banca.
+Os nomes no agradecimento e a turma seguem a seção Equipe do site da CK. Isso não define quem apresenta cada parte. Somente Gustavo nos itens 01 e 02 está confirmado. As falas mantêm as distinções entre pesquisas externas, demonstrações, projeções, verificações técnicas e avaliação com usuários ainda pendente. Os tempos são metas de ensaio.
 
 - [Apresentação](https://gustavooliveira-xxx.github.io/ck-group/apresentacao/index.html)
 - [Equipe original](https://gustavooliveira-xxx.github.io/ck-group/#equipe)
