@@ -5840,24 +5840,27 @@ html[data-perf="leve"] .palco-cartao__brilho { display: none; }
    vitrine de produtos e a vinheta de abertura.
    ========================================================= */
 
-/* — logo oficial (máscara vetorial) no cabeçalho, rodapé e equipe — */
-.logo-container img.logo-ck {
-  width: clamp(46px, 5.5vw, 58px);
-  height: auto;
-  aspect-ratio: 1;
+/* — logo completa (PNG) na interface; a máscara vetorial fica para a vinheta e os ícones — */
+.logo-container picture {
+  display: contents;
+}
+
+.logo-container img.logo-ck-png {
+  width: auto;
+  height: clamp(50px, 6vw, 62px);
 }
 
 .footer-marca img.footer-marca__logo {
-  width: 56px;
-  height: 56px;
+  width: auto;
+  height: 72px;
 }
 
-/* — núcleo do hero com a logo oficial — */
+/* — núcleo do hero com a logo oficial completa — */
 .nucleo__marca--unica {
-  left: 8%;
-  top: 8%;
-  width: 84%;
-  height: 84%;
+  left: 21%;
+  top: 6%;
+  width: 58%;
+  height: 88%;
   z-index: 5;
   cursor: default;
   opacity: 1;
@@ -6004,10 +6007,14 @@ html[data-perf="leve"] .palco-cartao__brilho { display: none; }
   background: radial-gradient(circle, rgba(163, 8, 200, .45), rgba(100, 1, 135, .18) 45%, transparent 70%);
 }
 
+.marca-oficial__palco picture {
+  display: contents;
+}
+
 .marca-oficial__palco img {
   position: relative;
-  width: 86%;
-  height: auto;
+  width: auto;
+  height: 92%;
   filter: drop-shadow(0 22px 30px rgba(0, 0, 0, .5));
   animation: flutua 7s ease-in-out infinite;
 }
@@ -6036,6 +6043,27 @@ html[data-perf="leve"] .palco-cartao__brilho { display: none; }
 
 .marca-oficial__slogan span {
   color: var(--yellow-400);
+}
+
+.marca-oficial__simples {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(9, 7, 14, .55);
+  max-width: 60ch;
+}
+
+.marca-oficial__simples img {
+  flex: none;
+  width: 64px;
+  height: 64px;
+}
+
+.marca-oficial__simples b {
+  color: var(--text-0);
 }
 
 .marca-oficial__cores {
