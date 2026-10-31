@@ -19,47 +19,9 @@
 
 
   /* ---------------------------------------------------------
-     00. Atmosfera da marca: a CK tem uma identidade só (roxo e ouro).
-     O alter ego saiu do site; ele fica só nas atividades internas.
+     00. Marca: a CK tem uma identidade só, roxo e ouro.
      --------------------------------------------------------- */
-  const temasValidos = ["origem"];
-  const coresTema = {
-    origem: "#7e22ce",
-  };
-
-  const sincronizarMarcaNucleo = (tema) => {
-    if (tema === "fusao") return;
-    $$('[data-marca]').forEach((marca) => {
-      const ativa = marca.dataset.marca === tema;
-      marca.classList.toggle("is-active", ativa);
-      marca.setAttribute("aria-pressed", String(ativa));
-    });
-  };
-
-  const aplicarTema = (tema) => {
-    if (!temasValidos.includes(tema)) return;
-    document.body.dataset.tema = tema;
-
-    $$('[data-tema-botao]').forEach((botao) => {
-      const ativo = botao.dataset.temaBotao === tema;
-      botao.classList.toggle("is-active", ativo);
-      botao.setAttribute("aria-pressed", String(ativo));
-    });
-
-    sincronizarMarcaNucleo(tema);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", coresTema[tema]);
-    window.dispatchEvent(new CustomEvent("ck:tema", { detail: { tema } }));
-  };
-
-  $$('[data-tema-botao]').forEach((botao) => {
-    botao.addEventListener("click", () => aplicarTema(botao.dataset.temaBotao));
-  });
-
-  $$('[data-marca]').forEach((marca) => {
-    marca.addEventListener("click", () => aplicarTema(marca.dataset.marca));
-  });
-
-  aplicarTema("origem");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#7e22ce");
 
 
   /* ---------------------------------------------------------
@@ -70,24 +32,6 @@
   });
 
 
-  /* ---------------------------------------------------------
-     01. Preloader
-     --------------------------------------------------------- */
-  const preloader = $("[data-preloader]");
-
-  const encerrarPreloader = () => {
-    if (!preloader || preloader.classList.contains("is-pronto")) return;
-    preloader.classList.add("is-pronto");
-    document.body.classList.remove("is-travado");
-    setTimeout(() => preloader.remove(), 900);
-  };
-
-  if (preloader) {
-    document.body.classList.add("is-travado");
-    window.addEventListener("load", () => setTimeout(encerrarPreloader, semMovimento ? 0 : 600));
-    // rede lenta ou imagem grande não pode prender o usuário
-    setTimeout(encerrarPreloader, 4500);
-  }
 
 
   /* ---------------------------------------------------------
@@ -145,21 +89,11 @@
   progresso.setAttribute("aria-hidden", "true");
   document.body.appendChild(progresso);
 
-  /* a barra de atmosfera recolhe enquanto a pessoa rola e volta na pausa:
-     em tela estreita ela fica no canto e não pode disputar a linha de leitura */
-  const dock = $(".tema-dock");
-  let pausaRolagem;
 
   const aoRolar = () => {
     const y = window.scrollY;
 
     header?.classList.toggle("is-scrolled", y > 24);
-
-    if (dock) {
-      dock.classList.add("is-recolhida");
-      clearTimeout(pausaRolagem);
-      pausaRolagem = setTimeout(() => dock.classList.remove("is-recolhida"), 620);
-    }
 
     if (y > 140 && !nav?.classList.contains("is-open")) {
       if (y > ultimoY + 8) header?.classList.add("is-hidden");
@@ -232,12 +166,13 @@
     [".ciclo-conhecimento__texto", "reveal--esq"],
     [".knowledge-core", "reveal--dir"],
     [".dynamic-cta", ""],
-    [".identidade-paleta", ""],
-    [".identity-totem--origem", "reveal--esq"],
-    [".identity-totem--futuro", "reveal--dir"],
-    [".identity-reactor", "reveal--zoom"],
-    [".fusion-lab", ""],
-    [".identity-matrix article", "reveal--zoom"],
+    [".produto", "reveal--zoom"],
+    [".synck-intro", ""],
+    [".synck-recurso", "reveal--zoom"],
+    [".autonick-palco", "reveal--zoom"],
+    [".autonick-texto", "reveal--dir"],
+    [".marca-oficial__palco", "reveal--esq"],
+    [".marca-oficial__texto", "reveal--dir"],
     [".entregavel", ""],
     [".timeline__item", "reveal--esq"],
     [".classroom", ""],
@@ -290,19 +225,7 @@
     let animando = true;
     let quadro = 0;
 
-    const PALETAS = {
-      origem: ["168, 85, 247", "192, 132, 252", "254, 200, 0"],
-      fusao: ["168, 85, 247", "37, 240, 162", "50, 215, 230", "254, 200, 0"],
-      futuro: ["37, 240, 162", "50, 215, 230", "234, 255, 223"],
-    };
-    let CORES = PALETAS[document.body.dataset.tema] || PALETAS.fusao;
-
-    window.addEventListener("ck:tema", (e) => {
-      CORES = PALETAS[e.detail?.tema] || PALETAS.fusao;
-      particulas.forEach((p, i) => {
-        p.cor = CORES[i % CORES.length];
-      });
-    });
+    const CORES = ["168, 85, 247", "192, 132, 252", "254, 200, 0"];
 
     // as ligações entre vizinhos são O(n²): é o trecho caro do laço
     const LIGA = perfLeve ? 0 : 130;
@@ -888,31 +811,5 @@
   });
 
 
-  /* ---------------------------------------------------------
-     15. Mesa de fusão das duas identidades CK
-     --------------------------------------------------------- */
-  const mixOrigem = $("[data-mix-origin]");
-  const mixFuturo = $("[data-mix-future]");
-  const visualFusao = $("[data-fusion-visual]");
-
-  if (mixOrigem && mixFuturo && visualFusao) {
-    const atualizarMistura = () => {
-      const origem = Number(mixOrigem.value);
-      const futuro = Number(mixFuturo.value);
-      const origemTexto = $("[data-mix-origin-value]");
-      const futuroTexto = $("[data-mix-future-value]");
-
-      mixOrigem.style.setProperty("--range-p", `${origem}%`);
-      mixFuturo.style.setProperty("--range-p", `${futuro}%`);
-      visualFusao.style.setProperty("--mix-origin", String(origem / 100));
-      visualFusao.style.setProperty("--mix-future", String(futuro / 100));
-      if (origemTexto) origemTexto.textContent = `${origem}%`;
-      if (futuroTexto) futuroTexto.textContent = `${futuro}%`;
-    };
-
-    mixOrigem.addEventListener("input", atualizarMistura);
-    mixFuturo.addEventListener("input", atualizarMistura);
-    atualizarMistura();
-  }
 
 })();
