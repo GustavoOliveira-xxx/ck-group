@@ -3317,7 +3317,7 @@ body {
   --tema-cor: var(--purple-400);
   --tema-cor-rgb: 168, 85, 247;
   --tema-secundaria: var(--mint-500);
-  --tema-secundaria-rgb: 37, 240, 162;
+  --tema-secundaria-rgb: 168, 85, 247;
   --tema-luz: var(--yellow-400);
   overflow-x: clip;
   transition: background-color .8s var(--ease), color .5s ease;
@@ -3337,15 +3337,15 @@ body[data-tema="origem"] {
 
 body[data-tema="futuro"] {
   --tema-cor: var(--mint-500);
-  --tema-cor-rgb: 37, 240, 162;
+  --tema-cor-rgb: 168, 85, 247;
   --tema-secundaria: var(--cyan-500);
-  --tema-secundaria-rgb: 50, 215, 230;
+  --tema-secundaria-rgb: 254, 200, 0;
   --tema-luz: var(--mint-300);
 }
 
 body[data-tema="fusao"] {
   --tema-cor: var(--mint-500);
-  --tema-cor-rgb: 37, 240, 162;
+  --tema-cor-rgb: 168, 85, 247;
   --tema-secundaria: var(--purple-400);
   --tema-secundaria-rgb: 168, 85, 247;
   --tema-luz: var(--yellow-400);
@@ -3357,7 +3357,7 @@ body[data-tema="fusao"] {
   height: 54vw;
   right: -26vw;
   top: 22%;
-  background: radial-gradient(circle, rgba(37, 240, 162, .2), rgba(11, 169, 183, .07) 46%, transparent 72%);
+  background: radial-gradient(circle, rgba(168, 85, 247, .2), rgba(126, 34, 206, .07) 46%, transparent 72%);
   filter: blur(80px);
   opacity: .5;
   animation: orbe-futuro-a 28s ease-in-out infinite alternate;
@@ -3368,7 +3368,7 @@ body[data-tema="fusao"] {
   height: 38vw;
   left: 26%;
   bottom: -18vw;
-  background: radial-gradient(circle, rgba(50, 215, 230, .15), rgba(37, 240, 162, .04) 52%, transparent 72%);
+  background: radial-gradient(circle, rgba(254, 200, 0, .15), rgba(168, 85, 247, .04) 52%, transparent 72%);
   filter: blur(70px);
   opacity: .38;
   animation: orbe-futuro-b 37s ease-in-out infinite alternate-reverse;
@@ -3699,13 +3699,13 @@ body[data-tema="futuro"] nav a::after {
 .hero-content {
   background:
     radial-gradient(circle at 12% 50%, rgba(147,51,196,.13), transparent 28%),
-    radial-gradient(circle at 88% 36%, rgba(37,240,162,.095), transparent 32%),
+    radial-gradient(circle at 88% 36%, rgba(168, 85, 247,.095), transparent 32%),
     linear-gradient(150deg, rgba(24, 12, 40, .82), rgba(5, 13, 11, .84));
   border-color: rgba(var(--tema-cor-rgb), .28);
   box-shadow:
     var(--shadow-deep),
     0 0 70px rgba(147, 51, 196, .14),
-    0 0 90px rgba(37, 240, 162, .07),
+    0 0 90px rgba(168, 85, 247, .07),
     inset 0 1px 0 rgba(255, 255, 255, .07);
 }
 
@@ -3727,7 +3727,7 @@ body[data-tema="futuro"] nav a::after {
     transparent 18%,
     rgba(168, 85, 247, .07) 36%,
     rgba(254, 200, 0, .035) 48%,
-    rgba(37, 240, 162, .07) 62%,
+    rgba(168, 85, 247, .07) 62%,
     transparent 82%);
   background-size: 240% 100%;
   animation: hero-reflexo 8s ease-in-out infinite alternate;
@@ -3753,14 +3753,14 @@ body[data-tema="futuro"] nav a::after {
 
 .nucleo__palco::before {
   inset: -18%;
-  border: 1px solid rgba(37,240,162,.12);
-  box-shadow: inset 0 0 55px rgba(37,240,162,.055), 0 0 50px rgba(147,51,196,.06);
+  border: 1px solid rgba(168, 85, 247,.12);
+  box-shadow: inset 0 0 55px rgba(168, 85, 247,.055), 0 0 50px rgba(147,51,196,.06);
   animation: nucleo-respira 5s ease-in-out infinite;
 }
 
 .nucleo__palco::after {
   inset: 15%;
-  background: radial-gradient(circle, rgba(255,255,255,.14), rgba(37,240,162,.09) 22%, rgba(147,51,196,.08) 46%, transparent 72%);
+  background: radial-gradient(circle, rgba(255,255,255,.14), rgba(168, 85, 247,.09) 22%, rgba(147,51,196,.08) 46%, transparent 72%);
   filter: blur(16px);
 }
 
@@ -3853,11 +3853,11 @@ body[data-tema="futuro"] nav a::after {
 .nucleo__halo {
   background:
     radial-gradient(circle at 35% 52%, rgba(147,51,196,.28), transparent 48%),
-    radial-gradient(circle at 66% 44%, rgba(37,240,162,.2), transparent 48%);
+    radial-gradient(circle at 66% 44%, rgba(168, 85, 247,.2), transparent 48%);
 }
 
-.nucleo__anel--a { border-color: rgba(37,240,162,.36); box-shadow: 0 0 22px rgba(37,240,162,.16), inset 0 0 22px rgba(147,51,196,.12); }
-.nucleo__anel--c { border-color: rgba(50,215,230,.25); }
+.nucleo__anel--a { border-color: rgba(168, 85, 247,.36); box-shadow: 0 0 22px rgba(168, 85, 247,.16), inset 0 0 22px rgba(147,51,196,.12); }
+.nucleo__anel--c { border-color: rgba(254, 200, 0,.25); }
 .nucleo__satelite { background: var(--mint-400); box-shadow: 0 0 16px var(--mint-glow-strong); }
 
 .hero-brand {
@@ -3874,8 +3874,8 @@ body[data-tema="futuro"] nav a::after {
 
 .hero-eyebrow {
   color: var(--mint-300);
-  background: linear-gradient(90deg, rgba(147,51,196,.13), rgba(37,240,162,.1));
-  border-color: rgba(37,240,162,.24);
+  background: linear-gradient(90deg, rgba(147,51,196,.13), rgba(168, 85, 247,.1));
+  border-color: rgba(168, 85, 247,.24);
 }
 
 .hero-eyebrow .ponto-vivo {
@@ -3896,13 +3896,13 @@ body[data-tema="futuro"] nav a::after {
 }
 
 .hero-metrics .metric-card:nth-child(2) {
-  border-color: rgba(37,240,162,.17);
-  background: linear-gradient(150deg, rgba(37,240,162,.06), rgba(255,255,255,.01) 62%), rgba(6,12,10,.72);
+  border-color: rgba(168, 85, 247,.17);
+  background: linear-gradient(150deg, rgba(168, 85, 247,.06), rgba(255,255,255,.01) 62%), rgba(6,12,10,.72);
 }
 
 .hero-metrics .metric-card:nth-child(3) {
   border-color: rgba(254,200,0,.15);
-  background: linear-gradient(150deg, rgba(254,200,0,.045), rgba(37,240,162,.035) 62%), rgba(8,8,11,.72);
+  background: linear-gradient(150deg, rgba(254,200,0,.045), rgba(168, 85, 247,.035) 62%), rgba(8,8,11,.72);
 }
 
 .hero-metrics .metric-card:nth-child(2) .metric-label { color: var(--mint-400); }
@@ -3910,11 +3910,11 @@ body[data-tema="futuro"] nav a::after {
 
 .btn--primario {
   background: linear-gradient(105deg, var(--purple-600), var(--purple-400) 42%, var(--mint-600) 92%);
-  box-shadow: 0 12px 34px rgba(147,51,196,.2), 0 0 28px rgba(37,240,162,.07);
+  box-shadow: 0 12px 34px rgba(147,51,196,.2), 0 0 28px rgba(168, 85, 247,.07);
 }
 
 .btn--primario::before {
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.22), rgba(37,240,162,.18), transparent);
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.22), rgba(168, 85, 247,.18), transparent);
 }
 
 .ticker {
@@ -5530,7 +5530,7 @@ body[data-tema="futuro"] nav a::after {
 @keyframes identity-orbit-b { to { transform: translate(-50%, -50%) rotateY(70deg) rotateZ(384deg); } }
 @keyframes identity-reflexo { 0%, 18% { transform: rotate(18deg) translateX(-220%); opacity: 0; } 48% { opacity: .9; } 78%, 100% { transform: rotate(18deg) translateX(240%); opacity: 0; } }
 @keyframes reactor-pulso { 50% { transform: scale(1.16); opacity: .64; } }
-@keyframes reactor-ck { 50% { transform: translateZ(35px) scale(1.08); filter: drop-shadow(0 0 28px rgba(37,240,162,.25)); } }
+@keyframes reactor-ck { 50% { transform: translateZ(35px) scale(1.08); filter: drop-shadow(0 0 28px rgba(168, 85, 247,.25)); } }
 @keyframes reactor-centro { 50% { transform: scale(1.6); opacity: .62; } }
 @keyframes reactor-orbit-a { to { transform: rotateX(70deg) rotateZ(360deg); } }
 @keyframes reactor-orbit-b { to { transform: rotateY(70deg) rotateZ(396deg); } }
@@ -5572,12 +5572,12 @@ body[data-tema="futuro"] {
 
 body[data-tema="futuro"] body > header,
 body[data-tema="futuro"] > header {
-  border-bottom-color: rgba(37,240,162,.14);
+  border-bottom-color: rgba(168, 85, 247,.14);
 }
 
 body[data-tema="futuro"] .hero-content {
-  border-color: rgba(37,240,162,.32);
-  box-shadow: var(--shadow-deep), 0 0 78px rgba(37,240,162,.1), inset 0 1px 0 rgba(255,255,255,.06);
+  border-color: rgba(168, 85, 247,.32);
+  box-shadow: var(--shadow-deep), 0 0 78px rgba(168, 85, 247,.1), inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 body[data-tema="origem"] .hero-content {
@@ -5589,7 +5589,7 @@ body[data-tema="futuro"] .metric-card,
 body[data-tema="futuro"] .pilar,
 body[data-tema="futuro"] .funcao,
 body[data-tema="futuro"] .entregavel {
-  border-color: rgba(37,240,162,.14);
+  border-color: rgba(168, 85, 247,.14);
 }
 
 .pilar,
@@ -5641,7 +5641,7 @@ body[data-tema="futuro"] .entregavel {
 .entregavel:nth-child(4n + 2),
 .fluxo__passo:nth-child(4n + 2),
 .metric-card:nth-child(2) {
-  --card-rgb: 37, 240, 162;
+  --card-rgb: 168, 85, 247;
 }
 
 .pilar:nth-child(3),
@@ -5656,15 +5656,15 @@ body[data-tema="futuro"] .entregavel {
 .funcao:nth-child(4n),
 .entregavel:nth-child(4n),
 .fluxo__passo:nth-child(4n) {
-  --card-rgb: 50, 215, 230;
+  --card-rgb: 254, 200, 0;
 }
 
 .pilar:nth-child(2) .pilar__icone,
 .funcao:nth-child(3n + 2) .funcao__icone {
   color: var(--mint-400);
-  background: rgba(37,240,162,.07);
-  border-color: rgba(37,240,162,.2);
-  box-shadow: 0 0 22px rgba(37,240,162,.06);
+  background: rgba(168, 85, 247,.07);
+  border-color: rgba(168, 85, 247,.2);
+  box-shadow: 0 0 22px rgba(168, 85, 247,.06);
 }
 
 .pilar:nth-child(3) .pilar__icone,
@@ -5678,21 +5678,21 @@ body[data-tema="futuro"] .entregavel {
 .pilar:nth-child(4) .pilar__icone,
 .funcao:nth-child(4n) .funcao__icone {
   color: var(--cyan-400);
-  background: rgba(50,215,230,.06);
-  border-color: rgba(50,215,230,.18);
-  box-shadow: 0 0 22px rgba(50,215,230,.055);
+  background: rgba(254, 200, 0,.06);
+  border-color: rgba(254, 200, 0,.18);
+  box-shadow: 0 0 22px rgba(254, 200, 0,.055);
 }
 
 .entregavel:nth-child(2) .entregavel__tag,
-.entregavel:nth-child(6) .entregavel__tag { color: var(--mint-400); border-color: rgba(37,240,162,.2); background: rgba(37,240,162,.055); }
+.entregavel:nth-child(6) .entregavel__tag { color: var(--mint-400); border-color: rgba(168, 85, 247,.2); background: rgba(168, 85, 247,.055); }
 .entregavel:nth-child(3) .entregavel__tag { color: var(--yellow-400); border-color: rgba(254,200,0,.18); background: rgba(254,200,0,.05); }
-.entregavel:nth-child(4) .entregavel__tag { color: var(--cyan-400); border-color: rgba(50,215,230,.18); background: rgba(50,215,230,.05); }
+.entregavel:nth-child(4) .entregavel__tag { color: var(--cyan-400); border-color: rgba(254, 200, 0,.18); background: rgba(254, 200, 0,.05); }
 
 .anel-tech__item:nth-child(3n + 2) {
   color: var(--mint-300);
-  border-color: rgba(37,240,162,.28);
+  border-color: rgba(168, 85, 247,.28);
   background: rgba(3,25,17,.88);
-  box-shadow: 0 0 18px rgba(37,240,162,.08);
+  box-shadow: 0 0 18px rgba(168, 85, 247,.08);
 }
 
 .anel-tech__item:nth-child(3n) {
@@ -5712,9 +5712,9 @@ body[data-tema="futuro"] .entregavel {
 
 .membro:nth-child(3n + 2) .membro__avatar {
   color: var(--mint-300);
-  border-color: rgba(37,240,162,.26);
-  background: rgba(37,240,162,.07);
-  box-shadow: 0 0 28px rgba(37,240,162,.08);
+  border-color: rgba(168, 85, 247,.26);
+  background: rgba(168, 85, 247,.07);
+  box-shadow: 0 0 28px rgba(168, 85, 247,.08);
 }
 
 .membro:nth-child(3n) .membro__avatar {
@@ -5725,8 +5725,8 @@ body[data-tema="futuro"] .entregavel {
 
 #contato address p:nth-child(2) .contato-icone {
   color: var(--mint-400);
-  border-color: rgba(37,240,162,.2);
-  background: rgba(37,240,162,.06);
+  border-color: rgba(168, 85, 247,.2);
+  background: rgba(168, 85, 247,.06);
 }
 
 #contato address p:nth-child(3) .contato-icone {
@@ -5737,8 +5737,8 @@ body[data-tema="futuro"] .entregavel {
 
 #contato address p:nth-child(4) .contato-icone {
   color: var(--cyan-400);
-  border-color: rgba(50,215,230,.18);
-  background: rgba(50,215,230,.05);
+  border-color: rgba(254, 200, 0,.18);
+  background: rgba(254, 200, 0,.05);
 }
 
 
@@ -6433,9 +6433,9 @@ html[data-perf="leve"] .orbe--4 {
   height: 82vw;
   right: -36vw;
   background: radial-gradient(circle,
-      rgba(37, 240, 162, .13) 0%,
-      rgba(11, 169, 183, .07) 30%,
-      rgba(11, 169, 183, .02) 52%,
+      rgba(168, 85, 247, .13) 0%,
+      rgba(126, 34, 206, .07) 30%,
+      rgba(126, 34, 206, .02) 52%,
       transparent 74%);
 }
 
@@ -6444,8 +6444,8 @@ html[data-perf="leve"] .orbe--5 {
   height: 62vw;
   bottom: -26vw;
   background: radial-gradient(circle,
-      rgba(50, 215, 230, .10) 0%,
-      rgba(37, 240, 162, .05) 32%,
+      rgba(254, 200, 0, .10) 0%,
+      rgba(168, 85, 247, .05) 32%,
       transparent 72%);
 }
 
@@ -6959,4 +6959,299 @@ html[data-perf="leve"] .palco-cartao__brilho { display: none; }
   .palco-cartao__folha--2,
   .palco-cartao__folha--3 { display: none; }
   .palco-cartao__folha--1 { transform: none; }
+}
+
+/* =========================================================
+   Repaginação 2026: uma marca só (sem alter ego), slogan,
+   vitrine de produtos e a vinheta de abertura.
+   ========================================================= */
+
+/* — logo oficial (máscara vetorial) no cabeçalho, rodapé e equipe — */
+.logo-container img.logo-ck {
+  width: clamp(46px, 5.5vw, 58px);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.footer-marca img.footer-marca__logo {
+  width: 56px;
+  height: 56px;
+}
+
+/* — núcleo do hero com uma logo só — */
+.nucleo__marca--unica,
+.nucleo__marca--unica.nucleo__marca--origem {
+  left: 21%;
+  top: 6%;
+  width: 58%;
+  height: 88%;
+  cursor: default;
+  opacity: 1;
+  transform: translateZ(72px) rotateY(6deg) rotateZ(-3deg);
+}
+
+/* — slogan — */
+.hero-slogan {
+  margin: -.2rem 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.1vw, 1.32rem);
+  font-weight: 600;
+  letter-spacing: .005em;
+  color: var(--text-0);
+  text-wrap: balance;
+}
+
+.hero-slogan span {
+  color: var(--yellow-400);
+}
+
+/* — produtos — */
+.produtos-grade {
+  list-style: none;
+  margin: 2.6rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1.2rem;
+}
+
+.produto {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: .7rem;
+  padding: 1.4rem 1.3rem 1.3rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(147, 51, 196, .2), transparent 60%),
+    linear-gradient(160deg, rgba(30, 14, 52, .72), rgba(9, 7, 14, .9));
+  min-width: 0;
+}
+
+.produto__logo {
+  height: 150px;
+  display: grid;
+  place-items: center;
+}
+
+.produto__logo picture {
+  display: contents;
+}
+
+.produto__logo img {
+  max-width: 100%;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .45));
+}
+
+.produto h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+}
+
+.produto h3 span {
+  color: var(--yellow-400);
+}
+
+.produto p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: .95rem;
+  line-height: 1.55;
+}
+
+.produto__selo {
+  justify-self: start;
+  padding: .32rem .62rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+
+.produto__selo--ar { color: #5ee6a8; }
+.produto__selo--novo { color: var(--purple-300); }
+.produto__selo--breve { color: var(--yellow-400); }
+
+.produto__link {
+  justify-self: start;
+  font-weight: 600;
+  color: var(--text-0);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(254, 200, 0, .5);
+  padding-bottom: 2px;
+}
+
+.produto__link:hover,
+.produto__link:focus-visible {
+  color: var(--yellow-400);
+}
+
+.produto__link--breve {
+  color: var(--text-3);
+  border-bottom-style: dashed;
+}
+
+.produto--breve {
+  border-color: rgba(254, 200, 0, .28);
+}
+
+/* — identidade: marca oficial — */
+.marca-oficial {
+  margin-top: 2.4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.marca-oficial__palco {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.marca-oficial__luz {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(163, 8, 200, .45), rgba(100, 1, 135, .18) 45%, transparent 70%);
+}
+
+.marca-oficial__palco img {
+  position: relative;
+  width: 86%;
+  height: auto;
+  filter: drop-shadow(0 22px 30px rgba(0, 0, 0, .5));
+  animation: flutua 7s ease-in-out infinite;
+}
+
+.marca-oficial__texto {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+  min-width: 0;
+}
+
+.marca-oficial__texto p {
+  margin: 0;
+  color: var(--text-2);
+  max-width: 60ch;
+}
+
+.marca-oficial__slogan {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-0) !important;
+  text-wrap: balance;
+}
+
+.marca-oficial__slogan span {
+  color: var(--yellow-400);
+}
+
+.marca-oficial__cores {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+
+.marca-oficial__cores li {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: .55rem;
+  align-items: center;
+  padding: .5rem .8rem .5rem .55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(9, 7, 14, .6);
+}
+
+.marca-oficial__cores i {
+  grid-row: span 2;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--cor);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18);
+}
+
+.marca-oficial__cores b {
+  font-size: .82rem;
+  color: var(--text-0);
+}
+
+.marca-oficial__cores code {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-3);
+}
+
+@media (max-width: 860px) {
+  .marca-oficial { grid-template-columns: 1fr; }
+  .marca-oficial__palco { max-width: 300px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marca-oficial__palco img { animation: none; }
+}
+
+/* — Sem alter ego: no institucional, a "menta" e o "ciano" viram roxo e ouro.
+     A seção do DynamiCK mantém o verde, que é a cor do produto. — */
+body[data-tema="origem"] {
+  --mint-950: #12061f;
+  --mint-900: #1e0a33;
+  --mint-800: #3b0764;
+  --mint-700: #680c90;
+  --mint-600: #7e22ce;
+  --mint-500: #a855f7;
+  --mint-400: #c084fc;
+  --mint-300: #ddc4fd;
+  --mint-200: #f1e4ff;
+  --cyan-600: #eab308;
+  --cyan-500: #fec800;
+  --cyan-400: #ffd95c;
+  --mint-glow: rgba(168, 85, 247, .46);
+  --mint-glow-strong: rgba(192, 132, 252, .72);
+  --cyan-glow: rgba(254, 200, 0, .3);
+  --mint-vidro: rgba(147, 51, 196, .09);
+  --grad-futuro: var(--grad-mista);
+  --grad-fusao: linear-gradient(105deg, var(--purple-400), var(--yellow-400) 60%, #ffe27a);
+  --grad-linha-dupla: var(--grad-linha);
+}
+
+body[data-tema="origem"] #dynamick {
+  --mint-950: #02150f;
+  --mint-900: #04281d;
+  --mint-800: #07563d;
+  --mint-700: #078f66;
+  --mint-600: #0dbb81;
+  --mint-500: #25f0a2;
+  --mint-400: #64ffc1;
+  --mint-300: #a0ffda;
+  --mint-200: #d8ffec;
+  --cyan-600: #0ba9b7;
+  --cyan-500: #32d7e6;
+  --cyan-400: #78eff8;
+  --mint-glow: rgba(37, 240, 162, .46);
+  --mint-glow-strong: rgba(100, 255, 193, .72);
+  --cyan-glow: rgba(50, 215, 230, .36);
+  --mint-vidro: rgba(37, 240, 162, .09);
+  --grad-futuro: linear-gradient(120deg, var(--mint-700), var(--mint-500) 52%, var(--cyan-400));
 }

@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
+  <!-- Vinheta de abertura da CK (gerada em marca/). No site da própria CK, sem "Uma produção de". -->
+  <script src="ck-vinheta.js" data-credito="nao"></script>
+
   <script>
     /* Perfil de desempenho decidido antes da primeira pintura.
        Aparelho modesto recebe a mesma decoração, mas desenhada de um
@@ -24,21 +27,22 @@
     })();
   </script>
 
-  <title>Conscious Knowledge — FinCK · DynamiCK · Tecnologia consciente</title>
+  <title>Conscious Knowledge | Consciência que cria, Conhecimento que transforma</title>
+  <link rel="icon" type="image/svg+xml" href="midia/ck-logo.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="midia/icone-ck-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="midia/icone-ck-192.png">
   <link rel="apple-touch-icon" href="midia/icone-ck-180.png">
 
   <meta name="description"
-    content="A Conscious Knowledge cria produtos digitais com propósito. Conheça o FinCK, o DynamiCK e as duas identidades que contam a evolução da CK.">
+    content="Consciência que cria, Conhecimento que transforma. A Conscious Knowledge cria produtos digitais com propósito: FinCK, DynamiCK, SynCK e, em breve, AutoniCK.">
   <meta name="author" content="Conscious Knowledge">
   <meta name="theme-color" content="#050409">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Conscious Knowledge — Conhecimento em movimento">
+  <meta property="og:title" content="Conscious Knowledge | Consciência que cria, Conhecimento que transforma">
   <meta property="og:description"
-    content="Da educação financeira ao estudo adaptativo: FinCK e DynamiCK, dois produtos com o mesmo DNA consciente.">
-  <meta property="og:image" content="midia/logo-ck-futuro-480.png">
+    content="Finanças conscientes, estudo adaptativo e agenda compartilhada: FinCK, DynamiCK e SynCK. Em breve, AutoniCK.">
+  <meta property="og:image" content="midia/ck-og.jpg">
   <meta property="og:locale" content="pt_BR">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,19 +55,7 @@
   <script src="script.js" defer></script>
 </head>
 
-<body data-tema="fusao">
-
-  <!-- ================= PRELOADER ================= -->
-  <div class="preloader" data-preloader aria-hidden="true">
-    <div class="preloader__core">
-      <span class="preloader__ring"></span>
-      <span class="preloader__ring preloader__ring--2"></span>
-      <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="110px"><img class="preloader__logo preloader__logo--origem" src="midia/logo-ck-origem-360.png" alt="" width="120" height="180" decoding="async" fetchpriority="high"></picture>
-      <picture><source type="image/webp" srcset="midia/logo-ck-futuro-180.webp 180w, midia/logo-ck-futuro-360.webp 360w, midia/logo-ck-futuro-540.webp 540w, midia/logo-ck-futuro-720.webp 720w, midia/logo-ck-futuro-960.webp 960w" sizes="110px"><img class="preloader__logo preloader__logo--futuro" src="midia/logo-ck-futuro-480.png" alt="" width="180" height="120" decoding="async"></picture>
-    </div>
-    <p class="preloader__brand">Conscious Knowledge</p>
-    <div class="preloader__bar"><span></span></div>
-  </div>
+<body data-tema="origem">
 
   <!-- ================= FUNDO ANIMADO ================= -->
   <div class="cena-fundo" aria-hidden="true">
@@ -84,13 +76,6 @@
   <div class="cursor" data-cursor aria-hidden="true"></div>
   <div class="cursor cursor--halo" data-cursor-halo aria-hidden="true"></div>
 
-  <aside class="tema-dock" aria-label="Alterar atmosfera da marca">
-    <span class="tema-dock__rotulo">Atmosfera</span>
-    <button type="button" data-tema-botao="origem" aria-label="Usar tema da identidade original"><i></i><span>Origem</span></button>
-    <button type="button" data-tema-botao="fusao" class="is-active" aria-pressed="true" aria-label="Usar fusão das duas identidades"><i></i><span>Fusão</span></button>
-    <button type="button" data-tema-botao="futuro" aria-label="Usar tema do alter ego"><i></i><span>Alter ego</span></button>
-  </aside>
-
   <a class="pular" href="#inicio">Pular para o conteúdo</a>
 
   <!-- ================= HEADER ================= -->
@@ -98,10 +83,7 @@
 
     <div class="logo-container">
       <a href="#inicio" aria-label="Conscious Knowledge — início">
-        <span class="logo-container__dupla">
-          <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="44px"><img class="marca-dupla marca-dupla--origem" src="midia/logo-ck-origem-360.png" alt="Logo original Conscious Knowledge" width="72" height="108" decoding="async"></picture>
-          <picture><source type="image/webp" srcset="midia/logo-ck-futuro-180.webp 180w, midia/logo-ck-futuro-360.webp 360w, midia/logo-ck-futuro-540.webp 540w, midia/logo-ck-futuro-720.webp 720w, midia/logo-ck-futuro-960.webp 960w" sizes="62px"><img class="marca-dupla marca-dupla--futuro" src="midia/logo-ck-futuro-480.png" alt="Logo remasterizada Conscious Knowledge" width="108" height="72" decoding="async"></picture>
-        </span>
+        <img class="logo-ck" src="midia/ck-logo.svg" alt="Logo da Conscious Knowledge" width="60" height="60" decoding="async">
       </a>
       <span class="logo-wordmark">
         <strong>Conscious</strong>
@@ -113,6 +95,7 @@
       <ul>
         <li><a href="#inicio">Início</a></li>
         <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#produtos">Produtos</a></li>
         <li><a href="#finck">FinCK</a></li>
         <li><a href="#dynamick">DynamiCK</a></li>
         <li><a href="#identidade">Identidade</a></li>
@@ -142,16 +125,9 @@
               <span class="nucleo__anel nucleo__anel--c"></span>
               <span class="nucleo__orbita"><i class="nucleo__satelite"></i></span>
               <span class="nucleo__orbita nucleo__orbita--2"><i class="nucleo__satelite nucleo__satelite--ouro"></i></span>
-              <button class="nucleo__marca nucleo__marca--origem is-active" type="button" data-marca="origem"
-                aria-pressed="true" aria-label="Trazer a identidade original para frente">
-                <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 210px, 250px"><img src="midia/logo-ck-origem-360.png" alt="Logo original Conscious Knowledge" width="1365" height="2048" decoding="async" fetchpriority="high"></picture>
-                <span>Origem</span>
-              </button>
-              <button class="nucleo__marca nucleo__marca--futuro" type="button" data-marca="futuro"
-                aria-pressed="false" aria-label="Trazer o alter ego para frente">
-                <picture><source type="image/webp" srcset="midia/logo-ck-futuro-180.webp 180w, midia/logo-ck-futuro-360.webp 360w, midia/logo-ck-futuro-540.webp 540w, midia/logo-ck-futuro-720.webp 720w, midia/logo-ck-futuro-960.webp 960w" sizes="(max-width: 860px) 205px, 240px"><img src="midia/logo-ck-futuro-480.png" alt="Logo remasterizada Conscious Knowledge" width="1536" height="1024" decoding="async"></picture>
-                <span>Alter ego</span>
-              </button>
+              <div class="nucleo__marca nucleo__marca--origem nucleo__marca--unica is-active">
+                <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 210px, 250px"><img src="midia/logo-ck-origem-360.png" alt="Logo da Conscious Knowledge" width="1365" height="2048" decoding="async" fetchpriority="high"></picture>
+              </div>
               <span class="nucleo__faisca nucleo__faisca--1"></span>
               <span class="nucleo__faisca nucleo__faisca--2"></span>
               <span class="nucleo__faisca nucleo__faisca--3"></span>
@@ -167,6 +143,8 @@
 
             <h1>Conscious<br>Knowledge</h1>
 
+            <p class="hero-slogan">Consciência que cria, <span>Conhecimento que transforma.</span></p>
+
             <p class="hero-typed">
               Transformamos conhecimento em
               <span class="typed" data-typed
@@ -174,10 +152,11 @@
                   class="typed__texto"></span><span class="typed__cursor"></span></span>
             </p>
 
-            <p class="hero-description">
+<p class="hero-description">
               Começamos na escola e crescemos para além dela. A CK transforma ideias em produtos com
               identidade, profundidade e propósito: o <strong>FinCK</strong>, que traduz preço em tempo,
-              ao <strong>DynamiCK</strong>, que transforma erros em próximos passos de aprendizagem.
+              o <strong>DynamiCK</strong>, que transforma erros em próximos passos de aprendizagem, e o
+              <strong>SynCK</strong>, que sincroniza a rotina com quem importa. O <strong>AutoniCK</strong> vem aí.
             </p>
 
             <div class="hero-acoes">
@@ -187,8 +166,8 @@
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </a>
-              <a class="btn btn--fantasma" href="#dynamick" data-magnetico>
-                <span>Conhecer o DynamiCK</span>
+              <a class="btn btn--fantasma" href="#produtos" data-magnetico>
+                <span>Ver os produtos</span>
               </a>
             </div>
           </div>
@@ -202,13 +181,13 @@
           </div>
           <div class="metric-card" data-tilt>
             <span class="metric-label">Ecossistema</span>
-            <strong>FinCK + DynamiCK</strong>
-            <p>Finanças conscientes e aprendizagem adaptativa.</p>
+            <strong>FinCK · DynamiCK · SynCK</strong>
+            <p>Finanças conscientes, estudo adaptativo e agenda compartilhada. AutoniCK em desenvolvimento.</p>
           </div>
           <div class="metric-card" data-tilt>
-            <span class="metric-label">Identidade</span>
-            <strong>Origem + alter ego</strong>
-            <p>Duas presenças visuais, uma mesma consciência.</p>
+            <span class="metric-label">Slogan</span>
+            <strong>Consciência que cria</strong>
+            <p>Conhecimento que transforma.</p>
           </div>
         </div>
 
@@ -226,15 +205,19 @@
         <span>Conhecimento Consciente</span><i>◆</i>
         <span>FinCK · Consumo consciente</span><i>◆</i>
         <span>DynamiCK · ENEM 2027</span><i>◆</i>
+        <span>SynCK · Agenda compartilhada</span><i>◆</i>
+        <span>AutoniCK · Em breve</span><i>◆</i>
         <span>Preço → Tempo de vida</span><i>◆</i>
         <span>Erro → Próximo passo</span><i>◆</i>
-        <span>Duas identidades · Um DNA</span><i>◆</i>
+        <span>Consciência que cria · Conhecimento que transforma</span><i>◆</i>
         <span>Conhecimento Consciente</span><i>◆</i>
         <span>FinCK · Consumo consciente</span><i>◆</i>
         <span>DynamiCK · ENEM 2027</span><i>◆</i>
+        <span>SynCK · Agenda compartilhada</span><i>◆</i>
+        <span>AutoniCK · Em breve</span><i>◆</i>
         <span>Preço → Tempo de vida</span><i>◆</i>
         <span>Erro → Próximo passo</span><i>◆</i>
-        <span>Duas identidades · Um DNA</span><i>◆</i>
+        <span>Consciência que cria · Conhecimento que transforma</span><i>◆</i>
       </div>
     </div>
 
@@ -263,7 +246,9 @@
             A iniciativa foi idealizada por <strong>Gustavo Oliveira dos Santos</strong>. O
             <strong>FinCK</strong> consolidou a primeira fase ao levar consciência para decisões
             financeiras. O <strong>DynamiCK</strong> abriu a segunda: aprendizagem adaptativa, uma nova
-            linguagem visual e espaço para projetos que não precisam nascer dentro da escola.
+            linguagem visual e espaço para projetos que não precisam nascer dentro da escola. Depois
+            veio o <strong>SynCK</strong>, a agenda compartilhada, e agora o <strong>AutoniCK</strong>
+            está em desenvolvimento.
           </p>
           <p>
             O objetivo continua simples e exigente: desenvolver soluções tecnológicas úteis,
@@ -340,11 +325,63 @@
       </div>
     </section>
 
+    <!-- ========== PRODUTOS ========== -->
+    <section id="produtos" class="produtos-secao">
+
+      <header>
+        <p class="secao-indice">02 — Produtos CK</p>
+        <h2>Uma marca, <span class="texto-gradiente">vários produtos</span></h2>
+        <p class="secao-sub">
+          Cada produto tem nome, cara e jeito próprios, mas todos carregam o CK no fim do nome e
+          o mesmo compromisso: consciência que cria, conhecimento que transforma.
+        </p>
+      </header>
+
+      <ul class="produtos-grade">
+        <li class="produto" data-tilt>
+          <div class="produto__logo">
+            <picture><source type="image/webp" srcset="midia/logo-finck-240.webp 240w, midia/logo-finck-480.webp 480w" sizes="200px"><img src="midia/logo-finck-300.png" alt="Logo do FinCK" width="300" height="306" loading="lazy" decoding="async"></picture>
+          </div>
+          <span class="produto__selo produto__selo--ar">No ar</span>
+          <h3>Fin<span>CK</span></h3>
+          <p>Consumo consciente: mostra quanto uma compra custa em dinheiro e em horas da sua vida antes de decidir.</p>
+          <a class="produto__link" href="#finck">Conhecer o FinCK <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="produto" data-tilt>
+          <div class="produto__logo">
+            <picture><source type="image/webp" srcset="midia/logo-dynamick-360.webp 360w, midia/logo-dynamick-540.webp 540w" sizes="240px"><img src="midia/logo-dynamick-480.png" alt="Logo do DynamiCK" width="480" height="320" loading="lazy" decoding="async"></picture>
+          </div>
+          <span class="produto__selo produto__selo--ar">No ar</span>
+          <h3>Dynami<span>CK</span></h3>
+          <p>Estudo adaptativo para o ENEM: cada erro vira o próximo passo do plano de estudos.</p>
+          <a class="produto__link" href="#dynamick">Conhecer o DynamiCK <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="produto" data-tilt>
+          <div class="produto__logo">
+            <picture><source type="image/webp" srcset="midia/logo-synck-480.webp" sizes="220px"><img src="midia/logo-synck-480.png" alt="Logo do SynCK" width="480" height="335" loading="lazy" decoding="async"></picture>
+          </div>
+          <span class="produto__selo produto__selo--novo">Novo</span>
+          <h3>Syn<span>CK</span></h3>
+          <p>Agenda compartilhada: compromissos, tarefas e lembretes sincronizados com quem divide a rotina com você, no Android, no iPhone e no computador.</p>
+          <a class="produto__link" href="https://gustavooliveira-xxx.github.io/synck-app/" target="_blank" rel="noopener">Abrir o SynCK <span aria-hidden="true">↗</span></a>
+        </li>
+        <li class="produto produto--breve" data-tilt>
+          <div class="produto__logo">
+            <picture><source type="image/webp" srcset="midia/logo-autonick-360.webp 360w, midia/logo-autonick-720.webp 720w" sizes="220px"><img src="midia/logo-autonick-480.png" alt="Logo do AutoniCK" width="480" height="505" loading="lazy" decoding="async"></picture>
+          </div>
+          <span class="produto__selo produto__selo--breve">Em desenvolvimento</span>
+          <h3>Autoni<span>CK</span></h3>
+          <p>O próximo produto da CK está sendo construído. Em breve, mais novidades por aqui.</p>
+          <span class="produto__link produto__link--breve">Em breve</span>
+        </li>
+      </ul>
+    </section>
+
     <!-- ========== FINCK ========== -->
     <section id="finck">
 
       <header>
-        <p class="secao-indice">02 — Nosso produto</p>
+        <p class="secao-indice">03 — Primeiro produto</p>
         <h2>FinCK <span class="h2-sub">consumo consciente</span></h2>
         <p class="secao-sub">
           O primeiro produto da Conscious Knowledge e a entrega central do Projeto
@@ -738,7 +775,7 @@
     <section id="dynamick" class="dynamick-secao">
 
       <header>
-        <p class="secao-indice secao-indice--menta">03 — Segundo produto · Nova energia</p>
+        <p class="secao-indice secao-indice--menta">04 — Segundo produto · Nova energia</p>
         <h2>Dynami<span class="texto-menta">CK</span></h2>
         <p class="secao-sub">
           Uma plataforma de preparação para o ENEM 2027 que transforma erro em direção,
@@ -891,82 +928,39 @@
     </section>
 
     <!-- ========== IDENTIDADE ========== -->
-    <section id="identidade" class="identidade-secao">
+    <section id="identidade" class="identidade-secao identidade-secao--unica">
       <header>
-        <p class="secao-indice secao-indice--dupla">04 — Duas faces · Uma consciência</p>
-        <h2>Identidade em <span class="texto-gradiente">evolução</span></h2>
+        <p class="secao-indice">05 — Identidade</p>
+        <h2>Uma <span class="texto-gradiente">marca só</span></h2>
         <p class="secao-sub">
-          A logo original é a fundação. A remasterizada é o alter ego que acompanha a expansão.
-          Nenhuma apaga a outra: a força está na tensão entre as duas.
+          A CK tem uma identidade oficial: a máscara roxa e dourada, com os olhos arregalados de quem
+          acabou de entender alguma coisa. É ela que abre todos os nossos apps.
         </p>
       </header>
 
-      <div class="identidade-paleta" role="group" aria-label="Experimentar as atmosferas da CK">
-        <button type="button" data-tema-botao="origem"><i></i> Ativar origem</button>
-        <button type="button" data-tema-botao="fusao" class="is-active" aria-pressed="true"><i></i> Misturar as duas</button>
-        <button type="button" data-tema-botao="futuro"><i></i> Ativar alter ego</button>
-      </div>
-
-      <div class="identity-arena">
-        <article class="identity-totem identity-totem--origem" data-tilt>
-          <span class="identity-totem__indice">IDENTIDADE / 01</span>
-          <div class="identity-totem__palco">
-            <span class="identity-totem__anel identity-totem__anel--a"></span>
-            <span class="identity-totem__anel identity-totem__anel--b"></span>
-            <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 255px, 350px"><img src="midia/logo-ck-origem-360.png" alt="Logo original da Conscious Knowledge" width="1365" height="2048" loading="lazy" decoding="async"></picture>
-            <span class="identity-totem__reflexo"></span>
-          </div>
-          <div class="identity-totem__texto">
-            <span>Roxo · Ouro · Energia</span><h3>O guardião da origem</h3>
-            <p>Intensa, heroica e ambiciosa. É a presença que abriu o universo visual da CK e carrega a memória do primeiro projeto.</p>
-            <ul><li style="--cor:#7e22ce">Arcano</li><li style="--cor:#c084fc">Pulso</li><li style="--cor:#fec800">Ouro</li></ul>
-          </div>
-        </article>
-
-        <div class="identity-reactor" data-identity-reactor>
-          <span class="identity-reactor__anel identity-reactor__anel--a"></span>
-          <span class="identity-reactor__anel identity-reactor__anel--b"></span>
-          <span class="identity-reactor__anel identity-reactor__anel--c"></span>
-          <strong>CK</strong><i></i><em>evolução<br>sem ruptura</em>
+      <div class="marca-oficial">
+        <div class="marca-oficial__palco" data-tilt>
+          <span class="marca-oficial__luz" aria-hidden="true"></span>
+          <img src="midia/ck-logo.svg" alt="Logo oficial da Conscious Knowledge: máscara roxa com detalhes dourados e raios amarelos" width="420" height="420" loading="lazy" decoding="async">
         </div>
 
-        <article class="identity-totem identity-totem--futuro" data-tilt>
-          <span class="identity-totem__indice">IDENTIDADE / 02</span>
-          <div class="identity-totem__palco">
-            <span class="identity-totem__anel identity-totem__anel--a"></span>
-            <span class="identity-totem__anel identity-totem__anel--b"></span>
-            <picture><source type="image/webp" srcset="midia/logo-ck-futuro-180.webp 180w, midia/logo-ck-futuro-360.webp 360w, midia/logo-ck-futuro-540.webp 540w, midia/logo-ck-futuro-720.webp 720w, midia/logo-ck-futuro-960.webp 960w" sizes="(max-width: 860px) 375px, 485px"><img src="midia/logo-ck-futuro-480.png" alt="Logo remasterizada da Conscious Knowledge" width="1536" height="1024" loading="lazy" decoding="async"></picture>
-            <span class="identity-totem__reflexo"></span>
-          </div>
-          <div class="identity-totem__texto">
-            <span>Menta · Ciano · Luz</span><h3>O alter ego do futuro</h3>
-            <p>Tecnológica, curiosa e educacional. Nasceu com o DynamiCK para mostrar que a marca pode mudar de energia sem perder o DNA.</p>
-            <ul><li style="--cor:#25f0a2">Menta</li><li style="--cor:#32d7e6">Ciano</li><li style="--cor:#eaffdf">Luz</li></ul>
-          </div>
-        </article>
-      </div>
-
-      <div class="fusion-lab">
-        <div class="fusion-lab__texto">
-          <p class="secao-indice secao-indice--dupla">Mesa de mistura visual</p>
-          <h3>Você controla a tensão entre as duas.</h3>
-          <p>Altere a presença de cada identidade e veja o reator responder. O site começa em equilíbrio porque a CK atual é a soma, não a substituição.</p>
-          <label>Energia original <span data-mix-origin-value>50%</span><input type="range" min="10" max="90" value="50" data-mix-origin></label>
-          <label>Energia do alter ego <span data-mix-future-value>50%</span><input type="range" min="10" max="90" value="50" data-mix-future></label>
+        <div class="marca-oficial__texto">
+          <p class="marca-oficial__slogan">Consciência que cria,<br><span>Conhecimento que transforma.</span></p>
+          <ul class="marca-oficial__cores" aria-label="Cores oficiais">
+            <li style="--cor:#a308c8"><i></i><b>Roxo CK</b><code>#A308C8</code></li>
+            <li style="--cor:#640187"><i></i><b>Roxo profundo</b><code>#640187</code></li>
+            <li style="--cor:#fccf02"><i></i><b>Ouro</b><code>#FCCF02</code></li>
+            <li style="--cor:#050407"><i></i><b>Tinta</b><code>#050407</code></li>
+          </ul>
+          <p>
+            A mesma máscara é o ícone dos apps e a assinatura da vinheta de abertura, que toca
+            quando você abre o FinCK, o DynamiCK, o SynCK e o AutoniCK.
+          </p>
+          <button class="btn btn--primario" type="button" data-assistir-vinheta data-magnetico>
+            <span>Assistir à vinheta</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          </button>
         </div>
-        <div class="fusion-visual" data-fusion-visual>
-          <span class="fusion-visual__campo"></span><span class="fusion-visual__orbita fusion-visual__orbita--a"></span><span class="fusion-visual__orbita fusion-visual__orbita--b"></span>
-          <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 160px, 240px"><img class="fusion-visual__logo fusion-visual__logo--origem" src="midia/logo-ck-origem-360.png" alt="" width="1365" height="2048" loading="lazy" decoding="async"></picture>
-          <picture><source type="image/webp" srcset="midia/logo-ck-futuro-180.webp 180w, midia/logo-ck-futuro-360.webp 360w, midia/logo-ck-futuro-540.webp 540w, midia/logo-ck-futuro-720.webp 720w, midia/logo-ck-futuro-960.webp 960w" sizes="(max-width: 860px) 210px, 345px"><img class="fusion-visual__logo fusion-visual__logo--futuro" src="midia/logo-ck-futuro-480.png" alt="" width="1536" height="1024" loading="lazy" decoding="async"></picture>
-          <strong>CONSCIOUS<br>KNOWLEDGE</strong>
-        </div>
-      </div>
-
-      <div class="identity-matrix">
-        <article data-tilt><span>01</span><h3>Origem preservada</h3><p>A primeira logo continua sendo a assinatura histórica e institucional da CK.</p></article>
-        <article data-tilt><span>02</span><h3>Alter ego ativo</h3><p>A remasterização pode assumir projetos educacionais, experimentais e futuros.</p></article>
-        <article data-tilt><span>03</span><h3>Produtos com voz própria</h3><p>FinCK e DynamiCK herdam a CK sem precisar parecer o mesmo produto.</p></article>
-        <article data-tilt><span>04</span><h3>Fusão como sistema</h3><p>Roxo, ouro, menta e ciano convivem no institucional para contar toda a evolução.</p></article>
       </div>
     </section>
 
@@ -974,7 +968,7 @@
     <section id="entrega">
 
       <header>
-        <p class="secao-indice">05 — Projeto Interdisciplinar</p>
+        <p class="secao-indice">06 — Projeto Interdisciplinar</p>
         <h2>O que entregamos</h2>
         <p class="secao-sub">
           O Interdisciplinar não é só um app. É um conjunto de entregas que mostra domínio técnico,
@@ -1127,7 +1121,7 @@
     <section id="apresentacoes" class="palcos-secao">
 
       <header>
-        <p class="secao-indice">06 · Palco</p>
+        <p class="secao-indice">07 · Palco</p>
         <h2>Apresentações do <span class="h2-sub">FinCK</span></h2>
         <p class="secao-sub">
           Duas apresentações, dois momentos. Ambas rodam no navegador, com navegação por teclado
@@ -1232,7 +1226,7 @@
     <section id="equipe">
 
       <header>
-        <p class="secao-indice">07 · Quem constrói</p>
+        <p class="secao-indice">08 · Quem constrói</p>
         <h2>Nossa Equipe</h2>
         <p class="secao-sub">
           Seis estudantes desenvolvendo um produto real, do conceito à defesa.
@@ -1255,7 +1249,7 @@
         <ul>
           <li class="leader">
             <div class="leader__marca" aria-hidden="true">
-              <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 768px) 80px, 110px"><img src="midia/logo-ck-origem-360.png" alt="" width="120" height="180" loading="lazy" decoding="async"></picture>
+              <img src="midia/ck-logo.svg" alt="" width="110" height="110" loading="lazy" decoding="async">
             </div>
             <div class="leader__texto">
               <h4 class="leader-name">Gustavo Oliveira dos Santos</h4>
@@ -1345,10 +1339,10 @@
     <section id="contato">
 
       <header>
-        <p class="secao-indice">08 · Fale com a gente</p>
+        <p class="secao-indice">09 · Fale com a gente</p>
         <h2>Contato</h2>
         <p class="secao-sub">
-          Dúvidas sobre a CK, o FinCK, o DynamiCK ou uma próxima ideia? É só chamar.
+          Dúvidas sobre a CK, o FinCK, o DynamiCK, o SynCK ou uma próxima ideia? É só chamar.
         </p>
       </header>
 
@@ -1406,18 +1400,16 @@
   <footer>
     <div class="footer-grade">
       <div class="footer-marca">
-        <span class="footer-marca__dupla">
-          <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="48px"><img class="marca-dupla marca-dupla--origem" src="midia/logo-ck-origem-360.png" alt="Logo original Conscious Knowledge" width="64" height="96" loading="lazy" decoding="async"></picture>
-          <picture><source type="image/webp" srcset="midia/logo-ck-futuro-180.webp 180w, midia/logo-ck-futuro-360.webp 360w, midia/logo-ck-futuro-540.webp 540w, midia/logo-ck-futuro-720.webp 720w, midia/logo-ck-futuro-960.webp 960w" sizes="(max-width: 860px) 67px, 72px"><img class="marca-dupla marca-dupla--futuro" src="midia/logo-ck-futuro-480.png" alt="Logo remasterizada Conscious Knowledge" width="96" height="64" loading="lazy" decoding="async"></picture>
-        </span>
+        <img class="footer-marca__logo" src="midia/ck-logo.svg" alt="Logo da Conscious Knowledge" width="56" height="56" loading="lazy" decoding="async">
         <div>
           <strong>Conscious Knowledge</strong>
-          <span>Conhecimento consciente aplicado à tecnologia.</span>
+          <span>Consciência que cria, Conhecimento que transforma.</span>
         </div>
       </div>
 
       <nav class="footer-links" aria-label="Navegação do rodapé">
         <a href="#sobre">Sobre</a>
+        <a href="#produtos">Produtos</a>
         <a href="#finck">FinCK</a>
         <a href="#dynamick">DynamiCK</a>
         <a href="#identidade">Identidade</a>

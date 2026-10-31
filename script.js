@@ -19,13 +19,12 @@
 
 
   /* ---------------------------------------------------------
-     00. Sistema de atmosfera — origem, alter ego e fusão
+     00. Atmosfera da marca: a CK tem uma identidade só (roxo e ouro).
+     O alter ego saiu do site; ele fica só nas atividades internas.
      --------------------------------------------------------- */
-  const temasValidos = ["origem", "fusao", "futuro"];
+  const temasValidos = ["origem"];
   const coresTema = {
     origem: "#7e22ce",
-    fusao: "#25f0a2",
-    futuro: "#18c98b",
   };
 
   const sincronizarMarcaNucleo = (tema) => {
@@ -60,7 +59,15 @@
     marca.addEventListener("click", () => aplicarTema(marca.dataset.marca));
   });
 
-  aplicarTema(document.body.dataset.tema || "fusao");
+  aplicarTema("origem");
+
+
+  /* ---------------------------------------------------------
+     00b. Vinheta de abertura: botão "Assistir à vinheta"
+     --------------------------------------------------------- */
+  $$("[data-assistir-vinheta]").forEach((botao) => {
+    botao.addEventListener("click", () => window.CKVinheta?.tocar({ tipo: "completa", credito: false }));
+  });
 
 
   /* ---------------------------------------------------------
