@@ -1365,3 +1365,438 @@
   .encerramento__titulo { -webkit-text-fill-color: var(--purple-200); }
   .encerramento__orbita { display: none; }
 }
+
+/* ============================================================
+   Versão final · novembro de 2026
+   Peças da revisão com a base estatística definida: conceitos
+   da Peic, teto legal da fatura, selos de tipo de dado, exemplo
+   local em passos, vitrine do app e quadro de entregas.
+   ============================================================ */
+
+/* ---------- selos que dizem a natureza do número ---------- */
+.selo-tipo {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--border-forte);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: 2px;
+  color: var(--purple-200);
+  background: rgba(168, 85, 247, .08);
+}
+
+.selo-tipo--obs { border-color: rgba(100, 255, 193, .32); color: var(--mint-400); background: rgba(31, 209, 143, .08); }
+.selo-tipo--proj { border-style: dashed; border-color: rgba(254, 200, 0, .42); color: var(--yellow-300); background: var(--yellow-fraco); }
+.selo-tipo--est { border-color: rgba(254, 200, 0, .42); color: var(--yellow-300); background: var(--yellow-fraco); }
+
+/* ---------- endividamento: conceitos e séries ---------- */
+.conceitos {
+  display: grid;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--r-md);
+  border: 1px dashed var(--border-forte);
+  background: rgba(255, 255, 255, .02);
+}
+
+.conceitos p {
+  font-size: calc(var(--t-peq) - 1px);
+  line-height: 1.42;
+  color: var(--text-2);
+}
+
+.conceitos b { color: var(--text-0); }
+
+.serie-bloco {
+  display: grid;
+  gap: 10px;
+}
+
+.serie-bloco__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: var(--t-peq);
+  font-weight: 600;
+  color: var(--text-0);
+}
+
+.serie-bloco__titulo i,
+.legenda__ouro {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.serie-bloco__titulo i.legenda__roxo { background: var(--purple-400); }
+.legenda__ouro { background: var(--yellow-300); }
+
+.escala {
+  display: grid;
+  grid-template-columns: 112px 1fr 58px;
+  gap: 0 12px;
+}
+
+.escala__eixo {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.escala__eixo i { font-style: normal; }
+
+/* ---------- teto legal da fatura ---------- */
+.teto {
+  display: grid;
+  gap: 22px;
+  margin-block: 14px 8px;
+}
+
+.teto__linha {
+  display: grid;
+  grid-template-columns: 210px 1fr 96px;
+  gap: 14px;
+  align-items: center;
+}
+
+.teto__rotulo {
+  font-size: var(--t-peq);
+  line-height: 1.35;
+  color: var(--text-2);
+}
+
+.teto__rotulo b { color: var(--text-0); }
+
+.teto__trilho {
+  display: flex;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .05);
+  overflow: hidden;
+}
+
+.teto__parte {
+  display: block;
+  height: 100%;
+  width: 0;
+  transition: width 1s var(--ease-out) .3s;
+}
+
+.slide.is-ativo .teto__parte,
+.slide.is-medindo .teto__parte { width: var(--p); }
+
+.teto__parte--principal { background: linear-gradient(90deg, var(--purple-600), var(--purple-400)); }
+.teto__parte--encargos {
+  background: repeating-linear-gradient(135deg, var(--yellow-400) 0 10px, var(--yellow-300) 10px 20px);
+}
+
+
+.teto__linha--total .teto__rotulo { color: var(--text-0); font-weight: 600; }
+.teto__linha--total .teto__trilho { height: 50px; box-shadow: 0 0 0 1px rgba(254, 200, 0, .28); }
+
+.teto__valor {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--text-0);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.teto__valor--ouro { color: var(--yellow-300); }
+.teto__linha--total .teto__valor { font-size: 22px; color: var(--yellow-300); }
+
+.teto__escala {
+  display: grid;
+  grid-template-columns: 210px 1fr 96px;
+  gap: 0 14px;
+}
+
+/* ---------- fichas com origem da pesquisa ---------- */
+.ficha__num small {
+  font-size: .5em;
+  color: var(--text-2);
+  letter-spacing: 0;
+}
+
+.ficha__rotulo b { color: var(--text-0); }
+
+.ficha__meta {
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: .02em;
+  color: var(--purple-300);
+}
+
+.painel__titulo--espaco { margin-top: 6px; }
+
+/* ---------- exemplo local em passos ---------- */
+.passos {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+  list-style: none;
+}
+
+.passos li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.passos__n {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--grad-marca);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+}
+
+.passos li:last-child .passos__n {
+  background: linear-gradient(130deg, var(--yellow-500), var(--yellow-300));
+  color: #1a1206;
+}
+
+.passos p {
+  font-size: var(--t-corpo);
+  line-height: 1.42;
+  color: var(--text-1);
+}
+
+.passos p b { color: var(--text-0); }
+
+/* ---------- vitrine: computador e celular ---------- */
+.vitrine {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-right: 110px;
+  min-height: 0;
+}
+
+.vitrine button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.vitrine__desk img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(168, 85, 247, .38);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .6), 0 0 0 4px rgba(12, 10, 18, .9), 0 0 0 5px rgba(168, 85, 247, .18);
+}
+
+.vitrine__cel {
+  position: absolute;
+  right: 0;
+  top: 26px;
+  width: 190px;
+}
+
+.vitrine__cel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  border: 5px solid #0d0a14;
+  outline: 1px solid rgba(254, 200, 0, .45);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, .72), 0 0 40px rgba(147, 51, 196, .25);
+  transform: rotate(3deg);
+  transition: transform .35s var(--ease);
+}
+
+.vitrine__cel:hover img,
+.vitrine__cel:focus-visible img { transform: rotate(0deg) translateY(-4px); }
+
+.vitrine__desk:focus-visible,
+.vitrine__cel:focus-visible { outline: 2px solid var(--purple-300); outline-offset: 4px; border-radius: 16px; }
+
+.vitrine__legenda {
+  max-width: calc(100% - 210px);
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  color: var(--text-3);
+}
+
+.camadas--compactas { gap: 8px; }
+.camadas--compactas .camada { grid-template-columns: 44px 1fr; padding: 10px 14px; gap: 12px; }
+.camadas--compactas .camada__n { width: 44px; height: 44px; font-size: 20px; border-radius: 12px; }
+
+.lema {
+  padding: 14px 18px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(254, 200, 0, .3);
+  background: linear-gradient(120deg, rgba(254, 200, 0, .09), rgba(147, 51, 196, .1));
+  font-family: var(--font-display);
+  font-size: calc(var(--t-corpo) + 3px);
+  line-height: 1.42;
+  color: var(--text-0);
+}
+
+.lema b { color: var(--yellow-300); }
+
+/* ---------- leituras com selo ---------- */
+.leituras--compactas li { grid-template-columns: 112px 1fr; padding: 7px 11px; }
+.leituras--compactas strong { font-size: 19px; }
+.leituras .selo-tipo { margin-left: 4px; }
+
+.painel__titulo small {
+  font-family: var(--font-sans);
+  font-size: .62em;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+/* ---------- captura em paisagem ---------- */
+.tela--paisagem { width: 100%; }
+
+.tela--paisagem .tela__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 812;
+  border-radius: 14px;
+}
+
+/* ---------- ODS 12 compacta ---------- */
+.painel--ods {
+  border-color: rgba(191, 139, 45, .38);
+  background: linear-gradient(135deg, rgba(191, 139, 45, .15), rgba(12, 10, 18, .72));
+  gap: .45rem;
+}
+
+.selo-ods {
+  display: inline-grid;
+  place-items: center;
+  margin-right: 6px;
+  padding: 2px 9px;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #d9a441, #a36f1d);
+  font-size: .72em;
+  font-weight: 700;
+  color: #1a1208;
+  vertical-align: 2px;
+}
+
+.painel--ods .painel__sub b {
+  font-family: var(--font-mono);
+  color: #e8b75a;
+}
+
+.mini-fichas--4 .mini-ficha strong { font-size: calc(var(--t-peq) + 2px); letter-spacing: 0; }
+
+/* ---------- entregas e limites ---------- */
+.entregas-lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  align-content: start;
+}
+
+.entregas-lista li {
+  position: relative;
+  display: grid;
+  gap: 3px;
+  align-content: start;
+  padding: 13px 15px 13px 46px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--grad-vidro), rgba(14, 11, 21, .62);
+}
+
+.entregas-lista li::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: rgba(31, 209, 143, .14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364ffc1' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 14px no-repeat;
+  box-shadow: 0 0 0 1px rgba(100, 255, 193, .32);
+}
+
+.entregas-lista b {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  font-weight: 600;
+  color: var(--text-0);
+}
+
+.entregas-lista span {
+  font-size: calc(var(--t-peq) - 1px);
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.painel--limites {
+  border-color: rgba(255, 77, 94, .3);
+  background: var(--grad-vidro), linear-gradient(150deg, rgba(255, 77, 94, .08), rgba(12, 10, 18, .7));
+}
+
+.lista-curta {
+  display: grid;
+  gap: 6px;
+  padding-left: 18px;
+  font-size: calc(var(--t-peq) - .5px);
+  line-height: 1.42;
+  color: var(--text-1);
+}
+
+.lista-curta b { color: var(--text-0); }
+.lista-curta li::marker { color: var(--purple-300); }
+
+/* ---------- celular ---------- */
+.deck[data-modo="fluido"] .teto__linha { grid-template-columns: 1fr 86px; }
+.deck[data-modo="fluido"] .teto__rotulo { grid-column: 1 / -1; }
+.deck[data-modo="fluido"] .teto__escala { grid-template-columns: 0 1fr 86px; }
+.deck[data-modo="fluido"] .entregas-lista,
+.deck[data-modo="fluido"] .mini-fichas--4 { grid-template-columns: 1fr; }
+.deck[data-modo="fluido"] .vitrine { padding-right: 0; }
+.deck[data-modo="fluido"] .vitrine__legenda { max-width: none; margin-top: 0; }
+.deck[data-modo="fluido"] .vitrine__cel { position: static; width: 46%; justify-self: center; }
+.deck[data-modo="fluido"] .vitrine__cel img { transform: none; }
+.deck[data-modo="fluido"] .tela--paisagem .tela__img { height: auto; }
+.deck[data-modo="fluido"] .trio { grid-template-columns: 1fr; }
+
+@media (prefers-reduced-motion: reduce) {
+  .teto__parte { transition: none; }
+}
+
+.barras--grossas { gap: 16px; }
+.barras--grossas .barras__trilho { height: 22px; }
+.barras--grossas .barras__valor { font-size: 20px; }
+.barras--grossas .barras__rotulo { line-height: 1.3; }

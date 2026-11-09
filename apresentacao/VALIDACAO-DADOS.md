@@ -1,12 +1,75 @@
-# Revisão das evidências da apresentação FinCK
+# Registro das fontes e evidências da apresentação FinCK
+
+Versão final: 9 de novembro de 2026. Escopo: `apresentacao/index.html` (slides, notas, legendas de ampliação, textos acessíveis e referências), `ROTEIRO-GRUPO.md` e `roteiro-finck-8-minutos.pdf`.
+
+A numeração dos itens segue o cabeçalho dos slides (01 a 12). A capa é a tela 1/14 e o agradecimento, a tela 14/14.
+
+## Critério
+
+Os dados externos abaixo formam a base estatística definida pelo grupo antes desta revisão. Eles foram inseridos com seus períodos, públicos e ressalvas, sem nova pesquisa ampla e sem substitutos. Nesta sessão, os sites das fontes estavam fora da rede permitida do ambiente de edição (CNC, BCB e ANBIMA retornaram falha de resolução); por isso, os valores não foram reabertos aqui, e as referências trazem “Acesso em: nov. 2026”. Conferir o dia exato de acesso com a documentação ABNT antes da entrega.
+
+“Estimativa”, “projeção”, “autorrelato” e “dado da demonstração” são naturezas diferentes e aparecem identificadas nos slides.
+
+## Base estatística usada nos slides
+
+| Item | Estatística | Valor usado | Fonte | Período | Público | Ressalvas |
+|---|---|---|---|---|---|---|
+| 02 | Famílias endividadas | 81,6% (out.); 81,7% (set.); 82,0% (jul.) | [CNC, Peic, comunicado de 5/11/2026](https://portaldocomercio.org.br/acoes-institucionais/endividamento-fica-praticamente-estavel-em-outubro-e-cnc-alerta-para-necessidade-de-previsibilidade-e-alivio-tributario/) | jul., set. e out. 2026 | Famílias brasileiras | Endividamento inclui dívidas a vencer; não é inadimplência. Não se afirma que decorre de compra impulsiva. |
+| 02 | Contas ou dívidas em atraso | 29,3% (out.); 29,6% (set.) | Mesma | set. e out. 2026 | Famílias brasileiras | Condição diferente do endividamento. |
+| 03 | Teto de juros e encargos da fatura | Até 100% do principal; R$ 1.000 → até R$ 2.000 | [BCB, perguntas frequentes](https://www.bcb.gov.br/meubc/faqs/p/limitacao-dos-juros-e-encargos-financeiros-no-saldo-devedor-da-fatura-do-cartao); Lei nº 14.690/2023 | Operações originadas a partir de 3/1/2024 | Rotativo e parcelamento do saldo devedor da fatura, nas operações abrangidas | Não vale para qualquer compra parcelada. Exemplo didático dos autores. A curva de juros compostos sem teto saiu do slide e ficou só nas notas, identificada como simulação. A taxa de 444,89% a.a. não é destaque. |
+| 04 | Letramento financeiro, PISA | 45,1% abaixo do nível 2; média 416; 18º de 20 | [OCDE, PISA 2022, Volume IV](https://www.oecd.org/en/publications/pisa-2022-results-volume-iv_5a849c2a-en/full-report/component-5.html) | 2022 (publicação 2024) | Estudantes de 15 anos avaliados | Posição é ordenação das médias, não diferença estatisticamente significativa entre vizinhos. Não é a prova de Matemática, Leitura e Ciências. |
+| 04 | Entendimento de educação financeira | 55% pouco ou nada; 91% importante ou muito importante | [Febraban/IPESPE](https://portal.febraban.org.br/Noticia/4324/pt_br) | Divulgação 21/7/2025 | 3.000 entrevistados | Autodeclaração. |
+| 04 | Fontes de informação | 18% redes sociais; 15% escola ou universidade | Mesma | 2025 | Conjunto dos entrevistados | Corrigido: não é recorte de jovens e não há 27%. |
+| 04 | Score de crédito | 500 (18 a 25 anos) × 542 (média nacional) | [Serasa, Mapa Score](https://www.serasa.com.br/imprensa/primeiro-ano-mapa-score-brasil/) | Abril de 2026 | Consumidores com score | Pontuação de crédito; não mede educação financeira. 548 e 505 são de abril de 2025 e não são usados na comparação. |
+| 04 (notas) | Negociação de dívidas | +49% | [Serasa](https://www.serasa.com.br/imprensa/geracao-z-e-o-publico-que-mais-cresce-nas-negociacoes-de-dividas/) | jan.–jul. 2025 × jan.–jul. 2024 | Pessoas de 18 a 25 anos no Serasa Limpa Nome | Crescimento de negociações, não de inadimplência. |
+| 04 | Comportamento financeiro | 33% economizaram em 2025; 24% investiram em 2025; 36% tinham aplicações | [ANBIMA/Datafolha, Raio X do Investidor, 9ª ed.](https://www.anbima.com.br/pt_br/noticias/anbima-lanca-a-nona-edicao-do-raio-x-do-investidor-brasileiro-36-da-populacao-aplica-em-produtos-financeiros-8A2AB28F9DAD6E80019DBC15DCF11FD1-00.htm) | Comportamentos de 2025; publicação abr. 2026 | 5.832 entrevistados | Três indicadores diferentes. O índice de 47% de alto estresse saiu do slide pela inconsistência apontada. |
+| 05 | Resíduos eletrônicos gerados | 62 milhões de toneladas | [ITU/UNITAR, Global E-waste Monitor 2024](https://www.itu.int/en/ITU-D/Environment/Pages/Publications/The-Global-E-waste-Monitor-2024.aspx) | 2022 | Mundo | Estimativa. |
+| 05 | Coleta e reciclagem documentadas | 22,3% | Mesma | 2022 | Mundo | Não é taxa brasileira. |
+| 05 | Projeção | 82 milhões de toneladas | Mesma | 2030 | Mundo | Projeção, não observação. Não se afirma redução causada pelo FinCK. |
+| 05 | Maiores geradores | China 12,1; EUA 7,2; Índia 4,1; Japão 2,6; Brasil 2,4 mi t | ITU/UNITAR, anexo 2 (conferido em 28/10/2026) | 2022 | Países | Preservado da revisão anterior; barras com valores antes do arredondamento. |
+| 05, 11 | ODS 12 | Metas 12.5 e 12.8 | [ONU Brasil](https://brasil.un.org/pt-br/sdgs/12) | Agenda 2030 | — | Alinhamento; o FinCK não resolve integralmente a ODS 12. |
+| 06 | População | 273.542 habitantes | [IBGE, Cidades e Estados](https://www.ibge.gov.br/cidades-e-estados/sp/taboao-da-serra.html) | Censo 2022 | Taboão da Serra | — |
+| 06 | Densidade | 13.416,81 hab./km² | Mesma | Censo 2022 | Taboão da Serra | Não recalculada com a área de outro ano. Não se afirma que a densidade, sozinha, indica mais consumo ou endividamento. A afirmação anterior de “maior densidade do Brasil” e a urbanização da prefeitura saíram do slide. |
+| 06 | Área territorial | 20,371 km² | Mesma | 2025 | Taboão da Serra | — |
+| 07, 12 | Testes técnicos | 972 aprovados: 457 no navegador e 515 em Node.js | [Registro local](evidencias/verificacao-local-2026-10-28.json) | Execução de 28/10/2026, commit `912b0c13abeb6b164cda79ad4617bf078d3865bb` do FinCK | Código do FinCK | Execução histórica, não refeita nesta revisão. Não é auditoria de segurança nem cobertura de código. |
+
+## Dados internos de demonstração
+
+Todos os números do aplicativo vêm do modo de demonstração, com dados fictícios. Os dados da demonstração são calculados em relação à data em que o app é aberto; por isso, cada slide usa capturas de uma mesma sessão ou explica a data.
+
+| Item | Dado | Valor | Captura |
+|---|---|---|---|
+| 07, 09 | Fone de ouvido, renda e jornada | R$ 800; R$ 3.500; 176 h (22 × 8) | Conta: R$ 3.500 ÷ 176 = R$ 19,886…/h; R$ 800 ÷ 19,886… = 40,228… h ≈ 40 h 14 min |
+| 09 | Impacto | 40 h 14 min; 5 dias de 8 h; 37% da sobra (R$ 2.146) | `img/impacto.jpg` (out. 2026), reconferido no app em 9/11/2026 com os mesmos valores |
+| 09 | Metas e meses seguintes | 42% do guardado nas metas (R$ 1.900); 10 × R$ 80 não fecha sem o cartão a partir de jan./27; R$ 677,27 de juros estimados | `img/atencao.jpg` (9/11/2026). Estimativa do app; a configuração do FinCK prevê o teto de 100% (`TETO_JUROS_PCT`) |
+| 10 | Pequenos gastos | 26 gastos; R$ 695,60 em 30 dias; R$ 8.347,20 em 12 meses (projeção) | `img/habitos.jpg` (out. 2026). R$ 695,60 × 12 = R$ 8.347,20 |
+| 10 | Índice FinCK | 61/100, “vida financeira em ajuste” | `img/revisao.jpg` (mesma sessão de out. 2026) |
+| 11 | Decisões | 3 análises; 2 decisões conscientes; R$ 3.200 de valor potencial; R$ 0 de economia confirmada; 160,9 h | `img/decisoes-desktop.jpg` (9/11/2026), iguais aos de `img/decisoes.jpg` (out. 2026) |
+
+A versão anterior do slide dizia que, em 10 × R$ 80, “novembro fecha em −R$ 14,57”. Esse valor era de outra data da demonstração e foi substituído pela projeção da captura de 9/11/2026, para não misturar cenários.
+
+## Capturas inseridas nesta versão
+
+| Arquivo | Tela | Formato | Data |
+|---|---|---|---|
+| `img/home-desktop.jpg` | Início, computador (1440 × 796) | Recorte do topo, sem a barra de navegação sobreposta | 9/11/2026 |
+| `img/home-mobile.jpg` | Início, celular (375 × 812 a 1,6×) | Tela inteira | 9/11/2026 |
+| `img/atencao.jpg` | Reality, “O que merece atenção” (parcelas e metas) | Tela inteira | 9/11/2026 |
+| `img/decisoes-desktop.jpg` | Decisões conscientes, computador | Recorte do topo | 9/11/2026 |
+
+Como o endereço publicado (`finck-app.vercel.app`) estava fora da rede permitida do ambiente de edição, as capturas novas foram feitas numa cópia somente leitura do repositório `finck-app` (commit `67ba49114a7ae144dece0f7f3de33b3683b7ebdc`, o mais recente da `main` em 9/11/2026), servida localmente e aberta no modo de demonstração pelo próprio botão “Experimentar com dados de exemplo”. Nenhum arquivo do FinCK foi alterado, nenhuma conta foi usada e nenhuma conexão externa foi feita (Supabase, IA e mapas bloqueados). As capturas não foram editadas além do recorte; nenhum número foi alterado. As capturas antigas (`compra`, `impacto`, `decisao`, `habitos`, `revisao`, `decisoes`, `locais`, `desafio`) foram mantidas.
+
+## Histórico: revisão de 28 de outubro de 2026
+
+O conteúdo abaixo registra a revisão anterior. Alguns indicadores citados nela (CNDL/SPC, Serasa inadimplência, Serasa/Opinion Box, YOUPIX/Nielsen, BCB 28,7%, cartão 85,3%, urbanização 100%) não aparecem mais nos slides da versão final, que usa somente a base estatística acima.
 
 Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo notas, legendas de ampliação, textos acessíveis e referências. A numeração abaixo é a impressa no cabeçalho; a capa ocupa a primeira posição na navegação.
 
-## Critério de leitura
+### Critério de leitura
 
 “Confirmado” significa que o dado foi localizado na fonte indicada, com seu recorte e referência temporal. Não significa certeza absoluta, ausência de erro amostral ou auditoria independente. Estimativas, projeções, autorrelatos e dados técnicos internos têm naturezas distintas.
 
-## Correções solicitadas
+### Correções solicitadas
 
 | Tema | Tratamento final | Evidência |
 |---|---|---|
@@ -17,7 +80,7 @@ Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo no
 | Pequenos gastos, slide 10 | Na demonstração, 26 gastos e R$ 695,60 em 30 dias. R$ 8.347,20 é projeção se repetido o ritmo mensal, não gasto anual observado. | Aritmética: R$ 695,60 × 12 = R$ 8.347,20. A quantidade e os valores de demonstração foram preservados como dados internos simulados. |
 | Hipóteses e resultados | H1 e H2 continuam a validar com pessoas. Revisões de interface e testes determinísticos não demonstram confiança, compreensão, redução de consumo impulsivo ou de resíduos. | Limitação metodológica explicitada nos slides e notas. Não há resultados de testes com usuários apresentados. |
 
-## Outras inconsistências e decisões
+### Outras inconsistências e decisões
 
 | Ponto encontrado | Decisão e justificativa |
 |---|---|
@@ -39,7 +102,7 @@ Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo no
 | “63 políticas RLS” | O código usa criação dinâmica e substituição de políticas entre migrações, não apenas declarações individuais que possam ser somadas. A leitura não sustentou o total 63, e o banco publicado não foi consultado. Retirada a contagem, preservando a descrição de políticas para isolamento por usuário. Definir uma política no código não comprova sua implantação ou eficácia em produção. |
 | IA recebe “só dados agregados” | Precisado o escopo: o panorama da Revisão é agregado; os recursos de extração recebem foto ou link. Não se estendeu a todas as rotas uma propriedade do panorama da Revisão. |
 
-## Dados externos preservados
+### Dados externos preservados
 
 - CNC/Peic: 82,0% em julho/agosto e 81,7% em setembro de 2026; 29,6% com atraso em setembro; comparação por renda de julho e 18,3% sem condições de pagamento na faixa de menor renda em agosto. Conferência nos comunicados oficiais de [julho](https://portaldocomercio.org.br/acoes-institucionais/cnc-endividamento-e-o-maior-da-serie-historica/), [agosto](https://portaldocomercio.org.br/acoes-institucionais/cnc-mais-endividadas-do-que-a-media-familias-de-menor-renda-lideram-avanco-na-inadimplencia-em-agosto/) e [setembro](https://portaldocomercio.org.br/acoes-institucionais/cnc-inadimplencia-e-endividamento-das-familias-brasileiras-recuam-em-setembro/).
 - CNDL/SPC: 75,05 milhões e 44,67% da população adulta em setembro de 2026, conforme [comunicado de 20/10/2026](https://cndl.org.br/varejosa/inadimplencia-volta-a-crescer-no-brasil-e-atinge-7505-milhoes-de-consumidores-em-setembro-aponta-cndl-e-spc-brasil/).
@@ -47,7 +110,7 @@ Revisão: 28 de outubro de 2026. Escopo: `apresentacao/index.html`, incluindo no
 - Serasa/Opinion Box: 46% e 54%, descritos como autorrelatos. [Release original da assessoria](https://saladeimprensa.trevocomunica.com/releases/46-dos-brasileiros-ja-realizaram-compras-por-impulso-para-se-sentirem-melhor-emocionalmente-revela-pesquisa-serasa/1008832): 1.240 entrevistas online, 8–19/8/2025; margem de erro informada de 2,8 pontos percentuais.
 - YOUPIX/Nielsen: 80% já compraram algo indicado por influenciador, conforme [publicação das responsáveis pelo estudo em 2025](https://youpix.com.br/relevancia-pra-alem-do-hype-o-que-os-dados-dizem-sobre-influencia-e-consumo/). Não foi transformado em taxa de compras impulsivas.
 
-## Limites e dados internos
+### Limites e dados internos
 
 Na primeira revisão foram preservados os números internos, sem reprodução da suíte. Na rechecagem de 28/10/2026, a suíte foi efetivamente executada na cópia local do commit `912b0c13abeb6b164cda79ad4617bf078d3865bb` do FinCK: 457 casos no navegador e 515 verificações nos oito scripts Node.js, sem falhas. A apresentação agora usa essa contagem observada, e não o total anterior de 973. O [registro da execução](evidencias/verificacao-local-2026-10-28.json) identifica versão, ambiente, scripts, quantidades e limites.
 
@@ -59,7 +122,7 @@ Valores nas capturas e na demonstração não representam um estudo de usuários
 
 Os documentos internos da escola e os registros de desenvolvimento foram preservados como fontes internas; esta revisão não constitui autenticação desses documentos.
 
-## Rechecagem do score e testes locais — 28/10/2026
+### Rechecagem do score e testes locais — 28/10/2026
 
 ### Relatórios originais da Serasa
 
@@ -91,7 +154,7 @@ Uma tentativa inicial pelo protocolo `file://` falhou em 11 casos que dependiam 
 
 Não foram testados nesta execução o login real, a autorização entre usuários no banco publicado, as RPCs em produção, a qualidade das respostas de modelos ao vivo ou o efeito educativo com participantes. Um conjunto de testes aprovado não implica cobertura integral do aplicativo.
 
-## Verificação da apresentação
+### Verificação da apresentação
 
 - Preservados os 14 slides, os arquivos CSS e JavaScript, imagens e recursos de navegação.
 - Conferidos notas, referências, mapa, ampliação de capturas, navegação por teclado e modo fluido de celular.
@@ -100,7 +163,7 @@ Não foram testados nesta execução o login real, a autorização entre usuári
 
 Esta revisão melhora a rastreabilidade e a precisão das afirmações. Não transforma pesquisas amostrais, estimativas ou registros internos em verdades sem incerteza.
 
-## Roteiro e encerramento do grupo — 28/10/2026
+### Roteiro e encerramento do grupo — 28/10/2026
 
 - Organizadas 12 partes de conteúdo, duas por integrante, além da capa e do agradecimento: continuam sendo 14 telas de navegação.
 - O antigo quadro final de resultados foi substituído pelo agradecimento. As verificações técnicas e suas limitações permanecem na metodologia, nas notas e neste relatório.
