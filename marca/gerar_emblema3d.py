@@ -127,48 +127,54 @@ def tampa(g, z, mat, parte, cima=True):
             tri((*v[i], z), (*v[j], z), (*v[k], z), (0, 0, 1 if cima else -1), mat, parte, grupo=0)
 
 
-def faixa(fora, z_fora, dentro, z_dentro, mat, parte, ao=(1, 1)):
-    """Superficie inclinada entre dois contornos (o chanfro)."""
-    anel = fora.difference(dentro)
-    borda = dentro.boundary
-    for p in poligonos(anel):
-        if p.area < 1e-3: continue
-        v, t = triangular(p)
-        alto = np.array([borda.distance(Polygon([(x - .001, y - .001), (x + .001, y - .001), (x, y + .001)])) < 0.02
-                         for x, y in v])
-        z = np.where(alto, z_dentro, z_fora)
-        a = np.where(alto, ao[1], ao[0])
-        for i, j, k in t:
-            if alto[i] == alto[j] == alto[k]: continue   # triangulo deitado: a tampa ja cobre
-            tri((*v[i], z[i]), (*v[j], z[j]), (*v[k], z[k]), (0, 0, 1), mat, parte, (a[i], a[j], a[k]))
+def deslocar(anel, d):
+    """Empurra um contorno 'd' para fora, vertice a vertice (mitra limitada). Como cada ponto
+    continua sendo o mesmo ponto, as faixas do chanfro saem continuas, sem fresta."""
+    p = np.asarray(anel, float)
+    e = np.roll(p, -1, 0) - p
+    e /= np.maximum(np.linalg.norm(e, axis=1, keepdims=True), 1e-9)
+    n_sai = np.stack([e[:, 1], -e[:, 0]], 1)        # normal da aresta que sai do vertice
+    n_chega = np.roll(n_sai, 1, 0)                  # normal da aresta que chega
+    k = 1 + (n_sai * n_chega).sum(1, keepdims=True)
+    return p + (n_sai + n_chega) / np.maximum(k, 0.5) * d
 
 
-def parede(g, z_topo, z_base, mat, parte, ao_base=0.5):
+def tira(ra, za, rb, zb, mat, parte, ao=(1, 1)):
+    """Faixa entre dois contornos com os mesmos vertices (ra em cima, rb embaixo/fora)."""
+    n = len(ra)
+    for i in range(n):
+        j = (i + 1) % n
+        ex, ey = ra[j][0] - ra[i][0], ra[j][1] - ra[i][1]
+        if abs(ex) + abs(ey) < 1e-9: continue
+        fora = (ey, -ex, 0.35 * math.hypot(ex, ey))      # para fora e um pouco para cima
+        a, b, c, d = (*ra[i], za), (*rb[i], zb), (*rb[j], zb), (*ra[j], za)
+        tri(a, b, c, fora, mat, parte, (ao[0], ao[1], ao[1]))
+        tri(a, c, d, fora, mat, parte, (ao[0], ao[1], ao[0]))
+
+
+# perfil da borda: (fracao do chanfro para fora, fracao do chanfro para baixo)
+BORDA = [(0.34, 0.14), (1.0, 1.0)]
+BORDA_OLHO = [(0.10, 0.02), (0.30, 0.10), (0.58, 0.32), (0.84, 0.64), (1.0, 1.0)]
+
+
+def placa(g, base, topo, chanfro, mat, parte, ao_base=0.5, borda=BORDA):
+    """Placa com borda arredondada: a tampa fica no contorno original e o corpo cresce 'chanfro'
+    para fora enquanto desce, entao nunca ha recuo que se cruze em detalhe fino."""
+    if g is None: return
     for p in poligonos(g):
         p = orient(p, 1.0)
         for anel in [p.exterior] + list(p.interiors):
-            c = np.asarray(anel.coords)
-            for (x0, y0), (x1, y1) in zip(c[:-1], c[1:]):
-                fora = (y1 - y0, -(x1 - x0), 0)
-                tri((x0, y0, z_topo), (x0, y0, z_base), (x1, y1, z_base), fora, mat, parte, (1, ao_base, ao_base))
-                tri((x0, y0, z_topo), (x1, y1, z_base), (x1, y1, z_topo), fora, mat, parte, (1, ao_base, 1))
+            r0 = np.asarray(anel.coords)[:-1]
+            aneis_ = [(r0, topo)] + [(deslocar(r0, chanfro * fo), topo - chanfro * fz) for fo, fz in borda]
+            for (ra, za), (rb, zb) in zip(aneis_, aneis_[1:]):
+                tira(ra, za, rb, zb, mat, parte)
+            ult, z_ult = aneis_[-1]
+            tira(ult, z_ult, ult, base, mat, parte, (1, ao_base))
+    tampa(g, topo, mat, parte)
 
 
 def crescer(g, d):
     return g if d == 0 else g.buffer(d, join_style=2, mitre_limit=2.2)
-
-
-def placa(g, base, topo, chanfro, mat, parte, ao_base=0.5):
-    """Placa com borda arredondada em dois lances: o corpo cresce 'chanfro' para fora e a tampa
-    fica no contorno original, entao nunca ha recuo que se cruze em detalhe fino."""
-    if g is None: return
-    b = chanfro
-    perfil = [(b, topo - b), (b * 0.38, topo - b * 0.2), (0, topo)]
-    contornos = [crescer(g, o) for o, _ in perfil]
-    parede(contornos[0], perfil[0][1], base, mat, parte, ao_base)
-    for (o0, z0), (o1, z1), c0, c1 in zip(perfil, perfil[1:], contornos, contornos[1:]):
-        faixa(c0, z0, c1, z1, mat, parte)
-    tampa(g, topo, mat, parte)
 
 
 def espelhar_desde(n0):
@@ -214,7 +220,7 @@ PIVOS = {}
 for m in re.finditer(r'<path class="(eye-[rl])"[^>]*?d="([^"]+)"', camadas['eyes']):
     nome = 'olho-dir' if m.group(1) == 'eye-r' else 'olho-esq'
     g = forma(m.group(2))
-    placa(g, 39, 66, 6.5, MAT['#FBF9FC'], PARTE[nome], 0.45)
+    placa(g, 39, 66, 8, MAT['#FBF9FC'], PARTE[nome], 0.45, BORDA_OLHO)
     PIVOS[nome] = round(g.centroid.y / MEIO, 4)
 placa(forma(caminhos(camadas['shine'])[0][1]), 57, 61.5, 1.6, MAT['#FBF9FC'], PARTE['brilho'])
 

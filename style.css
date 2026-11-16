@@ -542,7 +542,7 @@ h2 em { font-style: normal; color: var(--destaque); }
 .produto__nome small { display: block; margin-top: 14px; font: 500 clamp(0.8rem, 1.3vw, 0.96rem)/1 var(--f-titulo); letter-spacing: 0.22em; text-transform: uppercase; color: var(--cor-2); }
 .chamada { margin-top: 28px; padding-left: 20px; border-left: 3px solid var(--ouro); font: 500 clamp(1.14rem, 2vw, 1.42rem)/1.38 var(--f-titulo); letter-spacing: -0.015em; color: #efe6f5; }
 .chamada strong { color: var(--ouro); font-weight: 600; }
-.produto__texto > div > p, .produto__texto > p:not([class]) { margin-top: 20px; color: var(--cor-2); }
+.produto__texto > div > p, .chamada + p { margin-top: 20px; color: var(--cor-2); }
 .produto__texto p strong { color: #fff; font-weight: 600; }
 .produto__texto p em { color: var(--lilas); font-style: normal; }
 .produto__acoes { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; }
