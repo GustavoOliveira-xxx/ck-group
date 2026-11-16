@@ -40,7 +40,7 @@
   });
   menu?.addEventListener("click", (e) => e.target.closest("a") && fecharMenu());
   addEventListener("keydown", (e) => e.key === "Escape" && fecharMenu());
-  matchMedia("(min-width: 941px)").addEventListener?.("change", fecharMenu);
+  matchMedia("(min-width: 1061px)").addEventListener?.("change", fecharMenu);
 
   const linksMenu = $$(".menu > ul:first-child a");
   if (temIO) {

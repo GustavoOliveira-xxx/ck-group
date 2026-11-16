@@ -178,7 +178,7 @@ strong, b { font-weight: 700; }
 .menu-botao[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
 .menu-botao[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
-@media (max-width: 940px) {
+@media (max-width: 1060px) {
   .menu-botao { display: block; z-index: 2; }
   .topo__cta { display: none; }
   .marca { z-index: 2; }
@@ -388,6 +388,78 @@ h2 em { font-style: normal; color: var(--destaque); }
 
 .etiquetas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
 .etiquetas li { padding: 7px 14px; border-radius: 99px; font: 500 0.84rem/1.2 var(--f-titulo); color: #e9def2; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); }
+
+/* ============================================================
+   DECORATIVOS 3D DOS CABEÇALHOS
+   Sólidos feitos só de CSS (transform-style: preserve-3d). Giram
+   na placa de vídeo e pausam quando a seção sai da tela.
+   ============================================================ */
+.secao > .caixa { position: relative; }
+.decor {
+  --larg: clamp(150px, 19vw, 250px);
+  --d-face: rgba(178, 16, 214, 0.2); --d-borda: var(--lilas); --d-solido: var(--ouro); --d-solido-2: var(--ouro-fundo); --d-solido-3: var(--ouro-claro);
+  position: absolute; right: 0; top: -14px; width: var(--larg); height: var(--larg);
+  pointer-events: none; perspective: 800px;
+}
+.secao--papel .decor { --d-face: rgba(100, 1, 135, 0.1); --d-borda: var(--roxo-fundo); }
+@media (max-width: 760px) { .decor { --larg: 92px; top: -66px; right: -10px; } }
+
+/* cubos */
+.cubo3d { --t: calc(var(--larg) * 0.36); position: absolute; left: 50%; top: 52%; width: var(--t); height: var(--t); margin: calc(var(--t) / -2); transform-style: preserve-3d; animation: gira-cubo 18s linear infinite; }
+.cubo3d i { position: absolute; inset: 0; border: 2px solid var(--d-borda); background: var(--d-face); }
+.cubo3d i:nth-child(1) { transform: translateZ(calc(var(--t) / 2)); }
+.cubo3d i:nth-child(2) { transform: rotateY(90deg) translateZ(calc(var(--t) / 2)); }
+.cubo3d i:nth-child(3) { transform: rotateY(180deg) translateZ(calc(var(--t) / 2)); }
+.cubo3d i:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--t) / 2)); }
+.cubo3d i:nth-child(5) { transform: rotateX(90deg) translateZ(calc(var(--t) / 2)); }
+.cubo3d i:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--t) / 2)); }
+.cubo3d--b { --t: calc(var(--larg) * 0.2); left: 20%; top: 24%; animation-duration: 11s; animation-direction: reverse; }
+.cubo3d--b i { border: 0; background: var(--d-solido); }
+.cubo3d--b i:nth-child(even) { background: var(--d-solido-2); }
+.cubo3d--b i:nth-child(5) { background: var(--d-solido-3); }
+.cubo3d--c { --t: calc(var(--larg) * 0.13); left: 84%; top: 82%; animation-duration: 8s; }
+.cubo3d--c i { border: 0; background: var(--roxo); }
+.cubo3d--c i:nth-child(even) { background: var(--roxo-fundo); }
+.cubo3d--c i:nth-child(5) { background: var(--roxo-vivo); }
+@keyframes gira-cubo { from { transform: rotateX(-26deg) rotateY(0deg); } to { transform: rotateX(-26deg) rotateY(360deg); } }
+
+/* órbitas */
+.aro { --ix: 68deg; --iy: 0deg; position: absolute; inset: 6%; border-radius: 50%; border: 2px solid var(--d-borda); animation: gira-aro 16s linear infinite; }
+.aro::before { content: ""; position: absolute; left: 50%; top: -8px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--ouro); box-shadow: 0 0 0 4px rgba(252, 207, 2, 0.22); }
+.aro--b { --ix: 28deg; --iy: 62deg; inset: 18%; border-color: var(--ouro); animation-duration: 11s; animation-direction: reverse; }
+.aro--b::before { background: #fff; box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2); }
+.aro--c { --ix: -40deg; --iy: -50deg; inset: 30%; animation-duration: 8s; }
+.decor > b { position: absolute; inset: 39%; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #f0b0ff, var(--roxo) 52%, var(--roxo-fundo)); box-shadow: 0 0 0 6px rgba(178, 16, 214, 0.22); animation: pulsa-nucleo 4s ease-in-out infinite; }
+@keyframes gira-aro { from { transform: rotateX(var(--ix)) rotateY(var(--iy)) rotateZ(0deg); } to { transform: rotateX(var(--ix)) rotateY(var(--iy)) rotateZ(360deg); } }
+@keyframes pulsa-nucleo { 50% { transform: scale(1.14); } }
+
+/* seis contas em órbita: a equipe */
+.decor--seis .aro { --ix: 64deg; --iy: 12deg; animation-duration: 22s; }
+.decor--seis .aro::before { display: none; }
+.decor--seis .aro i { position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px; border-radius: 50%; background: radial-gradient(circle at 34% 28%, var(--ouro-claro), var(--ouro) 50%, var(--ouro-fundo)); box-shadow: 0 0 0 2px var(--fundo); transform: rotate(calc(var(--n) * 60deg)) translateX(calc(var(--larg) * 0.44)); }
+.decor--seis .aro--b { --ix: 64deg; --iy: 12deg; inset: 27%; border-style: dashed; animation-duration: 14s; }
+.decor--seis > b { background: radial-gradient(circle at 34% 28%, #d77cf5, var(--roxo-fundo) 60%, #37014c); }
+@media (max-width: 760px) { .decor--seis .aro i { width: 11px; height: 11px; margin: -5.5px; } .aro::before { width: 9px; height: 9px; margin-left: -4.5px; top: -5.5px; } }
+
+/* placas empilhadas: as entregas */
+.pilha3d { position: absolute; inset: 24%; transform-style: preserve-3d; animation: gira-pilha 22s linear infinite; }
+.pilha3d i { position: absolute; inset: 0; border-radius: 14%; background: var(--d-face); border: 2px solid var(--d-borda); transform: translateZ(calc((var(--n) - 1.5) * var(--larg) * 0.12)); animation: respira 3.6s ease-in-out infinite alternate; animation-delay: calc(var(--n) * -0.5s); }
+.pilha3d i:nth-child(2) { background: var(--roxo-fundo); border-color: var(--roxo-vivo); }
+.pilha3d i:nth-child(4) { background: var(--ouro); border-color: var(--ouro-claro); }
+@keyframes gira-pilha { from { transform: rotateX(62deg) rotateZ(0deg); } to { transform: rotateX(62deg) rotateZ(360deg); } }
+@keyframes respira { to { transform: translateZ(calc((var(--n) - 1.5) * var(--larg) * 0.2)); } }
+
+/* telas de apresentação em leque */
+.tela3d { position: absolute; inset: 20% 12%; transform-style: preserve-3d; animation: balanca 9s ease-in-out infinite alternate; }
+.tela3d i { position: absolute; inset: 0; border-radius: 9%; border: 2px solid var(--d-borda); background: #2b0340; transform: translateZ(calc(var(--larg) * -0.24)) translateX(16%) translateY(-14%); }
+.tela3d i:nth-child(2) { background: var(--roxo-fundo); transform: translateZ(calc(var(--larg) * -0.12)) translateX(8%) translateY(-7%); }
+.tela3d i:nth-child(3) { transform: none; border-color: var(--ouro); background:
+  linear-gradient(var(--ouro), var(--ouro)) 14% 24% / 46% 9% no-repeat,
+  linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)) 14% 48% / 72% 6% no-repeat,
+  linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)) 14% 64% / 58% 6% no-repeat,
+  linear-gradient(160deg, #4a0667, #1d0229); }
+@keyframes balanca { from { transform: rotateY(-38deg) rotateX(14deg); } to { transform: rotateY(-8deg) rotateX(4deg); } }
+
 
 /* ============================================================
    SOBRE
@@ -749,12 +821,9 @@ input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px 
 .tempo h4 { margin-top: 10px; font: 700 1.1rem/1.2 var(--f-titulo); letter-spacing: -0.015em; }
 .tempo p { margin-top: 8px; font-size: 0.92rem; line-height: 1.56; color: var(--cor-2); }
 
-.palcos { margin-top: clamp(64px, 8vw, 110px); }
-.palcos .titulo-bloco { margin-bottom: 10px; }
-.palcos__sub { max-width: 62ch; color: var(--cor-2); margin-bottom: 30px; }
 .palcos__grade { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.slide { display: grid; grid-template-columns: 150px 1fr; gap: 26px; align-items: center; padding: 28px; border-radius: calc(var(--raio) + 4px); background: linear-gradient(150deg, #2b0340, var(--noite-2) 60%); box-shadow: inset 0 0 0 1px var(--borda), var(--sombra); }
-.slide:nth-child(2) { background: linear-gradient(150deg, #3a2f00, var(--noite-2) 60%); }
+.slide { display: grid; grid-template-columns: 150px 1fr; gap: 26px; align-items: center; padding: 28px; border-radius: calc(var(--raio) + 4px); background: linear-gradient(150deg, #3d0556, var(--noite) 62%); box-shadow: inset 0 0 0 1px var(--borda), var(--sombra); }
+.slide:nth-child(2) { background: linear-gradient(150deg, #4a3c00, var(--noite) 62%); }
 /* pilha de slides em perspectiva: abre em leque ao passar o mouse */
 .slide__pilha { position: relative; height: 150px; perspective: 600px; transform: translateZ(40px); }
 .slide__pilha i { position: absolute; inset: 22px 6px 22px 6px; border-radius: 10px; background: var(--noite-3); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 14px 22px -10px #000; transform: rotateY(-28deg) rotateX(8deg); transition: transform 0.55s var(--mola); }

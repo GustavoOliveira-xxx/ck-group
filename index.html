@@ -57,6 +57,7 @@
         <li><a href="#produtos">Produtos</a></li>
         <li><a href="#identidade">Identidade</a></li>
         <li><a href="#entrega">Projeto</a></li>
+        <li><a href="#apresentacoes">Apresentações</a></li>
         <li><a href="#equipe">Equipe</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
@@ -161,6 +162,8 @@
     <!-- ================= SOBRE ================= -->
     <section class="secao secao--papel sobre" id="sobre">
       <div class="caixa">
+        <!-- 3D · Cubos girando -->
+        <div class="decor decor--cubos" aria-hidden="true"><span class="cubo3d"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cubo3d cubo3d--b"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cubo3d cubo3d--c"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
         <header class="cabeca">
           <p class="indice" data-revelar><b>01</b>Quem somos</p>
           <h2 data-revelar style="--i:1">Uma empresa-conceito que dá <em>forma real</em> às ideias.</h2>
@@ -235,6 +238,8 @@
     <!-- ================= PRODUTOS ================= -->
     <section class="secao produtos" id="produtos">
       <div class="caixa">
+        <!-- 3D · Órbitas -->
+        <div class="decor decor--aneis" aria-hidden="true"><span class="aro"></span><span class="aro aro--b"></span><span class="aro aro--c"></span><b></b></div>
         <header class="cabeca">
           <p class="indice" data-revelar><b>02</b>Produtos CK</p>
           <h2 data-revelar style="--i:1">Uma marca, <em>vários produtos.</em></h2>
@@ -319,7 +324,7 @@
                 <span>Acessar o FinCK</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
               </a>
-              <span class="produto__nota">Abre o aplicativo em uma nova aba.</span>
+              <a class="botao botao--linha" href="#apresentacoes"><span>Ver as apresentações</span></a>
             </div>
           </div>
 
@@ -733,6 +738,8 @@
     <!-- ================= PROJETO ================= -->
     <section class="secao entrega" id="entrega">
       <div class="caixa">
+        <!-- 3D · Entregas empilhadas -->
+        <div class="decor decor--pilha" aria-hidden="true"><span class="pilha3d"><i style="--n:0"></i><i style="--n:1"></i><i style="--n:2"></i><i style="--n:3"></i></span></div>
         <header class="cabeca">
           <p class="indice" data-revelar><b>04</b>Projeto Interdisciplinar</p>
           <h2 data-revelar style="--i:1">O que <em>entregamos.</em></h2>
@@ -797,54 +804,63 @@
           <li class="is-feito" data-revelar><span class="tempo__fase">Fase 05</span><h4>Jornada, análises e relatórios</h4><p>Gamificação com regras anti-farm, gráficos de categoria, evolução mensal e exportação.</p></li>
           <li class="is-agora" data-revelar><span class="tempo__fase">Fase 06 · em andamento</span><h4>Refino e apresentação</h4><p>Testes finais, ajustes de usabilidade, documentação e preparação da defesa.</p></li>
         </ol>
+      </div>
+    </section>
 
-        <!-- ========== APRESENTAÇÕES ========== -->
-        <div class="palcos" id="apresentacoes">
-          <h3 class="titulo-bloco" data-revelar>Apresentações do FinCK</h3>
-          <p class="palcos__sub" data-revelar>
+    <!-- ================= APRESENTAÇÕES ================= -->
+    <section class="secao secao--roxa palcos" id="apresentacoes">
+      <div class="caixa">
+        <!-- 3D · Telas de apresentação -->
+        <div class="decor decor--telas" aria-hidden="true"><span class="tela3d"><i></i><i></i><i></i></span></div>
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>05</b>Palco</p>
+          <h2 data-revelar style="--i:1">Apresentações do <em>FinCK.</em></h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
             Duas apresentações, dois momentos. Ambas rodam no navegador, com navegação por teclado
-            e notas de apresentador.
+            e notas de apresentador. Clique para abrir.
           </p>
+        </header>
 
-          <div class="palcos__grade">
-            <a class="slide" href="apresentacao/index.html" aria-label="Abrir a apresentação final do FinCK" data-revelar data-inclinar>
-              <!-- 3D · Pilha de slides -->
-              <span class="slide__pilha" aria-hidden="true"><i></i><i></i><i><b></b><b></b><b></b></i></span>
-              <span class="slide__corpo">
-                <span class="slide__tag">Defesa final</span>
-                <strong>A problemática e a solução</strong>
-                <span class="slide__texto">Do consumo desenfreado ao aterro de lixo eletrônico, e de Thoreau ao aplicativo em produção. É a apresentação que responde ao enunciado da escola item por item.</span>
-                <span class="slide__ficha"><span><b>14</b> slides</span><span><b>12</b> itens do roteiro</span><span><b>~8</b> minutos</span></span>
-                <span class="slide__ir">Abrir a apresentação <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              </span>
-            </a>
+        <div class="palcos__grade">
+          <a class="slide" href="apresentacao/index.html" aria-label="Abrir a apresentação final do FinCK" data-revelar data-inclinar>
+            <!-- 3D · Pilha de slides -->
+            <span class="slide__pilha" aria-hidden="true"><i></i><i></i><i><b></b><b></b><b></b></i></span>
+            <span class="slide__corpo">
+              <span class="slide__tag">Defesa final</span>
+              <strong>A problemática e a solução</strong>
+              <span class="slide__texto">Do consumo desenfreado ao aterro de lixo eletrônico, e de Thoreau ao aplicativo em produção. É a apresentação que responde ao enunciado da escola item por item.</span>
+              <span class="slide__ficha"><span><b>14</b> slides</span><span><b>12</b> itens do roteiro</span><span><b>~8</b> minutos</span></span>
+              <span class="slide__ir">Abrir a apresentação <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+            </span>
+          </a>
 
-            <a class="slide" href="apresentacao-projeto/index.html" aria-label="Abrir a prévia do projeto FinCK" data-revelar style="--i:1" data-inclinar>
-              <span class="slide__pilha" aria-hidden="true"><i></i><i></i><i><b></b><b></b><b></b></i></span>
-              <span class="slide__corpo">
-                <span class="slide__tag">Prévia do projeto</span>
-                <strong>O app por dentro</strong>
-                <span class="slide__texto">Uma passagem tela a tela pelo aplicativo, do primeiro acesso ao Assistente FinCK, com o estado real de cada entrega: o que está no ar, o que está em curso e o que ainda falta.</span>
-                <span class="slide__ficha"><span><b>13</b> slides</span><span><b>ao vivo</b> calculadora</span><span><b>~8</b> minutos</span></span>
-                <span class="slide__ir">Abrir a prévia <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
-              </span>
-            </a>
-          </div>
-
-          <p class="palcos__nota" data-revelar>
-            Atalhos nas duas: <kbd>→</kbd> avança, <kbd>←</kbd> volta, <kbd>N</kbd> mostra as notas do
-            apresentador. Na defesa, <kbd>F</kbd> liga a tela cheia e imprimir gera o PDF; na prévia,
-            <kbd>O</kbd> abre o mapa de slides e <kbd>T</kbd> liga o cronômetro.
-          </p>
+          <a class="slide" href="apresentacao-projeto/index.html" aria-label="Abrir a prévia do projeto FinCK" data-revelar style="--i:1" data-inclinar>
+            <span class="slide__pilha" aria-hidden="true"><i></i><i></i><i><b></b><b></b><b></b></i></span>
+            <span class="slide__corpo">
+              <span class="slide__tag">Prévia do projeto</span>
+              <strong>O app por dentro</strong>
+              <span class="slide__texto">Uma passagem tela a tela pelo aplicativo, do primeiro acesso ao Assistente FinCK, com o estado real de cada entrega: o que está no ar, o que está em curso e o que ainda falta.</span>
+              <span class="slide__ficha"><span><b>13</b> slides</span><span><b>ao vivo</b> calculadora</span><span><b>~8</b> minutos</span></span>
+              <span class="slide__ir">Abrir a prévia <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+            </span>
+          </a>
         </div>
+
+        <p class="palcos__nota" data-revelar>
+          Atalhos nas duas: <kbd>→</kbd> avança, <kbd>←</kbd> volta, <kbd>N</kbd> mostra as notas do
+          apresentador. Na defesa, <kbd>F</kbd> liga a tela cheia e imprimir gera o PDF; na prévia,
+          <kbd>O</kbd> abre o mapa de slides e <kbd>T</kbd> liga o cronômetro.
+        </p>
       </div>
     </section>
 
     <!-- ================= EQUIPE ================= -->
     <section class="secao secao--papel equipe" id="equipe">
       <div class="caixa">
+        <!-- 3D · Seis integrantes em órbita -->
+        <div class="decor decor--seis" aria-hidden="true"><span class="aro"><i style="--n:0"></i><i style="--n:1"></i><i style="--n:2"></i><i style="--n:3"></i><i style="--n:4"></i><i style="--n:5"></i></span><span class="aro aro--b"></span><b></b></div>
         <header class="cabeca">
-          <p class="indice" data-revelar><b>05</b>Quem constrói</p>
+          <p class="indice" data-revelar><b>06</b>Quem constrói</p>
           <h2 data-revelar style="--i:1">Seis estudantes, <em>um produto real.</em></h2>
           <p class="cabeca__sub" data-revelar style="--i:2">
             Do conceito à defesa. <strong>2º C · M-Tec Informática para Internet</strong>, na Escola
@@ -878,7 +894,7 @@
     <section class="secao secao--ouro contato" id="contato">
       <div class="caixa contato__grade">
         <header class="cabeca">
-          <p class="indice" data-revelar><b>06</b>Fale com a gente</p>
+          <p class="indice" data-revelar><b>07</b>Fale com a gente</p>
           <h2 data-revelar style="--i:1">Tem uma ideia? <em>É só chamar.</em></h2>
           <p class="cabeca__sub" data-revelar style="--i:2">
             Dúvidas sobre a CK, o FinCK, o DynamiCK, o SynCK ou uma próxima ideia?
@@ -931,7 +947,7 @@
         <a href="#autonick">AutoniCK</a>
         <a href="#identidade">Identidade</a>
         <a href="#entrega">Entrega</a>
-        <a href="#apresentacoes">Palco</a>
+        <a href="#apresentacoes">Apresentações</a>
         <a href="#equipe">Equipe</a>
         <a href="#contato">Contato</a>
       </nav>
