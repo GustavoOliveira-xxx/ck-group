@@ -18,6 +18,8 @@ A CK tem **uma identidade só**: a máscara roxa e dourada. O alter ego (a logo 
 | `gerar_vinheta.py` | Junta camadas, letras e código e gera os dois arquivos abaixo. |
 | `ck-vinheta.js` | Vinheta pronta para os apps web (um arquivo só, sem dependências). |
 | `vinheta-dados.json` | Os mesmos desenhos, para o SynCK (React Native). |
+| `gerar_emblema3d.py` | Gera o modelo 3D da máscara a partir de `camadas.json`: cada cor vira uma placa com altura própria, com bordas arredondadas. |
+| `../ck-emblema.js` | O modelo 3D pronto para o site (um arquivo só). Quem desenha é o `../ck-3d.js`. |
 | `russo.woff`, `grotesk.woff` | Russo One (CK e CONSCIOUS KNOWLEDGE) e Space Grotesk 600 (slogan). Licença SIL Open Font License. O texto vira curva no gerador, então os apps não precisam das fontes. |
 
 ## Mudar a vinheta
@@ -32,6 +34,15 @@ Depois copie:
 
 - `ck-vinheta.js` para a raiz do site da CK, do FinCK, do DynamiCK e do AutoniCK;
 - `vinheta-dados.json` para `synck-app/app-mobile/src/components/brand/vinheta/dados.json`.
+
+## Mudar o modelo 3D da logo
+
+```bash
+pip install shapely numpy mapbox_earcut
+python3 gerar_emblema3d.py
+```
+
+O arquivo `ck-emblema.js` sai direto na raiz do site. As alturas de cada camada ficam no começo do script (`TOPO_ROSTO` e as chamadas de `placa`). No site, o modelo aparece no topo (ele se monta, flutua e pisca) e na seção Identidade, onde dá para girar e separar as camadas.
 
 ## Como a vinheta funciona nos apps
 

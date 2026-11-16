@@ -7,25 +7,7 @@
 
   <!-- Vinheta de abertura da CK (gerada em marca/). No site da própria CK, sem "Uma produção de". -->
   <script src="ck-vinheta.js" data-credito="nao"></script>
-
-  <script>
-    /* Perfil de desempenho decidido antes da primeira pintura.
-       Aparelho modesto recebe a mesma decoração, mas desenhada de um
-       jeito que a GPU dele aguenta: aurora em gradiente no lugar de
-       filter: blur, vidro opaco no lugar de backdrop-filter e menos
-       camadas animadas ao mesmo tempo. */
-    (() => {
-      const r = document.documentElement;
-      const n = navigator;
-      const leve =
-        (n.connection && (n.connection.saveData || /(^|-)(2g|slow-2g)$/.test(n.connection.effectiveType || ""))) ||
-        (n.deviceMemory && n.deviceMemory <= 4) ||
-        (n.hardwareConcurrency && n.hardwareConcurrency <= 4) ||
-        matchMedia("(max-width: 900px)").matches ||
-        matchMedia("(hover: none) and (pointer: coarse)").matches;
-      r.dataset.perf = leve ? "leve" : "pleno";
-    })();
-  </script>
+  <script>document.documentElement.classList.add("js");</script>
 
   <title>Conscious Knowledge | Consciência que cria, Conhecimento que transforma</title>
   <link rel="icon" type="image/svg+xml" href="midia/ck-logo.svg">
@@ -36,7 +18,7 @@
   <meta name="description"
     content="Consciência que cria, Conhecimento que transforma. A Conscious Knowledge cria produtos digitais com propósito: FinCK, DynamiCK, SynCK e, em breve, AutoniCK.">
   <meta name="author" content="Conscious Knowledge">
-  <meta name="theme-color" content="#050409">
+  <meta name="theme-color" content="#050407">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Conscious Knowledge | Consciência que cria, Conhecimento que transforma">
@@ -45,1431 +27,902 @@
   <meta property="og:image" content="midia/ck-og.jpg">
   <meta property="og:locale" content="pt_BR">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
-    rel="stylesheet">
-
+  <link rel="preload" href="fontes/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fontes/manrope.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
+
+  <script src="ck-emblema.js" defer></script>
+  <script src="ck-3d.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 
-<body data-tema="origem">
+<body>
 
-  <!-- ================= FUNDO ANIMADO ================= -->
-  <div class="cena-fundo" aria-hidden="true">
-    <canvas class="cena-fundo__canvas" data-canvas></canvas>
-    <span class="orbe orbe--1"></span>
-    <span class="orbe orbe--2"></span>
-    <span class="orbe orbe--3"></span>
-    <span class="orbe orbe--4"></span>
-    <span class="orbe orbe--5"></span>
-    <span class="cena-fundo__ribbon cena-fundo__ribbon--a"></span>
-    <span class="cena-fundo__ribbon cena-fundo__ribbon--b"></span>
-    <span class="cena-fundo__portal"></span>
-    <span class="cena-fundo__grade"></span>
-    <span class="cena-fundo__scan"></span>
-    <span class="cena-fundo__ruido"></span>
-  </div>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <div class="progresso" aria-hidden="true"><span data-progresso></span></div>
 
-  <div class="cursor" data-cursor aria-hidden="true"></div>
-  <div class="cursor cursor--halo" data-cursor-halo aria-hidden="true"></div>
+  <!-- ================= TOPO ================= -->
+  <header class="topo" data-topo>
+    <a class="marca" href="#inicio" aria-label="Conscious Knowledge, início">
+      <picture>
+        <source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w" sizes="38px">
+        <img src="midia/logo-ck-origem-360.png" alt="" width="38" height="57" decoding="async">
+      </picture>
+      <span class="marca__nome"><b>Conscious</b><i>Knowledge</i></span>
+    </a>
 
-  <a class="pular" href="#inicio">Pular para o conteúdo</a>
-
-  <!-- ================= HEADER ================= -->
-  <header>
-
-    <div class="logo-container">
-      <a href="#inicio" aria-label="Conscious Knowledge — início">
-        <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="44px"><img src="midia/logo-ck-origem-360.png" class="logo-ck-png" alt="Logo da Conscious Knowledge" width="72" height="108" decoding="async"></picture>
-      </a>
-      <span class="logo-wordmark">
-        <strong>Conscious</strong>
-        <small>Knowledge</small>
-      </span>
-    </div>
-
-    <nav aria-label="Navegação principal">
+    <nav class="menu" id="menu" aria-label="Navegação principal">
       <ul>
-        <li><a href="#inicio">Início</a></li>
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#identidade">Identidade</a></li>
+        <li><a href="#entrega">Projeto</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <ul class="menu__produtos" aria-label="Produtos">
         <li><a href="#finck">FinCK</a></li>
         <li><a href="#dynamick">DynamiCK</a></li>
         <li><a href="#synck">SynCK</a></li>
         <li><a href="#autonick">AutoniCK</a></li>
-        <li><a href="#identidade">Identidade</a></li>
-        <li><a href="#equipe">Equipe</a></li>
-        <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
 
+    <a class="botao botao--ouro botao--p topo__cta" href="#produtos">Ver produtos</a>
+
+    <button class="menu-botao" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu" data-menu-botao>
+      <span></span><span></span>
+    </button>
   </header>
 
-  <!-- ================= MAIN ================= -->
-  <main>
+  <main id="conteudo">
 
-    <!-- ========== HERO ========== -->
-    <section id="inicio">
-      <div class="hero-content">
+    <!-- ================= INÍCIO ================= -->
+    <section class="inicio" id="inicio" data-inicio>
+      <div class="inicio__fundo" aria-hidden="true">
+        <span class="inicio__clarao"></span>
+        <span class="inicio__piso"><i></i></span>
+      </div>
 
-        <div class="hero-brand">
+      <div class="inicio__grade caixa">
+        <div class="inicio__texto">
+          <p class="selo-vivo" data-revelar><span></span>Estúdio de tecnologia criativa · Brasil</p>
 
-          <!-- 3D · Núcleo orbital da marca -->
-          <div class="nucleo" data-nucleo>
-            <div class="nucleo__palco">
-              <span class="nucleo__anel nucleo__anel--a"></span>
-              <span class="nucleo__anel nucleo__anel--b"></span>
-              <span class="nucleo__anel nucleo__anel--c"></span>
-              <span class="nucleo__orbita"><i class="nucleo__satelite"></i></span>
-              <span class="nucleo__orbita nucleo__orbita--2"><i class="nucleo__satelite nucleo__satelite--ouro"></i></span>
-              <div class="nucleo__marca nucleo__marca--unica">
-                <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 210px, 250px"><img src="midia/logo-ck-origem-360.png" alt="Logo da Conscious Knowledge" width="1365" height="2048" decoding="async" fetchpriority="high"></picture>
-              </div>
-              <span class="nucleo__faisca nucleo__faisca--1"></span>
-              <span class="nucleo__faisca nucleo__faisca--2"></span>
-              <span class="nucleo__faisca nucleo__faisca--3"></span>
-              <span class="nucleo__halo"></span>
-            </div>
-          </div>
+          <p class="inicio__assinatura" data-revelar style="--i:1">Conscious Knowledge</p>
+          <h1 data-revelar style="--i:2">
+            <span class="linha">Consciência que cria,</span>
+            <span class="linha linha--ouro">Conhecimento que transforma.</span>
+          </h1>
 
-          <div class="hero-text">
-            <p class="hero-eyebrow">
-              <span class="ponto-vivo"></span>
-              Creative technology studio · Brasil
-            </p>
+          <p class="inicio__gira" data-revelar style="--i:3">
+            Transformamos conhecimento em
+            <span class="gira" data-gira aria-live="off">
+              <span class="gira__palavra is-ativa">soluções conscientes</span>
+              <span class="gira__palavra">decisões melhores</span>
+              <span class="gira__palavra">tecnologia com propósito</span>
+              <span class="gira__palavra">aprendizagem adaptativa</span>
+              <span class="gira__palavra">experiências memoráveis</span>
+            </span>
+          </p>
 
-            <h1>Conscious<br>Knowledge</h1>
+          <p class="inicio__resumo" data-revelar style="--i:4">
+            Começamos na escola e crescemos para além dela. A CK transforma ideias em produtos com
+            identidade, profundidade e propósito: o <strong>FinCK</strong>, que traduz preço em tempo,
+            o <strong>DynamiCK</strong>, que transforma erros em próximos passos, e o
+            <strong>SynCK</strong>, que sincroniza a rotina com quem importa. O <strong>AutoniCK</strong> vem aí.
+          </p>
 
-            <p class="hero-slogan">Consciência que cria, <span>Conhecimento que transforma.</span></p>
-
-            <p class="hero-typed">
-              Transformamos conhecimento em
-              <span class="typed" data-typed
-                data-palavras="soluções conscientes|decisões melhores|tecnologia com propósito|aprendizagem adaptativa|experiências memoráveis"><span
-                  class="typed__texto"></span><span class="typed__cursor"></span></span>
-            </p>
-
-<p class="hero-description">
-              Começamos na escola e crescemos para além dela. A CK transforma ideias em produtos com
-              identidade, profundidade e propósito: o <strong>FinCK</strong>, que traduz preço em tempo,
-              o <strong>DynamiCK</strong>, que transforma erros em próximos passos de aprendizagem, e o
-              <strong>SynCK</strong>, que sincroniza a rotina com quem importa. O <strong>AutoniCK</strong> vem aí.
-            </p>
-
-            <div class="hero-acoes">
-              <a class="btn btn--primario" href="#finck" data-magnetico>
-                <span>Explorar o universo CK</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
-              <a class="btn btn--fantasma" href="#produtos" data-magnetico>
-                <span>Ver os produtos</span>
-              </a>
-            </div>
+          <div class="inicio__acoes" data-revelar style="--i:5">
+            <a class="botao botao--ouro" href="#produtos">
+              <span>Explorar os produtos</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="botao botao--linha" href="#sobre"><span>Conhecer a CK</span></a>
           </div>
         </div>
 
-        <div class="hero-metrics" aria-label="Destaques institucionais">
-          <div class="metric-card" data-tilt>
-            <span class="metric-label">Foco</span>
-            <strong>Inovação responsável</strong>
-            <p>Tecnologia que resolve problema real, sem manipular quem usa.</p>
+        <!-- 3D · A máscara da CK modelada a partir da logo em SVG -->
+        <div class="inicio__palco">
+          <span class="inicio__halo" aria-hidden="true"></span>
+          <div class="palco palco--emblema" data-palco="emblema" role="img" aria-label="Logo da Conscious Knowledge em 3D: a máscara roxa e dourada">
+            <img class="palco__reserva" src="midia/ck-logo.svg" alt="" width="640" height="640" decoding="async" fetchpriority="high">
           </div>
-          <div class="metric-card" data-tilt>
-            <span class="metric-label">Ecossistema</span>
-            <strong>FinCK · DynamiCK · SynCK</strong>
-            <p>Finanças conscientes, estudo adaptativo e agenda compartilhada. AutoniCK em desenvolvimento.</p>
-          </div>
-          <div class="metric-card" data-tilt>
-            <span class="metric-label">Slogan</span>
-            <strong>Consciência que cria</strong>
-            <p>Conhecimento que transforma.</p>
-          </div>
+          <span class="inicio__sombra" aria-hidden="true"></span>
+
+          <div class="ficha ficha--a" aria-hidden="true"><b>4</b><span>produtos com a assinatura CK</span></div>
+          <div class="ficha ficha--b" aria-hidden="true"><b>3</b><span>já no ar</span></div>
         </div>
-
       </div>
 
-      <a class="hero-scroll" href="#sobre" aria-label="Rolar para a próxima seção">
-        <span class="hero-scroll__mouse"><i></i></span>
-        <span class="hero-scroll__texto">role</span>
-      </a>
-    </section>
-
-    <!-- ========== TICKER ========== -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__trilha">
-        <span>Conhecimento Consciente</span><i>◆</i>
-        <span>FinCK · Consumo consciente</span><i>◆</i>
-        <span>DynamiCK · ENEM 2027</span><i>◆</i>
-        <span>SynCK · Agenda compartilhada</span><i>◆</i>
-        <span>AutoniCK · Em breve</span><i>◆</i>
-        <span>Preço → Tempo de vida</span><i>◆</i>
-        <span>Erro → Próximo passo</span><i>◆</i>
-        <span>Consciência que cria · Conhecimento que transforma</span><i>◆</i>
-        <span>Conhecimento Consciente</span><i>◆</i>
-        <span>FinCK · Consumo consciente</span><i>◆</i>
-        <span>DynamiCK · ENEM 2027</span><i>◆</i>
-        <span>SynCK · Agenda compartilhada</span><i>◆</i>
-        <span>AutoniCK · Em breve</span><i>◆</i>
-        <span>Preço → Tempo de vida</span><i>◆</i>
-        <span>Erro → Próximo passo</span><i>◆</i>
-        <span>Consciência que cria · Conhecimento que transforma</span><i>◆</i>
-      </div>
-    </div>
-
-    <!-- ========== SOBRE ========== -->
-    <section id="sobre">
-
-      <header>
-        <p class="secao-indice">01 — Quem somos</p>
-        <h2>Sobre a Conscious Knowledge</h2>
-        <p class="secao-sub">
-          Uma empresa-conceito que nasceu para dar forma real a projetos escolares e cresceu como
-          um estúdio demonstrativo de produtos digitais, identidades e experiências com propósito.
-        </p>
-      </header>
-
-      <div class="sobre-grade">
-
-        <article>
-          <p>
-            A <strong>Conscious Knowledge (CK)</strong> nasceu na Escola Técnica Estadual de Taboão da
-            Serra como uma assinatura para projetos. Mas a ideia evoluiu: em vez de apenas colocar um
-            nome em trabalhos, a CK passou a transformar cada desafio em um produto de verdade, com
-            marca, processo, tecnologia, documentação e uma experiência que dá vontade de explorar.
-          </p>
-          <p>
-            A iniciativa foi idealizada por <strong>Gustavo Oliveira dos Santos</strong>. O
-            <strong>FinCK</strong> consolidou a primeira fase ao levar consciência para decisões
-            financeiras. O <strong>DynamiCK</strong> abriu a segunda: aprendizagem adaptativa, uma nova
-            linguagem visual e espaço para projetos que não precisam nascer dentro da escola. Depois
-            veio o <strong>SynCK</strong>, a agenda compartilhada, e agora o <strong>AutoniCK</strong>
-            está em desenvolvimento.
-          </p>
-          <p>
-            O objetivo continua simples e exigente: desenvolver soluções tecnológicas úteis,
-            explicáveis, acessíveis e memoráveis para problemas reais, sempre usando conhecimento
-            com ética, personalidade e consciência.
-          </p>
-
-          <div class="etimologia">
-            <div class="etimologia__peca">
-              <span>Conscious</span>
-              <strong>Consciente</strong>
-            </div>
-            <span class="etimologia__mais">+</span>
-            <div class="etimologia__peca">
-              <span>Knowledge</span>
-              <strong>Conhecimento</strong>
-            </div>
-            <span class="etimologia__igual">=</span>
-            <div class="etimologia__peca etimologia__peca--destaque">
-              <span>Nossa filosofia</span>
-              <strong>Conhecimento aplicado com responsabilidade</strong>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3D · Cartões de valores com profundidade -->
-        <div class="pilares">
-          <div class="pilar" data-tilt>
-            <span class="pilar__icone" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 3l7.5 3.8v5c0 4.4-3.1 7.9-7.5 9.2-4.4-1.3-7.5-4.8-7.5-9.2v-5L12 3Z" />
-                <path d="M9 12l2.2 2.2L15.5 10" />
-              </svg>
-            </span>
-            <h3>Ética por padrão</h3>
-            <p>Nenhum recurso empurra compra, cria urgência falsa ou lucra com o descontrole do usuário.</p>
-          </div>
-
-          <div class="pilar" data-tilt>
-            <span class="pilar__icone" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="8.5" />
-                <path d="M12 7v5l3.2 2" />
-              </svg>
-            </span>
-            <h3>Clareza antes da decisão</h3>
-            <p>A informação certa precisa chegar no momento em que ainda dá para mudar de ideia.</p>
-          </div>
-
-          <div class="pilar" data-tilt>
-            <span class="pilar__icone" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 19V5" />
-                <path d="M4 19h16" />
-                <path d="M8 16V11M12.5 16V7M17 16v-3" />
-              </svg>
-            </span>
-            <h3>Dado sobre opinião</h3>
-            <p>Cada número exibido tem uma fórmula rastreável por trás. Nada de estimativa mágica.</p>
-          </div>
-
-          <div class="pilar" data-tilt>
-            <span class="pilar__icone" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
-                <circle cx="12" cy="12" r="3.2" />
-              </svg>
-            </span>
-            <h3>Acessível de verdade</h3>
-            <p>Contraste, teclado, leitor de tela e funcionamento offline fazem parte do requisito.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========== PRODUTOS ========== -->
-    <section id="produtos" class="produtos-secao">
-
-      <header>
-        <p class="secao-indice">02 — Produtos CK</p>
-        <h2>Uma marca, <span class="texto-gradiente">vários produtos</span></h2>
-        <p class="secao-sub">
-          Cada produto tem nome, cara e jeito próprios, mas todos carregam o CK no fim do nome e
-          o mesmo compromisso: consciência que cria, conhecimento que transforma.
-        </p>
-      </header>
-
-      <ul class="produtos-grade">
-        <li class="produto" data-tilt>
-          <div class="produto__logo">
-            <picture><source type="image/webp" srcset="midia/logo-finck-240.webp 240w, midia/logo-finck-480.webp 480w" sizes="200px"><img src="midia/logo-finck-300.png" alt="Logo do FinCK" width="300" height="306" loading="lazy" decoding="async"></picture>
-          </div>
-          <span class="produto__selo produto__selo--ar">No ar</span>
-          <h3>Fin<span>CK</span></h3>
-          <p>Consumo consciente: mostra quanto uma compra custa em dinheiro e em horas da sua vida antes de decidir.</p>
-          <a class="produto__link" href="#finck">Conhecer o FinCK <span aria-hidden="true">→</span></a>
-        </li>
-        <li class="produto" data-tilt>
-          <div class="produto__logo">
-            <picture><source type="image/webp" srcset="midia/logo-dynamick-360.webp 360w, midia/logo-dynamick-540.webp 540w" sizes="240px"><img src="midia/logo-dynamick-480.png" alt="Logo do DynamiCK" width="480" height="320" loading="lazy" decoding="async"></picture>
-          </div>
-          <span class="produto__selo produto__selo--ar">No ar</span>
-          <h3>Dynami<span>CK</span></h3>
-          <p>Estudo adaptativo para o ENEM: cada erro vira o próximo passo do plano de estudos.</p>
-          <a class="produto__link" href="#dynamick">Conhecer o DynamiCK <span aria-hidden="true">→</span></a>
-        </li>
-        <li class="produto" data-tilt>
-          <div class="produto__logo">
-            <picture><source type="image/webp" srcset="midia/logo-synck-480.webp" sizes="220px"><img src="midia/logo-synck-480.png" alt="Logo do SynCK" width="480" height="335" loading="lazy" decoding="async"></picture>
-          </div>
-          <span class="produto__selo produto__selo--novo">Novo</span>
-          <h3>Syn<span>CK</span></h3>
-          <p>Agenda compartilhada: compromissos, tarefas e lembretes sincronizados com quem divide a rotina com você, no Android, no iPhone e no computador.</p>
-          <a class="produto__link" href="#synck">Conhecer o SynCK <span aria-hidden="true">→</span></a>
-        </li>
-        <li class="produto produto--breve" data-tilt>
-          <div class="produto__logo">
-            <picture><source type="image/webp" srcset="midia/logo-autonick-360.webp 360w, midia/logo-autonick-720.webp 720w" sizes="220px"><img src="midia/logo-autonick-480.png" alt="Logo do AutoniCK" width="480" height="505" loading="lazy" decoding="async"></picture>
-          </div>
-          <span class="produto__selo produto__selo--breve">Em desenvolvimento</span>
-          <h3>Autoni<span>CK</span></h3>
-          <p>O próximo produto da CK está sendo construído. Em breve, mais novidades por aqui.</p>
-          <a class="produto__link" href="#autonick">Ver o que vem aí <span aria-hidden="true">→</span></a>
-        </li>
+      <ul class="fatos caixa" aria-label="Destaques institucionais">
+        <li data-revelar><span>Foco</span><strong>Inovação responsável</strong><p>Tecnologia que resolve problema real, sem manipular quem usa.</p></li>
+        <li data-revelar style="--i:1"><span>Ecossistema</span><strong>FinCK · DynamiCK · SynCK</strong><p>Finanças conscientes, estudo adaptativo e agenda compartilhada.</p></li>
+        <li data-revelar style="--i:2"><span>Em construção</span><strong>AutoniCK</strong><p>O próximo produto já tem nome, logo e vinheta.</p></li>
+        <li data-revelar style="--i:3"><span>Origem</span><strong>Etec Taboão da Serra</strong><p>Nasceu como projeto escolar e virou marca.</p></li>
       </ul>
     </section>
 
-    <!-- ========== FINCK ========== -->
-    <section id="finck">
-
-      <header>
-        <p class="secao-indice">03 — Primeiro produto</p>
-        <h2>FinCK <span class="h2-sub">consumo consciente</span></h2>
-        <p class="secao-sub">
-          O primeiro produto da Conscious Knowledge e a entrega central do Projeto
-          Interdisciplinar de 2026.
-        </p>
-      </header>
-
-      <!-- Manifesto do produto -->
-      <article class="finck-intro">
-        <div class="finck-intro__texto">
-          <p class="destaque-linha">
-            Todo preço tem duas etiquetas. A que está na vitrine e a que ninguém mostra:
-            <strong>quantas horas da sua vida aquilo custa.</strong>
-          </p>
-          <p>
-            O <strong>FinCK</strong> é um aplicativo mobile de controle financeiro inteligente e
-            consumo consciente. Ele organiza receitas, despesas, contas, parcelas e metas, mas o
-            que o torna diferente é o motor <strong>FinCK of Reality</strong>: antes de você comprar,
-            ele converte o preço em <em>tempo de trabalho</em>, mostra o impacto no orçamento do mês
-            e o atraso que aquela compra causa nas suas metas.
-          </p>
-          <p>
-            O app nunca bloqueia uma compra e nunca julga a escolha. Ele apenas garante que a decisão
-            seja tomada com todas as cartas na mesa.
-          </p>
-
-          <ul class="selos">
-            <li>Mobile-first · PWA instalável</li>
-            <li>Modo demonstração sem cadastro</li>
-            <li>Interface em português</li>
-            <li>Sem anúncios</li>
-          </ul>
-        </div>
-
-        <!-- 3D · Mockup de celular com a interface do app -->
-        <div class="palco-device" data-device>
-          <div class="device">
-            <div class="device__moldura">
-              <span class="device__ilha"></span>
-              <div class="device__tela">
-
-                <div class="mini-topo">
-                  <span class="mini-avatar"></span>
-                  <div>
-                    <small>Olá, Gustavo</small>
-                    <strong>Seu mês em foco</strong>
-                  </div>
-                </div>
-
-                <div class="mini-saldo">
-                  <small>Saldo atual</small>
-                  <p>R$ 2.480,00</p>
-                  <div class="mini-saldo__linhas">
-                    <span><i>Entradas</i><b class="verde">R$ 3.500</b></span>
-                    <span><i>Saídas</i><b class="vermelho">R$ 1.020</b></span>
-                  </div>
-                </div>
-
-                <div class="mini-card mini-card--reality">
-                  <small>FinCK of Reality</small>
-                  <strong>Fone · R$ 800,00</strong>
-                  <div class="mini-semaforo">
-                    <span class="ativo"></span><span></span><span></span>
-                  </div>
-                  <p>≈ <b>40h</b> de trabalho · 22,9% da renda</p>
-                </div>
-
-                <div class="mini-barras">
-                  <span style="--h:44%"></span>
-                  <span style="--h:72%"></span>
-                  <span style="--h:31%"></span>
-                  <span style="--h:88%"></span>
-                  <span style="--h:57%"></span>
-                  <span style="--h:66%"></span>
-                </div>
-
-                <div class="mini-metas">
-                  <div>
-                    <small>Notebook</small>
-                    <span class="mini-progresso"><i style="--p:62%"></i></span>
-                  </div>
-                  <div>
-                    <small>Reserva</small>
-                    <span class="mini-progresso"><i style="--p:38%"></i></span>
-                  </div>
-                </div>
-
-                <div class="mini-nav">
-                  <span class="ativo"></span><span></span><span></span><span></span>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Cartões flutuantes em profundidade -->
-            <div class="device__flutuante device__flutuante--1">
-              <span>Horas equivalentes</span>
-              <strong>128 h</strong>
-            </div>
-            <div class="device__flutuante device__flutuante--2">
-              <span>Decisões conscientes</span>
-              <strong>17</strong>
-            </div>
-            <div class="device__flutuante device__flutuante--3">
-              <span>Nível</span>
-              <strong>Consciente</strong>
-            </div>
-          </div>
-          <span class="palco-device__sombra" aria-hidden="true"></span>
-        </div>
-      </article>
-
-      <!-- Números do produto -->
-      <div class="numeros">
-        <div class="numero" data-tilt>
-          <strong data-contador="18">18</strong>
-          <span>telas do aplicativo</span>
-        </div>
-        <div class="numero" data-tilt>
-          <strong data-contador="30">30</strong>
-          <span>módulos JavaScript</span>
-        </div>
-        <div class="numero" data-tilt>
-          <strong data-contador="9">9</strong>
-          <span>categorias de gasto</span>
-        </div>
-        <div class="numero" data-tilt>
-          <strong data-contador="7">7</strong>
-          <span>instituições no catálogo</span>
+    <!-- ================= FAIXAS ================= -->
+    <div class="faixas" aria-hidden="true" data-faixas>
+      <div class="faixa faixa--ouro">
+        <div class="faixa__trilho">
+          <span>Conhecimento consciente</span><i></i><span>Preço em tempo de vida</span><i></i><span>Erro vira próximo passo</span><i></i><span>Rotina em sincronia</span><i></i>
+          <span>Conhecimento consciente</span><i></i><span>Preço em tempo de vida</span><i></i><span>Erro vira próximo passo</span><i></i><span>Rotina em sincronia</span><i></i>
         </div>
       </div>
+      <div class="faixa faixa--roxa">
+        <div class="faixa__trilho">
+          <span>FinCK</span><i></i><span>DynamiCK</span><i></i><span>SynCK</span><i></i><span>AutoniCK</span><i></i><span>Consciência que cria</span><i></i><span>Conhecimento que transforma</span><i></i>
+          <span>FinCK</span><i></i><span>DynamiCK</span><i></i><span>SynCK</span><i></i><span>AutoniCK</span><i></i><span>Consciência que cria</span><i></i><span>Conhecimento que transforma</span><i></i>
+        </div>
+      </div>
+    </div>
 
-      <!-- 3D · O prisma: o mesmo valor lido de quatro ângulos -->
-      <div class="prisma-secao">
-        <div class="prisma-secao__texto">
-          <h3>O mesmo valor, quatro leituras</h3>
-          <p>
-            Este é o coração do FinCK. Um único valor é traduzido em unidades diferentes,
-            reais, horas, dias e porcentagem da renda, porque cada uma revela um aspecto que a
-            outra esconde. Gire o prisma e teste com os seus próprios números.
+    <!-- ================= SOBRE ================= -->
+    <section class="secao secao--papel sobre" id="sobre">
+      <div class="caixa">
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>01</b>Quem somos</p>
+          <h2 data-revelar style="--i:1">Uma empresa-conceito que dá <em>forma real</em> às ideias.</h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
+            Nascemos para assinar projetos escolares e crescemos como um estúdio demonstrativo de
+            produtos digitais, identidades e experiências com propósito.
           </p>
+        </header>
 
-          <form class="calc" data-calc autocomplete="off">
-            <div class="calc__campos">
-              <label>
-                Renda mensal (R$)
+        <div class="sobre__grade">
+          <div class="sobre__texto" data-revelar>
+            <p>
+              A <strong>Conscious Knowledge (CK)</strong> nasceu na Escola Técnica Estadual de Taboão da
+              Serra como uma assinatura para projetos. Mas a ideia evoluiu: em vez de apenas colocar um
+              nome em trabalhos, a CK passou a transformar cada desafio em um produto de verdade, com
+              marca, processo, tecnologia, documentação e uma experiência que dá vontade de explorar.
+            </p>
+            <p>
+              A iniciativa foi idealizada por <strong>Gustavo Oliveira dos Santos</strong>. O
+              <strong>FinCK</strong> consolidou a primeira fase ao levar consciência para decisões
+              financeiras. O <strong>DynamiCK</strong> abriu a segunda: aprendizagem adaptativa e espaço
+              para projetos que não precisam nascer dentro da escola. Depois veio o
+              <strong>SynCK</strong>, a agenda compartilhada, e agora o <strong>AutoniCK</strong>
+              está em desenvolvimento.
+            </p>
+            <p>
+              O objetivo continua simples e exigente: desenvolver soluções tecnológicas úteis,
+              explicáveis, acessíveis e memoráveis para problemas reais, sempre usando conhecimento
+              com ética, personalidade e consciência.
+            </p>
+          </div>
+
+          <!-- 3D · A equação do nome em placas empilhadas -->
+          <div class="equacao" data-revelar style="--i:1" data-inclinar>
+            <div class="equacao__placa equacao__placa--a"><span>Conscious</span><strong>Consciente</strong></div>
+            <div class="equacao__sinal" aria-hidden="true">+</div>
+            <div class="equacao__placa equacao__placa--b"><span>Knowledge</span><strong>Conhecimento</strong></div>
+            <div class="equacao__sinal" aria-hidden="true">=</div>
+            <div class="equacao__placa equacao__placa--c"><span>Nossa filosofia</span><strong>Conhecimento aplicado com responsabilidade</strong></div>
+          </div>
+        </div>
+
+        <ul class="pilares">
+          <li class="pilar" data-revelar data-inclinar>
+            <span class="pilar__num" aria-hidden="true">I</span>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3.8v5c0 4.4-3.1 7.9-7.5 9.2-4.4-1.3-7.5-4.8-7.5-9.2v-5L12 3Z" /><path d="M9 12l2.2 2.2L15.5 10" /></svg>
+            <h3>Ética por padrão</h3>
+            <p>Nenhum recurso empurra compra, cria urgência falsa ou lucra com o descontrole do usuário.</p>
+          </li>
+          <li class="pilar" data-revelar style="--i:1" data-inclinar>
+            <span class="pilar__num" aria-hidden="true">II</span>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.2 2" /></svg>
+            <h3>Clareza antes da decisão</h3>
+            <p>A informação certa precisa chegar no momento em que ainda dá para mudar de ideia.</p>
+          </li>
+          <li class="pilar" data-revelar style="--i:2" data-inclinar>
+            <span class="pilar__num" aria-hidden="true">III</span>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 16v-5M12.5 16V7M17 16v-3" /></svg>
+            <h3>Dado sobre opinião</h3>
+            <p>Cada número exibido tem uma fórmula rastreável por trás. Nada de estimativa mágica.</p>
+          </li>
+          <li class="pilar" data-revelar style="--i:3" data-inclinar>
+            <span class="pilar__num" aria-hidden="true">IV</span>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" /><circle cx="12" cy="12" r="3.2" /></svg>
+            <h3>Acessível de verdade</h3>
+            <p>Contraste, teclado, leitor de tela e funcionamento offline fazem parte do requisito.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= PRODUTOS ================= -->
+    <section class="secao produtos" id="produtos">
+      <div class="caixa">
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>02</b>Produtos CK</p>
+          <h2 data-revelar style="--i:1">Uma marca, <em>vários produtos.</em></h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
+            Cada produto tem nome, cara e jeito próprios, mas todos carregam o CK no fim do nome e
+            o mesmo compromisso: consciência que cria, conhecimento que transforma.
+          </p>
+        </header>
+
+        <ul class="vitrine">
+          <li data-revelar>
+            <a class="vitrine__item" href="#finck" data-inclinar>
+              <span class="vitrine__estado">No ar</span>
+              <span class="vitrine__logo"><picture><source type="image/webp" srcset="midia/logo-finck-240.webp 240w, midia/logo-finck-480.webp 480w" sizes="170px"><img src="midia/logo-finck-300.png" alt="" width="300" height="306" loading="lazy" decoding="async"></picture></span>
+              <h3>Fin<b>CK</b></h3>
+              <p>Consumo consciente: mostra quanto uma compra custa em dinheiro e em horas da sua vida antes de decidir.</p>
+              <span class="vitrine__ir">Conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+            </a>
+          </li>
+          <li data-revelar style="--i:1">
+            <a class="vitrine__item" href="#dynamick" data-inclinar>
+              <span class="vitrine__estado">No ar</span>
+              <span class="vitrine__logo"><picture><source type="image/webp" srcset="midia/logo-dynamick-360.webp 360w, midia/logo-dynamick-540.webp 540w" sizes="200px"><img src="midia/logo-dynamick-480.png" alt="" width="480" height="320" loading="lazy" decoding="async"></picture></span>
+              <h3>Dynami<b>CK</b></h3>
+              <p>Estudo adaptativo para o ENEM: cada erro vira o próximo passo do plano de estudos.</p>
+              <span class="vitrine__ir">Conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+            </a>
+          </li>
+          <li data-revelar style="--i:2">
+            <a class="vitrine__item" href="#synck" data-inclinar>
+              <span class="vitrine__estado vitrine__estado--novo">Novo</span>
+              <span class="vitrine__logo"><picture><source type="image/webp" srcset="midia/logo-synck-480.webp" sizes="190px"><img src="midia/logo-synck-480.png" alt="" width="480" height="335" loading="lazy" decoding="async"></picture></span>
+              <h3>Syn<b>CK</b></h3>
+              <p>Agenda compartilhada: compromissos, tarefas e lembretes sincronizados com quem divide a rotina com você.</p>
+              <span class="vitrine__ir">Conhecer <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+            </a>
+          </li>
+          <li data-revelar style="--i:3">
+            <a class="vitrine__item vitrine__item--breve" href="#autonick" data-inclinar>
+              <span class="vitrine__estado vitrine__estado--breve">Em desenvolvimento</span>
+              <span class="vitrine__logo"><picture><source type="image/webp" srcset="midia/logo-autonick-360.webp 360w, midia/logo-autonick-720.webp 720w" sizes="180px"><img src="midia/logo-autonick-480.png" alt="" width="480" height="505" loading="lazy" decoding="async"></picture></span>
+              <h3>Autoni<b>CK</b></h3>
+              <p>O próximo produto da CK está sendo construído. Em breve, mais novidades por aqui.</p>
+              <span class="vitrine__ir">Ver o que vem aí <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ========== FINCK ========== -->
+      <article class="produto caixa" id="finck">
+        <div class="produto__topo">
+          <div class="produto__texto">
+            <p class="produto__ordem" data-revelar><b>Produto 01</b><span class="estado estado--ar">Ativo</span></p>
+            <h3 class="produto__nome" data-revelar style="--i:1">Fin<b>CK</b><small>consumo consciente</small></h3>
+            <p class="chamada" data-revelar style="--i:2">
+              Todo preço tem duas etiquetas. A que está na vitrine e a que ninguém mostra:
+              <strong>quantas horas da sua vida aquilo custa.</strong>
+            </p>
+            <div data-revelar style="--i:3">
+              <p>
+                O primeiro produto da Conscious Knowledge e a entrega central do Projeto Interdisciplinar
+                de 2026. O <strong>FinCK</strong> é um aplicativo mobile de controle financeiro inteligente:
+                organiza receitas, despesas, contas, parcelas e metas. O que o torna diferente é o motor
+                <strong>FinCK of Reality</strong>: antes de você comprar, ele converte o preço em
+                <em>tempo de trabalho</em>, mostra o impacto no orçamento do mês e o atraso que aquela
+                compra causa nas suas metas.
+              </p>
+              <p>
+                O app nunca bloqueia uma compra e nunca julga a escolha. Ele apenas garante que a decisão
+                seja tomada com todas as cartas na mesa.
+              </p>
+            </div>
+            <ul class="etiquetas" data-revelar style="--i:4">
+              <li>Mobile-first · PWA instalável</li>
+              <li>Modo demonstração sem cadastro</li>
+              <li>Interface em português</li>
+              <li>Sem anúncios</li>
+            </ul>
+            <div class="produto__acoes" data-revelar style="--i:5">
+              <a class="botao botao--ouro" href="https://finck-app.vercel.app" target="_blank" rel="noopener">
+                <span>Acessar o FinCK</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+              </a>
+              <span class="produto__nota">Abre o aplicativo em uma nova aba.</span>
+            </div>
+          </div>
+
+          <div class="produto__cena" data-revelar>
+            <!-- 3D · A moeda que também é relógio: preço em tempo -->
+            <div class="palco palco--totem" data-palco="moeda" aria-hidden="true"></div>
+            <picture><source type="image/webp" srcset="midia/logo-finck-240.webp 240w, midia/logo-finck-480.webp 480w" sizes="150px"><img class="produto__logo" src="midia/logo-finck-300.png" alt="Logo do FinCK" width="300" height="306" loading="lazy" decoding="async"></picture>
+          </div>
+        </div>
+
+        <ul class="numeros">
+          <li data-revelar><strong data-contar="18">18</strong><span>telas do aplicativo</span></li>
+          <li data-revelar style="--i:1"><strong data-contar="30">30</strong><span>módulos JavaScript</span></li>
+          <li data-revelar style="--i:2"><strong data-contar="9">9</strong><span>categorias de gasto</span></li>
+          <li data-revelar style="--i:3"><strong data-contar="7">7</strong><span>instituições no catálogo</span></li>
+        </ul>
+
+        <!-- Calculadora: o mesmo valor em quatro leituras -->
+        <div class="leituras" data-revelar>
+          <div class="leituras__texto">
+            <h4 class="titulo-bloco">O mesmo valor, quatro leituras</h4>
+            <p>
+              Este é o coração do FinCK. Um único valor é traduzido em reais, horas, dias e porcentagem
+              da renda, porque cada unidade revela um aspecto que a outra esconde. Teste com os seus
+              próprios números.
+            </p>
+
+            <form class="calc" data-calc autocomplete="off">
+              <label>Renda mensal (R$)
                 <input type="number" id="calcRenda" value="3500" min="0" step="100" inputmode="decimal">
               </label>
-              <label>
-                Dias de trabalho/mês
+              <label>Dias de trabalho no mês
                 <input type="number" id="calcDias" value="22" min="1" max="31" step="1" inputmode="numeric">
               </label>
-              <label>
-                Horas por dia
+              <label>Horas por dia
                 <input type="number" id="calcHoras" value="8" min="1" max="24" step="1" inputmode="numeric">
               </label>
-              <label>
-                Preço do item (R$)
+              <label>Preço do item (R$)
                 <input type="number" id="calcPreco" value="800" min="0" step="50" inputmode="decimal">
               </label>
-            </div>
+            </form>
 
             <p class="calc__formula">
               <code>valor_dia = renda ÷ dias</code>
               <code>valor_hora = valor_dia ÷ horas</code>
               <code>custo_horas = preço ÷ valor_hora</code>
             </p>
-
-            <p class="calc__saida" aria-live="polite" data-calc-resumo>
+            <p class="calc__resumo" aria-live="polite" data-calc-resumo>
               Sua hora vale <strong>R$ 19,89</strong> e seu dia vale <strong>R$ 159,09</strong>.
             </p>
-          </form>
-        </div>
+          </div>
 
-        <div class="prisma-palco" data-prisma>
-          <div class="prisma-orbita">
-            <div class="prisma">
-              <div class="prisma__face prisma__face--frente">
-                <span class="prisma__rotulo">Preço</span>
-                <strong class="prisma__valor" data-prisma-reais>R$ 800,00</strong>
-                <span class="prisma__nota">o que a etiqueta mostra</span>
-              </div>
-              <div class="prisma__face prisma__face--direita">
-                <span class="prisma__rotulo">Em trabalho</span>
-                <strong class="prisma__valor" data-prisma-horas>40,2 h</strong>
-                <span class="prisma__nota">horas para ganhar esse valor</span>
-              </div>
-              <div class="prisma__face prisma__face--tras">
-                <span class="prisma__rotulo">Em dias</span>
-                <strong class="prisma__valor" data-prisma-dias>5,0 dias</strong>
-                <span class="prisma__nota">dias de trabalho equivalentes</span>
-              </div>
-              <div class="prisma__face prisma__face--esquerda">
-                <span class="prisma__rotulo">Da sua renda</span>
-                <strong class="prisma__valor" data-prisma-percent>22,9%</strong>
-                <span class="prisma__nota">fatia do mês comprometida</span>
-              </div>
-              <div class="prisma__face prisma__face--topo" aria-hidden="true"></div>
-              <div class="prisma__face prisma__face--base" aria-hidden="true"></div>
+          <div class="leituras__painel">
+            <ul class="leituras__valores">
+              <li><span>Preço</span><strong data-calc-reais>R$ 800,00</strong><small>o que a etiqueta mostra</small></li>
+              <li class="is-ouro"><span>Em trabalho</span><strong data-calc-horas>40,2 h</strong><small>horas para ganhar esse valor</small></li>
+              <li><span>Em dias</span><strong data-calc-dias>5,0 dias</strong><small>dias de trabalho equivalentes</small></li>
+              <li><span>Da sua renda</span><strong data-calc-percent>22,9%</strong><small>fatia do mês comprometida</small></li>
+            </ul>
+
+            <!-- 3D · Cada bloco é um dia de trabalho do mês; os dourados são os que a compra consome -->
+            <div class="mes" aria-hidden="true">
+              <div class="mes__plano" data-calc-blocos></div>
             </div>
-          </div>
-          <span class="prisma-palco__sombra" aria-hidden="true"></span>
-          <span class="prisma-dica">arraste para girar</span>
-        </div>
-      </div>
-
-      <!-- Funcionalidades -->
-      <h3 class="titulo-bloco">O que existe dentro do app</h3>
-      <div class="funcoes">
-
-        <article class="funcao funcao--destaque" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="8.5" />
-              <path d="M12 7v5l3.2 2" />
-            </svg>
-          </span>
-          <h4>FinCK of Reality</h4>
-          <p>
-            O motor de decisão. Informe o item e o preço: o app devolve custo em horas e dias de
-            trabalho, percentual da renda, impacto no saldo, efeito em cada meta, um semáforo de
-            risco e alternativas mais sustentáveis. Depois vêm as perguntas de reflexão, e a
-            decisão fica sempre com você.
-          </p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="2.5" y="6" width="19" height="13" rx="2" />
-              <path d="M2.5 10h19M6 14.5h4" />
-            </svg>
-          </span>
-          <h4>Contas</h4>
-          <p>Carteira, conta corrente, poupança e cartões em uma visão consolidada, com total por
-            instituição e transferências internas que não contaminam entradas e saídas.</p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="3" y="5" width="18" height="16" rx="2" />
-              <path d="M3 10h18M8 3v4M16 3v4M8 15h2M14 15h2" />
-            </svg>
-          </span>
-          <h4>Planejamento</h4>
-          <p>Projeção de saldo mês a mês, calendário financeiro, compras parceladas e teto por
-            categoria, com aviso aos 75% do limite, antes de estourar.</p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z" />
-            </svg>
-          </span>
-          <h4>Metas</h4>
-          <p>Valor, prazo e aporte mensal. Cada meta funciona como contraponto ao impulso: o que
-            você deixa de gastar aparece como progresso.</p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M5 20V11M12 20V4M19 20v-7" />
-            </svg>
-          </span>
-          <h4>Análises e relatórios</h4>
-          <p>Gastos por categoria, evolução mensal, indicadores de consumo consciente e exportação
-            dos dados em CSV.</p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" />
-              <path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5 3.5 3.5 0 0 0 6.5 10H7" />
-              <path d="M17 5h2.5A1.5 1.5 0 0 1 21 6.5 3.5 3.5 0 0 1 17.5 10H17" />
-              <path d="M12 13v3M8.5 20h7l-1-3.5h-5z" />
-            </svg>
-          </span>
-          <h4>Jornada</h4>
-          <p>XP, níveis e conquistas por constância real, com regras anti-farm: teto diário,
-            intervalo mínimo entre ganhos e cada conquista paga uma única vez.</p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 7h11a3 3 0 0 1 3 3v1M15 4l3 3-3 3" />
-              <path d="M20 17H9a3 3 0 0 1-3-3v-1M9 20l-3-3 3-3" />
-            </svg>
-          </span>
-          <h4>Recorrentes</h4>
-          <p>Assinaturas e contas fixas cadastradas uma vez, aplicadas automaticamente ao orçamento
-            previsto e à projeção futura.</p>
-        </article>
-
-        <article class="funcao" data-tilt>
-          <span class="funcao__icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z" />
-              <path d="M9 8h6M9 12h6M9 16h3" />
-            </svg>
-          </span>
-          <h4>Decisões</h4>
-          <p>Todo cálculo vira histórico: o que você comprou, adiou ou substituiu, e o quanto isso
-            representou em dinheiro e em horas de trabalho equivalentes.</p>
-        </article>
-
-      </div>
-
-      <!-- Como funciona -->
-      <h3 class="titulo-bloco">Como funciona, na prática</h3>
-      <ol class="fluxo">
-        <li class="fluxo__passo" data-tilt>
-          <span class="fluxo__num">01</span>
-          <h4>Você define sua realidade</h4>
-          <p>Renda mensal, dias trabalhados e horas por dia. É daí que sai o valor real da sua hora.</p>
-        </li>
-        <li class="fluxo__passo" data-tilt>
-          <span class="fluxo__num">02</span>
-          <h4>Registra a compra desejada</h4>
-          <p>Item, preço, categoria e, se quiser, o link do produto e uma observação.</p>
-        </li>
-        <li class="fluxo__passo" data-tilt>
-          <span class="fluxo__num">03</span>
-          <h4>Recebe a tradução completa</h4>
-          <p>Horas, dias, percentual da renda, semáforo, impacto nas metas e alternativas.</p>
-        </li>
-        <li class="fluxo__passo" data-tilt>
-          <span class="fluxo__num">04</span>
-          <h4>Decide com consciência</h4>
-          <p>Comprar, adiar ou substituir. A escolha é registrada e vira aprendizado no histórico.</p>
-        </li>
-      </ol>
-
-      <!-- Tecnologia -->
-      <h3 class="titulo-bloco">A tecnologia por trás</h3>
-      <div class="tech">
-        <div class="tech__texto">
-          <p>
-            O FinCK foi construído sem framework: HTML semântico, CSS moderno e JavaScript modular,
-            para que cada linha do projeto seja compreendida e defendida pela equipe. A persistência
-            usa <strong>Supabase</strong> (PostgreSQL + autenticação), e um <strong>modo demonstração</strong>
-            guarda dados de exemplo no próprio navegador, sem cadastro, útil tanto para quem quer
-            conhecer o app quanto para a demonstração em sala.
-          </p>
-          <ul class="tech__lista">
-            <li><strong>Front-end</strong> HTML5, CSS3 e JavaScript (ES6+), sem dependências de build</li>
-            <li><strong>Back-end</strong> Supabase: PostgreSQL, Auth e políticas de acesso por usuário</li>
-            <li><strong>PWA</strong> manifest, ícones e instalação na tela inicial</li>
-            <li><strong>Modo demonstração</strong> dados de exemplo no navegador, sem tocar no banco de produção</li>
-            <li><strong>Acessibilidade</strong> foco visível, navegação por teclado, ARIA e alto contraste</li>
-            <li><strong>Design system</strong> tokens de cor, tipografia e espaçamento centralizados</li>
-          </ul>
-        </div>
-
-        <!-- 3D · Anel giratório de tecnologias -->
-        <div class="anel-tech" data-anel>
-          <div class="anel-tech__palco">
-            <span class="anel-tech__item">HTML5</span>
-            <span class="anel-tech__item">CSS3</span>
-            <span class="anel-tech__item">JavaScript</span>
-            <span class="anel-tech__item">Supabase</span>
-            <span class="anel-tech__item">PostgreSQL</span>
-            <span class="anel-tech__item">PWA</span>
-            <span class="anel-tech__item">Git</span>
-            <span class="anel-tech__item">Figma</span>
+            <p class="mes__legenda" data-calc-legenda>5,0 dos seus 22 dias de trabalho no mês vão para esta compra.</p>
           </div>
         </div>
-      </div>
 
-      <div class="project-status">
-        <p>Status do Projeto</p>
-        <span class="status active">Ativo</span>
-      </div>
+        <h4 class="titulo-bloco" data-revelar>O que existe dentro do app</h4>
+        <ul class="trilho" data-trilho>
+          <li class="recurso recurso--destaque" data-revelar>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.2 2" /></svg>
+            <h5>FinCK of Reality</h5>
+            <p>O motor de decisão. Informe o item e o preço: o app devolve custo em horas e dias de trabalho, percentual da renda, impacto no saldo, efeito em cada meta, um semáforo de risco e alternativas mais sustentáveis. Depois vêm as perguntas de reflexão, e a decisão fica sempre com você.</p>
+          </li>
+          <li class="recurso" data-revelar style="--i:1">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="6" width="19" height="13" rx="2" /><path d="M2.5 10h19M6 14.5h4" /></svg>
+            <h5>Contas</h5>
+            <p>Carteira, conta corrente, poupança e cartões em uma visão consolidada, com total por instituição e transferências internas que não contaminam entradas e saídas.</p>
+          </li>
+          <li class="recurso" data-revelar style="--i:2">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4M8 15h2M14 15h2" /></svg>
+            <h5>Planejamento</h5>
+            <p>Projeção de saldo mês a mês, calendário financeiro, compras parceladas e teto por categoria, com aviso aos 75% do limite, antes de estourar.</p>
+          </li>
+          <li class="recurso" data-revelar style="--i:3">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z" /></svg>
+            <h5>Metas</h5>
+            <p>Valor, prazo e aporte mensal. Cada meta funciona como contraponto ao impulso: o que você deixa de gastar aparece como progresso.</p>
+          </li>
+          <li class="recurso" data-revelar>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-9M12 20V4M19 20v-7" /></svg>
+            <h5>Análises e relatórios</h5>
+            <p>Gastos por categoria, evolução mensal, indicadores de consumo consciente e exportação dos dados em CSV.</p>
+          </li>
+          <li class="recurso" data-revelar style="--i:1">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" /><path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5 3.5 3.5 0 0 0 6.5 10H7M17 5h2.5A1.5 1.5 0 0 1 21 6.5 3.5 3.5 0 0 1 17.5 10H17M12 13v3M8.5 20h7l-1-3.5h-5z" /></svg>
+            <h5>Jornada</h5>
+            <p>XP, níveis e conquistas por constância real, com regras anti-farm: teto diário, intervalo mínimo entre ganhos e cada conquista paga uma única vez.</p>
+          </li>
+          <li class="recurso" data-revelar style="--i:2">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h11a3 3 0 0 1 3 3v1M15 4l3 3-3 3M20 17H9a3 3 0 0 1-3-3v-1M9 20l-3-3 3-3" /></svg>
+            <h5>Recorrentes</h5>
+            <p>Assinaturas e contas fixas cadastradas uma vez, aplicadas automaticamente ao orçamento previsto e à projeção futura.</p>
+          </li>
+          <li class="recurso" data-revelar style="--i:3">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-2.5-1.5L13 21l-2.5-1.5L8 21l-2-1.5V3Z" /><path d="M9 8h6M9 12h6M9 16h3" /></svg>
+            <h5>Decisões</h5>
+            <p>Todo cálculo vira histórico: o que você comprou, adiou ou substituiu, e o quanto isso representou em dinheiro e em horas de trabalho equivalentes.</p>
+          </li>
+        </ul>
 
-      <div class="finck-cta">
-        <a class="btn btn--primario btn--grande" href="https://finck-app.vercel.app"
-          target="_blank" rel="noopener" data-magnetico>
-          <span>Acessar o FinCK</span>
-          <span class="development-indicator" aria-hidden="true"></span>
-        </a>
-        <p class="finck-cta__nota">Abre o aplicativo em uma nova aba.</p>
-      </div>
+        <h4 class="titulo-bloco" data-revelar>Como funciona, na prática</h4>
+        <ol class="passos">
+          <li data-revelar><span>01</span><h5>Você define sua realidade</h5><p>Renda mensal, dias trabalhados e horas por dia. É daí que sai o valor real da sua hora.</p></li>
+          <li data-revelar style="--i:1"><span>02</span><h5>Registra a compra desejada</h5><p>Item, preço, categoria e, se quiser, o link do produto e uma observação.</p></li>
+          <li data-revelar style="--i:2"><span>03</span><h5>Recebe a tradução completa</h5><p>Horas, dias, percentual da renda, semáforo, impacto nas metas e alternativas.</p></li>
+          <li data-revelar style="--i:3"><span>04</span><h5>Decide com consciência</h5><p>Comprar, adiar ou substituir. A escolha é registrada e vira aprendizado no histórico.</p></li>
+        </ol>
 
-    </section>
-
-    <!-- ========== DYNAMICK ========== -->
-    <section id="dynamick" class="dynamick-secao">
-
-      <header>
-        <p class="secao-indice secao-indice--menta">04 — Segundo produto · Nova energia</p>
-        <h2>Dynami<span class="texto-menta">CK</span></h2>
-        <p class="secao-sub">
-          Uma plataforma de preparação para o ENEM 2027 que transforma erro em direção,
-          estudo em jornada e tempo disponível em uma sessão possível.
-        </p>
-      </header>
-
-      <article class="dynamick-intro">
-        <div class="dynamick-intro__texto">
-          <div class="dynamic-selo"><span></span> Aprendizagem adaptativa · Web app</div>
-          <p class="destaque-linha destaque-linha--menta">
-            Estudar sem saber por onde começar cansa mais do que estudar.
-            <strong>O DynamiCK mostra o próximo passo.</strong>
-          </p>
-          <p>
-            O <strong>DynamiCK</strong> aprende com o que o estudante acerta, erra e tem tempo para
-            fazer. Em vez de despejar uma biblioteca inteira na tela, ele recomenda uma sessão por
-            vez, explica o motivo da escolha e usa cada correção para reorganizar a jornada.
-          </p>
-          <p>
-            O produto não promete aprovação, não cria ranking público e não transforma desempenho
-            em rótulo. A experiência é pessoal, transparente e desenhada para construir constância.
-          </p>
-
-          <ul class="selos selos--menta">
-            <li>Preparação para o ENEM 2027</li>
-            <li>Revisão espaçada</li>
-            <li>Explicações úteis</li>
-            <li>Dados no navegador</li>
-          </ul>
-
-          <a class="btn btn--menta btn--grande" href="https://dyanimi-ck.vercel.app/inicio#/inicio"
-            target="_blank" rel="noopener" data-magnetico>
-            <span>Entrar no DynamiCK</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </a>
-        </div>
-
-        <div class="dynamic-universo" data-dynamic-universo>
-          <span class="dynamic-universo__halo"></span>
-          <span class="dynamic-universo__orbita dynamic-universo__orbita--a"><i>Matemática</i></span>
-          <span class="dynamic-universo__orbita dynamic-universo__orbita--b"><i>Linguagens</i></span>
-          <span class="dynamic-universo__orbita dynamic-universo__orbita--c"><i>Ciências</i></span>
-
-          <picture><source type="image/webp" srcset="midia/logo-dynamick-180.webp 180w, midia/logo-dynamick-360.webp 360w, midia/logo-dynamick-540.webp 540w, midia/logo-dynamick-720.webp 720w, midia/logo-dynamick-960.webp 960w" sizes="(max-width: 860px) 225px, 300px"><img class="dynamic-universo__logo" src="midia/logo-dynamick-480.png" alt="DynamiCK by Conscious Knowledge" width="1536" height="1024" loading="lazy" decoding="async"></picture>
-
-          <div class="study-cube" data-study-cube tabindex="0"
-            aria-label="Cubo de conhecimento 3D. Arraste ou use as setas para girar.">
-            <div class="study-cube__body">
-              <div class="cube-face cube-face--front"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="cube-face cube-face--back"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="cube-face cube-face--right"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="cube-face cube-face--left"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="cube-face cube-face--top"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="cube-face cube-face--bottom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            </div>
+        <div class="tecnologia" data-revelar>
+          <div>
+            <h4 class="titulo-bloco">A tecnologia por trás</h4>
+            <p>
+              O FinCK foi construído sem framework: HTML semântico, CSS moderno e JavaScript modular,
+              para que cada linha do projeto seja compreendida e defendida pela equipe. A persistência
+              usa <strong>Supabase</strong> (PostgreSQL + autenticação), e um <strong>modo demonstração</strong>
+              guarda dados de exemplo no próprio navegador, sem cadastro, útil tanto para quem quer
+              conhecer o app quanto para a demonstração em sala.
+            </p>
+            <ul class="pilha" aria-label="Tecnologias usadas">
+              <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Supabase</li><li>PostgreSQL</li><li>PWA</li><li>Git</li><li>Figma</li>
+            </ul>
           </div>
-
-          <div class="dynamic-float dynamic-float--1" data-tilt><span>Revisão</span><strong>3 dias</strong></div>
-          <div class="dynamic-float dynamic-float--2" data-tilt><span>Sessão</span><strong>20 min</strong></div>
-          <div class="dynamic-float dynamic-float--3" data-tilt><span>Foco</span><strong>Inferência</strong></div>
+          <dl class="ficha-tecnica">
+            <div><dt>Front-end</dt><dd>HTML5, CSS3 e JavaScript (ES6+), sem dependências de build</dd></div>
+            <div><dt>Back-end</dt><dd>Supabase: PostgreSQL, Auth e políticas de acesso por usuário</dd></div>
+            <div><dt>PWA</dt><dd>Manifest, ícones e instalação na tela inicial</dd></div>
+            <div><dt>Modo demonstração</dt><dd>Dados de exemplo no navegador, sem tocar no banco de produção</dd></div>
+            <div><dt>Acessibilidade</dt><dd>Foco visível, navegação por teclado, ARIA e alto contraste</dd></div>
+            <div><dt>Design system</dt><dd>Tokens de cor, tipografia e espaçamento centralizados</dd></div>
+          </dl>
         </div>
       </article>
 
-      <div class="dynamic-numeros">
-        <article data-tilt><span class="dynamic-numeros__icone">◎</span><strong data-contador="1">1</strong><p>recomendação principal por vez</p></article>
-        <article data-tilt><span class="dynamic-numeros__icone">↻</span><strong data-contador="3">3</strong><p>etapas em cada correção útil</p></article>
-        <article data-tilt><span class="dynamic-numeros__icone">◷</span><strong data-contador="8">8</strong><p>passos no ciclo de aprendizagem</p></article>
-        <article data-tilt><span class="dynamic-numeros__icone">∞</span><strong>∞</strong><p>novos contextos para praticar</p></article>
-      </div>
+      <!-- ========== DYNAMICK ========== -->
+      <article class="produto produto--invertido caixa" id="dynamick">
+        <div class="produto__topo">
+          <div class="produto__texto">
+            <p class="produto__ordem" data-revelar><b>Produto 02</b><span class="estado estado--ar">No ar</span></p>
+            <h3 class="produto__nome" data-revelar style="--i:1">Dynami<b>CK</b><small>aprendizagem adaptativa</small></h3>
+            <p class="chamada" data-revelar style="--i:2">
+              Estudar sem saber por onde começar cansa mais do que estudar.
+              <strong>O DynamiCK mostra o próximo passo.</strong>
+            </p>
+            <div data-revelar style="--i:3">
+              <p>
+                Uma plataforma de preparação para o ENEM 2027 que transforma erro em direção, estudo em
+                jornada e tempo disponível em uma sessão possível. O <strong>DynamiCK</strong> aprende com
+                o que o estudante acerta, erra e tem tempo para fazer. Em vez de despejar uma biblioteca
+                inteira na tela, ele recomenda uma sessão por vez, explica o motivo da escolha e usa cada
+                correção para reorganizar a jornada.
+              </p>
+              <p>
+                O produto não promete aprovação, não cria ranking público e não transforma desempenho
+                em rótulo. A experiência é pessoal, transparente e desenhada para construir constância.
+              </p>
+            </div>
+            <ul class="etiquetas" data-revelar style="--i:4">
+              <li>Preparação para o ENEM 2027</li>
+              <li>Revisão espaçada</li>
+              <li>Explicações úteis</li>
+              <li>Dados no navegador</li>
+            </ul>
+            <div class="produto__acoes" data-revelar style="--i:5">
+              <a class="botao botao--ouro" href="https://dyanimi-ck.vercel.app/inicio#/inicio" target="_blank" rel="noopener">
+                <span>Entrar no DynamiCK</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+              </a>
+            </div>
+          </div>
 
-      <div class="dynamic-lab">
-        <div class="dynamic-lab__copy">
-          <p class="secao-indice secao-indice--menta">Laboratório de sessão</p>
-          <h3>Quanto tempo você tem <span>agora?</span></h3>
-          <p>
-            Mova o controle e veja a sessão se reorganizar. O tempo muda; a estrutura permanece:
-            entender, praticar e revisar sem transformar estudo em uma maratona impossível.
+          <div class="produto__cena" data-revelar>
+            <!-- 3D · O ciclo que não termina -->
+            <div class="palco palco--totem" data-palco="no" aria-hidden="true"></div>
+            <picture><source type="image/webp" srcset="midia/logo-dynamick-180.webp 180w, midia/logo-dynamick-360.webp 360w, midia/logo-dynamick-540.webp 540w" sizes="190px"><img class="produto__logo produto__logo--largo" src="midia/logo-dynamick-480.png" alt="DynamiCK by Conscious Knowledge" width="1536" height="1024" loading="lazy" decoding="async"></picture>
+          </div>
+        </div>
+
+        <ul class="numeros">
+          <li data-revelar><strong data-contar="1">1</strong><span>recomendação principal por vez</span></li>
+          <li data-revelar style="--i:1"><strong data-contar="3">3</strong><span>etapas em cada correção útil</span></li>
+          <li data-revelar style="--i:2"><strong data-contar="8">8</strong><span>passos no ciclo de aprendizagem</span></li>
+          <li data-revelar style="--i:3"><strong>∞</strong><span>novos contextos para praticar</span></li>
+        </ul>
+
+        <!-- Laboratório de sessão -->
+        <div class="laboratorio" data-revelar>
+          <div class="laboratorio__texto">
+            <h4 class="titulo-bloco">Quanto tempo você tem agora?</h4>
+            <p>
+              Mova o controle e veja a sessão se reorganizar. O tempo muda; a estrutura permanece:
+              entender, praticar e revisar sem transformar estudo em uma maratona impossível.
+            </p>
+            <div class="controle">
+              <div class="controle__topo"><span>Tempo disponível</span><strong data-estudo-tempo>30 min</strong></div>
+              <input type="range" min="15" max="90" step="5" value="30" data-estudo-controle aria-label="Tempo disponível para estudar">
+              <div class="controle__escala" aria-hidden="true"><span>15 min</span><span>45 min</span><span>90 min</span></div>
+            </div>
+          </div>
+
+          <div class="sessao" data-inclinar>
+            <p class="sessao__topo"><span>Sessão recomendada</span><i>ao vivo</i></p>
+            <h5>Interpretação e inferência</h5>
+            <p>Você foi bem em vocabulário, mas errou questões sobre a intenção do autor.</p>
+            <!-- 3D · As três etapas como colunas que crescem com o tempo -->
+            <div class="sessao__colunas" aria-hidden="true">
+              <span data-estudo-coluna="aprender"><i></i></span>
+              <span data-estudo-coluna="praticar"><i></i></span>
+              <span data-estudo-coluna="revisar"><i></i></span>
+            </div>
+            <ul class="sessao__plano">
+              <li><span>Aprender o conceito</span><strong data-estudo-texto="aprender">6 min</strong></li>
+              <li><span>Praticar com questões</span><strong data-estudo-texto="praticar">18 min</strong></li>
+              <li><span>Rever o que ficou em dúvida</span><strong data-estudo-texto="revisar">6 min</strong></li>
+            </ul>
+            <p class="sessao__rodape"><b>Depois da sessão</b> 2 questões voltam em outro contexto daqui a 3 dias.</p>
+          </div>
+        </div>
+
+        <h4 class="titulo-bloco" data-revelar>O que acontece dentro da jornada</h4>
+        <ul class="trilho" data-trilho>
+          <li class="recurso recurso--destaque" data-revelar><span class="recurso__num">01</span><h5>Recomendação explicável</h5><p>Uma sugestão principal por vez, acompanhada do tópico, do tempo necessário e do motivo de ter sido escolhida para hoje.</p></li>
+          <li class="recurso" data-revelar style="--i:1"><span class="recurso__num">02</span><h5>Correção que ensina</h5><p>Cada alternativa mostra por que está certa ou errada: o erro vira material de aprendizagem.</p></li>
+          <li class="recurso" data-revelar style="--i:2"><span class="recurso__num">03</span><h5>Revisão espaçada</h5><p>O conteúdo reaparece em intervalos crescentes e sempre com uma questão diferente.</p></li>
+          <li class="recurso" data-revelar><span class="recurso__num">04</span><h5>Perfil vivo</h5><p>O perfil é uma hipótese que muda conforme o estudante pratica, nunca um rótulo fixo.</p></li>
+          <li class="recurso" data-revelar style="--i:1"><span class="recurso__num">05</span><h5>Tempo realista</h5><p>Quinze minutos ainda contam. A plataforma cabe no dia em vez de exigir que o dia caiba nela.</p></li>
+          <li class="recurso" data-revelar style="--i:2"><span class="recurso__num">06</span><h5>Progresso pessoal</h5><p>Sem ranking público e sem comparação: o foco é tornar a evolução individual visível.</p></li>
+        </ul>
+
+        <div class="ciclo" data-revelar>
+          <div>
+            <h4 class="titulo-bloco">Aprender é voltar diferente.</h4>
+            <p>O ciclo não termina: cada volta traz um novo contexto, e as etapas se conectam umas às outras.</p>
+          </div>
+          <ol class="ciclo__etapas">
+            <li><span>01</span>Entender</li><li><span>02</span>Aprender</li><li><span>03</span>Praticar</li><li><span>04</span>Corrigir</li>
+            <li><span>05</span>Identificar</li><li><span>06</span>Revisar</li><li><span>07</span>Recontextualizar</li><li><span>08</span>Evoluir</li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- ========== SYNCK ========== -->
+      <article class="produto caixa" id="synck">
+        <div class="produto__topo">
+          <div class="produto__texto">
+            <p class="produto__ordem" data-revelar><b>Produto 03</b><span class="estado estado--novo">Novo</span></p>
+            <h3 class="produto__nome" data-revelar style="--i:1">Syn<b>CK</b><small>agenda compartilhada</small></h3>
+            <p class="chamada" data-revelar style="--i:2">
+              Sua rotina, <strong>sincronizada com quem importa.</strong>
+            </p>
+            <div data-revelar style="--i:3">
+              <p>
+                Quem divide a vida com outras pessoas combina tudo por mensagem e perde informação:
+                <em>"era terça ou quarta?"</em>, <em>"quem leva a vó no médico?"</em>.
+              </p>
+              <p>
+                O <strong>SynCK</strong> junta compromissos, tarefas e lembretes num calendário só, que
+                todo mundo vê ao mesmo tempo, cada pessoa com o acesso que você escolher. Serve para
+                casal, família, amigos, república, equipe pequena, grupo de estudo e viagens.
+              </p>
+            </div>
+            <ul class="etiquetas" aria-label="Onde funciona" data-revelar style="--i:4">
+              <li>Android</li><li>iPhone</li><li>iPad</li><li>Computador</li>
+            </ul>
+            <div class="produto__acoes" data-revelar style="--i:5">
+              <a class="botao botao--ouro" href="https://gustavooliveira-xxx.github.io/synck-app/" target="_blank" rel="noopener">
+                <span>Abrir o SynCK</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg>
+              </a>
+              <a class="botao botao--linha" href="https://github.com/GustavoOliveira-xxx/synck-app/blob/main/COMO_INSTALAR.md" target="_blank" rel="noopener">
+                <span>Como instalar</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="produto__cena" data-revelar>
+            <!-- 3D · Dois elos girando juntos -->
+            <div class="palco palco--totem" data-palco="elos" aria-hidden="true"></div>
+            <picture><source type="image/webp" srcset="midia/logo-synck-480.webp"><img class="produto__logo produto__logo--largo" src="midia/logo-synck-480.png" alt="Logo do SynCK" width="480" height="335" loading="lazy" decoding="async"></picture>
+          </div>
+        </div>
+
+        <ul class="quadra">
+          <li class="recurso" data-revelar data-inclinar><span class="recurso__num">01</span><h5>Agendas compartilhadas</h5><p>Convite por código ou e-mail e cinco papéis, de proprietário a visualizador. Tirou alguém, o acesso some na hora.</p></li>
+          <li class="recurso" data-revelar style="--i:1" data-inclinar><span class="recurso__num">02</span><h5>Cada um vê o que deve</h5><p>Eventos e tarefas podem ser privados ou só para quem participa. No horário em comum, os outros veem só "ocupado".</p></li>
+          <li class="recurso" data-revelar style="--i:2" data-inclinar><span class="recurso__num">03</span><h5>Tarefas e lembretes</h5><p>Responsável, prazo, subtarefas e lembretes no celular de cada um. Escreva "Pagar luz todo dia 10" e ele entende.</p></li>
+          <li class="recurso" data-revelar style="--i:3" data-inclinar><span class="recurso__num">04</span><h5>Funciona sem internet</h5><p>As mudanças ficam guardadas no aparelho e sobem sozinhas quando a conexão volta, sem perder nada.</p></li>
+        </ul>
+      </article>
+
+      <!-- ========== AUTONICK ========== -->
+      <article class="produto produto--invertido caixa" id="autonick">
+        <div class="produto__topo">
+          <div class="produto__texto">
+            <p class="produto__ordem" data-revelar><b>Produto 04</b><span class="estado estado--breve">Em desenvolvimento</span></p>
+            <h3 class="produto__nome" data-revelar style="--i:1">Autoni<b>CK</b><small>o próximo produto</small></h3>
+            <p class="chamada" data-revelar style="--i:2">
+              Já tem nome, cara e vinheta. <strong>Agora começa a construção.</strong>
+            </p>
+            <p data-revelar style="--i:3">
+              Ainda não dá para contar tudo, mas o AutoniCK vai seguir o que move a CK: tecnologia útil,
+              explicável e feita com consciência.
+            </p>
+            <ol class="andamento" aria-label="Andamento do AutoniCK" data-revelar style="--i:4">
+              <li class="is-feito"><b>Nome e logo</b><span>Prontos</span></li>
+              <li class="is-feito"><b>Vinheta de abertura</b><span>Pronta</span></li>
+              <li class="is-agora"><b>Desenvolvimento</b><span>Começando</span></li>
+              <li><b>Lançamento</b><span>Em breve</span></li>
+            </ol>
+          </div>
+
+          <div class="produto__cena" data-revelar>
+            <!-- 3D · Giroscópio -->
+            <div class="palco palco--totem" data-palco="giroscopio" aria-hidden="true"></div>
+            <picture><source type="image/webp" srcset="midia/logo-autonick-360.webp 360w, midia/logo-autonick-720.webp 720w" sizes="170px"><img class="produto__logo" src="midia/logo-autonick-480.png" alt="Logo do AutoniCK" width="480" height="505" loading="lazy" decoding="async"></picture>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= IDENTIDADE ================= -->
+    <section class="secao secao--roxa identidade" id="identidade">
+      <div class="caixa">
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>03</b>Identidade</p>
+          <h2 data-revelar style="--i:1">Uma <em>marca só,</em> roxa e dourada.</h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
+            A logo completa assina o site e os projetos. A máscara, que é a versão simplificada,
+            aparece nos ícones e abre todos os nossos apps. Aqui ela está em 3D: gire, vire do avesso
+            e separe as camadas.
           </p>
+        </header>
 
-          <div class="study-control">
-            <div class="study-control__topo"><span>Tempo disponível</span><strong data-study-time>30 min</strong></div>
-            <input type="range" min="15" max="90" step="5" value="30" data-study-range
-              aria-label="Tempo disponível para estudar">
-            <div class="study-control__escala"><span>15 min</span><span>45 min</span><span>90 min</span></div>
-          </div>
-        </div>
-
-        <div class="session-card" data-tilt>
-          <div class="session-card__topo"><span>Sessão recomendada</span><i>ao vivo</i></div>
-          <h4>Interpretação e inferência</h4>
-          <p>Você foi bem em vocabulário, mas errou questões sobre a intenção do autor.</p>
-          <div class="session-card__plano">
-            <div><span><i data-study-learn></i></span><p>Aprender o conceito</p><strong data-study-learn-text>6 min</strong></div>
-            <div><span><i data-study-practice></i></span><p>Praticar com questões</p><strong data-study-practice-text>18 min</strong></div>
-            <div><span><i data-study-review></i></span><p>Rever o que ficou em dúvida</p><strong data-study-review-text>6 min</strong></div>
-          </div>
-          <div class="session-card__rodape"><span>Depois da sessão</span><p>2 questões voltam em outro contexto daqui a 3 dias.</p></div>
-        </div>
-      </div>
-
-      <h3 class="titulo-bloco titulo-bloco--menta">O que acontece dentro da jornada</h3>
-      <div class="dynamic-funcoes">
-        <article class="dynamic-funcao dynamic-funcao--grande" data-tilt>
-          <span class="dynamic-funcao__num">01</span><span class="dynamic-funcao__glifo">✦</span>
-          <h4>Recomendação explicável</h4>
-          <p>Uma sugestão principal por vez, acompanhada do tópico, do tempo necessário e do motivo de ter sido escolhida para hoje.</p>
-        </article>
-        <article class="dynamic-funcao" data-tilt><span class="dynamic-funcao__num">02</span><span class="dynamic-funcao__glifo">⌁</span><h4>Correção que ensina</h4><p>Cada alternativa mostra por que está certa ou errada — o erro vira material de aprendizagem.</p></article>
-        <article class="dynamic-funcao" data-tilt><span class="dynamic-funcao__num">03</span><span class="dynamic-funcao__glifo">↻</span><h4>Revisão espaçada</h4><p>O conteúdo reaparece em intervalos crescentes e sempre com uma questão diferente.</p></article>
-        <article class="dynamic-funcao" data-tilt><span class="dynamic-funcao__num">04</span><span class="dynamic-funcao__glifo">◇</span><h4>Perfil vivo</h4><p>O perfil é uma hipótese que muda conforme o estudante pratica — nunca um rótulo fixo.</p></article>
-        <article class="dynamic-funcao" data-tilt><span class="dynamic-funcao__num">05</span><span class="dynamic-funcao__glifo">◷</span><h4>Tempo realista</h4><p>Quinze minutos ainda contam. A plataforma cabe no dia em vez de exigir que o dia caiba nela.</p></article>
-        <article class="dynamic-funcao dynamic-funcao--brilho" data-tilt><span class="dynamic-funcao__num">06</span><span class="dynamic-funcao__glifo">◎</span><h4>Progresso pessoal</h4><p>Sem ranking público e sem comparação: o foco é tornar a evolução individual visível.</p></article>
-      </div>
-
-      <div class="ciclo-conhecimento">
-        <div class="ciclo-conhecimento__texto">
-          <p class="secao-indice secao-indice--menta">O ciclo que não termina</p>
-          <h3>Aprender é voltar diferente.</h3>
-          <p>Cada volta traz um novo contexto. Gire o núcleo para sentir como as etapas se conectam.</p>
-          <ol>
-            <li><span>01</span> Entender</li><li><span>02</span> Aprender</li><li><span>03</span> Praticar</li>
-            <li><span>04</span> Corrigir</li><li><span>05</span> Identificar</li><li><span>06</span> Revisar</li>
-            <li><span>07</span> Recontextualizar</li><li><span>08</span> Evoluir</li>
-          </ol>
-        </div>
-
-        <div class="knowledge-core" data-knowledge-core tabindex="0" aria-label="Núcleo 3D do ciclo de aprendizagem">
-          <span class="knowledge-core__orbita knowledge-core__orbita--a"></span>
-          <span class="knowledge-core__orbita knowledge-core__orbita--b"></span>
-          <span class="knowledge-core__orbita knowledge-core__orbita--c"></span>
-          <div class="knowledge-prism">
-            <div class="knowledge-prism__face knowledge-prism__face--front">Entender</div>
-            <div class="knowledge-prism__face knowledge-prism__face--back">Revisar</div>
-            <div class="knowledge-prism__face knowledge-prism__face--right">Praticar</div>
-            <div class="knowledge-prism__face knowledge-prism__face--left">Corrigir</div>
-            <div class="knowledge-prism__face knowledge-prism__face--top">Aprender</div>
-            <div class="knowledge-prism__face knowledge-prism__face--bottom">Evoluir</div>
-          </div>
-          <span class="knowledge-core__dica">arraste para girar</span>
-        </div>
-      </div>
-
-      <div class="dynamic-cta">
-        <picture><source type="image/webp" srcset="midia/logo-dynamick-180.webp 180w, midia/logo-dynamick-360.webp 360w, midia/logo-dynamick-540.webp 540w, midia/logo-dynamick-720.webp 720w, midia/logo-dynamick-960.webp 960w" sizes="140px"><img src="midia/logo-dynamick-480.png" alt="" width="1536" height="1024" loading="lazy" decoding="async"></picture>
-        <div><span>Preparação para o ENEM 2027</span><h3>Pronto para descobrir o seu próximo passo?</h3></div>
-        <a class="btn btn--menta" href="https://dyanimi-ck.vercel.app/inicio#/inicio" target="_blank" rel="noopener" data-magnetico>Começar gratuitamente <span aria-hidden="true">↗</span></a>
-      </div>
-
-    </section>
-
-    <!-- ========== SYNCK ========== -->
-    <section id="synck" class="synck-secao">
-      <header>
-        <p class="secao-indice secao-indice--synck">05 — Terceiro produto · Agenda compartilhada</p>
-        <h2>Syn<span class="texto-synck">CK</span></h2>
-        <p class="secao-sub">Sua rotina, sincronizada com quem importa.</p>
-      </header>
-
-      <div class="synck-intro">
-        <div class="synck-intro__texto">
-          <p class="synck-intro__chamada">Quem divide a vida com outras pessoas combina tudo por mensagem e perde informação: <em>"era terça ou quarta?"</em>, <em>"quem leva a vó no médico?"</em>.</p>
-          <p>O <strong>SynCK</strong> junta compromissos, tarefas e lembretes num calendário só, que todo mundo vê ao mesmo tempo, cada pessoa com o acesso que você escolher. Serve para casal, família, amigos, república, equipe pequena, grupo de estudo e viagens.</p>
-          <ul class="synck-aparelhos" aria-label="Onde funciona">
-            <li>Android</li><li>iPhone</li><li>iPad</li><li>Computador</li>
-          </ul>
-          <div class="synck-acoes">
-            <a class="btn btn--synck" href="https://gustavooliveira-xxx.github.io/synck-app/" target="_blank" rel="noopener" data-magnetico>Abrir o SynCK <span aria-hidden="true">↗</span></a>
-            <a class="btn btn--fantasma" href="https://github.com/GustavoOliveira-xxx/synck-app/blob/main/COMO_INSTALAR.md" target="_blank" rel="noopener">Como instalar <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-        <div class="synck-intro__marca" aria-hidden="true">
-          <span class="synck-intro__halo"></span>
-          <picture><source type="image/webp" srcset="midia/logo-synck-480.webp"><img src="midia/logo-synck-480.png" alt="" width="480" height="335" loading="lazy" decoding="async"></picture>
-          <p class="synck-intro__nome">Syn<span>CK</span></p>
-        </div>
-      </div>
-
-      <ul class="synck-recursos">
-        <li class="synck-recurso" data-tilt><span>01</span><h3>Agendas compartilhadas</h3><p>Convite por código ou e-mail e cinco papéis, de proprietário a visualizador. Tirou alguém, o acesso some na hora.</p></li>
-        <li class="synck-recurso" data-tilt><span>02</span><h3>Cada um vê o que deve</h3><p>Eventos e tarefas podem ser privados ou só para quem participa. No horário em comum, os outros veem só "ocupado".</p></li>
-        <li class="synck-recurso" data-tilt><span>03</span><h3>Tarefas e lembretes</h3><p>Responsável, prazo, subtarefas e lembretes no celular de cada um. Escreva "Pagar luz todo dia 10" e ele entende.</p></li>
-        <li class="synck-recurso" data-tilt><span>04</span><h3>Funciona sem internet</h3><p>As mudanças ficam guardadas no aparelho e sobem sozinhas quando a conexão volta, sem perder nada.</p></li>
-      </ul>
-    </section>
-
-    <!-- ========== AUTONICK ========== -->
-    <section id="autonick" class="autonick-secao">
-      <header>
-        <p class="secao-indice secao-indice--autonick">06 — Próximo produto · Em desenvolvimento</p>
-        <h2>Autoni<span class="texto-autonick">CK</span></h2>
-        <p class="secao-sub">O próximo produto da CK já tem nome, cara e vinheta. Agora começa a construção.</p>
-      </header>
-
-      <div class="autonick-vitrine">
-        <div class="autonick-palco" aria-hidden="true">
-          <span class="autonick-palco__raios"></span>
-          <span class="autonick-palco__halo"></span>
-          <picture><source type="image/webp" srcset="midia/logo-autonick-360.webp 360w, midia/logo-autonick-720.webp 720w" sizes="(max-width: 860px) 300px, 420px"><img src="midia/logo-autonick-480.png" alt="" width="480" height="505" loading="lazy" decoding="async"></picture>
-        </div>
-        <div class="autonick-texto">
-          <span class="autonick-selo">Em desenvolvimento</span>
-          <p>Ainda não dá para contar tudo, mas o AutoniCK vai seguir o que move a CK: tecnologia útil, explicável e feita com consciência.</p>
-          <ol class="autonick-etapas" aria-label="Andamento do AutoniCK">
-            <li class="is-feito"><b>Nome e logo</b><span>Prontos</span></li>
-            <li class="is-feito"><b>Vinheta de abertura</b><span>Pronta</span></li>
-            <li class="is-agora"><b>Desenvolvimento</b><span>Começando</span></li>
-            <li><b>Lançamento</b><span>Em breve</span></li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== IDENTIDADE ========== -->
-    <section id="identidade" class="identidade-secao identidade-secao--unica">
-      <header>
-        <p class="secao-indice">07 — Identidade</p>
-        <h2>Uma <span class="texto-gradiente">marca só</span></h2>
-        <p class="secao-sub">
-          A CK tem uma identidade só, roxa e dourada. A logo completa assina o site e os projetos; a
-          máscara, que é a versão simplificada, aparece nos ícones e abre todos os nossos apps.
-        </p>
-      </header>
-
-      <div class="marca-oficial">
-        <div class="marca-oficial__palco" data-tilt>
-          <span class="marca-oficial__luz" aria-hidden="true"></span>
-          <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 200px, 280px"><img src="midia/logo-ck-origem-360.png" class="marca-oficial__completa" alt="Logo oficial da Conscious Knowledge" width="1365" height="2048" loading="lazy" decoding="async"></picture>
-        </div>
-
-        <div class="marca-oficial__texto">
-          <p class="marca-oficial__slogan">Consciência que cria,<br><span>Conhecimento que transforma.</span></p>
-          <ul class="marca-oficial__cores" aria-label="Cores oficiais">
-            <li style="--cor:#a308c8"><i></i><b>Roxo CK</b><code>#A308C8</code></li>
-            <li style="--cor:#640187"><i></i><b>Roxo profundo</b><code>#640187</code></li>
-            <li style="--cor:#fccf02"><i></i><b>Ouro</b><code>#FCCF02</code></li>
-            <li style="--cor:#050407"><i></i><b>Tinta</b><code>#050407</code></li>
-          </ul>
-          <div class="marca-oficial__simples">
-            <img src="midia/ck-logo.svg" alt="Versão simplificada da logo: a máscara roxa e dourada" width="72" height="72" loading="lazy" decoding="async">
-            <p><b>Versão simplificada.</b> A máscara é o ícone dos apps e a assinatura da vinheta de abertura, que toca quando você abre o FinCK, o DynamiCK, o SynCK e o AutoniCK.</p>
-          </div>
-          <button class="btn btn--primario" type="button" data-assistir-vinheta data-magnetico>
-            <span>Assistir à vinheta</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== ENTREGA ========== -->
-    <section id="entrega">
-
-      <header>
-        <p class="secao-indice">08 — Projeto Interdisciplinar</p>
-        <h2>O que entregamos</h2>
-        <p class="secao-sub">
-          O Interdisciplinar não é só um app. É um conjunto de entregas que mostra domínio técnico,
-          organização de equipe e capacidade de defender cada decisão tomada, e o que está pronto,
-          a banca abre daqui mesmo.
-        </p>
-      </header>
-
-      <div class="entregaveis">
-        <article class="entregavel entregavel--vivo" data-tilt>
-          <span class="entregavel__indice" aria-hidden="true">01</span>
-          <span class="entregavel__brasao" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M10.5 18h3"/><path d="M9 8.5h6M9 12h4"/></svg>
-          </span>
-          <span class="entregavel__tag">Produto</span>
-          <h3>Aplicativo FinCK</h3>
-          <p>PWA responsivo e instalável, com autenticação, banco de dados e todos os módulos funcionais de ponta a ponta.</p>
-          <div class="entregavel__rodape">
-            <span class="entregavel__estado" data-estado="feito">Entregue</span>
-            <a class="entregavel__acao" href="https://finck-app.vercel.app" target="_blank" rel="noopener"><span>Abrir o aplicativo</span> <span class="entregavel__seta" aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="entregavel " data-tilt>
-          <span class="entregavel__indice" aria-hidden="true">02</span>
-          <span class="entregavel__brasao" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6"/><path d="M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg>
-          </span>
-          <span class="entregavel__tag">Dados</span>
-          <h3>Modelagem do banco</h3>
-          <p>Esquema relacional em PostgreSQL com migrações versionadas e regras de acesso por usuário.</p>
-          <div class="entregavel__rodape">
-            <span class="entregavel__estado" data-estado="feito">Entregue</span>
-          </div>
-        </article>
-
-        <article class="entregavel " data-tilt>
-          <span class="entregavel__indice" aria-hidden="true">03</span>
-          <span class="entregavel__brasao" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.2l5.9-.8L12 3Z"/></svg>
-          </span>
-          <span class="entregavel__tag">Marca</span>
-          <h3>Identidade visual</h3>
-          <p>Logotipo, paleta, tipografia e sistema de componentes aplicados de forma coerente no app e neste site.</p>
-          <div class="entregavel__rodape">
-            <span class="entregavel__estado" data-estado="feito">Entregue</span>
-          </div>
-        </article>
-
-        <article class="entregavel entregavel--vivo" data-tilt>
-          <span class="entregavel__indice" aria-hidden="true">04</span>
-          <span class="entregavel__brasao" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5s-1.2 6.1-3.4 8.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5Z"/></svg>
-          </span>
-          <span class="entregavel__tag">Web</span>
-          <h3>Site institucional</h3>
-          <p>Esta página: apresentação da empresa, da equipe e do produto, com demonstração interativa do motor de cálculo.</p>
-          <div class="entregavel__rodape">
-            <span class="entregavel__estado" data-estado="feito">Entregue</span>
-            <a class="entregavel__acao" href="#inicio"><span>Você está nele</span> <span class="entregavel__seta" aria-hidden="true">→</span></a>
-          </div>
-        </article>
-
-        <article class="entregavel entregavel--vivo" data-tilt>
-          <span class="entregavel__indice" aria-hidden="true">05</span>
-          <span class="entregavel__brasao" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
-          </span>
-          <span class="entregavel__tag">Documentação</span>
-          <h3>Documento ABNT</h3>
-          <p>Monografia interdisciplinar: problemática com dados públicos, arquitetura funcional e técnica, e a relação do projeto com cada disciplina.</p>
-          <div class="entregavel__rodape">
-            <span class="entregavel__estado" data-estado="feito">Entregue</span>
-            <a class="entregavel__acao" href="https://centropaulasouza-my.sharepoint.com/:w:/g/personal/gustavo_santos331_aluno_cps_sp_gov_br/IQC9_HCBkpdiQrsqToc9lixOAcS4ibnH10JG5f61KESlnoE" target="_blank" rel="noopener"><span>Ler o documento</span> <span class="entregavel__seta" aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="entregavel entregavel--vivo" data-tilt>
-          <span class="entregavel__indice" aria-hidden="true">06</span>
-          <span class="entregavel__brasao" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M7.5 11.5l2.5-2.5 2 2 3.5-3.5"/></svg>
-          </span>
-          <span class="entregavel__tag">Banca</span>
-          <h3>Apresentação final</h3>
-          <p>Catorze slides no formato de defesa: a problemática comprovada com dados públicos de 2025 e 2026, fundamentação, metodologia, o app em produção com capturas ampliáveis, arquitetura, disciplinas, resultados e conclusão, com notas do apresentador em cada slide.</p>
-          <div class="entregavel__rodape">
-            <span class="entregavel__estado" data-estado="agora">Pronta para a defesa</span>
-            <a class="entregavel__acao" href="apresentacao/index.html"><span>Abrir a apresentação</span> <span class="entregavel__seta" aria-hidden="true">→</span></a>
-          </div>
-        </article>
-      </div>
-
-      <h3 class="titulo-bloco">Linha do tempo do desenvolvimento</h3>
-      <ol class="timeline">
-        <li class="timeline__item" data-estado="feito">
-          <span class="timeline__marca"></span>
-          <div class="timeline__corpo">
-            <span class="timeline__fase">Fase 01</span>
-            <h4>Concepção e identidade</h4>
-            <p>Definição do problema, criação da Conscious Knowledge, nome, logotipo e paleta.</p>
-          </div>
-        </li>
-        <li class="timeline__item" data-estado="feito">
-          <span class="timeline__marca"></span>
-          <div class="timeline__corpo">
-            <span class="timeline__fase">Fase 02</span>
-            <h4>Fundação técnica</h4>
-            <p>Estrutura do app, design system, autenticação, banco de dados e camada de armazenamento.</p>
-          </div>
-        </li>
-        <li class="timeline__item" data-estado="feito">
-          <span class="timeline__marca"></span>
-          <div class="timeline__corpo">
-            <span class="timeline__fase">Fase 03</span>
-            <h4>Motor FinCK of Reality</h4>
-            <p>Fórmulas de conversão preço→tempo, semáforo de risco, reflexão e registro de decisões.</p>
-          </div>
-        </li>
-        <li class="timeline__item" data-estado="feito">
-          <span class="timeline__marca"></span>
-          <div class="timeline__corpo">
-            <span class="timeline__fase">Fase 04</span>
-            <h4>Contas, planejamento e metas</h4>
-            <p>Visão consolidada, parcelamentos, projeção de saldo, calendário e tetos por categoria.</p>
-          </div>
-        </li>
-        <li class="timeline__item" data-estado="feito">
-          <span class="timeline__marca"></span>
-          <div class="timeline__corpo">
-            <span class="timeline__fase">Fase 05</span>
-            <h4>Jornada, análises e relatórios</h4>
-            <p>Gamificação com regras anti-farm, gráficos de categoria, evolução mensal e exportação.</p>
-          </div>
-        </li>
-        <li class="timeline__item" data-estado="andamento">
-          <span class="timeline__marca"></span>
-          <div class="timeline__corpo">
-            <span class="timeline__fase">Fase 06</span>
-            <h4>Refino e apresentação</h4>
-            <p>Testes finais, ajustes de usabilidade, documentação e preparação da defesa.</p>
-          </div>
-        </li>
-      </ol>
-
-    </section>
-
-    <!-- ========== EQUIPE ========== -->
-
-    <!-- ========== APRESENTAÇÕES ========== -->
-    <section id="apresentacoes" class="palcos-secao">
-
-      <header>
-        <p class="secao-indice">09 · Palco</p>
-        <h2>Apresentações do <span class="h2-sub">FinCK</span></h2>
-        <p class="secao-sub">
-          Duas apresentações, dois momentos. Ambas rodam no navegador, com navegação por teclado
-          e notas de apresentador. Clique para abrir em tela cheia.
-        </p>
-      </header>
-
-      <div class="palcos">
-
-        <article class="palco-cartao palco-cartao--final" data-tilt>
-          <a class="palco-cartao__link" href="apresentacao/index.html"
-            aria-label="Abrir a apresentação final do FinCK">
-
-            <span class="palco-cartao__pilha" aria-hidden="true">
-              <span class="palco-cartao__folha palco-cartao__folha--3"></span>
-              <span class="palco-cartao__folha palco-cartao__folha--2"></span>
-              <span class="palco-cartao__folha palco-cartao__folha--1">
-                <span class="palco-cartao__barra"></span>
-                <span class="palco-cartao__linha"></span>
-                <span class="palco-cartao__linha palco-cartao__linha--curta"></span>
-                <span class="palco-cartao__blocos">
-                  <i></i><i></i><i></i>
-                </span>
-                <span class="palco-cartao__linha palco-cartao__linha--curta"></span>
-              </span>
-              <span class="palco-cartao__brilho"></span>
-            </span>
-
-            <div class="palco-cartao__corpo">
-              <span class="palco-cartao__tag">Defesa final</span>
-              <h3>A problemática e a solução</h3>
-              <p>
-                Do consumo desenfreado ao aterro de lixo eletrônico, e de Thoreau ao aplicativo
-                em produção. É a apresentação que responde ao enunciado da escola item por item.
-              </p>
-
-              <ul class="palco-cartao__ficha">
-                <li><b>29</b><span>slides</span></li>
-                <li><b>6</b><span>apresentadores</span></li>
-                <li><b>~20</b><span>minutos</span></li>
-              </ul>
-
-              <span class="palco-cartao__acao">
-                <span>Abrir a apresentação</span>
-                <span class="palco-cartao__seta" aria-hidden="true">↗</span>
-              </span>
+        <div class="anatomia" data-revelar>
+          <div class="anatomia__cena">
+            <span class="anatomia__halo" aria-hidden="true"></span>
+            <!-- 3D · A máscara nas mãos do visitante -->
+            <div class="palco palco--anatomia" data-palco="anatomia" data-anatomia tabindex="0" role="img"
+              aria-label="Modelo 3D da máscara da CK. Arraste ou use as setas do teclado para girar.">
+              <img class="palco__reserva" src="midia/ck-logo.svg" alt="" width="640" height="640" loading="lazy" decoding="async">
             </div>
-          </a>
-        </article>
+            <p class="anatomia__dica" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" /></svg>
+              arraste para girar
+            </p>
+          </div>
 
-        <article class="palco-cartao palco-cartao--previa" data-tilt>
-          <a class="palco-cartao__link" href="apresentacao-projeto/index.html"
-            aria-label="Abrir a prévia do projeto FinCK">
-
-            <span class="palco-cartao__pilha" aria-hidden="true">
-              <span class="palco-cartao__folha palco-cartao__folha--3"></span>
-              <span class="palco-cartao__folha palco-cartao__folha--2"></span>
-              <span class="palco-cartao__folha palco-cartao__folha--1">
-                <span class="palco-cartao__barra"></span>
-                <span class="palco-cartao__aparelho">
-                  <i></i><i></i><i></i>
-                </span>
-                <span class="palco-cartao__linha"></span>
-                <span class="palco-cartao__linha palco-cartao__linha--curta"></span>
-              </span>
-              <span class="palco-cartao__brilho"></span>
-            </span>
-
-            <div class="palco-cartao__corpo">
-              <span class="palco-cartao__tag palco-cartao__tag--menta">Prévia do projeto</span>
-              <h3>O app por dentro</h3>
-              <p>
-                Uma passagem tela a tela pelo aplicativo, do primeiro acesso ao Assistente FinCK,
-                com o estado real de cada entrega: o que está no ar, o que está em curso e o que
-                ainda falta.
-              </p>
-
-              <ul class="palco-cartao__ficha">
-                <li><b>13</b><span>slides</span></li>
-                <li><b>ao vivo</b><span>calculadora</span></li>
-                <li><b>~8</b><span>minutos</span></li>
-              </ul>
-
-              <span class="palco-cartao__acao">
-                <span>Abrir a prévia</span>
-                <span class="palco-cartao__seta" aria-hidden="true">↗</span>
-              </span>
+          <div class="anatomia__painel">
+            <label class="separar">
+              <span class="separar__topo"><b>Separar as camadas</b><output data-separar-valor>0%</output></span>
+              <input type="range" min="0" max="100" value="0" step="1" data-separar aria-label="Separar as camadas do modelo 3D">
+            </label>
+            <div class="anatomia__botoes">
+              <button class="botao botao--linha botao--p" type="button" data-separar-ir="0">Montada</button>
+              <button class="botao botao--linha botao--p" type="button" data-separar-ir="100">Em camadas</button>
             </div>
-          </a>
-        </article>
 
+            <ol class="camadas" aria-label="Camadas da logo">
+              <li><i style="--cor:#fccf02"></i><b>Clarão</b><span>os raios de surpresa, em ouro</span></li>
+              <li><i style="--cor:#050407"></i><b>Contorno</b><span>a base em tinta preta</span></li>
+              <li><i style="--cor:#a308c8"></i><b>Máscara</b><span>seis tons de roxo em degraus</span></li>
+              <li><i style="--cor:#daa602"></i><b>Faixa</b><span>os detalhes dourados</span></li>
+              <li><i style="--cor:#fbf9fc"></i><b>Olhos</b><span>arregalados, e piscam</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="oficial">
+          <div class="oficial__logo" data-revelar data-inclinar>
+            <picture>
+              <source type="image/webp" srcset="midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 860px) 190px, 250px">
+              <img src="midia/logo-ck-origem-360.png" alt="Logo oficial da Conscious Knowledge" width="1365" height="2048" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <div class="oficial__texto">
+            <p class="oficial__slogan" data-revelar>Consciência que cria,<br><span>Conhecimento que transforma.</span></p>
+
+            <ul class="cores" aria-label="Cores oficiais" data-revelar style="--i:1">
+              <li style="--cor:#a308c8"><i></i><b>Roxo CK</b><code>#A308C8</code></li>
+              <li style="--cor:#640187"><i></i><b>Roxo profundo</b><code>#640187</code></li>
+              <li style="--cor:#fccf02"><i></i><b>Ouro</b><code>#FCCF02</code></li>
+              <li style="--cor:#050407"><i></i><b>Tinta</b><code>#050407</code></li>
+            </ul>
+
+            <div class="simples" data-revelar style="--i:2">
+              <img src="midia/ck-logo.svg" alt="Versão simplificada da logo: a máscara roxa e dourada" width="72" height="72" loading="lazy" decoding="async">
+              <p><b>Versão simplificada.</b> A máscara é o ícone dos apps e a assinatura da vinheta de abertura, que toca quando você abre o FinCK, o DynamiCK, o SynCK e o AutoniCK.</p>
+            </div>
+
+            <button class="botao botao--ouro" type="button" data-assistir-vinheta data-revelar style="--i:3">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="cheio"><path d="M8 5v14l11-7z" /></svg>
+              <span>Assistir à vinheta</span>
+            </button>
+          </div>
+        </div>
       </div>
-
-      <p class="palcos__nota">
-        Atalhos nas duas: <kbd>→</kbd> avança, <kbd>←</kbd> volta, <kbd>N</kbd> mostra as notas do
-        apresentador. Na defesa, <kbd>F</kbd> liga a tela cheia e imprimir gera o PDF; na prévia,
-        <kbd>O</kbd> abre o mapa de slides e <kbd>T</kbd> liga o cronômetro.
-      </p>
-
     </section>
 
-    <section id="equipe">
+    <!-- ================= PROJETO ================= -->
+    <section class="secao entrega" id="entrega">
+      <div class="caixa">
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>04</b>Projeto Interdisciplinar</p>
+          <h2 data-revelar style="--i:1">O que <em>entregamos.</em></h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
+            O Interdisciplinar não é só um app. É um conjunto de entregas que mostra domínio técnico,
+            organização de equipe e capacidade de defender cada decisão tomada, e o que está pronto,
+            a banca abre daqui mesmo.
+          </p>
+        </header>
 
-      <header>
-        <p class="secao-indice">10 · Quem constrói</p>
-        <h2>Nossa Equipe</h2>
-        <p class="secao-sub">
-          Seis estudantes desenvolvendo um produto real, do conceito à defesa.
-        </p>
-      </header>
-
-      <div class="classroom">
-        <h3>Turma</h3>
-        <p><strong>2º C · M-Tec Informática para Internet</strong></p>
-        <p class="classroom__escola">Escola Técnica Estadual de Taboão da Serra</p>
-      </div>
-
-      <div class="members">
-        <h3>Equipe de Desenvolvimento</h3>
-
-        <!--
-          Os cartões abaixo giram no hover/foco. O verso está pronto para receber a
-          especialidade de cada integrante: basta editar o texto de .membro__verso p.
-        -->
-        <ul>
-          <li class="leader">
-            <div class="leader__marca" aria-hidden="true">
-              <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="(max-width: 768px) 80px, 110px"><img src="midia/logo-ck-origem-360.png" alt="" width="120" height="180" loading="lazy" decoding="async"></picture>
-            </div>
-            <div class="leader__texto">
-              <h4 class="leader-name">Gustavo Oliveira dos Santos</h4>
-              <span>Líder do Projeto</span>
-              <p>
-                Idealizador da Conscious Knowledge e responsável pela liderança,
-                organização e coordenação geral do projeto.
-              </p>
-            </div>
+        <ul class="entregas">
+          <li class="entregavel" data-revelar data-inclinar>
+            <span class="entregavel__num" aria-hidden="true">01</span>
+            <span class="entregavel__tag">Produto</span>
+            <h3>Aplicativo FinCK</h3>
+            <p>PWA responsivo e instalável, com autenticação, banco de dados e todos os módulos funcionais de ponta a ponta.</p>
+            <div class="entregavel__pe"><span class="estado estado--ar">Entregue</span><a href="https://finck-app.vercel.app" target="_blank" rel="noopener">Abrir o aplicativo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></a></div>
           </li>
-
-          <li class="membro" data-inicial="É" tabindex="0">
-            <div class="membro__carta">
-              <div class="membro__frente">
-                <span class="membro__avatar" aria-hidden="true">É</span>
-                <h4>Éric Estrela Vieira</h4>
-                <span class="membro__papel">Equipe de Desenvolvimento</span>
-              </div>
-              <div class="membro__verso">
-                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
-                <span class="membro__marca">CK</span>
-              </div>
-            </div>
+          <li class="entregavel" data-revelar style="--i:1" data-inclinar>
+            <span class="entregavel__num" aria-hidden="true">02</span>
+            <span class="entregavel__tag">Dados</span>
+            <h3>Modelagem do banco</h3>
+            <p>Esquema relacional em PostgreSQL com migrações versionadas e regras de acesso por usuário.</p>
+            <div class="entregavel__pe"><span class="estado estado--ar">Entregue</span></div>
           </li>
-
-          <li class="membro" data-inicial="G" tabindex="0">
-            <div class="membro__carta">
-              <div class="membro__frente">
-                <span class="membro__avatar" aria-hidden="true">G</span>
-                <h4>Gabriel Heanna dos Reis</h4>
-                <span class="membro__papel">Equipe de Desenvolvimento</span>
-              </div>
-              <div class="membro__verso">
-                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
-                <span class="membro__marca">CK</span>
-              </div>
-            </div>
+          <li class="entregavel" data-revelar style="--i:2" data-inclinar>
+            <span class="entregavel__num" aria-hidden="true">03</span>
+            <span class="entregavel__tag">Marca</span>
+            <h3>Identidade visual</h3>
+            <p>Logotipo, paleta, tipografia e sistema de componentes aplicados de forma coerente no app e neste site.</p>
+            <div class="entregavel__pe"><span class="estado estado--ar">Entregue</span><a href="#identidade">Ver a identidade <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></div>
           </li>
-
-          <li class="membro" data-inicial="P" tabindex="0">
-            <div class="membro__carta">
-              <div class="membro__frente">
-                <span class="membro__avatar" aria-hidden="true">P</span>
-                <h4>Paulo Henrique de Lima Silva</h4>
-                <span class="membro__papel">Equipe de Desenvolvimento</span>
-              </div>
-              <div class="membro__verso">
-                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
-                <span class="membro__marca">CK</span>
-              </div>
-            </div>
+          <li class="entregavel" data-revelar data-inclinar>
+            <span class="entregavel__num" aria-hidden="true">04</span>
+            <span class="entregavel__tag">Web</span>
+            <h3>Site institucional</h3>
+            <p>Esta página: apresentação da empresa, da equipe e do produto, com demonstração interativa do motor de cálculo.</p>
+            <div class="entregavel__pe"><span class="estado estado--ar">Entregue</span><a href="#inicio">Você está nele <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></div>
           </li>
-
-          <li class="membro" data-inicial="P" tabindex="0">
-            <div class="membro__carta">
-              <div class="membro__frente">
-                <span class="membro__avatar" aria-hidden="true">P</span>
-                <h4>Pedro Alcantara dos Santos Fialho</h4>
-                <span class="membro__papel">Equipe de Desenvolvimento</span>
-              </div>
-              <div class="membro__verso">
-                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
-                <span class="membro__marca">CK</span>
-              </div>
-            </div>
+          <li class="entregavel" data-revelar style="--i:1" data-inclinar>
+            <span class="entregavel__num" aria-hidden="true">05</span>
+            <span class="entregavel__tag">Documentação</span>
+            <h3>Documento ABNT</h3>
+            <p>Monografia interdisciplinar: problemática com dados públicos, arquitetura funcional e técnica, e a relação do projeto com cada disciplina.</p>
+            <div class="entregavel__pe"><span class="estado estado--ar">Entregue</span><a href="https://centropaulasouza-my.sharepoint.com/:w:/g/personal/gustavo_santos331_aluno_cps_sp_gov_br/IQC9_HCBkpdiQrsqToc9lixOAcS4ibnH10JG5f61KESlnoE" target="_blank" rel="noopener">Ler o documento <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></a></div>
           </li>
-
-          <li class="membro" data-inicial="T" tabindex="0">
-            <div class="membro__carta">
-              <div class="membro__frente">
-                <span class="membro__avatar" aria-hidden="true">T</span>
-                <h4>Thiago Wilson Vieira Serbino</h4>
-                <span class="membro__papel">Equipe de Desenvolvimento</span>
-              </div>
-              <div class="membro__verso">
-                <p>Integrante da equipe de desenvolvimento do FinCK.</p>
-                <span class="membro__marca">CK</span>
-              </div>
-            </div>
+          <li class="entregavel" data-revelar style="--i:2" data-inclinar>
+            <span class="entregavel__num" aria-hidden="true">06</span>
+            <span class="entregavel__tag">Banca</span>
+            <h3>Apresentação final</h3>
+            <p>Catorze slides no formato de defesa: a problemática comprovada com dados públicos de 2025 e 2026, fundamentação, metodologia, o app em produção, arquitetura, disciplinas, resultados e conclusão, com notas do apresentador em cada slide.</p>
+            <div class="entregavel__pe"><span class="estado estado--agora">Pronta para a defesa</span><a href="apresentacao/index.html">Abrir a apresentação <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></div>
           </li>
         </ul>
-      </div>
 
+        <h3 class="titulo-bloco" data-revelar>Linha do tempo do desenvolvimento</h3>
+        <ol class="tempo" data-tempo>
+          <li class="is-feito" data-revelar><span class="tempo__fase">Fase 01</span><h4>Concepção e identidade</h4><p>Definição do problema, criação da Conscious Knowledge, nome, logotipo e paleta.</p></li>
+          <li class="is-feito" data-revelar><span class="tempo__fase">Fase 02</span><h4>Fundação técnica</h4><p>Estrutura do app, design system, autenticação, banco de dados e camada de armazenamento.</p></li>
+          <li class="is-feito" data-revelar><span class="tempo__fase">Fase 03</span><h4>Motor FinCK of Reality</h4><p>Fórmulas de conversão de preço em tempo, semáforo de risco, reflexão e registro de decisões.</p></li>
+          <li class="is-feito" data-revelar><span class="tempo__fase">Fase 04</span><h4>Contas, planejamento e metas</h4><p>Visão consolidada, parcelamentos, projeção de saldo, calendário e tetos por categoria.</p></li>
+          <li class="is-feito" data-revelar><span class="tempo__fase">Fase 05</span><h4>Jornada, análises e relatórios</h4><p>Gamificação com regras anti-farm, gráficos de categoria, evolução mensal e exportação.</p></li>
+          <li class="is-agora" data-revelar><span class="tempo__fase">Fase 06 · em andamento</span><h4>Refino e apresentação</h4><p>Testes finais, ajustes de usabilidade, documentação e preparação da defesa.</p></li>
+        </ol>
+
+        <!-- ========== APRESENTAÇÕES ========== -->
+        <div class="palcos" id="apresentacoes">
+          <h3 class="titulo-bloco" data-revelar>Apresentações do FinCK</h3>
+          <p class="palcos__sub" data-revelar>
+            Duas apresentações, dois momentos. Ambas rodam no navegador, com navegação por teclado
+            e notas de apresentador.
+          </p>
+
+          <div class="palcos__grade">
+            <a class="slide" href="apresentacao/index.html" aria-label="Abrir a apresentação final do FinCK" data-revelar data-inclinar>
+              <!-- 3D · Pilha de slides -->
+              <span class="slide__pilha" aria-hidden="true"><i></i><i></i><i><b></b><b></b><b></b></i></span>
+              <span class="slide__corpo">
+                <span class="slide__tag">Defesa final</span>
+                <strong>A problemática e a solução</strong>
+                <span class="slide__texto">Do consumo desenfreado ao aterro de lixo eletrônico, e de Thoreau ao aplicativo em produção. É a apresentação que responde ao enunciado da escola item por item.</span>
+                <span class="slide__ficha"><span><b>14</b> slides</span><span><b>12</b> itens do roteiro</span><span><b>~8</b> minutos</span></span>
+                <span class="slide__ir">Abrir a apresentação <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              </span>
+            </a>
+
+            <a class="slide" href="apresentacao-projeto/index.html" aria-label="Abrir a prévia do projeto FinCK" data-revelar style="--i:1" data-inclinar>
+              <span class="slide__pilha" aria-hidden="true"><i></i><i></i><i><b></b><b></b><b></b></i></span>
+              <span class="slide__corpo">
+                <span class="slide__tag">Prévia do projeto</span>
+                <strong>O app por dentro</strong>
+                <span class="slide__texto">Uma passagem tela a tela pelo aplicativo, do primeiro acesso ao Assistente FinCK, com o estado real de cada entrega: o que está no ar, o que está em curso e o que ainda falta.</span>
+                <span class="slide__ficha"><span><b>13</b> slides</span><span><b>ao vivo</b> calculadora</span><span><b>~8</b> minutos</span></span>
+                <span class="slide__ir">Abrir a prévia <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              </span>
+            </a>
+          </div>
+
+          <p class="palcos__nota" data-revelar>
+            Atalhos nas duas: <kbd>→</kbd> avança, <kbd>←</kbd> volta, <kbd>N</kbd> mostra as notas do
+            apresentador. Na defesa, <kbd>F</kbd> liga a tela cheia e imprimir gera o PDF; na prévia,
+            <kbd>O</kbd> abre o mapa de slides e <kbd>T</kbd> liga o cronômetro.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- ========== CONTATO ========== -->
-    <section id="contato">
+    <!-- ================= EQUIPE ================= -->
+    <section class="secao secao--papel equipe" id="equipe">
+      <div class="caixa">
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>05</b>Quem constrói</p>
+          <h2 data-revelar style="--i:1">Seis estudantes, <em>um produto real.</em></h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
+            Do conceito à defesa. <strong>2º C · M-Tec Informática para Internet</strong>, na Escola
+            Técnica Estadual de Taboão da Serra.
+          </p>
+        </header>
 
-      <header>
-        <p class="secao-indice">11 · Fale com a gente</p>
-        <h2>Contato</h2>
-        <p class="secao-sub">
-          Dúvidas sobre a CK, o FinCK, o DynamiCK, o SynCK ou uma próxima ideia? É só chamar.
-        </p>
-      </header>
+        <div class="lider" data-revelar data-inclinar>
+          <picture>
+            <source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w" sizes="110px">
+            <img src="midia/logo-ck-origem-360.png" alt="" width="120" height="180" loading="lazy" decoding="async">
+          </picture>
+          <div>
+            <span class="lider__papel">Líder do projeto</span>
+            <h3>Gustavo Oliveira dos Santos</h3>
+            <p>Idealizador da Conscious Knowledge e responsável pela liderança, organização e coordenação geral do projeto.</p>
+          </div>
+        </div>
 
-      <address>
-        <p>
-          <span class="contato-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M5 4h3.5l1.7 4-2 1.4a12 12 0 0 0 6.4 6.4l1.4-2 4 1.7V19a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 5 4Z" />
-            </svg>
-          </span>
-          <strong>Telefone</strong>
-          <a href="tel:+5511945258239">(11) 94525-8239</a>
-        </p>
+        <ul class="membros">
+          <li class="membro" data-revelar><span class="membro__moeda" aria-hidden="true">É</span><h3>Éric Estrela Vieira</h3><p>Equipe de Desenvolvimento</p></li>
+          <li class="membro" data-revelar style="--i:1"><span class="membro__moeda" aria-hidden="true">G</span><h3>Gabriel Heanna dos Reis</h3><p>Equipe de Desenvolvimento</p></li>
+          <li class="membro" data-revelar style="--i:2"><span class="membro__moeda" aria-hidden="true">P</span><h3>Paulo Henrique de Lima Silva</h3><p>Equipe de Desenvolvimento</p></li>
+          <li class="membro" data-revelar style="--i:3"><span class="membro__moeda" aria-hidden="true">P</span><h3>Pedro Alcantara dos Santos Fialho</h3><p>Equipe de Desenvolvimento</p></li>
+          <li class="membro" data-revelar style="--i:4"><span class="membro__moeda" aria-hidden="true">T</span><h3>Thiago Wilson Vieira Serbino</h3><p>Equipe de Desenvolvimento</p></li>
+        </ul>
+      </div>
+    </section>
 
-        <p>
-          <span class="contato-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="3" y="5" width="18" height="14" rx="2" />
-              <path d="m3.5 7 8.5 6 8.5-6" />
-            </svg>
-          </span>
-          <strong>E-mail</strong>
-          <a href="mailto:gu.prgrm@gmail.com">gu.prgrm@gmail.com</a>
-        </p>
+    <!-- ================= CONTATO ================= -->
+    <section class="secao secao--ouro contato" id="contato">
+      <div class="caixa contato__grade">
+        <header class="cabeca">
+          <p class="indice" data-revelar><b>06</b>Fale com a gente</p>
+          <h2 data-revelar style="--i:1">Tem uma ideia? <em>É só chamar.</em></h2>
+          <p class="cabeca__sub" data-revelar style="--i:2">
+            Dúvidas sobre a CK, o FinCK, o DynamiCK, o SynCK ou uma próxima ideia?
+          </p>
+        </header>
 
-        <p>
-          <span class="contato-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" />
-              <circle cx="12" cy="10" r="2.6" />
-            </svg>
-          </span>
-          <strong>Instituição</strong>
-          <span class="contato-valor">ETEC Taboão da Serra · SP</span>
-        </p>
-
-        <p>
-          <span class="contato-icone" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M9 19c-4 1.3-4-2.2-5.6-2.7M15 21v-3.4c0-.9.1-1.3-.5-1.8 2.6-.3 5.3-1.3 5.3-5.8a4.5 4.5 0 0 0-1.2-3.1 4.2 4.2 0 0 0-.1-3.1s-1-.3-3.3 1.2a11.4 11.4 0 0 0-6 0C6.9 3.5 5.9 3.8 5.9 3.8a4.2 4.2 0 0 0-.1 3.1A4.5 4.5 0 0 0 4.6 10c0 4.5 2.7 5.5 5.3 5.8-.4.4-.5.9-.5 1.5V21" />
-            </svg>
-          </span>
-          <strong>Repositório</strong>
-          <a href="https://github.com/GustavoOliveira-xxx/ck-group" target="_blank" rel="noopener">github.com/ck-group</a>
-        </p>
-      </address>
-
+        <address class="canais">
+          <a class="canal" href="tel:+5511945258239" data-revelar>
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3.5l1.7 4-2 1.4a12 12 0 0 0 6.4 6.4l1.4-2 4 1.7V19a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 6.2 2 2 0 0 1 5 4Z" /></svg>
+            <span>Telefone</span><strong>(11) 94525-8239</strong>
+          </a>
+          <a class="canal" href="mailto:gu.prgrm@gmail.com" data-revelar style="--i:1">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 7 8.5 6 8.5-6" /></svg>
+            <span>E-mail</span><strong>gu.prgrm@gmail.com</strong>
+          </a>
+          <div class="canal" data-revelar style="--i:2">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" /><circle cx="12" cy="10" r="2.6" /></svg>
+            <span>Instituição</span><strong>ETEC Taboão da Serra · SP</strong>
+          </div>
+          <a class="canal" href="https://github.com/GustavoOliveira-xxx/ck-group" target="_blank" rel="noopener" data-revelar style="--i:3">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.3-4-2.2-5.6-2.7M15 21v-3.4c0-.9.1-1.3-.5-1.8 2.6-.3 5.3-1.3 5.3-5.8a4.5 4.5 0 0 0-1.2-3.1 4.2 4.2 0 0 0-.1-3.1s-1-.3-3.3 1.2a11.4 11.4 0 0 0-6 0C6.9 3.5 5.9 3.8 5.9 3.8a4.2 4.2 0 0 0-.1 3.1A4.5 4.5 0 0 0 4.6 10c0 4.5 2.7 5.5 5.3 5.8-.4.4-.5.9-.5 1.5V21" /></svg>
+            <span>Repositório</span><strong>github.com/ck-group</strong>
+          </a>
+        </address>
+      </div>
     </section>
 
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer>
-    <div class="footer-grade">
-      <div class="footer-marca">
-        <picture><source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w, midia/logo-ck-origem-360.webp 360w, midia/logo-ck-origem-480.webp 480w, midia/logo-ck-origem-720.webp 720w" sizes="48px"><img src="midia/logo-ck-origem-360.png" class="footer-marca__logo" alt="Logo da Conscious Knowledge" width="64" height="96" loading="lazy" decoding="async"></picture>
+  <!-- ================= RODAPÉ ================= -->
+  <footer class="rodape">
+    <div class="caixa rodape__grade">
+      <div class="rodape__marca">
+        <picture>
+          <source type="image/webp" srcset="midia/logo-ck-origem-120.webp 120w, midia/logo-ck-origem-240.webp 240w" sizes="56px">
+          <img src="midia/logo-ck-origem-360.png" alt="Logo da Conscious Knowledge" width="56" height="84" loading="lazy" decoding="async">
+        </picture>
         <div>
           <strong>Conscious Knowledge</strong>
           <span>Consciência que cria, Conhecimento que transforma.</span>
         </div>
       </div>
 
-      <nav class="footer-links" aria-label="Navegação do rodapé">
+      <nav class="rodape__links" aria-label="Navegação do rodapé">
         <a href="#sobre">Sobre</a>
         <a href="#produtos">Produtos</a>
         <a href="#finck">FinCK</a>
@@ -1484,7 +937,7 @@
       </nav>
     </div>
 
-    <div class="footer-base">
+    <div class="caixa rodape__base">
       <p>© 2026 Conscious Knowledge.</p>
       <p>Projeto Interdisciplinar · Etec Taboão da Serra · Orientador: Prof. Sullivan Franco.</p>
     </div>
