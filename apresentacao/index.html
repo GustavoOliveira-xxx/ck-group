@@ -65,16 +65,7 @@
 
   <!-- ================= CENÁRIO DE FUNDO ================= -->
   <div class="cenario" aria-hidden="true">
-    <canvas class="cenario__canvas" data-canvas></canvas>
-    <span class="orbe orbe--1"></span>
-    <span class="orbe orbe--2"></span>
-    <span class="orbe orbe--3"></span>
-    <span class="orbe orbe--4"></span>
-    <span class="cenario__fita cenario__fita--a"></span>
-    <span class="cenario__fita cenario__fita--b"></span>
-    <span class="cenario__aurora"></span>
-    <span class="cenario__varredura"></span>
-    <span class="cenario__grade"></span>
+    <canvas class="fundo-vivo" data-fundo></canvas>
     <span class="cenario__vinheta"></span>
     <span class="cenario__grao"></span>
   </div>
@@ -130,38 +121,40 @@
            ====================================================== -->
       <section class="slide slide--capa" data-slide data-cena="capa" data-fala="Grupo" data-secao="Abertura"
         data-titulo="Capa" aria-label="Slide 1: capa">
-        <div class="quadro quadro--centro">
+        <div class="quadro abre">
+          <span class="abre__ancora abre__ancora--esq" data-ancora="esq" aria-hidden="true"></span>
+          <span class="abre__ancora abre__ancora--dir" data-ancora="dir" aria-hidden="true"></span>
+          <span class="abre__raios" aria-hidden="true"></span>
 
-          <div class="capa__marca" data-orbital>
-            <span class="capa__anel capa__anel--a"></span>
-            <span class="capa__anel capa__anel--b"></span>
-            <span class="capa__anel capa__anel--c"></span>
-            <span class="capa__brilho"></span>
+          <div class="abre__marca" data-orbital>
+            <span class="abre__anel abre__anel--a" aria-hidden="true"></span>
+            <span class="abre__anel abre__anel--b" aria-hidden="true"></span>
+            <span class="abre__brilho" aria-hidden="true"></span>
             <picture>
               <source type="image/webp"
                 srcset="../midia/logo-finck-240.webp 240w, ../midia/logo-finck-360.webp 360w, ../midia/logo-finck-480.webp 480w, ../midia/logo-finck-640.webp 640w"
                 sizes="(max-width: 860px) 46vw, 300px">
-              <img class="capa__logo" src="../midia/logo-finck-300.png"
+              <img class="capa__logo abre__logo" src="../midia/logo-finck-300.png"
                 alt="Logotipo do FinCK" width="945" height="965" fetchpriority="high">
             </picture>
           </div>
 
-          <p class="capa__eyebrow" data-surge="1">
+          <p class="abre__selo">
             <span class="ponto-vivo"></span>
             Projeto Interdisciplinar · 2026
           </p>
 
-          <h1 class="capa__titulo" data-surge="2">
-            <span class="capa__titulo-a">FinCK</span>
-            <span class="capa__titulo-b">consumo consciente e decisão em tempo real</span>
+          <h1 class="abre__titulo">
+            <span class="abre__nome">FinCK</span>
+            <span class="abre__sub">consumo consciente e decisão em tempo real</span>
           </h1>
 
-          <p class="capa__tese" data-surge="3">
+          <p class="abre__tese">
             O impacto do descontrole financeiro
             <strong>na sociedade e no meio ambiente.</strong>
           </p>
 
-          <div class="capa__meta" data-surge="4">
+          <div class="abre__ficha">
             <div>
               <span>Curso</span>
               <strong>Técnico em Informática para Internet</strong>
@@ -183,7 +176,6 @@
               <strong>2026</strong>
             </div>
           </div>
-
         </div>
 
         <div class="notas" data-notas>
@@ -199,59 +191,59 @@
 
 
       <!-- ======================================================
-           02 · TEMA, PROBLEMA E HIPÓTESES
+           02 · INTRODUÇÃO, TEMA E OBJETIVO
            ====================================================== -->
       <section class="slide" data-slide data-fala="Gustavo" data-secao="Introdução"
         data-objeto="alvo" data-titulo="Introdução, tema e objetivo" aria-label="Slide 2: introdução, tema e objetivo">
-        <div class="quadro">
+        <div class="quadro cena" data-num="01">
 
-          <header class="cab">
-            <p class="cab__indice">01 · Introdução</p>
-            <h2 class="cab__titulo">Do tema dado pela escola <em>ao objetivo do FinCK</em></h2>
+          <header class="topo">
+            <p class="topo__indice">01 · Introdução</p>
+            <h2 class="topo__titulo">Do tema dado pela escola <em>ao objetivo do FinCK</em></h2>
           </header>
 
-          <div class="colunas colunas--5-7" data-surge="1">
-            <div class="painel painel--ouro painel--flex">
-              <h3 class="painel__titulo">O tema</h3>
-              <p class="tema">“O paradigma do consumo desenfreado e seu impacto na natureza”</p>
-              <ul class="exigencias">
+          <div class="intro">
+            <article class="lamina lamina--ouro intro__tema" data-bloco>
+              <h3 class="rotulo">O tema</h3>
+              <p class="intro__citacao">“O paradigma do consumo desenfreado e seu impacto na natureza”</p>
+              <ul class="intro__exige">
                 <li>
-                  <span class="exigencias__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z"/></svg></span>
+                  <span class="intro__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.6 12 21 12 21Z"/></svg></span>
                   <span><b>Aplicabilidade local</b>e não um discurso genérico sobre sustentabilidade</span>
                 </li>
                 <li>
-                  <span class="exigencias__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10.5 18h3"/></svg></span>
+                  <span class="intro__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10.5 18h3"/></svg></span>
                   <span><b>Aplicativo funcional</b>hospedado e operante, e não uma simulação de telas</span>
                 </li>
               </ul>
-              <p class="painel__sub"><b>Público-alvo:</b> jovens no primeiro contato sério com o próprio
+              <p class="intro__publico"><b>Público-alvo:</b> jovens no primeiro contato sério com o próprio
                 dinheiro, com ou sem renda consolidada.</p>
-              <p class="fonte rodape-fonte">Definidos pelo corpo docente da Etec Taboão da Serra. Tema gerador
+              <p class="fonte lamina__rodape">Definidos pelo corpo docente da Etec Taboão da Serra. Tema gerador
                 do curso: “Tecnologia Integrada para Soluções Eficientes” (ETEC TABOÃO DA SERRA, 2026k, 2026l).</p>
-            </div>
+            </article>
 
-            <div class="coluna">
-              <div class="painel">
-                <h3 class="painel__titulo">Problema de pesquisa</h3>
-                <p class="pergunta">
+            <div class="intro__dir">
+              <section class="intro__pergunta" data-bloco>
+                <h3 class="rotulo">Problema de pesquisa</h3>
+                <p class="intro__q">
                   De que forma uma aplicação web pode ajudar jovens a tomar decisões de consumo
                   <b>mais conscientes</b>, tornando visível o impacto financeiro e ambiental de uma compra
                   e dos hábitos de consumo, <b>sem exigir educação financeira prévia e sem decidir pela pessoa?</b>
                 </p>
-              </div>
+              </section>
 
-              <div class="painel painel--cheio">
-                <h3 class="painel__titulo">Hipóteses e objetivo geral</h3>
-                <ul class="hipoteses">
-                  <li><span class="hipoteses__h">H1</span><span>Traduzir o preço em <b>tempo de trabalho, peso no
+              <section class="intro__hip" data-bloco>
+                <h3 class="rotulo">Hipóteses e objetivo geral</h3>
+                <ol class="bilhetes">
+                  <li class="bilhete"><span class="bilhete__h">H1</span><span>Traduzir o preço em <b>tempo de trabalho, peso no
                     mês, atraso nas metas e efeito nos meses seguintes</b> pode tornar a decisão mais informada, mesmo
                     para quem nunca estudou finanças.</span></li>
-                  <li><span class="hipoteses__h">H2</span><span>A confiança pode ser favorecida por <b>números
+                  <li class="bilhete"><span class="bilhete__h">H2</span><span>A confiança pode ser favorecida por <b>números
                     reproduzíveis</b>: cálculos por regras determinísticas, e a IA apenas como apoio opcional.</span></li>
-                  <li><span class="hipoteses__h">OG</span><span>Desenvolver, publicar e documentar um app que
+                  <li class="bilhete bilhete--og"><span class="bilhete__h">OG</span><span>Desenvolver, publicar e documentar um app que
                     ligue finanças pessoais, consumo responsável e o <b>ODS 12</b>, com aplicação em Taboão da Serra.</span></li>
-                </ul>
-              </div>
+                </ol>
+              </section>
             </div>
           </div>
 
@@ -278,75 +270,65 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Gustavo" data-secao="Problemática"
         data-objeto="balanca" data-titulo="Endividamento das famílias" aria-label="Slide 3: endividamento das famílias">
-        <div class="quadro">
+        <div class="quadro cena" data-num="02">
 
-          <header class="cab">
-            <p class="cab__indice">02 · Problemática · endividamento</p>
-            <h2 class="cab__titulo">Oito em cada dez famílias <em>têm dívidas a pagar</em></h2>
+          <header class="topo">
+            <p class="topo__indice">02 · Problemática · endividamento</p>
+            <h2 class="topo__titulo">Oito em cada dez famílias <em>têm dívidas a pagar</em></h2>
           </header>
 
-          <div class="colunas colunas--5-7">
-            <div class="coluna" data-surge="1">
-              <div class="grande">
-                <strong class="grande__num"><span data-contador="81.6" data-decimais="1">81,6</span><small>%</small></strong>
-                <p class="grande__txt">das famílias brasileiras estavam <b>endividadas</b> em outubro de 2026.</p>
+          <div class="divida">
+            <div class="divida__aneis" data-bloco>
+              <div class="anel-dado" style="--p:81.6">
+                <span class="anel-dado__disco" aria-hidden="true"><i></i></span>
+                <div>
+                  <strong class="anel-dado__num"><span data-contador="81.6" data-decimais="1">81,6</span><small>%</small></strong>
+                  <p class="anel-dado__txt">das famílias brasileiras estavam <b>endividadas</b> em outubro de 2026.</p>
+                </div>
               </div>
-              <div class="grande grande--alerta">
-                <strong class="grande__num"><span data-contador="29.3" data-decimais="1">29,3</span><small>%</small></strong>
-                <p class="grande__txt">tinham <b>contas ou dívidas em atraso</b> no mesmo mês.</p>
-              </div>
-              <div class="conceitos">
-                <p><b>Endividada</b> tem compromissos a pagar, como cartão, carnê ou financiamento, mesmo que ainda não tenham vencido.</p>
-                <p><b>Em atraso</b> tem conta ou dívida vencida e não paga. São condições diferentes.</p>
+              <div class="anel-dado anel-dado--ouro" style="--p:29.3">
+                <span class="anel-dado__disco" aria-hidden="true"><i></i></span>
+                <div>
+                  <strong class="anel-dado__num"><span data-contador="29.3" data-decimais="1">29,3</span><small>%</small></strong>
+                  <p class="anel-dado__txt">tinham <b>contas ou dívidas em atraso</b> no mesmo mês.</p>
+                </div>
               </div>
             </div>
 
-            <div class="painel painel--distribuido" data-surge="2">
-              <h3 class="painel__titulo">Estável em 2026, mas em patamar alto</h3>
-              <p class="painel__sub">Percentual das famílias brasileiras · escala de 0 a 100%</p>
+            <article class="lamina divida__serie" data-bloco>
+              <h3 class="lamina__titulo">Estável em 2026, mas em patamar alto</h3>
+              <p class="lamina__sub">Percentual das famílias brasileiras · escala de 0 a 100%</p>
 
-              <div class="serie-bloco" role="img"
+              <div class="pilhas-serie" role="img"
                 aria-label="Famílias endividadas: 82,0% em julho, 81,7% em setembro e 81,6% em outubro de 2026. Com contas em atraso: 29,6% em setembro e 29,3% em outubro de 2026.">
-                <p class="serie-bloco__titulo"><i class="legenda__roxo"></i>Endividadas</p>
-                <div class="barras barras--estreito">
-                  <div class="barras__linha">
-                    <span class="barras__rotulo">jul. 2026</span>
-                    <span class="barras__trilho"><i class="barras__preenche barras__preenche--roxo" style="--p:82%"></i></span>
-                    <b class="barras__valor">82,0%</b>
-                  </div>
-                  <div class="barras__linha">
-                    <span class="barras__rotulo">set. 2026</span>
-                    <span class="barras__trilho"><i class="barras__preenche barras__preenche--roxo" style="--p:81.7%"></i></span>
-                    <b class="barras__valor">81,7%</b>
-                  </div>
-                  <div class="barras__linha barras__linha--foco">
-                    <span class="barras__rotulo">out. 2026</span>
-                    <span class="barras__trilho"><i class="barras__preenche barras__preenche--roxo" style="--p:81.6%"></i></span>
-                    <b class="barras__valor">81,6%</b>
+                <div class="pilhas-serie__eixo" aria-hidden="true"><i>100%</i><i>50%</i><i>0%</i></div>
+                <div class="pilhas-serie__grupo">
+                  <p class="pilhas-serie__titulo"><i class="ponto ponto--roxo"></i>Endividadas</p>
+                  <div class="pilhas-serie__cols">
+                    <div class="coluna-dado" style="--p:82%"><b class="coluna-dado__valor">82,0%</b><span class="coluna-dado__barra"></span><span class="coluna-dado__rotulo">jul. 2026</span></div>
+                    <div class="coluna-dado" style="--p:81.7%"><b class="coluna-dado__valor">81,7%</b><span class="coluna-dado__barra"></span><span class="coluna-dado__rotulo">set. 2026</span></div>
+                    <div class="coluna-dado coluna-dado--foco" style="--p:81.6%"><b class="coluna-dado__valor">81,6%</b><span class="coluna-dado__barra"></span><span class="coluna-dado__rotulo">out. 2026</span></div>
                   </div>
                 </div>
-
-                <p class="serie-bloco__titulo"><i class="legenda__ouro"></i>Com contas ou dívidas em atraso</p>
-                <div class="barras barras--estreito">
-                  <div class="barras__linha">
-                    <span class="barras__rotulo">set. 2026</span>
-                    <span class="barras__trilho"><i class="barras__preenche barras__preenche--ouro" style="--p:29.6%"></i></span>
-                    <b class="barras__valor">29,6%</b>
-                  </div>
-                  <div class="barras__linha barras__linha--foco">
-                    <span class="barras__rotulo">out. 2026</span>
-                    <span class="barras__trilho"><i class="barras__preenche barras__preenche--ouro" style="--p:29.3%"></i></span>
-                    <b class="barras__valor">29,3%</b>
+                <div class="pilhas-serie__grupo pilhas-serie__grupo--ouro">
+                  <p class="pilhas-serie__titulo"><i class="ponto ponto--ouro"></i>Com contas ou dívidas em atraso</p>
+                  <div class="pilhas-serie__cols">
+                    <div class="coluna-dado" style="--p:29.6%"><b class="coluna-dado__valor">29,6%</b><span class="coluna-dado__barra"></span><span class="coluna-dado__rotulo">set. 2026</span></div>
+                    <div class="coluna-dado coluna-dado--foco" style="--p:29.3%"><b class="coluna-dado__valor">29,3%</b><span class="coluna-dado__barra"></span><span class="coluna-dado__rotulo">out. 2026</span></div>
                   </div>
                 </div>
-                <div class="escala" aria-hidden="true"><span></span><span class="escala__eixo"><i>0%</i><i>50%</i><i>100%</i></span><span></span></div>
               </div>
 
-              <p class="painel__sub">Ter dívida não é o mesmo que estar inadimplente, e <b>nem todo endividamento vem de compra por impulso</b>. Os dados mostram o tamanho do compromisso com o futuro.</p>
-            </div>
+              <p class="lamina__sub">Ter dívida não é o mesmo que estar inadimplente, e <b>nem todo endividamento vem de compra por impulso</b>. Os dados mostram o tamanho do compromisso com o futuro.</p>
+            </article>
           </div>
 
-          <p class="fonte" data-surge="3">Fonte: CNC, Pesquisa de Endividamento e Inadimplência do Consumidor (Peic), comunicado de 5/11/2026. Famílias brasileiras; julho, setembro e outubro de 2026.</p>
+          <div class="definicoes" data-bloco>
+            <p><b>Endividada</b> tem compromissos a pagar, como cartão, carnê ou financiamento, mesmo que ainda não tenham vencido.</p>
+            <p><b>Em atraso</b> tem conta ou dívida vencida e não paga. São condições diferentes.</p>
+          </div>
+
+          <p class="fonte">Fonte: CNC, Pesquisa de Endividamento e Inadimplência do Consumidor (Peic), comunicado de 5/11/2026. Famílias brasileiras; julho, setembro e outubro de 2026.</p>
 
         </div>
 
@@ -369,55 +351,57 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Problemática"
         data-objeto="cartao" data-titulo="Crédito e juros" aria-label="Slide 4: crédito e juros">
-        <div class="quadro">
+        <div class="quadro cena" data-num="03">
 
-          <header class="cab">
-            <p class="cab__indice">03 · Problemática · crédito</p>
-            <h2 class="cab__titulo">O custo da compra <em>continua depois dela</em></h2>
+          <header class="topo">
+            <p class="topo__indice">03 · Problemática · crédito</p>
+            <h2 class="topo__titulo">O custo da compra <em>continua depois dela</em></h2>
           </header>
 
-          <div class="colunas colunas--7-5">
-            <div class="painel painel--flex" data-surge="1">
-              <h3 class="painel__titulo">Fatura do cartão: o que a regra limita</h3>
-              <p class="painel__sub">Exemplo didático com <b>R$ 1.000,00</b> de dívida principal no rotativo ou no parcelamento do saldo da fatura.</p>
+          <div class="credito">
+            <article class="lamina credito__teto" data-bloco>
+              <h3 class="lamina__titulo">Fatura do cartão: o que a regra limita</h3>
+              <p class="lamina__sub">Exemplo didático com <b>R$ 1.000,00</b> de dívida principal no rotativo ou no parcelamento do saldo da fatura.</p>
 
-              <div class="teto" role="img"
+              <div class="lingotes" role="img"
                 aria-label="Dívida principal de mil reais. Juros e encargos abrangidos limitados a mil reais. Total correspondente de até dois mil reais.">
-                <div class="teto__linha">
-                  <span class="teto__rotulo">Dívida principal</span>
-                  <span class="teto__trilho"><i class="teto__parte teto__parte--principal" style="--p:50%"></i></span>
-                  <b class="teto__valor">R$ 1.000</b>
+                <div class="lingote">
+                  <span class="lingote__rotulo">Dívida principal</span>
+                  <span class="lingote__trilho"><i class="lingote__barra lingote__barra--roxo" style="--p:50%"></i></span>
+                  <b class="lingote__valor">R$ 1.000</b>
                 </div>
-                <div class="teto__linha">
-                  <span class="teto__rotulo">Juros e encargos abrangidos, <b>no máximo</b></span>
-                  <span class="teto__trilho"><i class="teto__parte teto__parte--encargos" style="--p:50%"></i></span>
-                  <b class="teto__valor teto__valor--ouro">R$ 1.000</b>
+                <div class="lingote">
+                  <span class="lingote__rotulo">Juros e encargos abrangidos, <b>no máximo</b></span>
+                  <span class="lingote__trilho"><i class="lingote__barra lingote__barra--ouro" style="--p:50%"></i></span>
+                  <b class="lingote__valor lingote__valor--ouro">R$ 1.000</b>
                 </div>
-                <div class="teto__linha teto__linha--total">
-                  <span class="teto__rotulo">Total correspondente, <b>no máximo</b></span>
-                  <span class="teto__trilho teto__trilho--pilha"><i class="teto__parte teto__parte--principal" style="--p:50%"></i><i class="teto__parte teto__parte--encargos" style="--p:50%"></i></span>
-                  <b class="teto__valor">R$ 2.000</b>
+                <div class="lingote lingote--total">
+                  <span class="lingote__rotulo">Total correspondente, <b>no máximo</b></span>
+                  <span class="lingote__trilho"><i class="lingote__barra lingote__barra--roxo" style="--p:50%"></i><i class="lingote__barra lingote__barra--ouro lingote__barra--segue" style="--p:50%"></i></span>
+                  <b class="lingote__valor">R$ 2.000</b>
                 </div>
-                <div class="teto__escala" aria-hidden="true"><span></span><span class="escala__eixo"><i>R$ 0</i><i>R$ 1.000</i><i>R$ 2.000</i></span><span></span></div>
+                <div class="lingotes__escala" aria-hidden="true"><span></span><span class="regua"><i>R$ 0</i><i>R$ 1.000</i><i>R$ 2.000</i></span><span></span></div>
               </div>
 
-              <p class="painel__sub rodape-fonte">Vale para operações <b>originadas a partir de 3/1/2024</b> e abrangidas pela regra: juros e encargos do rotativo e do parcelamento do saldo devedor da fatura não podem passar de <b>100% do principal</b>. Não é uma regra para qualquer compra parcelada.</p>
-            </div>
+              <p class="lamina__sub lamina__rodape">Vale para operações <b>originadas a partir de 3/1/2024</b> e abrangidas pela regra: juros e encargos do rotativo e do parcelamento do saldo devedor da fatura não podem passar de <b>100% do principal</b>. Não é uma regra para qualquer compra parcelada.</p>
+            </article>
 
-            <div class="coluna" data-surge="2">
-              <div class="painel painel--ouro">
-                <h3 class="painel__titulo">Mesmo com limite, a dívida pode dobrar</h3>
-                <p class="painel__sub">Quem deixa R$ 1.000 na fatura pode acabar devendo até <b>R$ 2.000</b> nas operações abrangidas. O crédito não é o vilão: o problema é decidir <b>sem enxergar os meses seguintes</b>.</p>
-              </div>
-              <div class="painel painel--cheio">
-                <h3 class="painel__titulo">Onde o FinCK entra</h3>
-                <p class="painel__sub">Antes de parcelar, o app simula os próximos meses. Na demonstração, um fone de <b>R$ 800 em 10 × R$ 80</b> faria a conta não fechar sem recorrer ao cartão a partir de jan./2027.</p>
-                <p class="painel__sub"><span class="selo-tipo selo-tipo--est">Estimativa</span> calculada pelo próprio app com dados de exemplo; detalhada no item 09.</p>
-              </div>
+            <div class="credito__lado">
+              <article class="destaque" data-bloco>
+                <span class="destaque__seta" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 38h10V26H8zM22 38h10V14H22z"/><path d="M28 9l8-1-1 8M36 8 22 22"/></svg></span>
+                <h3 class="lamina__titulo">Mesmo com limite, a dívida pode dobrar</h3>
+                <p class="lamina__sub">Quem deixa R$ 1.000 na fatura pode acabar devendo até <b>R$ 2.000</b> nas operações abrangidas. O crédito não é o vilão: o problema é decidir <b>sem enxergar os meses seguintes</b>.</p>
+              </article>
+              <article class="lamina lamina--cheia" data-bloco>
+                <h3 class="lamina__titulo">Onde o FinCK entra</h3>
+                <div class="parcelas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <p class="lamina__sub">Antes de parcelar, o app simula os próximos meses. Na demonstração, um fone de <b>R$ 800 em 10 × R$ 80</b> faria a conta não fechar sem recorrer ao cartão a partir de jan./2027.</p>
+                <p class="lamina__sub"><span class="selo-tipo selo-tipo--est">Estimativa</span> calculada pelo próprio app com dados de exemplo; detalhada no item 09.</p>
+              </article>
             </div>
           </div>
 
-          <p class="fonte" data-surge="3">Fonte: Banco Central do Brasil, “Limitação dos juros e encargos financeiros no saldo devedor da fatura do cartão”; Lei nº 14.690/2023. Exemplo: cálculo dos autores. Simulação: FinCK, modo de demonstração (9/11/2026).</p>
+          <p class="fonte">Fonte: Banco Central do Brasil, “Limitação dos juros e encargos financeiros no saldo devedor da fatura do cartão”; Lei nº 14.690/2023. Exemplo: cálculo dos autores. Simulação: FinCK, modo de demonstração (9/11/2026).</p>
 
         </div>
 
@@ -439,74 +423,77 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Problemática"
         data-objeto="capelo" data-titulo="Comportamento e educação financeira" aria-label="Slide 5: comportamento e educação financeira">
-        <div class="quadro">
+        <div class="quadro cena" data-num="04">
 
-          <header class="cab">
-            <p class="cab__indice">04 · Problemática · comportamento</p>
-            <h2 class="cab__titulo">O tema é importante, <em>mas pouca gente aprendeu</em></h2>
+          <header class="topo">
+            <p class="topo__indice">04 · Problemática · comportamento</p>
+            <h2 class="topo__titulo">O tema é importante, <em>mas pouca gente aprendeu</em></h2>
           </header>
 
-          <div class="trio" data-surge="1">
-            <article class="ficha ficha--alerta">
-              <strong class="ficha__num">45,1%</strong>
-              <p class="ficha__rotulo">dos estudantes brasileiros avaliados ficaram <b>abaixo do nível básico</b> de letramento financeiro.</p>
-              <p class="ficha__meta">OCDE · PISA 2022 · Brasil: 416 pontos; 18º de 20 na ordenação das médias</p>
+          <div class="pilares" data-bloco>
+            <article class="pilar pilar--alerta" style="--p:45.1">
+              <strong class="pilar__num">45,1%</strong>
+              <span class="pilar__medidor" aria-hidden="true"><i></i></span>
+              <p class="pilar__txt">dos estudantes brasileiros avaliados ficaram <b>abaixo do nível básico</b> de letramento financeiro.</p>
+              <p class="pilar__meta">OCDE · PISA 2022 · Brasil: 416 pontos; 18º de 20 na ordenação das médias</p>
             </article>
-            <article class="ficha">
-              <strong class="ficha__num">55%</strong>
-              <p class="ficha__rotulo">declararam entender <b>pouco ou nada</b> de educação financeira; <b>91%</b> consideram o tema importante ou muito importante.</p>
-              <p class="ficha__meta">Febraban/IPESPE · jul. 2025 · 3.000 entrevistados</p>
+            <article class="pilar" style="--p:55">
+              <strong class="pilar__num">55%</strong>
+              <span class="pilar__medidor" aria-hidden="true"><i></i></span>
+              <p class="pilar__txt">declararam entender <b>pouco ou nada</b> de educação financeira; <b>91%</b> consideram o tema importante ou muito importante.</p>
+              <p class="pilar__meta">Febraban/IPESPE · jul. 2025 · 3.000 entrevistados</p>
             </article>
-            <article class="ficha">
-              <strong class="ficha__num">500 <small>× 542</small></strong>
-              <p class="ficha__rotulo">score médio de crédito de quem tem <b>18 a 25 anos</b>, contra a <b>média nacional</b>.</p>
-              <p class="ficha__meta">Serasa · Mapa Score · abr. 2026</p>
+            <article class="pilar pilar--duplo">
+              <strong class="pilar__num">500 <small>× 542</small></strong>
+              <span class="pilar__medidor pilar__medidor--duplo" aria-hidden="true"><i style="--p:50"></i><i style="--p:54.2"></i></span>
+              <p class="pilar__txt">score médio de crédito de quem tem <b>18 a 25 anos</b>, contra a <b>média nacional</b>.</p>
+              <p class="pilar__meta">Serasa · Mapa Score · abr. 2026</p>
             </article>
           </div>
 
-          <div class="colunas colunas--6-6" data-surge="2">
-            <div class="painel painel--flex">
-              <h3 class="painel__titulo">De onde vem a informação</h3>
-              <p class="painel__sub">Fontes citadas pelo conjunto dos entrevistados · Febraban/IPESPE, 2025</p>
-              <div class="barras barras--largo barras--grossas">
-                <div class="barras__linha barras__linha--foco">
-                  <span class="barras__rotulo">Redes sociais</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--ouro" style="--p:18%"></i></span>
-                  <b class="barras__valor">18%</b>
+          <div class="dupla">
+            <article class="lamina" data-bloco>
+              <h3 class="lamina__titulo">De onde vem a informação</h3>
+              <p class="lamina__sub">Fontes citadas pelo conjunto dos entrevistados · Febraban/IPESPE, 2025</p>
+              <div class="trilhos">
+                <div class="trilho trilho--foco" style="--p:18%">
+                  <span class="trilho__rotulo">Redes sociais</span>
+                  <span class="trilho__pista"><i class="trilho__barra trilho__barra--ouro"></i></span>
+                  <b class="trilho__valor">18%</b>
                 </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Escola ou universidade</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:15%"></i></span>
-                  <b class="barras__valor">15%</b>
-                </div>
-              </div>
-              <p class="painel__sub rodape-fonte">Mais entrevistados citaram <b>redes sociais</b> do que <b>escola ou universidade</b> como fonte de informação sobre o tema.</p>
-            </div>
-            <div class="painel painel--flex">
-              <h3 class="painel__titulo">Guardar dinheiro em 2025</h3>
-              <p class="painel__sub">ANBIMA/Datafolha, Raio X do Investidor, 9ª ed. (abr. 2026) · 5.832 entrevistados</p>
-              <div class="barras barras--largo barras--grossas">
-                <div class="barras__linha barras__linha--foco">
-                  <span class="barras__rotulo">Conseguiram economizar em 2025</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--roxo" style="--p:33%"></i></span>
-                  <b class="barras__valor">33%</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Investiram durante 2025</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:24%"></i></span>
-                  <b class="barras__valor">24%</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Tinham aplicações na data da pesquisa</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:36%"></i></span>
-                  <b class="barras__valor">36%</b>
+                <div class="trilho" style="--p:15%">
+                  <span class="trilho__rotulo">Escola ou universidade</span>
+                  <span class="trilho__pista"><i class="trilho__barra"></i></span>
+                  <b class="trilho__valor">15%</b>
                 </div>
               </div>
-              <p class="painel__sub rodape-fonte">Três indicadores diferentes: <b>só 1 em cada 3</b> conseguiu economizar no ano.</p>
-            </div>
+              <p class="lamina__sub lamina__rodape">Mais entrevistados citaram <b>redes sociais</b> do que <b>escola ou universidade</b> como fonte de informação sobre o tema.</p>
+            </article>
+            <article class="lamina" data-bloco>
+              <h3 class="lamina__titulo">Guardar dinheiro em 2025</h3>
+              <p class="lamina__sub">ANBIMA/Datafolha, Raio X do Investidor, 9ª ed. (abr. 2026) · 5.832 entrevistados</p>
+              <div class="trilhos">
+                <div class="trilho trilho--foco" style="--p:33%">
+                  <span class="trilho__rotulo">Conseguiram economizar em 2025</span>
+                  <span class="trilho__pista"><i class="trilho__barra trilho__barra--roxo"></i></span>
+                  <b class="trilho__valor">33%</b>
+                </div>
+                <div class="trilho" style="--p:24%">
+                  <span class="trilho__rotulo">Investiram durante 2025</span>
+                  <span class="trilho__pista"><i class="trilho__barra"></i></span>
+                  <b class="trilho__valor">24%</b>
+                </div>
+                <div class="trilho" style="--p:36%">
+                  <span class="trilho__rotulo">Tinham aplicações na data da pesquisa</span>
+                  <span class="trilho__pista"><i class="trilho__barra"></i></span>
+                  <b class="trilho__valor">36%</b>
+                </div>
+              </div>
+              <p class="lamina__sub lamina__rodape">Três indicadores diferentes: <b>só 1 em cada 3</b> conseguiu economizar no ano.</p>
+            </article>
           </div>
 
-          <p class="fonte" data-surge="3">Fontes: OCDE (2024), PISA 2022, Volume IV; Febraban (21/7/2025); Serasa, Mapa Score do Brasil (abr. 2026); ANBIMA (abr. 2026). Pesquisas com períodos, públicos e métodos diferentes: não se somam nem se comparam diretamente. Score é pontuação de crédito, não medida de educação financeira.</p>
+          <p class="fonte">Fontes: OCDE (2024), PISA 2022, Volume IV; Febraban (21/7/2025); Serasa, Mapa Score do Brasil (abr. 2026); ANBIMA (abr. 2026). Pesquisas com períodos, públicos e métodos diferentes: não se somam nem se comparam diretamente. Score é pontuação de crédito, não medida de educação financeira.</p>
 
         </div>
 
@@ -530,85 +517,67 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Problemática"
         data-objeto="placa" data-titulo="Consumo e meio ambiente" aria-label="Slide 6: consumo, resíduos eletrônicos e ODS 12">
-        <div class="quadro">
+        <div class="quadro cena" data-num="05">
 
-          <header class="cab">
-            <p class="cab__indice">05 · Problemática · natureza</p>
-            <h2 class="cab__titulo">Consumo de eletrônicos <em>e geração de resíduos</em></h2>
+          <header class="topo">
+            <p class="topo__indice">05 · Problemática · natureza</p>
+            <h2 class="topo__titulo">Consumo de eletrônicos <em>e geração de resíduos</em></h2>
           </header>
 
-          <div class="colunas colunas--7-5">
-            <div class="painel painel--flex" data-surge="1">
-              <div class="mini-fichas">
-                <div class="mini-ficha mini-ficha--alerta">
+          <div class="ambiente">
+            <div class="ambiente__esq">
+              <div class="placas" data-bloco>
+                <div class="placa-dado placa-dado--alerta">
                   <span class="selo-tipo selo-tipo--obs">2022 · estimativa</span>
                   <strong>62 mi <small>t</small></strong>
                   <p>de resíduos eletrônicos <b>gerados no mundo</b></p>
                 </div>
-                <div class="mini-ficha mini-ficha--ouro">
+                <div class="placa-dado placa-dado--ouro">
                   <span class="selo-tipo selo-tipo--obs">2022 · documentado</span>
                   <strong>22,3%</strong>
                   <p>com <b>coleta e reciclagem formalmente documentadas</b> no mundo</p>
                 </div>
-                <div class="mini-ficha">
+                <div class="placa-dado">
                   <span class="selo-tipo selo-tipo--proj">2030 · projeção</span>
                   <strong>82 mi <small>t</small></strong>
                   <p>previstas no mundo se a tendência continuar; <b>não é resultado observado</b></p>
                 </div>
               </div>
 
-              <h3 class="painel__titulo painel__titulo--espaco">Maiores geradores em 2022</h3>
-              <p class="painel__sub">Milhões de toneladas geradas no ano · ITU/UNITAR, anexo 2</p>
-              <div class="barras barras--estreito">
-                <div class="barras__linha">
-                  <span class="barras__rotulo">China</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:100%"></i></span>
-                  <b class="barras__valor">12,1</b>
+              <article class="lamina lamina--cheia" data-bloco>
+                <h3 class="lamina__titulo">Maiores geradores em 2022</h3>
+                <p class="lamina__sub">Milhões de toneladas geradas no ano · ITU/UNITAR, anexo 2</p>
+                <div class="pirulitos">
+                  <div class="pirulito" style="--p:100%"><span class="pirulito__rotulo">China</span><span class="pirulito__pista"><i></i></span><b class="pirulito__valor">12,1</b></div>
+                  <div class="pirulito" style="--p:59.6%"><span class="pirulito__rotulo">Estados Unidos</span><span class="pirulito__pista"><i></i></span><b class="pirulito__valor">7,2</b></div>
+                  <div class="pirulito" style="--p:34.3%"><span class="pirulito__rotulo">Índia</span><span class="pirulito__pista"><i></i></span><b class="pirulito__valor">4,1</b></div>
+                  <div class="pirulito" style="--p:21.9%"><span class="pirulito__rotulo">Japão</span><span class="pirulito__pista"><i></i></span><b class="pirulito__valor">2,6</b></div>
+                  <div class="pirulito pirulito--foco" style="--p:20.2%"><span class="pirulito__rotulo">Brasil (5º)</span><span class="pirulito__pista"><i></i></span><b class="pirulito__valor">2,4</b></div>
                 </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Estados Unidos</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:59.6%"></i></span>
-                  <b class="barras__valor">7,2</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Índia</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:34.3%"></i></span>
-                  <b class="barras__valor">4,1</b>
-                </div>
-                <div class="barras__linha">
-                  <span class="barras__rotulo">Japão</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--cinza" style="--p:21.9%"></i></span>
-                  <b class="barras__valor">2,6</b>
-                </div>
-                <div class="barras__linha barras__linha--foco">
-                  <span class="barras__rotulo">Brasil (5º)</span>
-                  <span class="barras__trilho"><i class="barras__preenche barras__preenche--ouro" style="--p:20.2%"></i></span>
-                  <b class="barras__valor">2,4</b>
-                </div>
-              </div>
+              </article>
             </div>
 
-            <div class="coluna" data-surge="2">
-              <div class="ods">
-                <span class="ods__numero">12</span>
-                <div class="ods__texto">
+            <div class="ambiente__dir">
+              <div class="ods-placa" data-bloco>
+                <span class="ods-placa__num">12</span>
+                <div class="ods-placa__texto">
                   <strong>Consumo e produção responsáveis</strong>
                   <span>Objetivo de Desenvolvimento Sustentável · ONU</span>
                 </div>
               </div>
 
-              <div class="painel painel--ouro painel--cheio">
-                <h3 class="painel__titulo">Meta 12.5</h3>
-                <blockquote class="citacao">
+              <article class="lamina lamina--ouro lamina--cheia" data-bloco>
+                <h3 class="lamina__titulo">Meta 12.5</h3>
+                <blockquote class="aspas">
                   Reduzir substancialmente a geração de resíduos por meio da <b>prevenção, redução,
                   reciclagem e reuso</b>.
                 </blockquote>
-                <p class="painel__sub">A forma mais simples de prevenir resíduo é <b>não comprar o que não será usado</b> e prolongar a vida do que já existe: consertar, reutilizar, trocar e descartar corretamente.</p>
-              </div>
+                <p class="lamina__sub">A forma mais simples de prevenir resíduo é <b>não comprar o que não será usado</b> e prolongar a vida do que já existe: consertar, reutilizar, trocar e descartar corretamente.</p>
+              </article>
             </div>
           </div>
 
-          <p class="remate remate--critico" data-surge="3">
+          <p class="faixa faixa--alerta" data-bloco>
             O FinCK estimula a reflexão antes da compra; <b>ainda não medimos redução de resíduos causada pelo aplicativo.</b>
           </p>
 
@@ -634,53 +603,53 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Aplicabilidade local"
         data-objeto="pino" data-titulo="Taboão da Serra" aria-label="Slide 7: Taboão da Serra e a aplicabilidade local">
-        <div class="quadro">
+        <div class="quadro cena" data-num="06">
 
-          <header class="cab">
-            <p class="cab__indice">06 · Aplicabilidade local</p>
-            <h2 class="cab__titulo">Taboão da Serra: <em>onde a decisão de consumo acontece</em></h2>
+          <header class="topo">
+            <p class="topo__indice">06 · Aplicabilidade local</p>
+            <h2 class="topo__titulo">Taboão da Serra: <em>onde a decisão de consumo acontece</em></h2>
           </header>
 
-          <div class="colunas colunas--7-5">
-            <div class="coluna" data-surge="1">
-              <div class="mini-fichas">
-                <div class="mini-ficha mini-ficha--ouro">
+          <div class="local">
+            <div class="local__esq">
+              <div class="marcos" data-bloco>
+                <div class="marco-dado marco-dado--ouro">
                   <strong>273.542</strong>
                   <p>habitantes no <b>Censo 2022</b></p>
                 </div>
-                <div class="mini-ficha">
+                <div class="marco-dado">
                   <strong>13.416,81</strong>
                   <p>habitantes por km² no <b>Censo 2022</b></p>
                 </div>
-                <div class="mini-ficha">
+                <div class="marco-dado">
                   <strong>20,371 <small>km²</small></strong>
                   <p>de área territorial, <b>referência 2025</b></p>
                 </div>
               </div>
 
-              <div class="painel painel--cheio">
-                <h3 class="painel__titulo">Um exemplo de uso</h3>
-                <ol class="passos">
-                  <li><span class="passos__n">1</span><p>Um morador de Taboão da Serra quer comprar um <b>fone de R$ 800</b>.</p></li>
-                  <li><span class="passos__n">2</span><p>No <b>FinCK of Reality</b>, vê o custo em horas de trabalho, o peso no mês e o efeito nas metas.</p></li>
-                  <li><span class="passos__n">3</span><p>Em <b>Alternativas perto de você</b>, procura conserto, usado, troca ou descarte correto no bairro.</p></li>
-                  <li><span class="passos__n">4</span><p>Decide <b>sabendo o impacto</b>: comprar, esperar, desistir ou buscar outra opção.</p></li>
+              <article class="lamina lamina--cheia" data-bloco>
+                <h3 class="lamina__titulo">Um exemplo de uso</h3>
+                <ol class="trajeto">
+                  <li><span class="trajeto__n">1</span><p>Um morador de Taboão da Serra quer comprar um <b>fone de R$ 800</b>.</p></li>
+                  <li><span class="trajeto__n">2</span><p>No <b>FinCK of Reality</b>, vê o custo em horas de trabalho, o peso no mês e o efeito nas metas.</p></li>
+                  <li><span class="trajeto__n">3</span><p>Em <b>Alternativas perto de você</b>, procura conserto, usado, troca ou descarte correto no bairro.</p></li>
+                  <li><span class="trajeto__n">4</span><p>Decide <b>sabendo o impacto</b>: comprar, esperar, desistir ou buscar outra opção.</p></li>
                 </ol>
-                <p class="painel__sub rodape-fonte">A densidade descreve o território; sozinha, não mostra mais consumo ou endividamento. Não há parceria com lojas.</p>
-              </div>
+                <p class="lamina__sub lamina__rodape">A densidade descreve o território; sozinha, não mostra mais consumo ou endividamento. Não há parceria com lojas.</p>
+              </article>
             </div>
 
-            <div class="colunas colunas--6-6" data-surge="2">
-              <button type="button" class="tela" data-zoom
+            <div class="local__telas" data-bloco>
+              <button type="button" class="aparelho" data-zoom
                 data-legenda="Alternativas perto de você: busca no Google Maps quem conserta, vende usado, troca, aluga, recebe doação ou faz descarte correto perto do endereço informado. Captura do modo de demonstração (outubro de 2026).">
-                <img class="tela__img" src="img/locais.jpg" alt="Tela Alternativas perto de você do FinCK" width="600" height="1298" loading="lazy" decoding="async" style="--tela-a:420px">
-                <span class="tela__legenda"><b>Alternativas perto de você:</b> conserto, usado, troca, aluguel,
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/locais.jpg" alt="Tela Alternativas perto de você do FinCK" width="600" height="1298" loading="lazy" decoding="async"></span>
+                <span class="aparelho__legenda"><b>Alternativas perto de você:</b> conserto, usado, troca, aluguel,
                   doação e descarte correto.</span>
               </button>
-              <button type="button" class="tela" data-zoom
+              <button type="button" class="aparelho" data-zoom
                 data-legenda="Desafio da turma: cada estudante cadastra um ponto real, registra uma análise no FinCK of Reality e, 30 dias depois, informa em Decisões o que aconteceu. É uma proposta de uso; não há resultados medidos.">
-                <img class="tela__img" src="img/desafio.jpg" alt="Tela com o Desafio da turma no FinCK" width="600" height="1298" loading="lazy" decoding="async" style="--tela-a:420px">
-                <span class="tela__legenda"><b>Desafio da turma:</b> um ponto real cadastrado, uma análise
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/desafio.jpg" alt="Tela com o Desafio da turma no FinCK" width="600" height="1298" loading="lazy" decoding="async"></span>
+                <span class="aparelho__legenda"><b>Desafio da turma:</b> um ponto real cadastrado, uma análise
                   e, 30 dias depois, o que aconteceu.</span>
               </button>
             </div>
@@ -709,74 +678,74 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Fundamentação"
         data-objeto="ampulheta" data-titulo="Fundamentação e metodologia" aria-label="Slide 8: fundamentação teórica e metodologia">
-        <div class="quadro">
+        <div class="quadro cena" data-num="07">
 
-          <header class="cab">
-            <p class="cab__indice">07 · Fundamentação e metodologia</p>
-            <h2 class="cab__titulo">Da teoria ao método: <em>informação na hora da compra</em></h2>
+          <header class="topo">
+            <p class="topo__indice">07 · Fundamentação e metodologia</p>
+            <h2 class="topo__titulo">Da teoria ao método: <em>informação na hora da compra</em></h2>
           </header>
 
-          <div class="colunas colunas--7-5">
-            <div class="linhas-teoria" data-surge="1">
-              <article class="teoria">
+          <div class="base">
+            <div class="estante" data-bloco>
+              <article class="tomo">
                 <h4>Psicologia Econômica</h4>
-                <p class="teoria__autores">Katona (1975)</p>
+                <p class="tomo__autores">Katona (1975)</p>
                 <p>Expectativas, hábitos e deliberação participam das decisões econômicas.</p>
               </article>
-              <article class="teoria">
+              <article class="tomo">
                 <h4>Economia Comportamental</h4>
-                <p class="teoria__autores">Simon (1957); Tversky e Kahneman (1974); Kahneman e Tversky (1979)</p>
+                <p class="tomo__autores">Simon (1957); Tversky e Kahneman (1974); Kahneman e Tversky (1979)</p>
                 <p>Racionalidade limitada, <b>ancoragem</b> e <b>aversão à perda</b>.</p>
               </article>
-              <article class="teoria">
+              <article class="tomo">
                 <h4>Finanças Comportamentais</h4>
-                <p class="teoria__autores">Shefrin e Statman (1985); Statman (1999, 2017)</p>
+                <p class="tomo__autores">Shefrin e Statman (1985); Statman (1999, 2017)</p>
                 <p>Vieses em decisões financeiras; o uso no consumo é <b>interpretação do projeto</b>.</p>
               </article>
-              <article class="teoria">
+              <article class="tomo">
                 <h4>Contabilidade mental e nudge</h4>
-                <p class="teoria__autores">Thaler (1999); Thaler e Sunstein (2008)</p>
+                <p class="tomo__autores">Thaler (1999); Thaler e Sunstein (2008)</p>
                 <p>Informar <b>sem proibir</b>: o app mostra e a pessoa decide.</p>
               </article>
             </div>
 
-            <div class="painel painel--ouro painel--flex" data-surge="2">
-              <h3 class="painel__titulo">Thoreau <small>· inspiração conceitual</small></h3>
-              <blockquote class="citacao">“O custo de uma coisa é a quantidade do que chamarei de <b>vida</b>
+            <article class="lamina lamina--ouro thoreau" data-bloco>
+              <h3 class="lamina__titulo">Thoreau <small>· inspiração conceitual</small></h3>
+              <blockquote class="aspas">“O custo de uma coisa é a quantidade do que chamarei de <b>vida</b>
                 que precisa ser trocada por ela [...]”</blockquote>
               <p class="fonte">(THOREAU, 1854, cap. “Economy”, tradução nossa)</p>
-              <ul class="equacoes">
+              <ul class="formulas">
                 <li><code><i>V</i><sub>h</sub> = <i>R</i> ÷ <i>J</i></code><span>valor da hora: renda ÷ horas no mês</span></li>
                 <li><code><i>T</i> = <i>P</i> ÷ <i>V</i><sub>h</sub></code><span>tempo de trabalho: preço ÷ valor da hora</span></li>
               </ul>
-              <p class="conta">R$ 3.500 ÷ 176 h = <b>R$ 19,89</b> por hora. R$ 800 ÷ R$ 19,89 ≈ <b>40 h 14 min</b>.</p>
-              <p class="painel__sub">Conversão didática criada no projeto, não uma fórmula de Thoreau.</p>
-            </div>
+              <p class="calculo">R$ 3.500 ÷ 176 h = <b>R$ 19,89</b> por hora. R$ 800 ÷ R$ 19,89 ≈ <b>40 h 14 min</b>.</p>
+              <p class="lamina__sub">Conversão didática criada no projeto, não uma fórmula de Thoreau.</p>
+            </article>
           </div>
 
-          <ol class="etapas" data-surge="3">
-            <li class="etapa">
-              <span class="etapa__quando">Pesquisa</span>
+          <ol class="percurso" data-bloco>
+            <li class="percurso__marco">
+              <span class="percurso__quando">Pesquisa</span>
               <h4>Bibliográfica</h4>
               <p>Autores do comportamento econômico e Thoreau.</p>
             </li>
-            <li class="etapa">
-              <span class="etapa__quando">Pesquisa</span>
+            <li class="percurso__marco">
+              <span class="percurso__quando">Pesquisa</span>
               <h4>Documental</h4>
               <p>CNC, BCB, OCDE, Febraban, Serasa, ANBIMA, ITU, IBGE e ONU.</p>
             </li>
-            <li class="etapa">
-              <span class="etapa__quando">Desenvolvimento</span>
+            <li class="percurso__marco">
+              <span class="percurso__quando">Desenvolvimento</span>
               <h4>Iterativo</h4>
               <p>Versões publicadas, revisadas e corrigidas; revisões internas de UX.</p>
             </li>
-            <li class="etapa">
-              <span class="etapa__quando">28/10/2026</span>
+            <li class="percurso__marco">
+              <span class="percurso__quando">28/10/2026</span>
               <h4>Testes técnicos</h4>
               <p>972 verificações aprovadas: 457 no navegador e 515 em Node.js.</p>
             </li>
-            <li class="etapa etapa--proxima">
-              <span class="etapa__quando">Proposta futura</span>
+            <li class="percurso__marco percurso__marco--futuro">
+              <span class="percurso__quando">Proposta futura</span>
               <h4>Avaliação com usuários</h4>
               <p>Protocolo preparado; ainda não aplicado.</p>
             </li>
@@ -803,54 +772,53 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
         data-objeto="celular" data-titulo="Conhecendo o FinCK" aria-label="Slide 9: conhecendo o FinCK">
-        <div class="quadro">
+        <div class="quadro cena" data-num="08">
 
-          <header class="cab cab--lado">
-            <p class="cab__indice">08 · A solução <span class="selo-vivo">app publicado</span></p>
-            <h2 class="cab__titulo">Conhecendo <em>o FinCK</em></h2>
-            <div class="cab__extra">
-              <a class="btn btn--primario" href="https://finck-app.vercel.app" target="_blank" rel="noopener"><span>Abrir o FinCK</span></a>
-            </div>
+          <header class="topo topo--acao">
+            <p class="topo__indice">08 · A solução <span class="selo-vivo">app publicado</span></p>
+            <h2 class="topo__titulo">Conhecendo <em>o FinCK</em></h2>
+            <a class="chamada" href="https://finck-app.vercel.app" target="_blank" rel="noopener"><span>Abrir o FinCK</span></a>
           </header>
 
-          <div class="colunas colunas--8-4">
-            <div class="vitrine" data-surge="1">
-              <button type="button" class="vitrine__desk" data-zoom
+          <div class="conhecer">
+            <div class="mesa" data-bloco>
+              <button type="button" class="notebook" data-zoom
                 data-legenda="Início do FinCK no computador, no modo de demonstração: resumo do mês, gastos e o atalho para analisar uma compra no FinCK of Reality. Dados de exemplo; captura de 9/11/2026.">
-                <img src="img/home-desktop.jpg" alt="Tela inicial do FinCK no computador, modo de demonstração" width="1440" height="796" decoding="async">
+                <span class="notebook__tela"><img src="img/home-desktop.jpg" alt="Tela inicial do FinCK no computador, modo de demonstração" width="1440" height="796" decoding="async"></span>
+                <span class="notebook__base" aria-hidden="true"></span>
               </button>
-              <button type="button" class="vitrine__cel" data-zoom
+              <button type="button" class="aparelho aparelho--sobre" data-zoom
                 data-legenda="Início do FinCK no celular, no modo de demonstração. O mesmo aplicativo se adapta à tela. Dados de exemplo; captura de 9/11/2026.">
-                <img src="img/home-mobile.jpg" alt="Tela inicial do FinCK no celular, modo de demonstração" width="600" height="1299" decoding="async">
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/home-mobile.jpg" alt="Tela inicial do FinCK no celular, modo de demonstração" width="600" height="1299" decoding="async"></span>
               </button>
-              <p class="vitrine__legenda">Início no computador e no celular · modo de demonstração, dados de exemplo · 9/11/2026</p>
+              <p class="mesa__legenda">Início no computador e no celular · modo de demonstração, dados de exemplo · 9/11/2026</p>
             </div>
 
-            <div class="coluna" data-surge="2">
-              <ol class="camadas camadas--compactas">
-                <li class="camada">
-                  <span class="camada__n">1</span>
+            <div class="frentes" data-bloco>
+              <ol class="frentes__lista">
+                <li class="frente">
+                  <span class="frente__n">1</span>
                   <div>
                     <h4>Avaliar uma compra</h4>
                     <p><b>FinCK of Reality:</b> preço em horas, peso no mês, metas e meses seguintes.</p>
                   </div>
                 </li>
-                <li class="camada">
-                  <span class="camada__n">2</span>
+                <li class="frente">
+                  <span class="frente__n">2</span>
                   <div>
                     <h4>Identificar hábitos</h4>
                     <p><b>Análises:</b> pequenos gastos que somam, categorias e padrões.</p>
                   </div>
                 </li>
-                <li class="camada">
-                  <span class="camada__n">3</span>
+                <li class="frente">
+                  <span class="frente__n">3</span>
                   <div>
                     <h4>Revisar e planejar</h4>
                     <p><b>Revisão financeira:</b> Espelho, Índice FinCK, metas e decisões.</p>
                   </div>
                 </li>
               </ol>
-              <p class="lema">“O FinCK calcula primeiro, você decide, e a IA só ajuda <b>se você pedir</b>.”</p>
+              <p class="lema-faixa">“O FinCK calcula primeiro, você decide, e a IA só ajuda <b>se você pedir</b>.”</p>
             </div>
           </div>
 
@@ -877,48 +845,48 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
         data-objeto="cronometro" data-titulo="FinCK of Reality" aria-label="Slide 10: FinCK of Reality">
-        <div class="quadro">
+        <div class="quadro cena" data-num="09">
 
-          <header class="cab">
-            <p class="cab__indice">09 · A solução · FinCK of Reality</p>
-            <h2 class="cab__titulo">Compra → impacto → <em>decisão</em></h2>
+          <header class="topo">
+            <p class="topo__indice">09 · A solução · FinCK of Reality</p>
+            <h2 class="topo__titulo">Compra → impacto → <em>decisão</em></h2>
           </header>
 
-          <div class="colunas colunas--8-4">
-            <div class="telas" data-surge="1">
-              <button type="button" class="tela" data-zoom
+          <div class="reality">
+            <div class="esteira" data-bloco>
+              <button type="button" class="aparelho aparelho--passo" data-zoom
                 data-legenda="Etapa 1, Compra: a pessoa diz o que quer comprar e quanto custa; o FinCK sugere a categoria.">
-                <span class="tela__passo"><i>1</i>Compra</span>
-                <img class="tela__img" style="--tela-a:372px" src="img/compra.jpg" alt="Etapa Compra do FinCK of Reality com fone de ouvido de R$ 800" width="600" height="1298" decoding="async">
+                <span class="passo"><i>1</i>Compra</span>
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/compra.jpg" alt="Etapa Compra do FinCK of Reality com fone de ouvido de R$ 800" width="600" height="1298" decoding="async"></span>
               </button>
-              <button type="button" class="tela" data-zoom
+              <button type="button" class="aparelho aparelho--passo" data-zoom
                 data-legenda="Etapa 2, Impacto: fone de R$ 800,00 = 40 h 14 min de trabalho, 5 dias de jornada de 8 h e 37% da sobra do mês. Impacto moderado.">
-                <span class="tela__passo"><i>2</i>Impacto</span>
-                <img class="tela__img" style="--tela-a:372px" src="img/impacto.jpg" alt="Etapa Impacto do FinCK of Reality com 40 horas e 14 minutos" width="600" height="1298" decoding="async">
+                <span class="passo"><i>2</i>Impacto</span>
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/impacto.jpg" alt="Etapa Impacto do FinCK of Reality com 40 horas e 14 minutos" width="600" height="1298" decoding="async"></span>
               </button>
-              <button type="button" class="tela" data-zoom
+              <button type="button" class="aparelho aparelho--passo" data-zoom
                 data-legenda="Ainda na etapa 2: em 10 × R$ 80, a simulação dos próximos meses não fecha sem usar o cartão a partir de jan./27 (Estimativa). A compra equivale a 42% do que já está guardado nas metas, R$ 1.900,00 (Dado confirmado). Captura de 9/11/2026.">
-                <span class="tela__passo"><i>2</i>Metas e meses</span>
-                <img class="tela__img" style="--tela-a:372px" src="img/atencao.jpg" alt="Seção O que merece atenção: parcelas e metas" width="600" height="1299" decoding="async">
+                <span class="passo"><i>2</i>Metas e meses</span>
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/atencao.jpg" alt="Seção O que merece atenção: parcelas e metas" width="600" height="1299" decoding="async"></span>
               </button>
-              <button type="button" class="tela" data-zoom
+              <button type="button" class="aparelho aparelho--passo" data-zoom
                 data-legenda="Etapa 3, Decisão: comprar agora, esperar 30 dias, não comprar ou buscar alternativa. A decisão continua sendo da pessoa.">
-                <span class="tela__passo"><i>3</i>Decisão</span>
-                <img class="tela__img" style="--tela-a:372px" src="img/decisao.jpg" alt="Etapa Decisão do FinCK of Reality" width="600" height="1298" decoding="async">
+                <span class="passo"><i>3</i>Decisão</span>
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/decisao.jpg" alt="Etapa Decisão do FinCK of Reality" width="600" height="1298" decoding="async"></span>
               </button>
             </div>
 
-            <div class="painel" data-surge="2">
-              <h3 class="painel__titulo">Fone de R$ 800 <small>· demonstração</small></h3>
-              <p class="painel__sub">Renda de R$ 3.500 · jornada de 176 h por mês</p>
-              <ul class="leituras leituras--compactas">
+            <article class="recibo" data-bloco>
+              <h3 class="recibo__titulo">Fone de R$ 800 <small>· demonstração</small></h3>
+              <p class="recibo__sub">Renda de R$ 3.500 · jornada de 176 h por mês</p>
+              <ul class="recibo__linhas">
                 <li><strong>40 h 14 min</strong><span>de trabalho</span></li>
                 <li><strong>37%</strong><span>da sobra do mês, depois dos fixos</span></li>
                 <li><strong>42%</strong><span>do que já está guardado nas metas</span></li>
                 <li><strong>10 × R$ 80</strong><span>a partir de jan./27, a conta não fecha sem o cartão <i class="selo-tipo selo-tipo--est">estimativa</i></span></li>
                 <li><strong>4 opções</strong><span>comprar, esperar, não comprar ou buscar alternativa</span></li>
               </ul>
-            </div>
+            </article>
           </div>
 
           <p class="fonte">Fonte: os autores (2026). FinCK, modo de demonstração com dados fictícios. Impacto e decisão: capturas de out. 2026; metas e meses: 9/11/2026, com os mesmos 40 h 14 min e 37% reconferidos nessa data.</p>
@@ -944,38 +912,38 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
         data-objeto="pilhas" data-titulo="Hábitos e revisão financeira" aria-label="Slide 11: hábitos e revisão financeira">
-        <div class="quadro">
+        <div class="quadro cena" data-num="10">
 
-          <header class="cab">
-            <p class="cab__indice">10 · A solução · o conjunto</p>
-            <h2 class="cab__titulo">Do gasto isolado <em>ao retrato do mês</em></h2>
+          <header class="topo">
+            <p class="topo__indice">10 · A solução · o conjunto</p>
+            <h2 class="topo__titulo">Do gasto isolado <em>ao retrato do mês</em></h2>
           </header>
 
-          <div class="colunas colunas--6-6">
-            <div class="telas" data-surge="1">
-              <button type="button" class="tela" data-zoom
+          <div class="habitos">
+            <div class="par-telas" data-bloco>
+              <button type="button" class="aparelho aparelho--esq" data-zoom
                 data-legenda="Pequenos gastos que somam: na demonstração, 26 gastos de até R$ 52,50 somaram R$ 695,60 em 30 dias (Dado confirmado). Mantido esse ritmo, R$ 8.347,20 em 12 meses (Estimativa).">
-                <img class="tela__img" src="img/habitos.jpg" alt="Análise de hábitos: pequenos gastos que somam" width="600" height="1298" decoding="async" style="--tela-a:420px">
-                <span class="tela__legenda"><b>Hábitos:</b> pequenos gastos que somam.</span>
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/habitos.jpg" alt="Análise de hábitos: pequenos gastos que somam" width="600" height="1298" decoding="async"></span>
+                <span class="aparelho__legenda"><b>Hábitos:</b> pequenos gastos que somam.</span>
               </button>
-              <button type="button" class="tela" data-zoom
+              <button type="button" class="aparelho aparelho--dir" data-zoom
                 data-legenda="Revisão financeira: Índice FinCK de 61/100, “vida financeira em ajuste”, primeira ação sugerida e o Espelho financeiro, com os meses lado a lado e os hábitos que mais pesam.">
-                <img class="tela__img" src="img/revisao.jpg" alt="Revisão financeira com o Índice FinCK de 61 de 100 e o Espelho financeiro" width="600" height="1298" decoding="async" style="--tela-a:420px">
-                <span class="tela__legenda"><b>Revisão:</b> Índice FinCK e Espelho financeiro.</span>
+                <span class="aparelho__corpo"><img class="aparelho__img" src="img/revisao.jpg" alt="Revisão financeira com o Índice FinCK de 61 de 100 e o Espelho financeiro" width="600" height="1298" decoding="async"></span>
+                <span class="aparelho__legenda"><b>Revisão:</b> Índice FinCK e Espelho financeiro.</span>
               </button>
             </div>
 
-            <div class="coluna" data-surge="2">
-              <ul class="leituras">
+            <div class="habitos__dir">
+              <ul class="placar" data-bloco>
                 <li><strong>R$ 695,60</strong><span>26 pequenos gastos em 30 dias <i class="selo-tipo selo-tipo--obs">dado da demo</i></span></li>
                 <li><strong>R$ 8.347,20</strong><span>em 12 meses, se o ritmo continuar <i class="selo-tipo selo-tipo--proj">projeção</i></span></li>
                 <li><strong>61/100</strong><span>Índice FinCK: “vida financeira em ajuste”</span></li>
               </ul>
-              <div class="painel painel--ouro painel--cheio">
-                <h3 class="painel__titulo">Espelho financeiro</h3>
-                <p class="painel__sub">Coloca <b>os meses lado a lado</b>, mostra o que mudou e quais hábitos mais pesam. O Índice resume seis dimensões em uma nota de 0 a 100 e sugere <b>a próxima ação</b>.</p>
-                <p class="painel__sub">Projeção não é economia observada: é o que aconteceria se nada mudasse.</p>
-              </div>
+              <article class="lamina lamina--ouro lamina--cheia espelho" data-bloco>
+                <h3 class="lamina__titulo">Espelho financeiro</h3>
+                <p class="lamina__sub">Coloca <b>os meses lado a lado</b>, mostra o que mudou e quais hábitos mais pesam. O Índice resume seis dimensões em uma nota de 0 a 100 e sugere <b>a próxima ação</b>.</p>
+                <p class="lamina__sub">Projeção não é economia observada: é o que aconteceria se nada mudasse.</p>
+              </article>
             </div>
           </div>
 
@@ -1002,37 +970,38 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
         data-objeto="laco" data-titulo="ODS 12, decisões e IA" aria-label="Slide 12: ODS 12, decisões conscientes e IA opcional">
-        <div class="quadro">
+        <div class="quadro cena" data-num="11">
 
-          <header class="cab">
-            <p class="cab__indice">11 · ODS 12 e inteligência artificial</p>
-            <h2 class="cab__titulo">Decisões conscientes, <em>com IA só a pedido</em></h2>
+          <header class="topo">
+            <p class="topo__indice">11 · ODS 12 e inteligência artificial</p>
+            <h2 class="topo__titulo">Decisões conscientes, <em>com IA só a pedido</em></h2>
           </header>
 
-          <div class="colunas colunas--7-5">
-            <div class="coluna" data-surge="1">
-              <button type="button" class="tela tela--paisagem" data-zoom
+          <div class="decisoes">
+            <div class="decisoes__esq">
+              <button type="button" class="navegador" data-zoom data-bloco
                 data-legenda="Decisões conscientes: 3 análises, 2 decisões conscientes, R$ 3.200,00 de valor potencial preservado e R$ 0,00 de economia confirmada. Valor potencial só vira economia confirmada quando a pessoa relata o que aconteceu. Demonstração, captura de 9/11/2026.">
-                <img class="tela__img" src="img/decisoes-desktop.jpg" alt="Tela Decisões conscientes do FinCK no computador" width="1440" height="812" decoding="async">
+                <span class="navegador__barra" aria-hidden="true"><i></i><i></i><i></i><span></span></span>
+                <img class="navegador__img" src="img/decisoes-desktop.jpg" alt="Tela Decisões conscientes do FinCK no computador" width="1440" height="812" decoding="async">
               </button>
-              <div class="mini-fichas mini-fichas--4">
-                <div class="mini-ficha mini-ficha--verde"><strong>Durabilidade</strong><p>compara o preço com o tempo de uso</p></div>
-                <div class="mini-ficha mini-ficha--verde"><strong>Reparo e reuso</strong><p>conserto, usado, troca ou aluguel</p></div>
-                <div class="mini-ficha mini-ficha--verde"><strong>Descarte</strong><p>pontos de descarte correto perto de você</p></div>
-                <div class="mini-ficha mini-ficha--verde"><strong>Histórico</strong><p>o que foi decidido e o que aconteceu</p></div>
+              <div class="selos-verdes" data-bloco>
+                <div class="selo-verde"><span class="selo-verde__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l2.5 1.5M10 3h4"/></svg></span><strong>Durabilidade</strong><p>compara o preço com o tempo de uso</p></div>
+                <div class="selo-verde"><span class="selo-verde__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><strong>Reparo e reuso</strong><p>conserto, usado, troca ou aluguel</p></div>
+                <div class="selo-verde"><span class="selo-verde__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></span><strong>Descarte</strong><p>pontos de descarte correto perto de você</p></div>
+                <div class="selo-verde"><span class="selo-verde__icone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7M4 4v4h4M12 8v4l3 2"/></svg></span><strong>Histórico</strong><p>o que foi decidido e o que aconteceu</p></div>
               </div>
             </div>
 
-            <div class="coluna" data-surge="2">
-              <div class="painel painel--ods">
-                <h3 class="painel__titulo"><span class="selo-ods">ODS 12</span> Metas relacionadas</h3>
-                <p class="painel__sub"><b>12.5</b> · reduzir resíduos por prevenção, redução, reciclagem e reuso.</p>
-                <p class="painel__sub"><b>12.8</b> · garantir informação e conscientização para estilos de vida sustentáveis.</p>
-              </div>
-              <ol class="camadas camadas--compactas">
-                <li class="camada"><span class="camada__n">1</span><div><h4>O FinCK calcula</h4><p>Regras fixas no navegador: o mesmo dado gera o mesmo número.</p></div></li>
-                <li class="camada"><span class="camada__n">2</span><div><h4>A pessoa decide</h4><p>Nenhuma opção é bloqueada ou imposta.</p></div></li>
-                <li class="camada camada--ia"><span class="camada__n">3</span><div><h4>A IA ajuda, se pedida</h4><p>Explica números já calculados e lê preço em foto ou link.</p></div></li>
+            <div class="decisoes__dir">
+              <article class="lamina lamina--verde" data-bloco>
+                <h3 class="lamina__titulo"><span class="selo-ods">ODS 12</span> Metas relacionadas</h3>
+                <p class="lamina__sub"><b>12.5</b> · reduzir resíduos por prevenção, redução, reciclagem e reuso.</p>
+                <p class="lamina__sub"><b>12.8</b> · garantir informação e conscientização para estilos de vida sustentáveis.</p>
+              </article>
+              <ol class="degraus" data-bloco>
+                <li class="degrau"><span class="degrau__n">1</span><div><h4>O FinCK calcula</h4><p>Regras fixas no navegador: o mesmo dado gera o mesmo número.</p></div></li>
+                <li class="degrau"><span class="degrau__n">2</span><div><h4>A pessoa decide</h4><p>Nenhuma opção é bloqueada ou imposta.</p></div></li>
+                <li class="degrau degrau--ia"><span class="degrau__n">3</span><div><h4>A IA ajuda, se pedida</h4><p>Explica números já calculados e lê preço em foto ou link.</p></div></li>
               </ol>
             </div>
           </div>
@@ -1060,15 +1029,15 @@
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Conclusão"
         data-objeto="prancheta" data-titulo="Resultados e conclusão" aria-label="Slide 13: resultados e conclusão">
-        <div class="quadro">
+        <div class="quadro cena" data-num="12">
 
-          <header class="cab">
-            <p class="cab__indice">12 · Resultados e conclusão</p>
-            <h2 class="cab__titulo">O que entregamos <em>e o que ainda falta medir</em></h2>
+          <header class="topo">
+            <p class="topo__indice">12 · Resultados e conclusão</p>
+            <h2 class="topo__titulo">O que entregamos <em>e o que ainda falta medir</em></h2>
           </header>
 
-          <div class="colunas colunas--7-5">
-            <ul class="entregas-lista" data-surge="1">
+          <div class="resultado">
+            <ul class="entregues" data-bloco>
               <li><b>Aplicativo publicado</b><span>web e celular, com conta e modo de demonstração</span></li>
               <li><b>Recursos implementados</b><span>Reality, hábitos, Revisão, Espelho, Índice FinCK, Decisões, Alternativas, metas e IA opcional</span></li>
               <li><b>Tecnologias</b><span>HTML, CSS e JavaScript; PostgreSQL no Supabase; Vercel Functions; Gemini; Google Maps</span></li>
@@ -1077,27 +1046,27 @@
               <li><b>Interdisciplinaridade</b><span>Banco de Dados, Sistemas e Interfaces Web, Nuvem, Matemática, Português e Geografia</span></li>
             </ul>
 
-            <div class="coluna" data-surge="2">
-              <div class="painel painel--limites">
-                <h3 class="painel__titulo">Limitações</h3>
-                <ul class="lista-curta">
+            <div class="resultado__dir">
+              <article class="lamina lamina--alerta" data-bloco>
+                <h3 class="lamina__titulo">Limitações</h3>
+                <ul class="marcadores">
                   <li>Impacto educativo e ambiental <b>ainda não medido</b> com pessoas.</li>
                   <li>Testes técnicos não são auditoria de segurança nem cobertura de código.</li>
                   <li>Exemplos usam dados fictícios; o app depende de internet.</li>
                 </ul>
-              </div>
-              <div class="painel painel--ouro painel--cheio">
-                <h3 class="painel__titulo">Próximos passos</h3>
-                <ul class="lista-curta">
+              </article>
+              <article class="lamina lamina--ouro lamina--cheia" data-bloco>
+                <h3 class="lamina__titulo">Próximos passos</h3>
+                <ul class="marcadores marcadores--seta">
                   <li>Avaliar com usuários se as informações são claras e úteis (proposta; sem resultados até agora).</li>
                   <li>Ampliar, com a turma, os pontos locais cadastrados em Taboão da Serra.</li>
                   <li>Permitir parte do uso sem conexão com a internet.</li>
                 </ul>
-              </div>
+              </article>
             </div>
           </div>
 
-          <p class="remate" data-surge="3">
+          <p class="fecho" data-bloco>
             O FinCK aproxima <b>educação financeira, tecnologia e sustentabilidade</b> para apoiar decisões de consumo mais informadas.
           </p>
 
@@ -1123,20 +1092,19 @@
            ====================================================== -->
       <section class="slide slide--agradecimento" data-slide data-cena="final" data-fala="Grupo" data-secao="Encerramento"
         data-titulo="Obrigado" aria-label="Slide 14: agradecimentos">
-        <div class="quadro quadro--centro encerramento">
-          <div class="encerramento__orbita encerramento__orbita--a" aria-hidden="true"></div>
-          <div class="encerramento__orbita encerramento__orbita--b" aria-hidden="true"></div>
-          <div class="encerramento__emblema" aria-hidden="true">
+        <div class="quadro fim">
+          <span class="fim__prateleira" data-ancora="prateleira" aria-hidden="true"></span>
+          <div class="fim__emblema" aria-hidden="true">
             <img src="../midia/logo-finck-240.webp" alt="" width="76" height="76" decoding="async">
           </div>
-          <h2 class="encerramento__titulo" data-surge="1">Obrigado!</h2>
-          <p class="encerramento__frase" data-surge="2">O futuro também se constrói nas escolhas de hoje.</p>
-          <div class="encerramento__turma" data-surge="3">
+          <h2 class="fim__titulo">Obrigado!</h2>
+          <p class="fim__frase">O futuro também se constrói nas escolhas de hoje.</p>
+          <div class="fim__turma">
             <span>Turma <b>2º C</b></span>
             <i aria-hidden="true"></i>
             <span>M-Tec Informática para Internet</span>
           </div>
-          <ul class="encerramento__nomes" aria-label="Integrantes da Conscious Knowledge" data-surge="4">
+          <ul class="fim__nomes" aria-label="Integrantes da Conscious Knowledge">
             <li>Gustavo Oliveira dos Santos</li>
             <li>Éric Estrela Vieira</li>
             <li>Gabriel Heanna dos Reis</li>
@@ -1144,7 +1112,6 @@
             <li>Pedro Alcantara dos Santos Fialho</li>
             <li>Thiago Wilson Vieira Serbino</li>
           </ul>
-          <span class="encerramento__assinatura" aria-hidden="true"></span>
         </div>
         <div class="notas" data-notas>
           <p><b>Encerramento · responsável a definir, em nome do grupo · 10 s.</b></p>
@@ -1153,6 +1120,7 @@
           <p>Não apresentar outro bloco de resultados aqui. O conteúdo se encerra no item 12, Resultados e conclusão. As respostas rápidas para a banca estão no roteiro. Referências: tecla R.</p>
         </div>
       </section>
+
 
     </div><!-- /palco -->
     </div><!-- /palco-caixa -->
@@ -1311,6 +1279,7 @@
   <button type="button" class="botao-ajuda" data-toggle-ajuda aria-label="Atalhos do apresentador" title="Atalhos (?)">?</button>
 
   <script src="apresentacao.js" defer></script>
+  <script src="fundo.js" defer></script>
   <script src="cena-motor.js" defer></script>
   <script src="cena-pecas.js" defer></script>
   <script src="cena-objetos-problema.js" defer></script>

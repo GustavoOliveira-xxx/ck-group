@@ -768,7 +768,11 @@ void main() {
       }
     };
 
-    return { gl, quadro, limpar: () => { gl.viewport(0, 0, canvas.width, canvas.height); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); } };
+    /* envia a malha para a placa antes de ela ser chamada: a troca de
+       slide não paga o envio no quadro em que a peça aparece */
+    const preparar = (geo) => { if (!geo.gl) geo.gl = enviar(geo); };
+
+    return { gl, quadro, preparar, limpar: () => { gl.viewport(0, 0, canvas.width, canvas.height); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); } };
   };
 
   window.FinckCena = { M, Malha, MAT, forma, criarMotor, PI, TAU, rad, limitar };

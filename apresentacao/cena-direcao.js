@@ -32,6 +32,9 @@
   const { suave, entre, mola, dePe } = pecas;
 
   const cenaDe = (i) => slides[i].dataset.cena || "vitrine";
+
+  /* ordem de entrada dos blocos de cada slide, na ordem de leitura */
+  slides.forEach((s) => s.querySelectorAll("[data-bloco]").forEach((b, k) => b.style.setProperty("--i", k)));
   const COLECAO = slides.map((s) => s.dataset.objeto).filter(Boolean);
 
 
@@ -57,6 +60,12 @@
       void deck.offsetWidth;
       deck.classList.add("is-troca");
     }
+    document.dispatchEvent(new CustomEvent("finck:slide", {
+      detail: {
+        indice: i, antes, secao: slides[i].dataset.secao || "",
+        marco: antes >= 0 && slides[i].dataset.secao !== slides[antes].dataset.secao,
+      },
+    }));
     aoTrocar(i, antes);
   };
 
@@ -170,6 +179,8 @@
   const mascara = new Malha().extrusao(forma.retangulo(1, 1, .42, 10), { prof: .02, chanfro: 0 });
   let capaPresenca = 0, capaAlvo = 0;
   const logo = document.querySelector(".capa__logo");
+  const ancora = (nome) => document.querySelector(`[data-ancora="${nome}"]`);
+  const ancoraE = ancora("esq"), ancoraD = ancora("dir"), ancoraP = ancora("prateleira");
 
 
   /* ---------------------------------------------------------
@@ -191,9 +202,15 @@
     const meio = (COLECAO.length - 1) / 2;
     prateleira.forEach((v, k) => v.por(cena === "final" ? COLECAO[k] : null, agora, .4 + Math.abs(k - meio) * .11));
 
-    /* a peça do próximo slide fica pronta antes de ser chamada */
-    const proximo = slides[i + 1] && slides[i + 1].dataset.objeto;
-    if (proximo) setTimeout(() => modelo(proximo), 700);
+  };
+
+  const ocioso = window.requestIdleCallback
+    ? (fn) => window.requestIdleCallback(fn, { timeout: 1600 })
+    : (fn) => setTimeout(fn, 120);
+
+  const preparar = (nome) => {
+    const mod = modelo(nome);
+    for (const p of mod.partes) motor.preparar(p.geo);
   };
 
   const partir = () => {
@@ -201,15 +218,17 @@
     partiu = true;
     medirDesde = performance.now() / 1000 + 3;
     aoTrocar(atual, -1);
-    /* o resto da coleção é modelado aos poucos, sem travar a fala */
-    let fila = COLECAO.slice();
+    /* a coleção inteira é modelada e enviada à placa enquanto a capa
+       está no ar, uma peça por folga do navegador */
+    [pedestal.corpo, pedestal.luz, moedinha, mascara, ...aros.map((a) => a.geo)].forEach(motor.preparar);
+    const fila = COLECAO.slice();
     const proxima = () => {
       const nome = fila.shift();
       if (!nome) return;
-      modelo(nome);
-      setTimeout(proxima, 450);
+      preparar(nome);
+      ocioso(proxima);
     };
-    setTimeout(proxima, 2500);
+    ocioso(proxima);
   };
 
   const carga = document.querySelector("[data-carga]");
@@ -223,19 +242,45 @@
 
 
   /* ---------------------------------------------------------
-     04. Medidas — tudo em pixels da janela, a partir do palco
-     --------------------------------------------------------- */
-  let largura = 0, altura = 0, qualidade = 1;
+     04. Medidas
 
-  const ajustarTela = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, leve ? 1.25 : 2) * qualidade;
-    const w = Math.max(1, Math.round(window.innerWidth * dpr)), h = Math.max(1, Math.round(window.innerHeight * dpr));
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width = w;
-      canvas.height = h;
-    }
-    largura = window.innerWidth;
-    altura = window.innerHeight;
+     O canvas não cobre a tela inteira: ele é recortado na área onde
+     há peças (a coluna da vitrine, a capa ou a prateleira) e
+     posicionado ali. Menos pixels para limpar e compor por quadro,
+     e sobra orçamento para desenhar em alta definição: em tela
+     comum a peça é renderizada com 1,6× mais pixels e reduzida,
+     o que apaga o serrilhado das bordas de ouro.
+     --------------------------------------------------------- */
+  let qualidade = 1;
+  const nitidez = () => {
+    const dpr = window.devicePixelRatio || 1;
+    const base = dpr < 1.5 ? dpr * 1.6 : Math.min(dpr * 1.25, 2.6);
+    return Math.max(1, (leve ? Math.min(base, 1.5) : base) * qualidade);
+  };
+
+  let caixa = { x: 0, y: 0, w: 0, h: 0 }, escalaCaixa = 0;
+  const GRADE = 48;
+
+  /* a caixa só muda de tamanho quando precisa: realocar o canvas a
+     cada quadro custaria mais do que desenhar sobra transparente */
+  const encaixar = (x0, y0, x1, y1) => {
+    const L = window.innerWidth, A = window.innerHeight;
+    x0 = Math.max(0, Math.floor(x0 / GRADE) * GRADE);
+    y0 = Math.max(0, Math.floor(y0 / GRADE) * GRADE);
+    x1 = Math.min(L, Math.ceil(x1 / GRADE) * GRADE);
+    y1 = Math.min(A, Math.ceil(y1 / GRADE) * GRADE);
+    const c = caixa;
+    const cabe = x0 >= c.x && y0 >= c.y && x1 <= c.x + c.w && y1 <= c.y + c.h;
+    const folgada = c.w * c.h > (x1 - x0) * (y1 - y0) * 1.8;
+    const k = nitidez();
+    if (cabe && !folgada && k === escalaCaixa) return;
+    caixa = { x: x0, y: y0, w: Math.max(GRADE, x1 - x0), h: Math.max(GRADE, y1 - y0) };
+    escalaCaixa = k;
+    canvas.width = Math.round(caixa.w * k);
+    canvas.height = Math.round(caixa.h * k);
+    canvas.style.width = caixa.w + "px";
+    canvas.style.height = caixa.h + "px";
+    canvas.style.transform = `translate3d(${caixa.x}px, ${caixa.y}px, 0)`;
   };
 
   const marcado = {};
@@ -245,6 +290,10 @@
     marcado[nome] = v;
     raiz.style.setProperty(nome, v);
   };
+
+  /* área ocupada por uma cena: a peça cabe em ±1,7 unidades na largura
+     e de 2,5 acima a 2,1 abaixo da origem */
+  const area = (c) => [c.x - c.un * 1.75, c.y - c.un * 2.6, c.x + c.un * 1.75, c.y + c.un * 2.15];
 
 
   /* ---------------------------------------------------------
@@ -259,18 +308,16 @@
 
     const agora = ms / 1000;
     const bruto = Math.min(1, Math.max(.001, agora - ultimo));
-    const dt = Math.min(.1, bruto);
     ultimo = agora;
 
     if (deck.dataset.modo !== "palco" || !partiu) {
-      if (!limpo) { ajustarTela(); motor.limpar(); limpo = true; }
+      if (!limpo) { motor.limpar(); limpo = true; }
       return;
     }
 
-    ajustarTela();
     const t = semMovimento ? 6 : agora;
     const r = palco.getBoundingClientRect(), s = r.width / 1280;
-    const px = (x) => r.left + x * s, py = (y) => r.top + y * s;
+    const largura = window.innerWidth;
     const cenas = [];
 
     /* coluna à direita do quadro */
@@ -278,7 +325,7 @@
     const temTrilho = livre >= 104;
     if (raiz.dataset.trilho !== (temTrilho ? "sim" : "nao")) raiz.dataset.trilho = temTrilho ? "sim" : "nao";
     if (temTrilho) {
-      const un = Math.min(livre / 2.75, r.height / 5.6);
+      const un = Math.min(livre / 2.5, r.height / 5.3);
       const x = beira + livre * .5, y = r.top + r.height * .5 + un * .12;
       marcar("--vx", x);
       marcar("--vy", y - CHAO * un);
@@ -288,12 +335,15 @@
       trilho.itens(agora, bruto, t);
     }
 
-    /* capa */
-    /* a capa sai pelo relógio de verdade: máquina lenta não deixa resto na tela */
+    /* capa: peças dos flancos pousadas nas âncoras do slide */
     capaPresenca += (capaAlvo - capaPresenca) * (semMovimento ? 1 : 1 - Math.exp(-bruto * (capaAlvo ? 4 : 9)));
     if (!capaAlvo && capaPresenca < .04) capaPresenca = 0;
-    if (!flancoE.vazia) cenas.push({ x: px(214), y: py(258), un: 62 * s, inclina: .2, itens: flancoE.itens(agora, bruto, t) });
-    if (!flancoD.vazia) cenas.push({ x: px(1066), y: py(258), un: 62 * s, inclina: .2, itens: flancoD.itens(agora, bruto, t) });
+    for (const [v, el] of [[flancoE, ancoraE], [flancoD, ancoraD]]) {
+      if (v.vazia || !el) continue;
+      const q = el.getBoundingClientRect();
+      const un = q.width / 2.3;
+      cenas.push({ x: q.left + q.width / 2, y: q.bottom + CHAO * un, un, inclina: .2, itens: v.itens(agora, bruto, t) });
+    }
     if (capaPresenca > .01 && logo) {
       const q = logo.getBoundingClientRect();
       if (q.width > 4) {
@@ -308,32 +358,42 @@
             itens.push({ geo: moedinha, m: M.juntar(eixo, M.mover(Math.cos(g) * R, 0, Math.sin(g) * R), M.ry(t * 1.6 + i), dePe) });
           }
         });
-        cenas.push({ x: q.left + q.width / 2, y: q.top + q.height / 2, un, inclina: 0, itens });
+        const cx = q.left + q.width / 2, cy = q.top + q.height / 2;
+        cenas.push({ x: cx, y: cy, un, inclina: 0, itens, area: [cx - un * 1.45, cy - un * .75, cx + un * 1.45, cy + un * .75] });
       }
     }
 
-    /* agradecimento: a coleção em prateleira */
-    const un = 27 * s, meio = (prateleira.length - 1) / 2;
-    prateleira.forEach((v, k) => {
-      if (v.vazia) return;
-      const lado = k <= meio ? -1 : 1, casa = k <= meio ? meio - .5 - k : k - meio - .5;
-      const x = 640 + lado * (104 + casa * 84);
-      cenas.push({ x: px(x), y: py(200) + CHAO * un, un, inclina: .16, itens: v.itens(agora, bruto, t) });
-    });
+    /* agradecimento: a coleção sobre a prateleira, com um vão no meio para o emblema */
+    if (ancoraP && prateleira.some((v) => !v.vazia)) {
+      const q = ancoraP.getBoundingClientRect();
+      const n = prateleira.length, meio = (n - 1) / 2, vao = q.width * .1;
+      const passo = (q.width - vao) / n, un = Math.min(passo / 2.9, q.height / 3.2);
+      prateleira.forEach((v, k) => {
+        if (v.vazia) return;
+        const x = q.left + passo * (k + .5) + (k > meio ? vao : 0);
+        cenas.push({ x, y: q.bottom + CHAO * un, un, inclina: .16, itens: v.itens(agora, bruto, t) });
+      });
+    }
 
-    const temAlgo = cenas.some((c) => c.itens.length);
-    if (!temAlgo) {
+    const comItens = cenas.filter((c) => c.itens.length);
+    if (!comItens.length) {
       if (!limpo) { motor.limpar(); limpo = true; }
       return;
     }
     limpo = false;
-    motor.quadro(cenas, largura, altura);
 
-    /* Se a máquina não acompanha, primeiro cai a nitidez. Se nem assim
-       os quadros vierem leves, o 3D se retira: a fluidez dos slides vale
-       mais do que a vitrine. A conta é por tempo de relógio, não por
-       número de quadros, para decidir rápido justamente na máquina lenta. */
-    /* os primeiros segundos compilam e enviam as peças: não contam */
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const c of comItens) {
+      const a = c.area || area(c);
+      x0 = Math.min(x0, a[0]); y0 = Math.min(y0, a[1]); x1 = Math.max(x1, a[2]); y1 = Math.max(y1, a[3]);
+    }
+    encaixar(x0, y0, x1, y1);
+    for (const c of comItens) { c.x -= caixa.x; c.y -= caixa.y; }
+    motor.quadro(comItens, caixa.w, caixa.h);
+
+    /* Se a máquina não acompanha, primeiro cai a nitidez extra. Se nem
+       assim os quadros vierem leves, o 3D se retira: a fluidez dos
+       slides vale mais do que a vitrine. Conta por tempo de relógio. */
     if (agora < medirDesde) { soma = 0; conta = 0; return; }
     soma += bruto;
     conta++;
@@ -341,13 +401,13 @@
       const media = soma / conta;
       soma = 0;
       conta = 0;
-      if (media > .045) {
-        if (media > .25) { desligar(); return; }
-        if (qualidade > .5) { qualidade = Math.max(.5, qualidade * .72); folga = 0; }
-        else if (++pesado >= 2) { desligar(); return; }
+      if (media > .028) {
+        if (media > .3) { desligar(); return; }
+        if (qualidade > .62) { qualidade = Math.max(.62, qualidade * .8); folga = 0; }
+        else if (media > .09 && ++pesado >= 2) { desligar(); return; }
       } else {
         pesado = 0;
-        if (media < .0125 && qualidade < 1 && ++folga >= 3) { qualidade = Math.min(1, qualidade * 1.15); folga = 0; }
+        if (media < .0135 && qualidade < 1 && ++folga >= 3) { qualidade = Math.min(1, qualidade * 1.12); folga = 0; }
       }
     }
   };
@@ -364,13 +424,6 @@
     /* a coluna da vitrine sai; o palco se mede de novo na largura toda */
     window.dispatchEvent(new Event("resize"));
   };
-
-  /* placa de vídeo emulada por software começa já na nitidez mínima */
-  try {
-    const info = motor.gl.getExtension("WEBGL_debug_renderer_info");
-    const nome = info ? String(motor.gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
-    if (/swiftshader|llvmpipe|software|basic render/i.test(nome)) qualidade = .5;
-  } catch (_) { /* sem informação do driver: segue o regulador */ }
 
   requestAnimationFrame(quadro);
 })();
