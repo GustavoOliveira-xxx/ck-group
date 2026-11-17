@@ -31,6 +31,7 @@
 
   <link rel="stylesheet" href="apresentacao.css">
   <link rel="stylesheet" href="banca.css">
+  <link rel="stylesheet" href="cena.css">
 
   <script>
     /* Perfil de desempenho decidido antes da primeira pintura:
@@ -75,6 +76,16 @@
     <span class="cenario__varredura"></span>
     <span class="cenario__grade"></span>
     <span class="cenario__vinheta"></span>
+    <span class="cenario__grao"></span>
+  </div>
+
+  <!-- ================= VITRINE 3D ================= -->
+  <div class="vitrine-fundo" aria-hidden="true">
+    <span class="vitrine-fundo__facho"></span>
+    <span class="vitrine-fundo__halo"></span>
+    <span class="vitrine-fundo__aro vitrine-fundo__aro--a"></span>
+    <span class="vitrine-fundo__aro vitrine-fundo__aro--b"></span>
+    <span class="vitrine-fundo__aro vitrine-fundo__aro--c"></span>
   </div>
 
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -117,7 +128,7 @@
       <!-- ======================================================
            01 · CAPA
            ====================================================== -->
-      <section class="slide slide--capa" data-slide data-fala="Grupo" data-secao="Abertura"
+      <section class="slide slide--capa" data-slide data-cena="capa" data-fala="Grupo" data-secao="Abertura"
         data-titulo="Capa" aria-label="Slide 1: capa">
         <div class="quadro quadro--centro">
 
@@ -191,7 +202,7 @@
            02 · TEMA, PROBLEMA E HIPÓTESES
            ====================================================== -->
       <section class="slide" data-slide data-fala="Gustavo" data-secao="Introdução"
-        data-titulo="Introdução, tema e objetivo" aria-label="Slide 2: introdução, tema e objetivo">
+        data-objeto="alvo" data-titulo="Introdução, tema e objetivo" aria-label="Slide 2: introdução, tema e objetivo">
         <div class="quadro">
 
           <header class="cab">
@@ -266,7 +277,7 @@
            03 · ENDIVIDAMENTO (item 02)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Gustavo" data-secao="Problemática"
-        data-titulo="Endividamento das famílias" aria-label="Slide 3: endividamento das famílias">
+        data-objeto="balanca" data-titulo="Endividamento das famílias" aria-label="Slide 3: endividamento das famílias">
         <div class="quadro">
 
           <header class="cab">
@@ -357,7 +368,7 @@
            04 · CRÉDITO E JUROS (item 03)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Problemática"
-        data-titulo="Crédito e juros" aria-label="Slide 4: crédito e juros">
+        data-objeto="cartao" data-titulo="Crédito e juros" aria-label="Slide 4: crédito e juros">
         <div class="quadro">
 
           <header class="cab">
@@ -427,7 +438,7 @@
            05 · COMPORTAMENTO E EDUCAÇÃO FINANCEIRA (item 04)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Problemática"
-        data-titulo="Comportamento e educação financeira" aria-label="Slide 5: comportamento e educação financeira">
+        data-objeto="capelo" data-titulo="Comportamento e educação financeira" aria-label="Slide 5: comportamento e educação financeira">
         <div class="quadro">
 
           <header class="cab">
@@ -518,7 +529,7 @@
            06 · CONSUMO E MEIO AMBIENTE (item 05)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Problemática"
-        data-titulo="Consumo e meio ambiente" aria-label="Slide 6: consumo, resíduos eletrônicos e ODS 12">
+        data-objeto="placa" data-titulo="Consumo e meio ambiente" aria-label="Slide 6: consumo, resíduos eletrônicos e ODS 12">
         <div class="quadro">
 
           <header class="cab">
@@ -622,7 +633,7 @@
            07 · TABOÃO DA SERRA (item 06)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Aplicabilidade local"
-        data-titulo="Taboão da Serra" aria-label="Slide 7: Taboão da Serra e a aplicabilidade local">
+        data-objeto="pino" data-titulo="Taboão da Serra" aria-label="Slide 7: Taboão da Serra e a aplicabilidade local">
         <div class="quadro">
 
           <header class="cab">
@@ -697,7 +708,7 @@
            08 · FUNDAMENTAÇÃO E METODOLOGIA (item 07)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Fundamentação"
-        data-titulo="Fundamentação e metodologia" aria-label="Slide 8: fundamentação teórica e metodologia">
+        data-objeto="ampulheta" data-titulo="Fundamentação e metodologia" aria-label="Slide 8: fundamentação teórica e metodologia">
         <div class="quadro">
 
           <header class="cab">
@@ -791,7 +802,7 @@
            09 · CONHECENDO O FINCK (item 08)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
-        data-titulo="Conhecendo o FinCK" aria-label="Slide 9: conhecendo o FinCK">
+        data-objeto="celular" data-titulo="Conhecendo o FinCK" aria-label="Slide 9: conhecendo o FinCK">
         <div class="quadro">
 
           <header class="cab cab--lado">
@@ -865,7 +876,7 @@
            10 · FINCK OF REALITY (item 09)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
-        data-titulo="FinCK of Reality" aria-label="Slide 10: FinCK of Reality">
+        data-objeto="cronometro" data-titulo="FinCK of Reality" aria-label="Slide 10: FinCK of Reality">
         <div class="quadro">
 
           <header class="cab">
@@ -932,7 +943,7 @@
            11 · HÁBITOS E REVISÃO FINANCEIRA (item 10)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
-        data-titulo="Hábitos e revisão financeira" aria-label="Slide 11: hábitos e revisão financeira">
+        data-objeto="pilhas" data-titulo="Hábitos e revisão financeira" aria-label="Slide 11: hábitos e revisão financeira">
         <div class="quadro">
 
           <header class="cab">
@@ -990,7 +1001,7 @@
            12 · ODS 12, DECISÕES E IA (item 11)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Solução"
-        data-titulo="ODS 12, decisões e IA" aria-label="Slide 12: ODS 12, decisões conscientes e IA opcional">
+        data-objeto="laco" data-titulo="ODS 12, decisões e IA" aria-label="Slide 12: ODS 12, decisões conscientes e IA opcional">
         <div class="quadro">
 
           <header class="cab">
@@ -1048,7 +1059,7 @@
            13 · RESULTADOS E CONCLUSÃO (item 12)
            ====================================================== -->
       <section class="slide" data-slide data-fala="Grupo" data-secao="Conclusão"
-        data-titulo="Resultados e conclusão" aria-label="Slide 13: resultados e conclusão">
+        data-objeto="prancheta" data-titulo="Resultados e conclusão" aria-label="Slide 13: resultados e conclusão">
         <div class="quadro">
 
           <header class="cab">
@@ -1110,7 +1121,7 @@
       <!-- ======================================================
            14 · AGRADECIMENTOS
            ====================================================== -->
-      <section class="slide slide--agradecimento" data-slide data-fala="Grupo" data-secao="Encerramento"
+      <section class="slide slide--agradecimento" data-slide data-cena="final" data-fala="Grupo" data-secao="Encerramento"
         data-titulo="Obrigado" aria-label="Slide 14: agradecimentos">
         <div class="quadro quadro--centro encerramento">
           <div class="encerramento__orbita encerramento__orbita--a" aria-hidden="true"></div>
@@ -1182,6 +1193,8 @@
     </footer>
 
   </div><!-- /deck -->
+
+  <canvas class="vitrine-tela" data-vitrine aria-hidden="true"></canvas>
 
 
   <!-- ================= MAPA DE SLIDES ================= -->
@@ -1298,6 +1311,11 @@
   <button type="button" class="botao-ajuda" data-toggle-ajuda aria-label="Atalhos do apresentador" title="Atalhos (?)">?</button>
 
   <script src="apresentacao.js" defer></script>
+  <script src="cena-motor.js" defer></script>
+  <script src="cena-pecas.js" defer></script>
+  <script src="cena-objetos-problema.js" defer></script>
+  <script src="cena-objetos-solucao.js" defer></script>
+  <script src="cena-direcao.js" defer></script>
 </body>
 
 </html>

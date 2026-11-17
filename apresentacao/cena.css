@@ -1,0 +1,1046 @@
+@charset "UTF-8";
+
+/* ============================================================
+   FinCK · Apresentação final · cena
+   Conscious Knowledge · Projeto Interdisciplinar 2026
+
+   A camada de palco da defesa. Nenhum texto, número ou captura
+   muda aqui: este arquivo só decide como as coisas entram, como
+   a luz corre e onde fica a vitrine dos objetos 3D.
+
+   Sumário
+   01. Medidas e a coluna da vitrine
+   02. Cenário
+   03. Vitrine: tela 3D e o chão de luz atrás dela
+   04. Troca de slide
+   05. Moldura do quadro
+   06. Cabeçalho
+   07. Entrada dos blocos
+   08. Barras e números
+   09. Capturas de tela
+   10. Capa e agradecimento
+   11. Barras de controle
+   12. Perfil leve, movimento reduzido, celular e impressão
+   ============================================================ */
+
+
+/* ============ 01. MEDIDAS E A COLUNA DA VITRINE ============= */
+@property --giro-borda {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+:root {
+  /* largura que sobra ao lado de um palco 16:9: é ali que mora a vitrine.
+     Em tela 4:3 a conta dá zero e o quadro usa a largura toda. */
+  --reserva: clamp(0px, calc((100vw - 133.4vh) * .6), 9.5vw);
+  --passo: 0;
+  --vx: 120vw;
+  --vy: 50vh;
+  --vu: 100px;
+}
+
+@media screen and (min-width: 861px) {
+  html[data-vitrine="sim"] .palco-caixa {
+    margin-right: var(--reserva);
+    /* o palco pode avançar sobre a coluna da vitrine (capa e agradecimento
+       ficam no centro da tela), mas continua preso entre as barras */
+    overflow: visible;
+    clip-path: inset(0 calc(var(--reserva) * -1) 0 0);
+  }
+
+  /* capa e agradecimento ficam no centro da tela; nos demais o quadro
+     encosta à esquerda e abre a coluna para o objeto */
+  html[data-vitrine="sim"] .deck[data-modo="palco"] .palco {
+    left: calc(50% + var(--reserva) / 2);
+    transition: left 1s var(--ease-out);
+  }
+
+  html[data-vitrine="sim"] .deck[data-modo="palco"][data-cena="vitrine"] .palco {
+    left: min(50%, calc(640px * var(--escala) + 12px));
+  }
+}
+
+.deck[data-modo="fluido"] .palco-caixa {
+  margin-right: 0;
+}
+
+
+/* ============ 02. CENÁRIO =================================== */
+.cenario {
+  background:
+    radial-gradient(70% 55% at 22% -6%, rgba(104, 12, 144, .5) 0%, transparent 62%),
+    radial-gradient(60% 60% at 104% 108%, rgba(20, 52, 78, .55) 0%, transparent 62%),
+    radial-gradient(50% 40% at 100% 0%, rgba(254, 200, 0, .05) 0%, transparent 70%),
+    #040308;
+}
+
+.cenario__canvas {
+  opacity: .42;
+}
+
+/* grão fino: tira o aspecto chapado dos degradês no projetor */
+.cenario__grao {
+  position: absolute;
+  inset: 0;
+  opacity: .05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+.cenario__vinheta {
+  background: radial-gradient(125% 105% at 46% 48%, transparent 46%, rgba(0, 0, 0, .78) 100%);
+}
+
+
+/* ============ 03. VITRINE =================================== */
+.vitrine-tela {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  display: none;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+html[data-vitrine="sim"] .vitrine-tela {
+  display: block;
+}
+
+/* o chão de luz fica ancorado no pedestal (--vx, --vy) e é medido
+   na mesma unidade do 3D (--vu), para os dois nunca descasarem */
+.vitrine-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(var(--vx), var(--vy), 0);
+  transition: opacity .9s var(--ease);
+}
+
+html[data-vitrine="sim"][data-cena="vitrine"][data-trilho="sim"] .vitrine-fundo {
+  opacity: 1;
+}
+
+.vitrine-fundo > span {
+  position: absolute;
+  display: block;
+}
+
+/* facho que desce do alto até o pedestal */
+.vitrine-fundo__facho {
+  left: calc(var(--vu) * -1.55);
+  top: calc(var(--vy) * -1);
+  width: calc(var(--vu) * 3.1);
+  height: var(--vy);
+  clip-path: polygon(41% 0, 59% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg,
+      rgba(196, 150, 255, 0) 0%,
+      rgba(196, 150, 255, .1) 28%,
+      rgba(168, 85, 247, .16) 72%,
+      rgba(254, 200, 0, .13) 100%);
+  filter: blur(9px);
+  animation: facho-respira 7s ease-in-out infinite;
+}
+
+@keyframes facho-respira {
+
+  0%,
+  100% {
+    opacity: .7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.vitrine-fundo__halo {
+  left: calc(var(--vu) * -2.5);
+  top: calc(var(--vu) * -3.6);
+  width: calc(var(--vu) * 5);
+  height: calc(var(--vu) * 4.6);
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side, rgba(147, 51, 196, .5), rgba(147, 51, 196, .14) 55%, transparent 100%);
+  filter: blur(calc(var(--vu) * .12));
+}
+
+/* aros no chão, vistos de cima como o pedestal: um mostrador
+   que avança uma marca a cada slide */
+.vitrine-fundo__aro {
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scaleY(.2);
+}
+
+.vitrine-fundo__aro--a {
+  width: calc(var(--vu) * 3.5);
+  height: calc(var(--vu) * 3.5);
+  background: repeating-conic-gradient(from 0deg, rgba(254, 200, 0, .75) 0 .7deg, transparent .7deg 6deg);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 16px), #000 calc(100% - 15px), #000 calc(100% - 1px), transparent 100%);
+  mask: radial-gradient(closest-side, transparent calc(100% - 16px), #000 calc(100% - 15px), #000 calc(100% - 1px), transparent 100%);
+  opacity: .75;
+  transform: translate(-50%, -50%) scaleY(.2) rotate(calc(var(--passo) * 24deg));
+  transition: transform 1.5s var(--ease-out);
+}
+
+.vitrine-fundo__aro--b {
+  width: calc(var(--vu) * 5.4);
+  height: calc(var(--vu) * 5.4);
+  border: 1px solid rgba(168, 85, 247, .5);
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, .08), inset 0 0 calc(var(--vu) * .6) rgba(147, 51, 196, .22);
+}
+
+.vitrine-fundo__aro--c {
+  width: calc(var(--vu) * 7.6);
+  height: calc(var(--vu) * 7.6);
+  background: repeating-conic-gradient(from 0deg, rgba(192, 132, 252, .55) 0 .25deg, transparent .25deg 2deg);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 9px), #000 calc(100% - 8px), #000 calc(100% - 1px), transparent 100%);
+  mask: radial-gradient(closest-side, transparent calc(100% - 9px), #000 calc(100% - 8px), #000 calc(100% - 1px), transparent 100%);
+  opacity: .5;
+  animation: aro-gira 90s linear infinite;
+}
+
+@keyframes aro-gira {
+  from {
+    transform: translate(-50%, -50%) scaleY(.2) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scaleY(.2) rotate(-360deg);
+  }
+}
+
+
+/* ============ 04. TROCA DE SLIDE ============================ */
+.palco {
+  perspective: 2100px;
+}
+
+.slide.is-ativo {
+  animation: cena-entra .82s var(--ease-out) both;
+}
+
+.slide.is-saindo {
+  animation: cena-sai .5s cubic-bezier(.55, 0, .8, .3) both;
+}
+
+.deck[data-sentido="tras"] .slide.is-ativo {
+  animation-name: cena-entra-tras;
+}
+
+.deck[data-sentido="tras"] .slide.is-saindo {
+  animation-name: cena-sai-tras;
+}
+
+/* o quadro novo vem do fundo, de lado, e assenta de frente */
+@keyframes cena-entra {
+  from {
+    opacity: 0;
+    transform: translate3d(8%, 0, -260px) rotateY(-16deg);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cena-sai {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-10%, 0, -300px) rotateY(18deg);
+  }
+}
+
+@keyframes cena-entra-tras {
+  from {
+    opacity: 0;
+    transform: translate3d(-8%, 0, -260px) rotateY(16deg);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cena-sai-tras {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(10%, 0, -300px) rotateY(-18deg);
+  }
+}
+
+/* clarão que atravessa o palco a cada troca; mais forte quando
+   a apresentação muda de parte */
+.palco-caixa::after {
+  content: "";
+  position: absolute;
+  inset: -12% -40%;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(102deg,
+      transparent 40%,
+      rgba(168, 85, 247, .14) 46%,
+      rgba(255, 224, 150, .3) 50%,
+      rgba(168, 85, 247, .14) 54%,
+      transparent 60%);
+  transform: translate3d(-62%, 0, 0);
+}
+
+.deck.is-troca .palco-caixa::after {
+  animation: clarao .9s var(--ease) both;
+}
+
+.deck.is-troca[data-sentido="tras"] .palco-caixa::after {
+  animation-name: clarao-tras;
+}
+
+.deck.is-troca[data-marco="sim"] .palco-caixa::after {
+  background: linear-gradient(102deg,
+      transparent 34%,
+      rgba(168, 85, 247, .26) 44%,
+      rgba(255, 224, 150, .6) 50%,
+      rgba(168, 85, 247, .26) 56%,
+      transparent 66%);
+}
+
+@keyframes clarao {
+  0% {
+    opacity: 0;
+    transform: translate3d(-62%, 0, 0);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(62%, 0, 0);
+  }
+}
+
+@keyframes clarao-tras {
+  0% {
+    opacity: 0;
+    transform: translate3d(62%, 0, 0);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-62%, 0, 0);
+  }
+}
+
+
+/* ============ 05. MOLDURA DO QUADRO ========================= */
+.quadro {
+  border-color: rgba(255, 255, 255, .06);
+  background:
+    /* cantoneiras */
+    linear-gradient(var(--yellow-400), var(--yellow-400)) 22px 22px / 16px 1.5px no-repeat,
+    linear-gradient(var(--yellow-400), var(--yellow-400)) 22px 22px / 1.5px 16px no-repeat,
+    linear-gradient(var(--purple-300), var(--purple-300)) calc(100% - 22px) calc(100% - 22px) / 16px 1.5px no-repeat,
+    linear-gradient(var(--purple-300), var(--purple-300)) calc(100% - 22px) calc(100% - 22px) / 1.5px 16px no-repeat,
+    radial-gradient(90% 70% at 0% 0%, rgba(147, 51, 196, .16), transparent 60%),
+    radial-gradient(70% 60% at 100% 100%, rgba(254, 200, 0, .045), transparent 62%),
+    var(--grad-vidro),
+    linear-gradient(168deg, rgba(21, 15, 34, .9), rgba(7, 5, 13, .93));
+  box-shadow:
+    0 40px 110px rgba(0, 0, 0, .78),
+    0 0 0 1px rgba(168, 85, 247, .09) inset,
+    0 1px 0 rgba(255, 255, 255, .07) inset,
+    0 0 90px rgba(104, 12, 144, .16);
+}
+
+/* um ponto de luz percorre a moldura inteira, sem parar */
+.quadro::before {
+  inset: 0;
+  height: auto;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--giro-borda),
+      rgba(168, 85, 247, .16) 0deg,
+      rgba(168, 85, 247, .16) 232deg,
+      rgba(168, 85, 247, .95) 304deg,
+      rgba(255, 216, 120, 1) 342deg,
+      rgba(168, 85, 247, .16) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 1;
+  pointer-events: none;
+  animation: borda-corre 11s linear infinite;
+}
+
+.slide:not(.is-ativo) .quadro::before {
+  animation-play-state: paused;
+}
+
+@keyframes borda-corre {
+  to {
+    --giro-borda: 360deg;
+  }
+}
+
+.quadro::after {
+  animation: brilho-canto 14s ease-in-out infinite;
+}
+
+@keyframes brilho-canto {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: .9;
+  }
+
+  50% {
+    transform: translate3d(-60px, 40px, 0) scale(1.18);
+    opacity: 1;
+  }
+}
+
+
+/* ============ 06. CABEÇALHO ================================= */
+.cab__indice::before {
+  content: "";
+  flex: none;
+  width: 34px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--yellow-400), rgba(254, 200, 0, 0));
+  transform-origin: left center;
+}
+
+.slide.is-ativo .cab__indice {
+  animation: indice-chega .8s var(--ease-out) .12s backwards;
+}
+
+.slide.is-ativo .cab__indice::before {
+  animation: fio-cresce .9s var(--ease-out) .2s backwards;
+}
+
+@keyframes indice-chega {
+  from {
+    opacity: 0;
+    letter-spacing: .55em;
+    transform: translate3d(-12px, 0, 0);
+  }
+}
+
+@keyframes fio-cresce {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* o título é descoberto da esquerda para a direita */
+.slide.is-ativo .cab__titulo {
+  animation: titulo-chega 1s var(--ease-out) .16s backwards;
+}
+
+@keyframes titulo-chega {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    clip-path: inset(-10% 100% -25% -2%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(-10% -4% -25% -2%);
+  }
+}
+
+/* reflexo que passa pela parte colorida do título */
+.cab__titulo em {
+  background:
+    linear-gradient(102deg, transparent 42%, rgba(255, 255, 255, .85) 50%, transparent 58%) no-repeat,
+    var(--grad-mista);
+  background-size: 260% 100%, 100% 100%;
+  background-position: 160% 0, 0 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.slide.is-ativo .cab__titulo em {
+  animation: reflexo-titulo 6.5s ease-in-out 1.1s infinite;
+}
+
+@keyframes reflexo-titulo {
+
+  0%,
+  62% {
+    background-position: 160% 0, 0 0;
+  }
+
+  100% {
+    background-position: -60% 0, 0 0;
+  }
+}
+
+
+/* ============ 07. ENTRADA DOS BLOCOS ======================== */
+/* o invólucro só aparece; quem faz o movimento são as peças */
+[data-surge] {
+  transform: none;
+  transition: opacity .5s var(--ease-out);
+}
+
+.slide.is-ativo :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .ods, .lema, .remate,
+  .vitrine__desk, .vitrine__cel, .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li) {
+  animation: peca-chega .78s var(--ease-out) backwards;
+  animation-delay: calc(.2s + (var(--coluna, 0) + var(--ordem, 0)) * .075s);
+}
+
+@keyframes peca-chega {
+  from {
+    opacity: 0;
+    transform: perspective(1100px) translate3d(0, 28px, -110px) rotateX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg);
+  }
+}
+
+@keyframes peca-chega-foco {
+  from {
+    opacity: 0;
+    filter: blur(7px);
+    transform: perspective(1100px) translate3d(0, 28px, -110px) rotateX(-14deg);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg);
+  }
+}
+
+html[data-perf="pleno"] .slide.is-ativo :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .ods, .lema,
+  .remate, .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li) {
+  animation-name: peca-chega-foco;
+}
+
+/* a ordem acompanha a leitura: de cima para baixo, da esquerda para a direita */
+.slide :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .tela,
+  .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li):nth-child(2) { --ordem: 1.3; }
+.slide :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .tela,
+  .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li):nth-child(3) { --ordem: 2.6; }
+.slide :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .tela,
+  .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li):nth-child(4) { --ordem: 3.9; }
+.slide :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .tela,
+  .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li):nth-child(5) { --ordem: 5.2; }
+.slide :is(.painel, .ficha, .mini-ficha, .grande, .conceitos, .teoria, .etapa, .camada, .tela,
+  .leituras > li, .entregas-lista > li, .capa__meta > div, .encerramento__nomes > li):nth-child(6) { --ordem: 6.5; }
+
+.colunas > :nth-child(2) { --coluna: 2.4; }
+.colunas > :nth-child(3) { --coluna: 4.8; }
+.etapas { --coluna: 5; }
+.slide .colunas ~ :is(.remate, .etapas) { --coluna: 6; }
+
+/* itens de lista deslizam um a um */
+.slide.is-ativo :is(.hipoteses, .exigencias, .passos, .lista-curta, .equacoes) > li {
+  animation: item-desliza .62s var(--ease-out) backwards;
+  animation-delay: calc(.46s + var(--coluna, 0) * .075s);
+}
+
+.slide.is-ativo :is(.hipoteses, .exigencias, .passos, .lista-curta, .equacoes) > li:nth-child(2) { animation-delay: calc(.56s + var(--coluna, 0) * .075s); }
+.slide.is-ativo :is(.hipoteses, .exigencias, .passos, .lista-curta, .equacoes) > li:nth-child(3) { animation-delay: calc(.66s + var(--coluna, 0) * .075s); }
+.slide.is-ativo :is(.hipoteses, .exigencias, .passos, .lista-curta, .equacoes) > li:nth-child(4) { animation-delay: calc(.76s + var(--coluna, 0) * .075s); }
+
+@keyframes item-desliza {
+  from {
+    opacity: 0;
+    transform: translate3d(-20px, 0, 0);
+  }
+}
+
+/* fio de luz na borda superior de cada painel */
+.painel,
+.ficha,
+.mini-ficha,
+.grande {
+  position: relative;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 18px 44px rgba(0, 0, 0, .28);
+}
+
+.fonte {
+  transition: opacity .8s var(--ease-out) .7s;
+}
+
+.slide:not(.is-ativo):not(.is-medindo) .quadro > .fonte {
+  opacity: 0;
+}
+
+
+/* ============ 08. BARRAS E NÚMEROS ========================== */
+.barras__preenche,
+.teto__parte {
+  position: relative;
+  overflow: hidden;
+}
+
+/* um reflexo corre pela barra logo depois que ela cresce */
+.barras__preenche::after,
+.teto__parte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .6) 50%, transparent 70%);
+  transform: translate3d(-130%, 0, 0);
+}
+
+.slide.is-ativo .barras__preenche::after,
+.slide.is-ativo .teto__parte::after {
+  animation: reflexo-barra 5.5s var(--ease) 1.3s infinite;
+}
+
+@keyframes reflexo-barra {
+
+  0% {
+    transform: translate3d(-130%, 0, 0);
+  }
+
+  26%,
+  100% {
+    transform: translate3d(130%, 0, 0);
+  }
+}
+
+.slide.is-ativo .barras__linha {
+  animation: item-desliza .6s var(--ease-out) backwards;
+  animation-delay: calc(.42s + var(--coluna, 0) * .075s);
+}
+
+.slide.is-ativo .barras__linha:nth-child(2) { animation-delay: calc(.5s + var(--coluna, 0) * .075s); }
+.slide.is-ativo .barras__linha:nth-child(3) { animation-delay: calc(.58s + var(--coluna, 0) * .075s); }
+.slide.is-ativo .barras__linha:nth-child(4) { animation-delay: calc(.66s + var(--coluna, 0) * .075s); }
+.slide.is-ativo .barras__linha:nth-child(5) { animation-delay: calc(.74s + var(--coluna, 0) * .075s); }
+
+.slide.is-ativo :is(.barras__valor, .teto__valor) {
+  animation: valor-acende .7s var(--ease-out) 1.25s backwards;
+}
+
+@keyframes valor-acende {
+  from {
+    opacity: 0;
+    transform: translate3d(-10px, 0, 0) scale(.86);
+  }
+}
+
+/* os números de destaque assentam com um brilho que se apaga */
+.slide.is-ativo :is(.grande__num, .ficha__num, .mini-ficha strong, .leituras strong) {
+  animation: numero-assenta 1.2s var(--ease-out) backwards;
+  animation-delay: calc(.42s + (var(--coluna, 0) + var(--ordem, 0)) * .075s);
+}
+
+@keyframes numero-assenta {
+  from {
+    opacity: 0;
+    letter-spacing: .06em;
+    transform: translate3d(0, 10px, 0) scale(.92);
+    filter: drop-shadow(0 0 22px rgba(255, 214, 110, .9));
+  }
+
+  45% {
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(196, 140, 255, .7));
+  }
+
+  to {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 rgba(196, 140, 255, 0));
+  }
+}
+
+.ods__numero {
+  animation: ods-pulsa 4.5s ease-in-out infinite;
+}
+
+@keyframes ods-pulsa {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(254, 200, 0, .0), 0 10px 28px rgba(0, 0, 0, .4);
+  }
+
+  50% {
+    box-shadow: 0 0 34px 2px rgba(254, 200, 0, .32), 0 10px 28px rgba(0, 0, 0, .4);
+  }
+}
+
+
+/* ============ 09. CAPTURAS DE TELA ========================== */
+/* as capturas são as mesmas; o que muda é a chegada: cada tela
+   vira de perfil para de frente, uma depois da outra */
+.telas,
+.vitrine {
+  perspective: 1500px;
+}
+
+.slide.is-ativo .tela {
+  animation: tela-vira 1s var(--ease-out) backwards;
+  animation-delay: calc(.24s + (var(--coluna, 0) * .06s) + var(--ordem, 0) * .1s);
+}
+
+@keyframes tela-vira {
+  from {
+    opacity: 0;
+    transform: translate3d(-34px, 30px, -220px) rotateY(42deg) rotateX(7deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg);
+  }
+}
+
+.slide.is-ativo :is(.tela__img, .vitrine__desk img, .vitrine__cel img) {
+  animation: tela-acende 1.5s ease-out backwards;
+  animation-delay: calc(.3s + var(--ordem, 0) * .1s);
+}
+
+@keyframes tela-acende {
+  from {
+    filter: brightness(.25) saturate(.3);
+  }
+
+  55% {
+    filter: brightness(1.14) saturate(1.1);
+  }
+
+  to {
+    filter: brightness(1) saturate(1);
+  }
+}
+
+.tela__img,
+.vitrine__desk img {
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, .68),
+    0 0 0 4px rgba(12, 10, 18, .92),
+    0 0 0 5px rgba(168, 85, 247, .3),
+    0 0 46px rgba(147, 51, 196, .2);
+}
+
+.slide.is-ativo .tela__passo i {
+  animation: passo-pulsa 3.2s ease-in-out infinite;
+  animation-delay: calc(1s + var(--ordem, 0) * .25s);
+}
+
+@keyframes passo-pulsa {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(168, 85, 247, .55);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px rgba(168, 85, 247, 0);
+  }
+}
+
+
+/* ============ 10. CAPA E AGRADECIMENTO ====================== */
+/* com a vitrine ligada, os aros de linha dão lugar ao giroscópio */
+html[data-vitrine="sim"] .deck[data-modo="palco"] .capa__anel {
+  display: none;
+}
+
+.capa__brilho {
+  inset: -6px;
+  background: radial-gradient(circle, rgba(147, 51, 196, .55), rgba(254, 200, 0, .08) 55%, transparent 70%);
+  animation: capa-pulso 6s ease-in-out infinite;
+}
+
+@keyframes capa-pulso {
+
+  0%,
+  100% {
+    transform: scale(.94);
+    opacity: .8;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.slide--capa.is-ativo .capa__marca {
+  animation: marca-surge 1.3s var(--ease-out) .1s backwards;
+}
+
+@keyframes marca-surge {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(.6);
+    filter: blur(10px);
+  }
+}
+
+.slide--capa.is-ativo .capa__titulo-a {
+  animation: nome-surge 1.2s var(--ease-out) .45s backwards;
+}
+
+@keyframes nome-surge {
+  from {
+    opacity: 0;
+    letter-spacing: .2em;
+    transform: translate3d(0, 14px, 0) scale(1.14);
+    filter: blur(8px);
+  }
+}
+
+.slide--capa.is-ativo .capa__titulo-b {
+  animation: titulo-chega 1.1s var(--ease-out) .75s backwards;
+}
+
+.capa__meta > div {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 14px 34px rgba(0, 0, 0, .3);
+}
+
+.slide--capa .capa__meta > div {
+  --coluna: 9;
+}
+
+/* a coleção do agradecimento fica sobre duas prateleiras de luz */
+html[data-vitrine="sim"] .deck[data-modo="palco"] .encerramento::before {
+  inset: auto;
+  top: 203px;
+  left: 82px;
+  width: 1090px;
+  height: 2px;
+  padding: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(168, 85, 247, .75) 12%,
+      rgba(255, 216, 120, .9) 40%,
+      transparent 43.5%,
+      transparent 56.5%,
+      rgba(255, 216, 120, .9) 60%,
+      rgba(168, 85, 247, .75) 88%,
+      transparent 100%);
+  -webkit-mask: none;
+  mask: none;
+  box-shadow: 0 0 18px rgba(168, 85, 247, .55), 0 14px 30px 6px rgba(147, 51, 196, .16);
+  animation: none;
+  z-index: 0;
+}
+
+.slide--agradecimento.is-ativo .encerramento::before {
+  animation: prateleira-abre 1.2s var(--ease-out) .25s backwards;
+}
+
+@keyframes prateleira-abre {
+  from {
+    opacity: 0;
+    transform: scaleX(.2);
+  }
+}
+
+.slide--agradecimento.is-ativo .encerramento__titulo {
+  animation: nome-surge 1.3s var(--ease-out) .3s backwards;
+}
+
+.slide--agradecimento.is-ativo .encerramento__emblema {
+  animation: emblema-surge 1.1s var(--ease-out) .15s backwards;
+}
+
+@keyframes emblema-surge {
+  from {
+    opacity: 0;
+    transform: rotate(-40deg) scale(.4);
+  }
+}
+
+.slide--agradecimento .encerramento__nomes > li {
+  --coluna: 8;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .05) inset, 0 14px 34px rgba(0, 0, 0, .3);
+}
+
+.encerramento__orbita {
+  opacity: .55;
+}
+
+
+/* ============ 11. BARRAS DE CONTROLE ======================== */
+.hud--topo {
+  border-bottom-color: transparent;
+  background:
+    linear-gradient(90deg, transparent, rgba(168, 85, 247, .35) 30%, rgba(254, 200, 0, .3) 70%, transparent) bottom / 100% 1px no-repeat,
+    linear-gradient(180deg, rgba(6, 5, 11, .92), rgba(6, 5, 11, 0));
+}
+
+.hud--base {
+  border-top-color: transparent;
+  background:
+    linear-gradient(90deg, transparent, rgba(168, 85, 247, .3) 30%, rgba(254, 200, 0, .25) 70%, transparent) top / 100% 1px no-repeat,
+    linear-gradient(0deg, rgba(6, 5, 11, .94), rgba(6, 5, 11, 0));
+}
+
+.hud__fala {
+  border-color: rgba(254, 200, 0, .32);
+  background: linear-gradient(120deg, rgba(147, 51, 196, .2), rgba(254, 200, 0, .07));
+  box-shadow: 0 0 26px rgba(147, 51, 196, .22);
+}
+
+.hud__fala-nome {
+  color: var(--yellow-300);
+}
+
+.trilha__item.is-ativo::after {
+  box-shadow: 0 0 18px rgba(168, 85, 247, .8), 0 0 4px rgba(255, 216, 120, .9);
+}
+
+.trilha__item.is-visto::after {
+  background: linear-gradient(90deg, rgba(168, 85, 247, .75), rgba(168, 85, 247, .45));
+}
+
+/* a ajuda sai do caminho da vitrine */
+html[data-vitrine="sim"] .botao-ajuda {
+  opacity: .5;
+}
+
+html[data-vitrine="sim"] .botao-ajuda:hover,
+html[data-vitrine="sim"] .botao-ajuda:focus-visible {
+  opacity: 1;
+}
+
+
+/* ============ 12. PERFIL LEVE, MOVIMENTO, CELULAR, IMPRESSÃO = */
+html[data-perf="leve"] .cenario__grao,
+html[data-perf="leve"] .vitrine-fundo__aro--c {
+  display: none;
+}
+
+html[data-perf="leve"] .vitrine-fundo__facho {
+  filter: none;
+  animation: none;
+}
+
+html[data-perf="leve"] .quadro::after,
+html[data-perf="leve"] .quadro::before,
+html[data-perf="leve"] .slide.is-ativo .cab__titulo em,
+html[data-perf="leve"] .ods__numero {
+  animation: none;
+}
+
+html[data-perf="leve"] .slide.is-ativo :is(.grande__num, .ficha__num, .mini-ficha strong, .leituras strong) {
+  animation-name: peca-chega;
+}
+
+html[data-perf="leve"] .slide.is-ativo :is(.tela__img, .vitrine__desk img, .vitrine__cel img) {
+  animation: none;
+}
+
+.deck[data-modo="fluido"] .palco {
+  perspective: none;
+}
+
+.deck[data-modo="fluido"] .slide.is-ativo {
+  animation: slide-entra .56s var(--ease-out) both;
+}
+
+.deck[data-modo="fluido"] .slide.is-saindo {
+  animation: slide-sai .42s var(--ease) both;
+}
+
+.deck[data-modo="fluido"] .palco-caixa::after {
+  display: none;
+}
+
+.deck[data-modo="fluido"] ~ .vitrine-tela {
+  display: none;
+}
+
+html[data-motion="reduzido"] .slide *,
+html[data-motion="reduzido"] .slide *::before,
+html[data-motion="reduzido"] .slide *::after,
+html[data-motion="reduzido"] .slide,
+html[data-motion="reduzido"] .palco-caixa::after,
+html[data-motion="reduzido"] .vitrine-fundo > span {
+  animation: none !important;
+}
+
+html[data-motion="reduzido"] .slide.is-ativo {
+  opacity: 1;
+}
+
+html[data-motion="reduzido"] .palco {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .slide *,
+  .slide *::before,
+  .slide *::after,
+  .slide,
+  .palco-caixa::after,
+  .vitrine-fundo > span {
+    animation: none !important;
+  }
+
+  .slide.is-ativo {
+    opacity: 1;
+  }
+}
+
+@media print {
+
+  .vitrine-tela,
+  .vitrine-fundo,
+  .palco-caixa::after {
+    display: none !important;
+  }
+
+  .quadro::before,
+  .slide *,
+  .slide *::before,
+  .slide *::after {
+    animation: none !important;
+  }
+
+  .slide:not(.is-ativo):not(.is-medindo) .quadro > .fonte {
+    opacity: 1;
+  }
+}
